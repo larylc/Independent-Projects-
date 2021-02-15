@@ -1,0 +1,35 @@
+---
+title: "Exploring Pokemon"
+author: "Cedric Lary"
+date: "July - September 2020"
+output: 
+  rmdformats::readthedown:
+    code_folding: hide
+    df_print: paged
+---
+
+```{r child = '01-intro.Rmd'}
+```
+
+
+```{r child = '02- Chapter 1.Rmd'}
+```
+
+```{r child = '03- Chapter 2.Rmd'}
+```
+
+```{r child = '04- Chapter 3.Rmd'}
+```
+
+```{r child = '05- Chapter 4.Rmd'}
+```
+
+
+```{r child = '06- Chapter 5.Rmd'}
+```
+
+
+```{r child = '07-Chapter 6.Rmd'}
+```
+
+
