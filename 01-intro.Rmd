@@ -1,0 +1,34 @@
+# Introduction
+
+After over 20 years of creating Pokemon content, Gamefreak has accumulated an abundance of Pokemon gaming data. The original 151 Pokemon that were created in the late 90s are now 892. With new types, forms and abilities being added with each new generation, the diversity in Pokemon data will continue to grow. Using data I obtained from Mario Tormo Romero's Kaggle page and data I procured from conducting my own surveys (see sources), my hope with this project is to answer as many questions as my data science tool kit allows. 
+
+
+## Goals 
+1. Answer some statistical questions.
+2. Explore data sets using stats and data visualization tools. 
+
+
+## Potential Questions and Tasks 
+#### Visualization Tasks and Questions
+1. Visualize the number of Pokemon per type. 
+2. Are there more dual-types than mono-types? 
+3. Are Pokemon with dual-types on average stronger than mono-type Pokemon? 
+4. On average, what is the strongest and weakest type?
+5. Which types have the most of each stat? 
+6. Are some generations on average stronger than others?
+7. Do newer generations have more variation in their stats? 
+8. Which stats have the most and least variation? 
+
+#### Correlational Tasks
+9.  What stats are correlated with each other?
+10. What stats are correlated with individual types? 
+11. Is typing significantly correlated with stat total? Does typing predict overall stats? 
+12. Is dual typing significantly correlated with stat total? 
+13. Is typing correlated with sub-legendary /mystical/ legendary status? 
+14. Which stat(s) are most useful for predicting legendary/ sub legendary/ mythical status?
+15. Do pokemon with better designs have higher stats?
+
+#### Multivariate Studies
+16. What would a PCA cluster of Pokemon look like based on their stats? 
+
+

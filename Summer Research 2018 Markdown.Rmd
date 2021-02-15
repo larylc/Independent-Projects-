@@ -1,0 +1,309 @@
+---
+title: "Movement Among Mating Arenas Predicts Individuals’ Centrality In Some Social Networks"
+author: "Cedric Lary and Vincent Formica"
+date: "Summer 2018"
+output: 
+  rmdformats::downcute:
+    code_folding: hide
+    df_print: paged
+---
+
+<center>
+![Mountain Lake Biological Station, 6/8/2018.](C:\Users\laryl\Downloads\IMG-0048.jpg){#id .class width=50% height=50%}
+</center>
+
+# Abstract 
+
+Because social interactions depend strongly on the positions of the interacting individuals, studying how movement affects those social interactions could give us a better understanding of where individuals fit within their societies. While previous work has shown that centrality metrics like strength and betweenness are significantly influenced by morphological traits, little is known about how these centrality metrics are affected by movement. We performed a general linear mixed model analysis to determine whether movement among mating arenas predicted strength and betweenness within forked fungus beetle (Bolitotherus cornutus) populations. In the analysis, sex, elytra size, and number of observations were used as fixed effects while population was used as a random effect. Our results showed that despite being highly correlated, strength and betweenness are affected by movement differently. Sex-specific social networks proved to be the most significant source of variation among the results with male-only social networks yielding consistent results across both centrality metrics. Additionally, although the effects of movement on strength in all social networks fell within our expectations, the effects of movement on male-only betweenness highlights a unique feature of male-only social interactions.
+
+
+
+# Sources and Acknowledgements 
+
+This project was made possible because of the efforts of Butch Brodie, Hannah Donald Cannon, Phoebe Cook, Robin Costello, and the members of Beetle Crew at Mountain Lake Biological Station. 
+
+
+The survey, attribute, and centrality metrics data were obtained from Beetle Crew's collection of data. For more information about the data, please contact Dr. Vincent Formica (vformic1@swarthmore.edu).
+
+
+See poster references for information about the research papers that motivated this project. 
+
+
+
+
+# Data and Preparation
+
+**Data Set 1**: The survey data measures observations of forked fungus beetles in the field. 
+
+**Data Set 2**: Beetle attribute data measures beetle characteristics like physical traits and capture information.
+
+**Data Set 3**: Centrality metric data measures social network metrics like strength and betweenness. 
+
+
+The objective at this stage is to measure beetle movement using the number of unique fungus brackets beetles were observed on. 
+
+This will be accomplished by:
+
+1. Filtering out beetles that were not observed on fungal brackets.
+2. Counting the observations of unique beetles on unique fungal brackets.
+3. Counting the number of unique brackets per beetle.
+4. Merging beetle attributes and centrality metrics with the movement data. 
+
+
+Load data and libraries.
+```{r message=FALSE}
+setwd("C:/Users/laryl/Desktop/Data Sets")
+
+#Load Libraries
+library(lattice)
+library(knitr)
+library(plyr)
+library(doBy)
+library(effects)
+library(visreg)
+library(lme4)
+library(ggplot2) 
+library(car) 
+library(lsmeans)
+
+#load the data from survey using a vector 
+raw_data_2017<-read.csv("2017_Surveys_20180419_1355_Cedric.csv")
+raw_data.att<-read.csv("Beetle_Attributes_20180419_1355.csv")
+raw_data_2017_0<-raw_data_2017[raw_data_2017$Date_Surveys > 20160000 &  raw_data_2017$Date_Surveys < 20170000,]
+head(raw_data_2017_0)
+```
+
+
+
+
+
+Step 1: Filter for beetles on fungal brackets.
+```{r}
+#Get rid of rows with no beetles and rows with blanks 
+#raw_data_2017_2<-raw_data_2017[raw_data_2017 $ No.Beetles!= "No Beetles :(",]
+raw_data_2017_2<-raw_data_2017_0[raw_data_2017_0$No.Beetles =="",]
+
+
+#Filter out beetle location variable that we only beetles on fungus are counted
+raw_data_2017_3<- raw_data_2017_2[raw_data_2017_2$Location != "BARK",]
+raw_data_2017_4<- raw_data_2017_3[raw_data_2017_3$Location != "SEE NOTES",]
+raw_data_2017_5<- raw_data_2017_4[raw_data_2017_4$Location != "",]
+
+# Go through and clean up the data frame when we done filtering 
+raw_data_2017_6<- droplevels(raw_data_2017_5)
+head(raw_data_2017_6)
+```
+
+
+```{r}
+#Rename field id variables
+names(raw_data_2017_6)[names(raw_data_2017_6) == "ï.._fkfieldID_surveys"]<- "X_fkfieldID_surveys"
+names(raw_data.att)[names(raw_data.att) == "ï..__pkfieldID"]<- "X__pkfieldID"
+
+```
+
+
+```{r include=FALSE}
+#Count records per scan ID
+raw_data_2017_7<-summaryBy(X_fkfieldID_surveys~ScanID,FUN=length,raw_data_2017_6) 
+#Try to count scans per beetle - why so many? --> it's counting the number of RECORDS!
+raw_data_2017_8<-summaryBy(ScanID~ X_fkfieldID_surveys,FUN=length,data=raw_data_2017_6)
+```
+
+Step 2: Count unique observations of beetles on unique fungal brackets
+```{r}
+#Make a new data frame with unique rows for a combination of columns
+raw_data_2017_9<- unique(raw_data_2017_6[,c("X_fkfieldID_surveys","ScanID","Bracket_surveys","X_fkPopulation_surveys")])
+#obs.scan.ID<-summaryBy(ScanID~FFB.ID+ScanID+Bracket_surveys,FUN=length,data=raw.data.2017.bigpops)
+# NOW count number of scans a beetle was obs using the table you made
+scans.per.beetle<-summaryBy(ScanID~ X_fkfieldID_surveys +X_fkPopulation_surveys, FUN=length,data=raw_data_2017_9)
+#make a new column that combines ID and Population
+scans.per.beetle$ID_Pop<-paste(scans.per.beetle$X_fkfieldID_surveys,scans.per.beetle$X_fkPopulation_surveys, sep= "_")
+head(scans.per.beetle)
+```
+Step 3: Count unique fungal brackets per beetle.
+```{r}
+#Data frame of list of unique brackets for HBY 
+unique.br<-unique(raw_data_2017_9[raw_data_2017_9$X_fkfieldID_surveys== "HBY",c("Bracket_surveys")])
+View(unique.br)
+
+# Data frame of list of unique brackets for each beetle ID accounting for populations 
+unique.br.per.beetle<-unique(raw_data_2017_9[,c("Bracket_surveys","X_fkfieldID_surveys","X_fkPopulation_surveys")])
+
+#It showed up as value so you need to hit view cause it is a vector
+View(unique.br.per.beetle)
+
+#This is the unique number of brackets for every beetle (completed!)> I used 9 instead of the correct condensed form.  
+unique.br.counts<-summaryBy(Bracket_surveys~ X_fkfieldID_surveys+ X_fkPopulation_surveys, FUN=length, data=unique.br.per.beetle)
+
+#make a new columnn that combines ID and Population 
+unique.br.counts$ID_Pop<-paste(unique.br.counts$X_fkfieldID_surveys,unique.br.counts$X_fkPopulation_surveys, sep= "_")
+head(unique.br.counts)
+```
+
+
+Step 4: Merge  observations of beetles on unique brackets and unique bracket data frames along with beetle attributes.
+```{r}
+#merging 
+merge.1<-merge(scans.per.beetle,unique.br.counts, by= "ID_Pop",all = TRUE)
+#Getting rid of unnecessary columns
+merge.2<-merge.1[,c(1:4,7)]
+merge.3<-rename(merge.2, c("X_fkPopulation_surveys.x"="Pop", "X_fkfieldID_surveys.x"="FFB.ID", "ScanID.length"="Num.obs", "Bracket_surveys.length"="uni.brs"))
+merge.4<-merge(merge.3, raw_data.att, by.x= "FFB.ID",by.y ="X__pkfieldID", all.x = TRUE, all.y= FALSE)
+head(merge.4)
+```
+
+
+Merge centrality metrics with the movement and attribute data
+```{r}
+#loading the the betweenness data
+setwd("C:/Users/laryl/Desktop/Data Sets")
+raw_data.bet<- read.csv("Network_output_TO=N_MP=N_BSCAN=Y__FROM_20160606-20160801_Created_20170725.csv")
+# Attempt to condence to very specific columns 
+raw_data.bet2<- raw_data.bet[,c(1:13,20:38)]
+#Get rid of unlabled bettles 
+merge.5<-merge.4[merge.4$FFB.ID != "UK",]
+merge.6<-merge.5[merge.5$FFB.ID != "UKF",]
+merge.7<-merge.6[merge.6$FFB.ID != "UKM",]
+merge.8<-merge.7[merge.7$FFB.ID != "UL",]
+merge.9<-merge.8[merge.8$FFB.ID != "ULF",]
+merge.10<-merge.9[merge.9$FFB.ID != "ULM",]
+merge.11<- droplevels(merge.10)
+#merged betweenness and merge.11 
+merge.12<-merge(merge.11, raw_data.bet2, by.x = "ID_Pop",by.y = "ID_pop", all.x = TRUE, all.y = FALSE)
+head(merge.12)
+```
+
+
+# Analysis 
+
+```{r include=FALSE}
+#Look at the variance in the data so far
+xyplot(betweenness_B.net ~uni.brs, merge.12)
+xyplot(betweenness_F.net ~uni.brs, merge.12)
+xyplot(betweenness_M.net ~uni.brs, merge.12)
+```
+
+
+```{r include=FALSE}
+
+#Trying to see a linear regression 
+qplot(x=uni.brs, y=betweenness_B.net, data=merge.12) + geom_smooth(method = "lm")
+qplot(x=uni.brs, y=betweenness_F.net, data=merge.12) + geom_smooth(method = "lm")
+qplot(x=uni.brs, y=betweenness_M.net, data=merge.12) + geom_smooth(method = "lm")
+
+qplot(x=betweenness_B.net, y=uni.brs, data=merge.12) + geom_smooth(method = "lm")
+
+```
+
+```{r include=FALSE}
+#Build Some models 
+mod1<-lm(betweenness_B.net~ uni.brs + Num.obs + Elytra + Sex.x, data= merge.12)
+Anova(mod1, type= 3)
+
+mod1_effects<-allEffects(mod1)
+plot(mod1_effects, "uni.brs",xlab="Unique Brackets", ylab="Betweenness",main="")
+plot(allEffects(mod1))
+
+visreg(mod1)
+```
+
+```{r}
+### Betweenness Joint 
+mod3<-lmer(betweenness_B.net~ (1|Pop.x)+ Sex.x+uni.brs + Num.obs + Elytra, data= merge.12 )
+summary(mod3)
+Anova(mod3, type=3)
+
+mod3_effects<-allEffects(mod3)
+plot(mod3_effects, "uni.brs",xlab="Unique Brackets", ylab="Betweenness",main="Joint Network",rug=FALSE,colors= "red", band.colors= "dark grey")
+plot(allEffects(mod3))
+visreg(mod3,"uni.brs",by="Pop.x")
+```
+
+```{r}
+#### Betweenness Males x males
+mod3.males<-lmer(betweenness_M.net~ (1|Pop.x)+uni.brs + Num.obs + Elytra, data= merge.12 )
+summary(mod3.males)
+Anova(mod3.males, type=3)
+
+mod3.male_effects<-allEffects(mod3.males)
+plot(mod3.male_effects, "uni.brs",xlab="Unique Brackets", ylab="Betweenness", main="Male-Only Network",rug=FALSE,colors= "red", band.colors= "dark grey" )
+plot(allEffects(mod3.males))
+visreg(mod3.males,"uni.brs",by="Pop.x")
+```
+
+```{r}
+##### Betweenness Females X Female
+
+mod3.females<-lmer(betweenness_F.net~ (1|Pop.x)+uni.brs + Num.obs + Elytra, data= merge.12 )
+summary(mod3.females)
+Anova(mod3.females, type=3)
+#merge.12$stand_unibr<-scaleBy(uni.brs~Pop.x, data=merge.12)
+
+mod3.females_effects<-allEffects(mod3.females)
+plot(allEffects(mod3.females))
+visreg(mod3.females,"uni.brs",by="Pop.x")
+plot(mod3.females_effects, "uni.brs",xlab="Unique Brackets", ylab="Betweenness",main="Female-Only Network",rug=FALSE,colors= "red", band.colors= "dark grey" )
+
+```
+
+```{r}
+### Strength Joint 
+mod4<-lmer(alpha_B.net~ (1|Pop.x)+ Sex.x+uni.brs + Num.obs + Elytra, data= merge.12 )
+summary(mod4)
+Anova(mod4, type=3)
+
+mod4_effects<-allEffects(mod4)
+plot(mod4_effects, "uni.brs",xlab="Unique Brackets", ylab="Strength",main="Joint Network",rug=FALSE,colors= "blue", band.colors= "dark grey")
+plot(allEffects(mod4))
+visreg(mod4,"uni.brs",by="Pop.x")
+```
+
+```{r}
+### Strength Male x Male
+mod4.males<-lmer(alpha_M.net~ (1|Pop.x)+ uni.brs + Num.obs + Elytra, data= merge.12 )
+summary(mod4.males)
+Anova(mod4.males, type=3)
+
+mod4.male_effects<-allEffects(mod4.males)
+plot(mod4.male_effects, "uni.brs",xlab="Unique Brackets", ylab="Strength", main="Male-Only Network",rug= FALSE, colors= "blue", band.colors= "dark grey")
+plot(allEffects(mod4.males))
+visreg(mod4.males,"uni.brs",by="Pop.x")
+
+
+```
+
+```{r}
+### Strength Female x female 
+mod4.females<-lmer(alpha_F.net~ (1|Pop.x)+uni.brs + Num.obs + Elytra, data= merge.12 )
+summary(mod4.females)
+Anova(mod4.females, type=3)
+
+mod4.female_effects<-allEffects(mod4.females)
+plot(allEffects(mod4.females))
+visreg(mod4.females,"uni.brs",by="Pop.x")
+plot(mod4.female_effects, "uni.brs",xlab="Unique Brackets", ylab="Strength",main="Female-Only Network",rug=FALSE,colors= "blue", band.colors= "dark grey")
+```
+
+
+# Conclusions
+
++ Movement by individual beetles across mating arenas affects their centrality in male-male networks. Specifically, there is a significant positive relationship between male-male centrality metrics and movement. 
+
+
++ The presence of females within a social network seems to strongly influence the relationship between movement and centrality metrics. While male-male social interactions are always affected by movement, in joint (two sex) and female-only networks the relationship between movement and centrality is not always significant. 
+
++ Joint networks and female-only network appear to mimic each other. 
+
++ See poster for more complete conclusions.
+
+
+
+
+
+
+
+
+
+
+

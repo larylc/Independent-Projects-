@@ -1,0 +1,298 @@
+
+
+# **Correlational Studies**
+
+The previous section was just a warm up and an opportunity to practice creating a variety of graphs. 
+This section will focus on analyzing statistical trends in the data set.
+
+## Task 9: What stats are correlated with each other?
+
+One of the easiest ways to get a preliminary look at the relationship between two variables is to use a correlation plot:
+```{r message=FALSE}
+stat_study<-pokemon_data_clean %>% 
+  select(hp, attack, defense, sp_attack, sp_defense, speed)
+
+stat_study_cor <- cor(stat_study, use = "complete.obs")
+round(stat_study_cor,2)
+
+
+library(ggcorrplot)
+ggcorrplot(stat_study_cor,
+          hc.order = TRUE, 
+          type = "lower",
+          lab = TRUE,
+          lab_size = 3.5,
+          outline.color = "white",
+          method = "circle",
+          colors = c("orangered","white" , "turquoise3"),
+          title = "Correlogram of Pokemon Stats",
+          ggtheme= theme_bw) 
+```
+
+This task could get more nuanced because we can take it a step further and investigate how multiple variables together could help predict another variable (Multiple regression). Additionally, we can check for interactions in the regressions because the presence of one extra variable could affect the relationship between two others.
+
+Because there are six variables and several different combinations of regressions possible, we will examine a single combination. In the competative Pokemon battling sphere (yes, there is one), gamers introduced terms that describe the different roles Pokemon can fulfill in battle. For more information check out this link: https://pokemondb.net/pokebase/38940/what-are-the-different-kinds-pokemon-competitive-battling
+
+These categories are useful to us because the roles tend to be defined by stat distributions. So Pokemon that have particular combinations of stats are grouped into these catgeories. If these categories have any truth to them, then we should be able to find stat combinations that are correlated. For our purposes, we will investigate the variables typically associated with the **"sweeper"**  role: Pokemon with a high speed, high attack and/or high special attack. 
+
+To create models that are strong representations of the patterns seen in the data, we need to examine the relationships between the variables in question using scatter plots first. This will help us identify strange features in the data like outliers or non-linearity between variables.
+```{r}
+#Scatter Plot for speed vs attack 
+ap<-ggplot(pokemon_data_clean, aes(x=attack, y = speed)) +
+  geom_point(shape= 19, size= 2, color = "red", alpha = .5)+
+  theme_minimal()+
+  theme(legend.position = "none",
+       text = element_text(family = "Georgia"))
+
+
+
+#Scatter Plot for speed vs sp.attack 
+spap<-ggplot(pokemon_data_clean, aes(x= sp_attack, y = speed))+
+  geom_point(shape= 19, size= 2, color ="cornflowerblue", alpha = .5)+
+  theme_minimal()+
+  theme(legend.position = "none",
+       text = element_text(family = "Georgia"))
+grid.arrange(ap,spap, ncol=2)
+
+```
+
+The explanatory variables (attack, sp_attack) seem to have an expected linear relationship with the response variable (speed). No interesting features seem to have been revealed, meaning we can continue to the regression modeling phase. 
+
+Let's run a few regressions to investigate the significance between the "sweeper" variables:
+```{r}
+#linear regression attack vs speed
+fit_sweepers_a<- lm(speed ~ attack, data = pokemon_data_clean)
+summary(fit_sweepers_a)
+
+#linear regression special attack vs speed
+fit_sweepers_spa<- lm(speed ~ sp_attack, data = pokemon_data_clean)
+summary(fit_sweepers_spa)
+
+#multiple regression attack & special attack vs speed
+fit_sweepers<- lm(speed ~ attack + sp_attack, data = pokemon_data_clean)
+summary(fit_sweepers)
+
+#multiple regression attack & special attack vs speed with interaction included
+fit_sweepers1<- lm(speed ~ attack + sp_attack + attack*sp_attack, data = pokemon_data_clean)
+summary(fit_sweepers1)
+```
+
+From these models, we can see that both explanatory variables are significantly correlated with the response variable. According to the multiple R squared value in the first model, we learned that about **14.5 percent** of the variation in speed could be explained by the variation in attack. In the second model, **19.6 percent** of the variation in speed can be explained by variation in special attack. Thus, much like the results from the correlation plot, special attack and speed are a little more correlated than attack and speed are.
+
+The first multiple regression shows that about **25 percent** of the variation in speed can be accounted for by the variation in attack and speed together. The last model shows another multiple regression which, this time, controls for an interaction between the two variables. This interaction, if significant, could mean that having more or less attack stat could affect how strongly special attack and speed or correlated. In our last model, we can see that although the interaction effect is slightly significant, it does not substantially help predict any more variation than our first multiple regression model. In the gaming context, this makes sense because having more of one of these offensive stats does not guarantee that a Pokemon will be fast and good at the other. Often times, sweepers are good at speed and one of the offensive stats. Although, mixed offensive sweepers do exist, special attacking or physical attacking sweepers are more common. 
+ 
+At this point, either of the multiple regression models could work. However, since the interaction effect in the second model is so small, I will continue with the more general model.
+
+But before moving forward, we need to check whether we violated any of the assumptions that come with building regression models.
+```{r output = FALSE}
+#Checking for Normaility
+residuals(fit_sweepers)
+qqnorm(residuals(fit_sweepers), col= "slateblue" )
+qqline(residuals(fit_sweepers))
+
+#Checking for Constant Conditional SDs and Linearity
+plot(fitted(fit_sweepers),resid(fit_sweepers), col= "slateblue", pch= 19)
+abline(h=0) 
+```
+
+None of the assumptions seem to have been violated, so we can move to the last stage and plot our multiple regression.
+```{r, warning=FALSE}
+library(visreg)
+
+visreg(fit_sweepers, "sp_attack", by= "attack", gg= TRUE, 
+       line= list(col ="slateblue1"),
+       fill = list(col = "grey85"))+ 
+  theme_bw()+
+  labs(title = "Sweepers Multiple Regression")+
+  theme(text = element_text(family = "Georgia"),
+        plot.title = element_text(size = 13, margin(b = 10), hjust = 0.5, family = "Georgia"))
+```
+
+
+
+
+## Task 10: What stats are correlated with each individual types? 
+
+Earlier, I showed which types had the most points, on average, for each stat. Now, I want to know which stats are correlated with particular types. Specifically, I want to investigate if specific stat combinations could be used to predict whether a Pokemon is a particular type. One of the best ways to accomplish this is to use logistic regressions.  
+
+Since there are so many types, I am going to pick only 5 to study: water, dragon, fire, ice, and steel. 
+
+Step 1, like before I need a data frame that merges  type_ 1 and type_2 into a single variable to account for each time a type is observed: 
+```{r message=FALSE}
+
+predict_type1<- data.frame(pokemon_data_clean[,c(5,9:15)]) 
+predict_type2<- data.frame(pokemon_data_clean[,c(6,9:15)])
+names(predict_type1)[names(predict_type1) == "type_1"]<- "type"
+names(predict_type2)[names(predict_type2) == "type_2"]<- "type"
+
+
+predict_type<- rbind(predict_type1, predict_type2)
+
+predict_type<- data.frame(predict_type[predict_type$type != "",])
+
+str(predict_type)
+
+```
+
+
+Because logistic regressions require the response variable to be bivariate, I need to change the data so that the logistic regression considers only two type categories: the type itself and all the other types. The two categories need to be numeric, so we will say that being the specific type is = 1, otherwise it is = 0. 
+```{r message=FALSE}
+#Water
+predict_water<- mutate(predict_type,
+                       type = ifelse(type == "Water", 1, 0))
+                                     
+table(predict_water$type) 
+
+#Fire
+predict_fire<- mutate(predict_type,
+                       type = ifelse(type == "Fire", 1, 0))
+table(predict_fire$type) 
+
+#Dragon 
+predict_dragon<- mutate(predict_type,
+                       type = ifelse(type == "Dragon", 1, 0))
+table(predict_dragon$type) 
+
+#Ice 
+predict_ice<- mutate(predict_type,
+                       type = ifelse(type == "Ice", 1, 0))
+table(predict_ice$type) 
+
+#Steel 
+predict_steel<- mutate(predict_type,
+                       type = ifelse(type == "Steel", 1, 0))
+table(predict_steel$type) 
+
+```
+
+Now, I am going to create logistic regression models that will reveal the stats most correlated with each type.
+```{r message=FALSE}
+#Water 
+fit_predict_water<-glm(type~ hp+ attack + defense+ sp_attack + sp_defense + speed, family= binomial, data = predict_water)
+summary(fit_predict_water)
+
+#fire 
+fit_predict_fire<-glm(type~ hp+ attack + defense+ sp_attack + sp_defense + speed, family= binomial, data = predict_fire)
+summary(fit_predict_fire)
+
+#Dragon 
+fit_predict_dragon<-glm(type~ hp+ attack + defense+ sp_attack + sp_defense + speed, family= binomial, data = predict_dragon)
+summary(fit_predict_dragon)
+
+#Ice
+fit_predict_ice<-glm(type~ hp+ attack + defense+ sp_attack + sp_defense + speed, family= binomial,  data = predict_ice)
+summary(fit_predict_ice)
+
+#Steel 
+fit_predict_steel<-glm(type~ hp+ attack + defense+ sp_attack + sp_defense + speed, family= binomial, data = predict_steel)
+summary(fit_predict_steel)
+
+```
+
+The findings here are really interesting. The water model summary shows that attack is the most significant stat in predicting water typing. Specifically, it is negatively correlated with water typing. This is a little surprising because I was expecting water Pokemon to be associated with special attack and special defense. Next, special attack is by far the biggest predictor of fire typing. For Dragon Pokemon, hp and special attack are the biggest predictors. In the ice model, surprisingly, hp is the best predictor of ice typing, despite it not being very significant. Finally, for steel, defense, attack, and hp are the most significant predictors in that order. Interestingly, hp is negatively correlated with steel typing.
+
+Let's now rebuild these models and see how well they predict the 5 typings:
+```{r message=FALSE, warning=FALSE}
+#Water 
+fit_predict_water1<-glm(type~ attack, family= binomial, data = predict_water)
+summary(fit_predict_water1)
+
+#Fire 
+fit_predict_fire1<-glm(type~ sp_attack, family= binomial, data = predict_fire)
+summary(fit_predict_fire1)
+
+#Dragon 
+fit_predict_dragon1<-glm(type~ hp+ sp_attack, family= binomial, data = predict_dragon)
+summary(fit_predict_dragon1)
+
+#Ice
+fit_predict_ice1<-glm(type~ hp, family= binomial,  data = predict_ice)
+summary(fit_predict_ice1)
+
+#Steel 
+fit_predict_steel1<-glm(type~ hp  +  attack + defense, family= binomial, data = predict_steel)
+summary(fit_predict_steel1)
+```
+
+The water and fire models did not change much in terms of significance. In the dragon model, hp did become a little more significant. Although the p-value of the hp stat in the ice model improved, it still did not go under the 0.5 alpha value needed for significance. For the steel model, defense and hp became a little more significant while attack remained about the same.
+
+At this point in the analysis, if we really wanted to assess how well our logistic models predicted typing, we would create confusion matrices to assess each model's "accuracy" "and "sensitivity". Accuracy would be a decent measure of our models because it measures how well a model classifies both the specified type and the non-specified types. Sensitivity would be another good metric to measure because it calculates how many of the actual specified type were correctly guessed. However, because our goal for this task was to find out if typing was correlated with specific stats, this kind of analysis lies outside of the scope of what we were planning to do.
+
+But we can still do a cursory validation analysis for one of our models for fun: 
+```{r message=FALSE, warning=FALSE}
+pred_log_odds_s<- predict(fit_predict_steel1)
+pred_prob_s<- 1/(1 + exp(-pred_log_odds_s))
+prob_steel<- pred_prob_s >= .5
+table(Predicted_Value = prob_steel, Actual_Value = predict_steel$type)
+
+```
+
+The accuracy for this model **(true positive + true negative)/ (true positive + true negative + false positive + false negative)** is equal to **1498/ 1570= 95.4 percent.** This, on the surface, sounds great, but there is one problem: our model does not do a good job of correctly predicting steel Pokemon. If we look at sensitivity the amount of Pokemon our model predicted true divided by the actual number of steel Pokemon you get **3/71** or **4 percent.** This means that my model is too conservative, meaning it is really good at detecting non-steel Pokemon but over-categorizes the observations as non-steel Pokemon. Decreasing the 0.5 threshold value would relax the filter and improve the model's ability to classify Pokemon as steel Pokemon correctly. 
+
+
+All that is left to do now is plot a few of the models: 
+```{r message=FALSE, warning=FALSE}
+#Water Logistic Regression
+visreg(fit_predict_water1, "attack",
+       rug = FALSE ,
+       xlab = "Attack", 
+       ylab = "Probabiltiy of Being a Water Type",
+       line= list(col ="dodgerblue"),
+       fill = list(fill = "lightblue"),
+       scale="response",
+       gg = TRUE)+ 
+       theme_bw()+ 
+       labs(title = "Logistic Regression Prediction of Water Typing")+
+       theme(legend.position = "none",
+              text = element_text(family = "Georgia"), 
+             plot.title = element_text(size = 15, margin(b = 10), hjust = 0.5, family = "Georgia"))
+
+#Fire Logistic Regression
+visreg(fit_predict_fire1, "sp_attack",
+       rug = FALSE ,
+       xlab = "Special Attack", 
+       ylab = "Probabiltiy of Being a Fire Type",
+       line= list(col ="orangered"),
+       fill = list(fill = "lightpink"),
+       scale="response",
+       gg = TRUE)+ 
+       theme_bw()+ 
+       labs(title = "Logistic Regression Prediction of Fire Typing")+
+       theme(legend.position = "none",
+              text = element_text(family = "Georgia"), 
+             plot.title = element_text(size = 15, margin(b = 10), hjust = 0.5, family = "Georgia"))
+
+#Steel Logistic Regression
+visreg(fit_predict_steel1, "defense", by = "attack",
+       rug = FALSE ,
+       xlab = "Defense", 
+       ylab = "Probabiltiy of Being a Steel Type",
+       line= list(col ="black"),
+       fill = list(fill = "grey80"),
+       scale="response",
+       gg = TRUE)+ 
+       theme_bw()+ 
+       labs(title = "Logistic Regression Prediction of Steel Typing")+
+       theme(legend.position = "none",
+              text = element_text(family = "Georgia"), 
+             plot.title = element_text(size = 15, margin(b = 10), hjust = 0.5, family = "Georgia"))
+
+visreg(fit_predict_steel1, "defense", by = "hp",
+       rug = FALSE ,
+       xlab = "Defense", 
+       ylab = "Probabiltiy of Being a Steel Type",
+       line= list(col ="black"),
+       fill = list(fill = "grey80"),
+       scale="response",
+       gg = TRUE)+ 
+       theme_bw()+ 
+       labs(title = "Logistic Regression Prediction of Steel Typing")+
+       theme(legend.position = "none",
+              text = element_text(family = "Georgia"), 
+             plot.title = element_text(size = 15, margin(b = 10), hjust = 0.5, family = "Georgia"))
+
+```
+
+If we take a look at the first model, if you had an attack stat of approximately 75, there is a 10 percent chance that you could be a water Pokemon. This makes sense because water Pokemon are usually special attackers. According to the second model, if a Pokemon had a special attack stat of 150, there would be over a 10 percent chance of it being a fire type. For the steel Pokemon model, we can clearly see that the more defense you have, the more likely it is that you are a steel Pokemon. Additionally, if you also had high attack your chances of being a steel Pokemon would increase slightly as well. Conversely, we can see that the more hp you have, the less likely it is that you are a steel Pokemon.
+
+Although the steel model, did not account for interactions, these plots may be showing signs of interaction effects. Because this task was meant to highlight possible correlations, more complex models were not considered. A future study could definitely take this a few steps further to investigate stat correlations with more types with more attention to the complexity of those correlations.
