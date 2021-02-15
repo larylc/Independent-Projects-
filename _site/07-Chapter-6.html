@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>07-Chapter-6.utf8</title>
+
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Cedric's Independent Projects</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Summer-Research-2018-Markdown.html">Summer Research Project 2018 (R)</a>
+</li>
+<li>
+  <a href="pokemon-project-2020.html">Exploratory Pokemon Analysis 2020 (R)</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<div id="multivariate-study" class="section level1">
+<h1><strong>Multivariate Study</strong></h1>
+<div id="task-16-what-would-a-pca-of-pokemon-look-like-based-on-their-stats" class="section level2">
+<h2>Task 16: What would a PCA of pokemon look like based on their stats?</h2>
+<p>Since this task is mostly an exercise in using visualization tools I will first create a simple principle component analysis to get a cursory glance at how the Pokemon are being placed.</p>
+<pre class="r"><code>pokemon_pca &lt;- prcomp(pokemon_data_full[,c(19:24)], center=T, scale=T)#Ex 1
+summary(pokemon_pca)</code></pre>
+<pre><code>## Importance of components:
+##                           PC1    PC2    PC3    PC4     PC5     PC6
+## Standard deviation     1.6561 1.0521 0.8875 0.8189 0.66131 0.50473
+## Proportion of Variance 0.4571 0.1845 0.1313 0.1118 0.07289 0.04246
+## Cumulative Proportion  0.4571 0.6416 0.7729 0.8847 0.95754 1.00000</code></pre>
+<pre class="r"><code>par(mfrow=c(1,1))
+scores &lt;- pokemon_pca$x
+plot(scores[,1], scores[,2], type=&quot;n&quot;)
+text(scores[,1], scores[,2], label= pokemon_data_full$name, repel = TRUE, cex=.5)</code></pre>
+<p><img src="07-Chapter-6_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Eternatus Eternamax probably needs to be removed in order to get a better glance at the Pokemon.</p>
+<pre class="r"><code>pokemon_data_biplot &lt;- pokemon_data_full[,c(3,19:24)]
+pokemon_data_biplot&lt;- pokemon_data_biplot[-1028,]
+rownames(pokemon_data_biplot)&lt;- pokemon_data_biplot[,1]
+pokemon_data_biplot[,1]&lt;- NULL
+
+pokemon_biplot&lt;-prcomp(pokemon_data_biplot,center =T, scale= T) 
+summary(pokemon_biplot)</code></pre>
+<pre><code>## Importance of components:
+##                           PC1    PC2    PC3    PC4     PC5     PC6
+## Standard deviation     1.6461 1.0547 0.8955 0.8304 0.65364 0.50923
+## Proportion of Variance 0.4516 0.1854 0.1337 0.1149 0.07121 0.04322
+## Cumulative Proportion  0.4516 0.6370 0.7706 0.8856 0.95678 1.00000</code></pre>
+<pre class="r"><code># plot the results
+library(factoextra)
+
+fviz_pca_biplot(pokemon_biplot, labelsize = 2, geom = &quot;text&quot;) + 
+  theme_bw() +
+  labs(title = &quot;Biplot of Pokemon by Stats&quot;)+
+  theme(text = element_text(family = &quot;Georgia&quot;),
+        plot.title = element_text(size = 13, margin(b = 10), hjust = 0.5, family = &quot;Georgia&quot;))</code></pre>
+<p><img src="07-Chapter-6_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>The <strong>first principal component (PC1)</strong> accounts for 45.2% of the variance. We can make the case that it probably measures total stats because we see the weakest unevolved Pokemon on left and the strongest mega evolved legendary Pokemon on the right. The <strong>second principal component (PC2)</strong>, which accounts for 18.5 percent of the variation, seperates Pokemon based on their offensive and defensive capabilities. Pokemon at the bottom of the plot have a larger proportion of their stats devoted to speed and offense. Pokemon at the top have a larger proportion of their stats devoted to defenses. Thus a principal component analysis that uses stats as the variables seperates pokemon by their functions in battle.</p>
+</div>
+</div>
+<div id="conclusion" class="section level1">
+<h1><strong>Conclusion</strong></h1>
+<p>For me this project served a few purposes. It not only permitted me to practice a number of coding skills but also allowed me to revisit a gaming series that I probably spent way to much time on in my childhood and adolescence. Having that personal understanding of the data did, however, help me understand many of the findings we uncovered, even if they were unexpected. If nothing else, this study underscored for me the importance of an intimate understanding of the data set being worked with. Although most of the findings were expected, I think fans of the franchise and data enthusiasts have a lot to look forward to as Gamefreak continues expand it’s franchise.</p>
+</div>
+<div id="sources" class="section level1">
+<h1><strong>Sources</strong></h1>
+<p>The first data set was obtained from Kaggle user Mario Tormo Romero: <a href="https://www.kaggle.com/mariotormo/complete-pokemon-data" class="uri">https://www.kaggle.com/mariotormo/complete-pokemon-data</a> set-updated-090420</p>
+<p>The 8 secondary data sets were produced from 8 google form surveys that asked respondents to rate the designs of most of the pokemon on a scale from 1-10. All of the pictures used in the surveys were obtained from <a href="https://www.serebii.net/pokemon/" class="uri">https://www.serebii.net/pokemon/</a>.</p>
+<p>To verify the accuracy of some of the results I used <a href="https://pokemondb.net/type/" class="uri">https://pokemondb.net/type/</a>.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

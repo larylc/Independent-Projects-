@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>02--Chapter-1.utf8</title>
+
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Cedric's Independent Projects</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Summer-Research-2018-Markdown.html">Summer Research Project 2018 (R)</a>
+</li>
+<li>
+  <a href="pokemon-project-2020.html">Exploratory Pokemon Analysis 2020 (R)</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<div id="data-prep" class="section level1">
+<h1>Data Prep</h1>
+<p>The first step is to read in the data set.</p>
+<pre class="r"><code>setwd(&quot;C:/Users/laryl/Desktop/Data Sets&quot;)
+pokemon_data_full&lt;-read.csv(&quot;pokedex.csv&quot;)</code></pre>
+<p>Next, I’m going to subset the data frame so that I can focus on the variables I am interested in. As a precaution, I am also going to clean up the data set to make sure there are no extra spaces in the variable names.</p>
+<pre class="r"><code>pokemon_data_clean &lt;- pokemon_data_full[, c(2,3, 6, 9:13, 18:24)]
+str(pokemon_data_clean)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    1028 obs. of  15 variables:
+##  $ pokedex_number: int  1 2 3 3 4 5 6 6 6 7 ...
+##  $ name          : chr  &quot;Bulbasaur&quot; &quot;Ivysaur&quot; &quot;Venusaur&quot; &quot;Mega Venusaur&quot; ...
+##  $ generation    : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ type_number   : int  2 2 2 2 1 1 2 2 2 1 ...
+##  $ type_1        : chr  &quot;Grass&quot; &quot;Grass&quot; &quot;Grass&quot; &quot;Grass&quot; ...
+##  $ type_2        : chr  &quot;Poison&quot; &quot;Poison&quot; &quot;Poison&quot; &quot;Poison&quot; ...
+##  $ height_m      : num  0.7 1 2 2.4 0.6 1.1 1.7 1.7 1.7 0.5 ...
+##  $ weight_kg     : num  6.9 13 100 155.5 8.5 ...
+##  $ total_points  : int  318 405 525 625 309 405 534 634 634 314 ...
+##  $ hp            : int  45 60 80 80 39 58 78 78 78 44 ...
+##  $ attack        : int  49 62 82 100 52 64 84 130 104 48 ...
+##  $ defense       : int  49 63 83 123 43 58 78 111 78 65 ...
+##  $ sp_attack     : int  65 80 100 122 60 80 109 130 159 50 ...
+##  $ sp_defense    : int  65 80 100 120 50 65 85 85 115 64 ...
+##  $ speed         : int  45 60 80 80 65 80 100 100 100 43 ...</code></pre>
+<pre class="r"><code>#Make sure there are no spacing issues
+library(stringr)
+str_replace_all(names(pokemon_data_clean), c(&quot; &quot; = &quot;&quot;))</code></pre>
+<pre><code>##  [1] &quot;pokedex_number&quot; &quot;name&quot;           &quot;generation&quot;     &quot;type_number&quot;    &quot;type_1&quot;         &quot;type_2&quot;         &quot;height_m&quot;       &quot;weight_kg&quot;     
+##  [9] &quot;total_points&quot;   &quot;hp&quot;             &quot;attack&quot;         &quot;defense&quot;        &quot;sp_attack&quot;      &quot;sp_defense&quot;     &quot;speed&quot;</code></pre>
+<p>Okay, the data frame is ready for the first task!</p>
+</div>
+<div id="visualization-tasks" class="section level1">
+<h1><strong>Visualization Tasks</strong></h1>
+<div id="task-1-visualize-number-of-pokemon-per-type." class="section level2">
+<h2>Task 1: Visualize number of Pokemon per type.</h2>
+<p>List of ways to visualize categorical frequency:</p>
+<ol style="list-style-type: decimal">
+<li><p>Bar plots (ideal)</p></li>
+<li><p>Pie charts(not great)</p></li>
+<li><p>Tree map (ideal for multiple levels)</p></li>
+</ol>
+<p><strong>Problem with data frame</strong>: Typing is separated into 2 columns in the data frame. I have to somehow find a way to count dual-type Pokemon twice.</p>
+<p><strong>Solution(s)</strong>:</p>
+<ol style="list-style-type: decimal">
+<li><p>I can isolate the first column (main type) then append the second typing column onto that first column so that each Pokemon is counted twice for both typings.</p></li>
+<li><p>I can create sub-categories involving dual-types (which is a lot of subcategories). It would be best to use tree map for this method. I can do this conditionally or by merging type 1 and type 2.</p></li>
+</ol>
+<p>Trying Solution 1.</p>
+<pre class="r"><code>#Create two seperate data frames for each type
+pokemon_types1&lt;- data.frame(pokemon_data_clean$type_1) 
+pokemon_types2&lt;- data.frame(pokemon_data_clean$type_2)
+
+#Variables have to match to bind a dataframe to the base of another
+names(pokemon_types1)[names(pokemon_types1) == &quot;pokemon_data_clean.type_1&quot;]&lt;- &quot;type&quot;
+names(pokemon_types2)[names(pokemon_types2) == &quot;pokemon_data_clean.type_2&quot;]&lt;- &quot;type&quot;
+
+pokemon_types1 &lt;- rbind(pokemon_types1, pokemon_types2)
+
+#Eliminate blanks that exist because some pokemon only have 1 type
+pokemon_types&lt;- data.frame(pokemon_types1[pokemon_types1$type != &quot;&quot;,])
+
+#Rename type variable
+names(pokemon_types)[names(pokemon_types) == &quot;pokemon_types1.pokemon_types1.type.........&quot;]&lt;- &quot;type&quot;
+
+#Let&#39;s see how many observations (pokemon) are in each type category
+table(pokemon_types$type)</code></pre>
+<pre><code>## 
+##      Bug     Dark   Dragon Electric    Fairy Fighting     Fire   Flying    Ghost    Grass   Ground      Ice   Normal   Poison  Psychic     Rock 
+##       90       70       72       72       63       70       82      117       66      117       80       55      126       77      114       75 
+##    Steel    Water 
+##       71      153</code></pre>
+<p>Now that every observation of a type has been accounted for, we are ready to visualize the data!</p>
+<pre class="r"><code>#Count number of Pokemon in each type category
+library(dplyr)
+plotdata&lt;- pokemon_types %&gt;%
+  count(type)
+
+#Bar plot 
+library(ggplot2)
+library(lattice)
+library(latticeExtra)
+library(scales)
+library(ggthemes)
+library(hrbrthemes)
+
+ggplot(plotdata, 
+       aes(x=reorder(type, n),
+           y= n, fill= type))+ 
+  geom_bar(stat = &quot;identity&quot;, width = .75, alpha = 1) +
+  scale_y_continuous(breaks = seq(0,170,20), 
+                     limits = c(0, 170))+
+  scale_fill_manual(values = c(&quot;darkolivegreen2&quot;, &quot;dimgray&quot;, &quot;navyblue&quot;,&quot;yellow2&quot;,&quot;plum1&quot;, 
+                               &quot;sienna2&quot;, &quot;orangered&quot;, &quot;skyblue&quot;, &quot;darkorchid&quot;, &quot;green2&quot;,
+                               &quot;tan3&quot;, &quot;cyan&quot;, &quot;cornsilk2&quot;, &quot;darkmagenta&quot;, &quot;maroon1&quot;, &quot;burlywood2&quot;,
+                               &quot;snow3&quot;, &quot;dodgerblue&quot;))+
+  geom_text(aes(label = n), family = &quot;Georgia&quot;,
+            vjust= -0.5) +
+  labs(x= &quot;Type&quot;, y= &quot;Number of Pokemon&quot;, title =&quot;Number of Pokemon Per Type&quot;)+
+  theme_minimal()+ 
+  theme(axis.text.x = element_text(angle = 45, hjust = 0.65),
+        legend.position= &quot;none&quot;,
+        panel.grid.major.x = element_blank(),
+        text = element_text(family = &quot;Georgia&quot;),
+        plot.title = element_text(size = 20))</code></pre>
+<p><img src="02--Chapter-1_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>The graph was a success. According to the Pokemon Database website (<a href="https://pokemondb.net/type/" class="uri">https://pokemondb.net/type/</a>), the data appears to be fairly accurate. The actual number of Pokemon per type might vary because of recent Pokemon additions or because of omissions by the data set’s author.</p>
+<p>Now, we will use a tree map to visualize dual-types and mono-types together. The goal is to count the type 1 and type 2 observations as one category to figure out the different combinations of types possible. To do this, I have to create a separate column with a combined type variable. Then I will map each combination as its own category. Finally, I will group those combinations by their primary type. For example, I want a Normal(type 1) &amp; Flying (type 2) observation to be grouped with other Type 1 normal types because type 1 is typically considered the primary type.</p>
+<pre class="r"><code>#Create dataframe for the two types
+pokemon_dual_data&lt;-select(pokemon_data_clean, type_1, type_2)
+
+#Count the Pokemon by both types or by their unique type combinations
+plotdata2&lt;-pokemon_dual_data %&gt;% 
+  count(type_1, type_2)
+
+#Replace all blanks in type 2 with &quot;Only&quot;
+plotdata2[plotdata2 == &quot;&quot;]&lt;- &quot;Only&quot;
+
+#Combine variables for labeling
+plotdata2$type&lt;- paste(plotdata2$type_1, plotdata2$type_2, sep = &quot;_&quot;)
+plotdata2$type_n&lt;- paste(plotdata2$type, plotdata2$n, sep = &quot;\n&quot;)
+
+#Treemap
+library(treemapify)
+ggplot(plotdata2, 
+       aes(fill = type_1,
+           area = n,
+           label = type_n,
+           subgroup = type_1)) +
+  geom_treemap() + 
+  labs(title = &quot;Number of Pokemon Per Type&quot;,
+       subtitle = &quot;Represented in this treemap is the distribution of Pokemon across the 189 unique type combinations.\n The number and area in each box represent the amount of Pokemon per combination.&quot; )+
+  geom_treemap_text(colour = &quot;black&quot;, 
+                    place = &quot;centre&quot;,
+                    family = &quot;Georgia&quot;,
+                    grow = F,
+                    reflow = T,
+                    min.size = 1.4) +
+  scale_fill_manual(values = c(&quot;darkolivegreen2&quot;, &quot;dimgray&quot;, &quot;royalblue1&quot;,&quot;yellow2&quot;,&quot;plum1&quot;, 
+                               &quot;sienna2&quot;, &quot;orangered&quot;, &quot;skyblue&quot;, &quot;darkorchid&quot;, &quot;green2&quot;,
+                               &quot;tan3&quot;, &quot;cyan&quot;, &quot;cornsilk2&quot;, &quot;darkmagenta&quot;, &quot;maroon1&quot;, &quot;burlywood2&quot;,
+                               &quot;snow3&quot;, &quot;dodgerblue&quot;))+
+  geom_treemap_subgroup_border(color = &quot;black&quot;)+
+  theme_minimal()+
+  theme(legend.position = &quot;none&quot;,
+        text = element_text(family = &quot;Georgia&quot;),
+        plot.title = element_text(size = 20,hjust = 0.5),
+        plot.subtitle = element_text(size = 10, color = &quot;darkslategrey&quot;, margin = margin(b =10), hjust = 0.5))</code></pre>
+<p><img src="02--Chapter-1_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="task-2-are-there-more-dual-types-than-mono-types" class="section level2">
+<h2>Task 2: Are there more dual-types than mono-types?</h2>
+<p>The easiest way to figure out this question is to count the amount of mono-type Pokemon. By taking the dual data frame from above and removing the observations with blanks in the second type, we can find the number of mono-types and subtract it from the 1028 Pokemon total.</p>
+<pre class="r"><code>number_dual_types&lt;- data.frame(pokemon_dual_data[pokemon_dual_data$type_2 != &quot;&quot;,])
+str(number_dual_types)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    542 obs. of  2 variables:
+##  $ type_1: chr  &quot;Grass&quot; &quot;Grass&quot; &quot;Grass&quot; &quot;Grass&quot; ...
+##  $ type_2: chr  &quot;Poison&quot; &quot;Poison&quot; &quot;Poison&quot; &quot;Poison&quot; ...</code></pre>
+<p><strong>1028 total pokemon - 542 dual-types = 486 mono-types</strong></p>
+<p>But where is the fun in that. Let’s try to visualize this with a bar chart because why not? I am simply going to create a data frame where every blank in type 2 counts as the mono-type marker.</p>
+<pre class="r"><code>#Count all the Pokemon that have a blank as true and all of them that don&#39;t as false
+plotdata3&lt;-pokemon_dual_data %&gt;%
+  count(type_2 == &quot;&quot;)
+str(plotdata3$`type_2 == &quot;&quot;`)</code></pre>
+<pre><code>##  logi [1:2] FALSE TRUE</code></pre>
+<pre class="r"><code>#Recharacterize the logical data as characters
+cols&lt;- sapply(plotdata3, is.logical)
+plotdata3[,cols] &lt;- lapply(plotdata3[,cols], as.character)
+
+#Rename true and false statements and rename second type variable
+plotdata3[1,1]= &quot;Dual-Type Pokemon&quot;
+plotdata3[2,1]= &quot;Mono-Type Pokemon&quot;
+
+plotdata3&lt;-plotdata3 %&gt;%
+  rename(type_2 =`type_2 == &quot;&quot;`)
+
+#Make sure the code worked
+print(plotdata3)</code></pre>
+<pre><code>##              type_2   n
+## 1 Dual-Type Pokemon 542
+## 2 Mono-Type Pokemon 486</code></pre>
+<pre class="r"><code>#Bar Plot
+ggplot(plotdata3, 
+       aes(x=type_2,
+           y= n, fill= type_2))+ 
+  geom_bar(stat = &quot;identity&quot;, width = .30, alpha = 1) +
+  scale_y_continuous(breaks = seq(0,600,100), 
+                     limits = c(0, 600))+
+  scale_x_discrete(labels = c(&quot;Dual-Types&quot;, &quot;Mono-Types&quot;))+
+  geom_text(aes(label = n, family = &quot;Georgia&quot;),
+            vjust= -0.5) +
+  labs(x= &quot;&quot;, y= &quot;Number of Pokemon&quot;, title =&quot;Number of Mono-Type Pokemon &amp; Dual-Type Pokemon&quot;)+
+  scale_fill_viridis_d()+
+  theme_minimal()+
+  theme(legend.position = &quot;none&quot;,
+        text = element_text(family = &quot;Georgia&quot;),
+        panel.grid.major.x = element_blank())</code></pre>
+<p><img src="02--Chapter-1_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="task-3-are-pokemon-with-dual-types-on-average-stronger-than-monotype-pokemon" class="section level2">
+<h2>Task 3: Are pokemon with dual-types on average stronger than monotype pokemon?</h2>
+<p>At this point, I realized that I had a single column from the original data frame that told me whether a Pokemon had 1 or 2 types. ** <em>Face Palm</em>. ** But I am still proud of the work-around that I came up with in the previous task.</p>
+<p>Now that we have this information it’s actually not hard to get the mean:</p>
+<pre class="r"><code>#Create a seperate dataframe for task
+pokemon_dual_comparison&lt;-pokemon_data_clean
+
+#Recharacterize type_number variable as character
+pokemon_dual_comparison$type_number&lt;- as.character(pokemon_dual_comparison$type_number)
+
+#Average the total points of mono-types and dual-types
+pokemon_type_avg&lt;- pokemon_dual_comparison %&gt;%
+  select(type_number, total_points) %&gt;%
+  group_by(type_number) %&gt;%
+  summarize(mean_total = mean(total_points))
+
+pokemon_type_avg</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   type_number mean_total
+##   &lt;chr&gt;            &lt;dbl&gt;
+## 1 1                 411.
+## 2 2                 462.</code></pre>
+<p>So dual-types are on average stronger than their mono-type counterparts. But I don’t think that really gives us the whole picture. So I am going to expand on this task to get a more holistic perspective using the summary statistics for the two categories.</p>
+<pre class="r"><code>monotype_vs_dualtype&lt;- pokemon_dual_comparison %&gt;%
+  select(type_number, total_points) %&gt;%
+  group_by(type_number) %&gt;%
+  summarize(n= n(),
+            mean_total = mean(total_points),
+            sd= sd(total_points),
+            se = sd / sqrt(n),
+            ci = qt(0.975, df = n - 1) * sd / sqrt(n))
+monotype_vs_dualtype</code></pre>
+<pre><code>## # A tibble: 2 x 6
+##   type_number     n mean_total    sd    se    ci
+##   &lt;chr&gt;       &lt;int&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 1             486       411.  115.  5.20  10.2
+## 2 2             542       462.  123.  5.28  10.4</code></pre>
+<p>According to this table, the stat total of dual-type Pokemon varies more than the stat total of mono-type Pokemon does across every metric, which is interesting because variation tends to decrease as <strong>sample size (n)</strong> increases. The <strong>standard deviation (SD)</strong> which represents the spread of observations/data around the mean is showing that there is a larger spread around the mean of dual-types. The <strong>standard error (SE)</strong> which is the standard deviation of the mean also shows slightly more variation for dual-types than mono-types. Lastly, the <strong>95% confidence interval</strong>, which states that we are 95% sure that the true mean lies somewhere between <strong>451.23- 471.98 (461.6 ± 10.373 )</strong>, shows slightly greater variation for dual-types. Thus, dual-types are not only, on average, stronger but also have a greater variety in stat totals than mono-types do. This makes sense because there are many weak un-evolved dual-types and then several examples of ultra powerful legendary dual-types like Mewtwo X, Mega Raquaza, and Black/ White Kyurem.</p>
+<p>Because I am tired of using bar charts, let’s make a box plot!</p>
+<pre class="r"><code>#Boxplot
+ggplot(pokemon_dual_comparison,
+       aes(y = total_points,
+           x = type_number,
+           colour = type_number))+
+  geom_boxplot(fill = &quot;white&quot;, 
+               size = 1,
+               outlier.shape = 19,
+               outlier.color = &quot;black&quot; )+
+  geom_jitter(alpha = 0.2)+
+  labs(title = &quot;Mono-Type vs Dual-Type Distributions&quot;,
+       subtitle = &quot;Represented in this figure is the total stat distribution of mono-types against \n the total stat distribution of dual-types. The jitter effect was included to help better \n compare the two distributions. All suspected outliers were highlighted and labeled.&quot;,
+       x =&quot;&quot;,
+       y = &quot;Stat Total&quot;)+
+  scale_colour_manual(values = c(&quot;yellow2&quot;, &quot;purple3&quot;))+
+  scale_x_discrete(labels = c(&quot;Mono-Types&quot;, &quot;Dual-Types&quot;))+
+  scale_y_continuous(breaks = seq(0,1200,200),
+                     limits = c(100,1200))+
+  theme_minimal()+
+  theme(legend.position = &quot;none&quot;,
+        text = element_text(family = &quot;Georgia&quot;),
+        panel.grid.major.x = element_blank(),
+        plot.title = element_text(size = 20,hjust = 0.5),
+        plot.subtitle = element_text(size = 10, color = &quot;darkslategrey&quot;, margin = margin(b =10), hjust = 0.5))+
+  annotate(geom = &quot;text&quot;, x = 2, y= 1125, label = &quot;Eternatus Eternamax&quot;, hjust = -0.1, family = &quot;Georgia&quot;)+
+  annotate(geom = &quot;point&quot;, x = 2, y =  1125, colour = &quot;purple3&quot;, size = 3)+
+  annotate(geom = &quot;text&quot;, x = 1, y= 780, label = &quot;Mewtwo Y&quot;, hjust = -0.1, vjust = -0.3, family = &quot;Georgia&quot;)+
+  annotate(geom = &quot;point&quot;, x = 1, y =  780, colour = &quot;yellow3&quot;, size = 3)+
+  annotate(geom = &quot;text&quot;, x = 1, y= 770, label = &quot;Primal Kyogre&quot;, hjust = -0.10,vjust = 0.4, family = &quot;Georgia&quot;)+
+  annotate(geom = &quot;point&quot;, x = 1, y =  770, colour = &quot;orange2&quot;, size = 3, alpha = 1)</code></pre>
+<p><img src="02--Chapter-1_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Although we can draw similar conclusions about the difference in variation between the two categories, what makes this graph so interesting is the presence of outliers. While <mark>mono-types have 2 outliers that are around 50 points higher</mark> than the upper whisker of the distribution, <mark>dual-types have a single extreme outlier</mark> far above the plot’s upper whisker. Although box plots show statistics centered around medians, which are not drastically affected by outliers, we can use the information in this figure to draw conclusions about the summary statistics above. Because the dual-type summary statistics above are mean based, they probably are being affected by this single extreme outlier.</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

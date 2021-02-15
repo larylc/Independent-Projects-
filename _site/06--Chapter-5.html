@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>06--Chapter-5.utf8</title>
+
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Cedric's Independent Projects</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Summer-Research-2018-Markdown.html">Summer Research Project 2018 (R)</a>
+</li>
+<li>
+  <a href="pokemon-project-2020.html">Exploratory Pokemon Analysis 2020 (R)</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<div id="task-14-which-stats-are-most-useful-for-predicting-legendary-sub-legendary-mythical-status" class="section level2">
+<h2>Task 14: Which stat(s) are most useful for predicting legendary/ sub-legendary/ mythical status?</h2>
+<p>Let’s first build the necessary data frame for analysis:</p>
+<pre class="r"><code>predict_special&lt;- data.frame(pokemon_data_full[,c(10,7,18:24)])
+
+
+predict_special&lt;- data.frame(predict_special[predict_special$type != &quot;&quot;,])
+str(predict_special)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    1028 obs. of  9 variables:
+##  $ type_1      : chr  &quot;Grass&quot; &quot;Grass&quot; &quot;Grass&quot; &quot;Grass&quot; ...
+##  $ status      : chr  &quot;Normal&quot; &quot;Normal&quot; &quot;Normal&quot; &quot;Normal&quot; ...
+##  $ total_points: int  318 405 525 625 309 405 534 634 634 314 ...
+##  $ hp          : int  45 60 80 80 39 58 78 78 78 44 ...
+##  $ attack      : int  49 62 82 100 52 64 84 130 104 48 ...
+##  $ defense     : int  49 63 83 123 43 58 78 111 78 65 ...
+##  $ sp_attack   : int  65 80 100 122 60 80 109 130 159 50 ...
+##  $ sp_defense  : int  65 80 100 120 50 65 85 85 115 64 ...
+##  $ speed       : int  45 60 80 80 65 80 100 100 100 43 ...</code></pre>
+<pre class="r"><code>predict_legendary &lt;- mutate(predict_special,
+                            status = ifelse(status == &quot;Legendary&quot;, 1, 0))
+table(predict_legendary$status)</code></pre>
+<pre><code>## 
+##   0   1 
+## 989  39</code></pre>
+<pre class="r"><code>predict_sublegendary&lt;- mutate(predict_special,
+                            status = ifelse(status == &quot;Sub Legendary&quot;, 1, 0))
+table(predict_sublegendary$status)</code></pre>
+<pre><code>## 
+##   0   1 
+## 983  45</code></pre>
+<pre class="r"><code>predict_mythical&lt;-mutate(predict_special,
+                            status = ifelse(status == &quot;Mythical&quot;, 1, 0))
+table(predict_mythical$status)</code></pre>
+<pre><code>## 
+##   0   1 
+## 999  29</code></pre>
+<p>Now, that we have the data frames, we can proceed to building the model:</p>
+<pre class="r"><code>predict_legendary_fit &lt;- glm(status ~ attack + defense + sp_attack + sp_defense + hp + speed, family = binomial, data = predict_legendary)
+summary(predict_legendary_fit)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = status ~ attack + defense + sp_attack + sp_defense + 
+##     hp + speed, family = binomial, data = predict_legendary)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.9148  -0.1046  -0.0393  -0.0062   5.3132  
+## 
+## Coefficients:
+##               Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -20.495902   2.325900  -8.812  &lt; 2e-16 ***
+## attack        0.018577   0.008039   2.311 0.020840 *  
+## defense       0.030676   0.009628   3.186 0.001443 ** 
+## sp_attack     0.026460   0.007777   3.402 0.000669 ***
+## sp_defense    0.030537   0.010044   3.040 0.002364 ** 
+## hp            0.046214   0.007992   5.782 7.36e-09 ***
+## speed         0.032161   0.009667   3.327 0.000878 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 331.70  on 1027  degrees of freedom
+## Residual deviance: 139.17  on 1021  degrees of freedom
+## AIC: 153.17
+## 
+## Number of Fisher Scoring iterations: 9</code></pre>
+<pre class="r"><code>predict_sublegendary_fit&lt;-glm(status ~ attack + defense + sp_attack + sp_defense + hp + speed, family = binomial, data = predict_sublegendary)
+summary(predict_sublegendary_fit)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = status ~ attack + defense + sp_attack + sp_defense + 
+##     hp + speed, family = binomial, data = predict_sublegendary)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.7810  -0.2909  -0.1950  -0.1060   2.8255  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -8.665698   0.926103  -9.357  &lt; 2e-16 ***
+## attack       0.001367   0.005814   0.235  0.81410    
+## defense      0.015796   0.006463   2.444  0.01452 *  
+## sp_attack    0.014333   0.005369   2.669  0.00760 ** 
+## sp_defense   0.010304   0.007030   1.466  0.14274    
+## hp           0.006161   0.007010   0.879  0.37950    
+## speed        0.018975   0.006196   3.063  0.00219 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 369.58  on 1027  degrees of freedom
+## Residual deviance: 300.34  on 1021  degrees of freedom
+## AIC: 314.34
+## 
+## Number of Fisher Scoring iterations: 7</code></pre>
+<pre class="r"><code>predict_mythical_fit &lt;- glm(status ~ attack + defense + sp_attack + sp_defense + hp + speed, family = binomial, data = predict_mythical)
+summary(predict_mythical_fit)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = status ~ attack + defense + sp_attack + sp_defense + 
+##     hp + speed, family = binomial, data = predict_mythical)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.3806  -0.2221  -0.1319  -0.0748   3.4963  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -9.315710   1.056971  -8.814  &lt; 2e-16 ***
+## attack       0.005908   0.006756   0.875 0.381833    
+## defense      0.015684   0.008368   1.874 0.060903 .  
+## sp_attack    0.020430   0.006481   3.152 0.001620 ** 
+## sp_defense   0.006592   0.009100   0.724 0.468797    
+## hp          -0.009267   0.009377  -0.988 0.323045    
+## speed        0.025713   0.007518   3.420 0.000626 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 264.12  on 1027  degrees of freedom
+## Residual deviance: 204.01  on 1021  degrees of freedom
+## AIC: 218.01
+## 
+## Number of Fisher Scoring iterations: 7</code></pre>
+<p>The legendary model shows that all of the stats help predict legendary status. This finding makes sense because legendary Pokemon are usually good at all of their stats even the stats that aren’t their best. Furthermore, there are a large number of stat combinations that legendaries fulfill. Interestingly, the attack stat and defensive stats are less significant than the others. Because legendaries tend to be more offensive than defensive, this is not too surprising. They even have more of a tendency of specializing in special attack over physical attack.</p>
+<p>According to the sub-legendary model, speed, special attack, and defense (in that order) are the defining stats of sub-legendaries. For mythical Pokemon, it is speed followed by special attack. It is worth noting that defense, in the mythical model, almost makes the statistically significant cut-off.</p>
+<p>The next step is to create more representative models for plotting using what we learned from the first models.</p>
+<pre class="r"><code>#Better Legendary model 
+predict_legendary_fit1 &lt;- glm(status ~ total_points, family = binomial, data = predict_legendary)
+summary(predict_legendary_fit1)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = status ~ total_points, family = binomial, data = predict_legendary)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.6633  -0.1094  -0.0465  -0.0081   5.2191  
+## 
+## Coefficients:
+##                Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  -19.278799   2.130088  -9.051   &lt;2e-16 ***
+## total_points   0.028296   0.003359   8.424   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 331.70  on 1027  degrees of freedom
+## Residual deviance: 146.55  on 1026  degrees of freedom
+## AIC: 150.55
+## 
+## Number of Fisher Scoring iterations: 9</code></pre>
+<pre class="r"><code>#Better Sub-Legndary Model
+predict_sublegendary_fit1 &lt;-glm(status ~ speed + sp_attack + defense, family = binomial, data = predict_sublegendary)
+summary(predict_sublegendary_fit1)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = status ~ speed + sp_attack + defense, family = binomial, 
+##     data = predict_sublegendary)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.0997  -0.2986  -0.1938  -0.1162   2.9475  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -8.083170   0.812345  -9.950  &lt; 2e-16 ***
+## speed        0.019957   0.005837   3.419 0.000628 ***
+## sp_attack    0.018272   0.004800   3.806 0.000141 ***
+## defense      0.021169   0.004901   4.319 1.57e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 369.58  on 1027  degrees of freedom
+## Residual deviance: 303.69  on 1024  degrees of freedom
+## AIC: 311.69
+## 
+## Number of Fisher Scoring iterations: 7</code></pre>
+<pre class="r"><code>#Better Mythical Model
+predict_mythical_fit1 &lt;- glm(status ~ sp_attack + speed + sp_attack*speed, family = binomial, data = predict_mythical)
+summary(predict_mythical_fit1)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = status ~ sp_attack + speed + sp_attack * speed, 
+##     family = binomial, data = predict_mythical)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.0016  -0.2432  -0.1273  -0.0743   3.5398  
+## 
+## Coefficients:
+##                   Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)     -9.9278318  2.0807822  -4.771 1.83e-06 ***
+## sp_attack        0.0451014  0.0188613   2.391   0.0168 *  
+## speed            0.0464912  0.0201305   2.309   0.0209 *  
+## sp_attack:speed -0.0002120  0.0001754  -1.209   0.2267    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 264.12  on 1027  degrees of freedom
+## Residual deviance: 211.63  on 1024  degrees of freedom
+## AIC: 219.63
+## 
+## Number of Fisher Scoring iterations: 8</code></pre>
+<pre class="r"><code>#Even Better Mythical Model
+predict_mythical_fit2 &lt;- glm(status ~ sp_attack + speed, family = binomial, data = predict_mythical)
+summary(predict_mythical_fit2)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = status ~ sp_attack + speed, family = binomial, 
+##     data = predict_mythical)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.2757  -0.2252  -0.1400  -0.0951   3.3491  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -7.721022   0.776369  -9.945  &lt; 2e-16 ***
+## sp_attack    0.023575   0.005787   4.073 4.63e-05 ***
+## speed        0.024111   0.007276   3.314  0.00092 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 264.12  on 1027  degrees of freedom
+## Residual deviance: 213.13  on 1025  degrees of freedom
+## AIC: 219.13
+## 
+## Number of Fisher Scoring iterations: 7</code></pre>
+<p>While attempting to improve the models for simplicity, something interesting happened to the sub-legendary and mythical models. In the sub-legendary model, defense became the most significant of the three variables followed by special attack and speed.</p>
+<p>An interaction term (special attack and speed) was included in the mythical model because there was a possibility that the two stats together could help better predict mythical status. As it turns out, the interaction is statistically insignificant. Additionally, special attack becomes the better predictor when handling the two variables alone. For this reason, a third model was made for predicting mythical Pokemon.</p>
+<pre class="r"><code>#Validation Analysis of Models 
+prob_legendary&lt;- predict(predict_legendary_fit1, predict_legendary, type = &quot;response&quot;)
+table(Predicted_Value = prob_legendary &gt; 0.5 , Actual_Value = predict_legendary$status )</code></pre>
+<pre><code>##                Actual_Value
+## Predicted_Value   0   1
+##           FALSE 981  26
+##           TRUE    8  13</code></pre>
+<pre class="r"><code>prob_sublegendary&lt;- predict(predict_sublegendary_fit1, predict_sublegendary, type = &quot;response&quot;)
+table(Predicted_Value = prob_sublegendary &gt; 0.5 , Actual_Value = predict_sublegendary$status )</code></pre>
+<pre><code>##                Actual_Value
+## Predicted_Value   0   1
+##           FALSE 982  45
+##           TRUE    1   0</code></pre>
+<pre class="r"><code>prob_mythical&lt;- predict(predict_mythical_fit2, predict_mythical, type = &quot;response&quot;)
+table(Predicted_Value = prob_mythical &gt; 0.5 , Actual_Value = predict_mythical$status )</code></pre>
+<pre><code>##                Actual_Value
+## Predicted_Value   0   1
+##           FALSE 997  28
+##           TRUE    2   1</code></pre>
+<p>The legendary model’s accuracy was 96.7 percent. The sub-legendary model’s accuracy is 95.5 percent, and the mythical model’s accuracy was equal to 97.2 percent. However, we, once again, are finding that the sensitivities of the models are not great. The sensitivities for the legendary, sub-legendary, and mythical models are 33%, 0%, and 3.5 percent, respectively. Like before, these models seem to be too conservative because they are better at classifying the non-specified categories of Pokemon rather than the one specified category we are looking for. This means that the 0.5 threshold values need to be decreased to allow for better classification to occur. But once again, this is beyond this task’s goal.</p>
+<p>Here are some plots so we can visualize all of this:</p>
+<pre class="r"><code>#Legendary Logistic Regression
+visreg(predict_legendary_fit1, &quot;total_points&quot;,
+       rug = FALSE ,
+       band= FALSE,
+       xlab = &quot;Total Points&quot;, 
+       ylab = &quot;Probabiltiy of Being a Legendary&quot;,
+       line= list(col =&quot;darkviolet&quot;),
+       fill = list(fill = &quot;grey80&quot;),
+       scale=&quot;response&quot;,
+       gg = TRUE)+ 
+       theme_bw()+ 
+       labs(title = &quot;Logistic Regression Prediction of Legendary Status&quot;)+
+       theme(legend.position = &quot;none&quot;,
+              text = element_text(family = &quot;Georgia&quot;), 
+             plot.title = element_text(size = 15, margin(b = 10), hjust = 0.5, family = &quot;Georgia&quot;))</code></pre>
+<p><img src="06--Chapter-5_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>#Sub-Legendary Logistic Regression
+library(visreg)
+visreg(predict_sublegendary_fit1, &quot;defense&quot;, by = &quot;sp_attack&quot;,
+       rug = FALSE ,
+       band= FALSE,
+       xlab = &quot;Defense&quot;, 
+       ylab = &quot;Probabiltiy of Being a Sub-Legendary&quot;,
+       line= list(col =&quot;green&quot;),
+       fill = list(fill = &quot;grey80&quot;),
+       scale=&quot;response&quot;,
+       gg = TRUE)+ 
+       theme_bw()+ 
+       labs(title = &quot;Logistic Regression Prediction of Sub-Legendary Status&quot;)+
+       theme(legend.position = &quot;none&quot;,
+              text = element_text(family = &quot;Georgia&quot;), 
+             plot.title = element_text(size = 15, margin(b = 10), hjust = 0.5, family = &quot;Georgia&quot;))</code></pre>
+<p><img src="06--Chapter-5_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+<pre class="r"><code>visreg(predict_sublegendary_fit1, &quot;defense&quot;, by = &quot;speed&quot;,
+       rug = FALSE ,
+       band= FALSE,
+       xlab = &quot;Defense&quot;, 
+       ylab = &quot;Probabiltiy of Being a Sub-Legendary&quot;,
+       line= list(col =&quot;green&quot;),
+       fill = list(fill = &quot;grey80&quot;),
+       scale=&quot;response&quot;,
+       gg = TRUE)+ 
+       theme_bw()+ 
+       labs(title = &quot;Logistic Regression Prediction of Sub-Legendary Status&quot;)+
+       theme(legend.position = &quot;none&quot;,
+              text = element_text(family = &quot;Georgia&quot;), 
+             plot.title = element_text(size = 15, margin(b = 10), hjust = 0.5, family = &quot;Georgia&quot;))</code></pre>
+<p><img src="06--Chapter-5_files/figure-html/unnamed-chunk-5-3.png" width="672" /></p>
+<pre class="r"><code>visreg(predict_sublegendary_fit1, &quot;sp_attack&quot;, by = &quot;speed&quot;,
+       rug = FALSE ,
+       band= FALSE,
+       xlab = &quot;Special Attack&quot;, 
+       ylab = &quot;Probabiltiy of Being a Sub-Legendary&quot;,
+       line= list(col =&quot;green&quot;),
+       fill = list(fill = &quot;grey80&quot;),
+       scale=&quot;response&quot;,
+       gg = TRUE)+ 
+       theme_bw()+ 
+       labs(title = &quot;Logistic Regression Prediction of Sub-Legendary Status&quot;)+
+       theme(legend.position = &quot;none&quot;,
+              text = element_text(family = &quot;Georgia&quot;), 
+             plot.title = element_text(size = 15, margin(b = 10), hjust = 0.5, family = &quot;Georgia&quot;))</code></pre>
+<p><img src="06--Chapter-5_files/figure-html/unnamed-chunk-5-4.png" width="672" /></p>
+<pre class="r"><code>#Mythical Logistirc Regression
+visreg(predict_mythical_fit2, &quot;sp_attack&quot;, by = &quot;speed&quot;,
+       rug = FALSE ,
+       band= FALSE,
+       xlab = &quot;Special Attack&quot;, 
+       ylab = &quot;Probabiltiy of Being a Mythical Pokemon&quot;,
+       line= list(col =&quot;deeppink&quot;),
+       fill = list(fill = &quot;grey80&quot;),
+       scale=&quot;response&quot;,
+       gg = TRUE)+ 
+       theme_bw()+ 
+       labs(title = &quot;Logistic Regression Prediction of Mythical Status&quot;)+
+       theme(legend.position = &quot;none&quot;,
+              text = element_text(family = &quot;Georgia&quot;), 
+             plot.title = element_text(size = 15, margin(b = 10), hjust = 0.5, family = &quot;Georgia&quot;))</code></pre>
+<p><img src="06--Chapter-5_files/figure-html/unnamed-chunk-5-5.png" width="672" /></p>
+<p>In the legendary regression, we see a pretty straight forward graph where the probability of being a legendary Pokemon before about 500 total points is basically 0. After 750 total points, the probability is more than 87.5 percent. The three sub-legendary logistic regressions show how having different amounts of particular stats affect the model’s ability to predict sub-legendary status. The essential things to note are that when a Pokemon has high defense, having high special attack or high speed helps better predict sub-legendary status. Although not as strong as the first two graphs, the last plot shows how the presence of both high special attack and high speed helps predict sub-legendary status to lesser degree. Finally, for mythical status, if a Pokemon had both high special attack and high speed, the probability of being a mythical Pokemon increases.</p>
+</div>
+<div id="task-15-do-pokemon-with-better-designs-have-higher-stats" class="section level2">
+<h2>Task 15: Do pokemon with better designs have higher stats?</h2>
+<p>This task is actually pretty simple because we are only trying to figure out the relationship between one explanatory variable (design) and one response variable (total points).</p>
+<p>The hardest part for this task is going to be creating the data frame we need. We need gather the 8 separate surveys that were used to get design scores, create a useful data frame with them, and combine them with the data we have been using.</p>
+<pre class="r"><code>#Read in data frames
+library(readr)
+
+# Survey 1
+pokemon_generation1 &lt;- read_csv(&quot;C:/Users/laryl/Desktop/Data Sets/Pokemon_Survey_Generation_1.csv&quot;)
+
+#Survey 2
+pokemon_generation2 &lt;- read_csv(&quot;C:/Users/laryl/Desktop/Data Sets/Pokemon_Survey_Generation_2.csv&quot;)
+
+# Survey 3
+pokemon_generation3  &lt;- read_csv(&quot;C:/Users/laryl/Desktop/Data Sets/Pokemon_Survey_Generation_3.csv&quot;)
+
+#Survey 4
+pokemon_generation4 &lt;- read_csv(&quot;C:/Users/laryl/Desktop/Data Sets/Pokemon_Survey_Generation_4 .csv&quot;)
+
+# Survey 5
+pokemon_generation5 &lt;- read_csv(&quot;C:/Users/laryl/Desktop/Data Sets/Pokemon_Survey_Generation_5.csv&quot;)
+
+# Survey 6
+pokemon_generation6  &lt;- read_csv(&quot;C:/Users/laryl/Desktop/Data Sets/Pokemon_Survey_Generation_6 .csv&quot;)
+
+# Survey 7
+pokemon_generation7 &lt;- read_csv(&quot;C:/Users/laryl/Desktop/Data Sets/Pokemon_Survey_Generation_7.csv&quot;)
+
+# Survey 8
+pokemon_generation8  &lt;- read_csv(&quot;C:/Users/laryl/Desktop/Data Sets/Pokemon_Survey_Generation_8.csv&quot;)</code></pre>
+<p>At the moment, each Pokemon in these data frames have a design score that was given to them by respondents to the surveys. Those scores are listed in variables called “obs”. For example, the generation 1 survey (pokemon_generation1) has 12 variables in total. The first variable (ï..num) represents the Pokemon’s pokedex number (a unique number assigned to each Pokemon). The last 11 variables (obs_1- obs 11) are the 11 respondents to the survey. So each of the 11 respondents rated each Pokemon in the survey from 1-10.</p>
+<p>Now we need to take the mean of each Pokemon’s score and tern it into its own variable for all 8 surveys.</p>
+<pre class="r"><code>#Take the mean of all of the observations and call that new variable design_mean
+
+library(dplyr)
+pokemon_generation1_des &lt;- pokemon_generation1 %&gt;%
+  mutate(design_mean = rowMeans(select(pokemon_generation1, starts_with(&quot;obs&quot;))))
+
+pokemon_generation2_des &lt;- pokemon_generation2 %&gt;%
+  mutate(design_mean = rowMeans(select(pokemon_generation2, starts_with(&quot;obs&quot;))))
+
+pokemon_generation3_des&lt;- pokemon_generation3 %&gt;%
+  mutate(design_mean =  rowMeans(select(pokemon_generation3, starts_with(&quot;obs&quot;))))
+
+pokemon_generation4_des &lt;- pokemon_generation4 %&gt;%
+  mutate(design_mean = rowMeans(select(pokemon_generation4, starts_with(&quot;obs&quot;))))
+
+
+pokemon_generation5_des &lt;- pokemon_generation5 %&gt;%
+  mutate(design_mean = rowMeans(select(pokemon_generation5, starts_with(&quot;obs&quot;))))
+
+pokemon_generation6_des &lt;- pokemon_generation6 %&gt;%
+  mutate(design_mean = rowMeans(select(pokemon_generation6, starts_with(&quot;obs&quot;))))
+
+pokemon_generation7_des &lt;- pokemon_generation7 %&gt;%
+  mutate(design_mean = rowMeans(select(pokemon_generation7, starts_with(&quot;obs&quot;))))
+
+pokemon_generation8_des &lt;- pokemon_generation8 %&gt;%
+  mutate(design_mean = rowMeans(select(pokemon_generation8, starts_with(&quot;obs&quot;))))</code></pre>
+<p>Let’s now filter out all of the useless variables</p>
+<pre class="r"><code>#Create new dataframe with just the pokedex number and design mean
+pokemon_generation1_des&lt;-pokemon_generation1_des %&gt;%
+  select(num, design_mean)
+pokemon_generation2_des&lt;- pokemon_generation2_des %&gt;%
+  select(num, design_mean)
+pokemon_generation3_des&lt;- pokemon_generation3_des %&gt;%
+  select(num, design_mean)
+pokemon_generation4_des&lt;- pokemon_generation4_des %&gt;%
+  select(num, design_mean)
+pokemon_generation5_des&lt;- pokemon_generation5_des %&gt;%
+  select(num, design_mean)
+pokemon_generation6_des&lt;- pokemon_generation6_des %&gt;%
+  select(num, design_mean)
+pokemon_generation7_des&lt;- pokemon_generation7_des %&gt;%
+  select(num, design_mean)
+pokemon_generation8_des&lt;- pokemon_generation8_des %&gt;%
+  select(num, design_mean)</code></pre>
+<p>We need to now bind all of these survey data frames into a single survey data frame.</p>
+<pre class="r"><code>pokemon_design&lt;- rbind(pokemon_generation1_des, pokemon_generation2_des, pokemon_generation3_des, pokemon_generation4_des, pokemon_generation5_des, pokemon_generation6_des, pokemon_generation7_des, pokemon_generation8_des)
+
+pokemon_design</code></pre>
+<pre><code>## # A tibble: 1,015 x 2
+##    num   design_mean
+##    &lt;chr&gt;       &lt;dbl&gt;
+##  1 1            8.09
+##  2 2            7.55
+##  3 3            5.45
+##  4 3M           6.55
+##  5 4            6.36
+##  6 5            6.45
+##  7 6            8.36
+##  8 6MX          7.09
+##  9 6MY          8.91
+## 10 7            7.91
+## # ... with 1,005 more rows</code></pre>
+<p>Now, in order to combine the design data frame with the data we have been using throughout this project, we need to make sure it has the same amount of observations. The design data frame has 1015 Pokemon whereas the project data frame has 1028 Pokemon. Unfortunately, this means playing detective to find all of the observations that do not match each other from both data frames.</p>
+<pre class="r"><code>#See the number of Pokemon per generation
+table(pokemon_data_clean$generation)</code></pre>
+<pre><code>## 
+##   1   2   3   4   5   6   7   8 
+## 192 107 165 121 171  85  99  88</code></pre>
+<pre class="r"><code>#Create new project dataframe with necessary variables 
+pokemon_data_pure &lt;- pokemon_data_full[, c(2,3,18)]
+
+#Eliminating mismatched obervations 
+pokemon_data_pure&lt;-pokemon_data_pure[c(-414,-415,-416, -560, -786,-787,-790,-791,-821, -822, -823, -825, -826,-827,-868),]
+
+pokemon_design&lt;- pokemon_design[c(-782, -785),]
+
+#Combine dataframes
+pokemon_design_vs_points &lt;-cbind(pokemon_data_pure, pokemon_design)
+
+#Removing Outlier
+pokemon_design_vs_points &lt;-pokemon_design_vs_points[-1013,]
+
+pokemon_design_vs_points</code></pre>
+<pre><code>##     pokedex_number                name total_points   num design_mean
+## 1                1           Bulbasaur          318     1    8.090909
+## 2                2             Ivysaur          405     2    7.545455
+## 3                3            Venusaur          525     3    5.454545
+## 4                3       Mega Venusaur          625    3M    6.545455
+## 5                4          Charmander          309     4    6.363636
+## 6                5          Charmeleon          405     5    6.454545
+## 7                6           Charizard          534     6    8.363636
+## 8                6    Mega Charizard X          634   6MX    7.090909
+## 9                6    Mega Charizard Y          634   6MY    8.909091
+## 10               7            Squirtle          314     7    7.909091
+## 11               8           Wartortle          405     8    7.000000
+## 12               9           Blastoise          530     9    6.636364
+## 13               9      Mega Blastoise          630    9M    6.545455
+## 14              10            Caterpie          195    10    4.636364
+## 15              11             Metapod          205    11    3.000000
+## 16              12          Butterfree          395    12    4.818182
+## 17              13              Weedle          195    13    3.636364
+## 18              14              Kakuna          205    14    3.909091
+## 19              15            Beedrill          395    15    5.181818
+## 20              15       Mega Beedrill          495   15M    6.272727
+## 21              16              Pidgey          251    16    4.636364
+## 22              17           Pidgeotto          349    17    5.090909
+## 23              18             Pidgeot          479    18    6.181818
+## 24              18        Mega Pidgeot          579   18M    6.727273
+## 25              19             Rattata          253    19    4.636364
+## 26              19      Alolan Rattata          253   19A    3.272727
+## 27              20            Raticate          413    20    3.363636
+## 28              20     Alolan Raticate          413   20A    3.000000
+## 29              21             Spearow          262    21    4.727273
+## 30              22              Fearow          442    22    3.909091
+## 31              23               Ekans          288    23    3.090909
+## 32              24               Arbok          448    24    4.181818
+## 33              25             Pikachu          320    25    8.727273
+## 34              25     Partner Pikachu          430   25P    8.909091
+## 35              26              Raichu          485    26    7.272727
+## 36              26       Alolan Raichu          485   26A    7.090909
+## 37              27           Sandshrew          300    27    6.363636
+## 38              27    Alolan Sandshrew          300   27A    7.454545
+## 39              28           Sandslash          450    28    6.909091
+## 40              28    Alolan Sandslash          450   28A    7.909091
+## 41              29          Nidoranâ\231\200          275    29    4.454545
+## 42              30            Nidorina          365    30    6.363636
+## 43              31           Nidoqueen          505    31    5.636364
+## 44              32          Nidoranâ\231‚          273    32    5.636364
+## 45              33            Nidorino          365    33    4.909091
+## 46              34            Nidoking          505    34    4.818182
+## 47              35            Clefairy          323    35    6.272727
+## 48              36            Clefable          483    36    5.545455
+## 49              37              Vulpix          299    37    8.181818
+## 50              37       Alolan Vulpix          299   37A    8.909091
+## 51              38           Ninetales          505    38    8.454545
+## 52              38    Alolan Ninetales          505   38A    9.090909
+## 53              39          Jigglypuff          270    39    6.636364
+## 54              40          Wigglytuff          435    40    6.909091
+## 55              41               Zubat          245    41    3.090909
+## 56              42              Golbat          455    42    3.727273
+## 57              43              Oddish          320    43    6.727273
+## 58              44               Gloom          395    44    3.000000
+## 59              45           Vileplume          490    45    6.181818
+## 60              46               Paras          285    46    4.363636
+## 61              47            Parasect          405    47    3.636364
+## 62              48             Venonat          305    48    4.272727
+## 63              49            Venomoth          450    49    4.909091
+## 64              50             Diglett          265    50    4.636364
+## 65              50      Alolan Diglett          265   50A    4.000000
+## 66              51             Dugtrio          425    51    4.545455
+## 67              51      Alolan Dugtrio          425   51A    3.818182
+## 68              52              Meowth          290    52    6.090909
+## 69              52       Alolan Meowth          290   52A    5.909091
+## 70              52     Galarian Meowth          290   52G    3.272727
+## 71              53             Persian          440    53    6.909091
+## 72              53      Alolan Persian          440   53A    3.727273
+## 73              54             Psyduck          320    54    5.545455
+## 74              55             Golduck          500    55    4.727273
+## 75              56              Mankey          305    56    4.000000
+## 76              57            Primeape          455    57    4.272727
+## 77              58           Growlithe          350    58    8.454545
+## 78              59            Arcanine          555    59    6.909091
+## 79              60             Poliwag          300    60    6.363636
+## 80              61           Poliwhirl          385    61    5.818182
+## 81              62           Poliwrath          510    62    5.090909
+## 82              63                Abra          310    63    6.454545
+## 83              64             Kadabra          400    64    4.727273
+## 84              65            Alakazam          500    65    4.090909
+## 85              65       Mega Alakazam          600   65A    5.272727
+## 86              66              Machop          305    66    5.272727
+## 87              67             Machoke          405    67    4.454545
+## 88              68             Machamp          505    68    5.727273
+## 89              69          Bellsprout          300    69    6.636364
+## 90              70          Weepinbell          390    70    4.000000
+## 91              71          Victreebel          490    71    4.636364
+## 92              72           Tentacool          335    72    3.818182
+## 93              73          Tentacruel          515    73    3.727273
+## 94              74             Geodude          300    74    3.090909
+## 95              74      Alolan Geodude          300   74A    3.909091
+## 96              75            Graveler          390    75    4.090909
+## 97              75     Alolan Graveler          390   75A    4.181818
+## 98              76               Golem          495    76    4.272727
+## 99              76        Alolan Golem          495   76A    5.454545
+## 100             77              Ponyta          410    77    7.000000
+## 101             77     Galarian Ponyta          410   77G    8.000000
+## 102             78            Rapidash          500    78    6.363636
+## 103             78   Galarian Rapidash          500   78G    6.909091
+## 104             79            Slowpoke          315    79    4.181818
+## 105             80             Slowbro          490    80    4.454545
+## 106             80        Mega Slowbro          590   80M    4.818182
+## 107             81           Magnemite          325    81    4.181818
+## 108             82            Magneton          465    82    4.636364
+## 109             83          Farfetch&#39;d          377    83    6.545455
+## 110             83 Galarian Farfetch&#39;d          377   83G    5.727273
+## 111             84               Doduo          310    84    5.454545
+## 112             85              Dodrio          470    85    4.181818
+## 113             86                Seel          325    86    7.545455
+## 114             87             Dewgong          475    87    7.363636
+## 115             88              Grimer          325    88    3.181818
+## 116             88       Alolan Grimer          325   88A    2.909091
+## 117             89                 Muk          500    89    2.636364
+## 118             89          Alolan Muk          500   89A    3.363636
+## 119             90            Shellder          305    90    4.454545
+## 120             91            Cloyster          525    91    4.727273
+## 121             92              Gastly          310    92    2.818182
+## 122             93             Haunter          405    93    5.181818
+## 123             94              Gengar          500    94    5.363636
+## 124             94         Mega Gengar          600   94A    5.181818
+## 125             95                Onix          385    95    4.000000
+## 126             96             Drowzee          328    96    3.909091
+## 127             97               Hypno          483    97    2.636364
+## 128             98              Krabby          325    98    3.727273
+## 129             99             Kingler          475    99    3.727273
+## 130            100             Voltorb          330   100    2.818182
+## 131            101           Electrode          490   101    3.090909
+## 132            102           Exeggcute          325   102    3.545455
+## 133            103           Exeggutor          530   103    4.090909
+## 134            103    Alolan Exeggutor          530  103A    4.818182
+## 135            104              Cubone          320   104    6.545455
+## 136            105             Marowak          425   105    4.818182
+## 137            105      Alolan Marowak          425  105A    7.545455
+## 138            106           Hitmonlee          455   106    4.181818
+## 139            107          Hitmonchan          455   107    5.909091
+## 140            108           Lickitung          385   108    4.727273
+## 141            109             Koffing          340   109    3.363636
+## 142            110             Weezing          490   110    3.000000
+## 143            110    Galarian Weezing          490  110G    5.000000
+## 144            111             Rhyhorn          345   111    5.090909
+## 145            112              Rhydon          485   112    5.727273
+## 146            113             Chansey          450   113    6.181818
+## 147            114             Tangela          435   114    4.272727
+## 148            115          Kangaskhan          490   115    6.181818
+## 149            115     Mega Kangaskhan          590  115M    5.727273
+## 150            116              Horsea          295   116    6.000000
+## 151            117              Seadra          440   117    5.090909
+## 152            118             Goldeen          320   118    5.818182
+## 153            119             Seaking          450   119    5.090909
+## 154            120              Staryu          340   120    5.181818
+## 155            121             Starmie          520   121    5.181818
+## 156            122            Mr. Mime          460   122    4.272727
+## 157            122   Galarian Mr. Mime          460  122G    4.818182
+## 158            123             Scyther          500   123    7.000000
+## 159            124                Jynx          455   124    2.181818
+## 160            125          Electabuzz          490   125    4.727273
+## 161            126              Magmar          495   126    5.818182
+## 162            127              Pinsir          500   127    3.818182
+## 163            127         Mega Pinsir          600  127M    3.090909
+## 164            128              Tauros          490   128    4.727273
+## 165            129            Magikarp          200   129    4.909091
+## 166            130            Gyarados          540   130    6.363636
+## 167            130       Mega Gyarados          640  130M    6.545455
+## 168            131              Lapras          535   131    7.909091
+## 169            132               Ditto          288   132    7.909091
+## 170            133               Eevee          325   133    8.272727
+## 171            133       Partner Eevee          435  133P    8.818182
+## 172            134            Vaporeon          525   134    8.272727
+## 173            135             Jolteon          525   135    7.727273
+## 174            136             Flareon          525   136    7.454545
+## 175            137             Porygon          395   137    3.727273
+## 176            138             Omanyte          355   138    6.363636
+## 177            139             Omastar          495   139    3.818182
+## 178            140              Kabuto          355   140    4.000000
+## 179            141            Kabutops          495   141    4.636364
+## 180            142          Aerodactyl          515   142    4.454545
+## 181            142     Mega Aerodactyl          615  142M    6.000000
+## 182            143             Snorlax          540   143    7.090909
+## 183            144            Articuno          580   144    7.363636
+## 184            145              Zapdos          580   145    5.181818
+## 185            146             Moltres          580   146    6.727273
+## 186            147             Dratini          300   147    7.272727
+## 187            148           Dragonair          420   148    8.363636
+## 188            149           Dragonite          600   149    7.818182
+## 189            150              Mewtwo          680   150    6.909091
+## 190            150       Mega Mewtwo X          780 150MX    6.000000
+## 191            150       Mega Mewtwo Y          780 150MY    7.454545
+## 192            151                 Mew          600   151    8.000000
+## 193            152           Chikorita          318   152    7.272727
+## 194            153             Bayleef          405   153    6.727273
+## 195            154            Meganium          525   154    7.363636
+## 196            155           Cyndaquil          309   155    6.545455
+## 197            156             Quilava          405   156    6.181818
+## 198            157          Typhlosion          534   157    6.181818
+## 199            158            Totodile          314   158    6.727273
+## 200            159            Croconaw          405   159    5.454545
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 812 rows ]</code></pre>
+<p>Finally, we can now do some modeling. Let’s first checkout the relationship between our two variables.</p>
+<pre class="r"><code>ggplot(pokemon_design_vs_points, aes(x= design_mean, y = total_points)) +
+  geom_point(shape= 19, size= 2, color = &quot;orange1&quot;, alpha = .5)+
+  theme_minimal()+
+  theme(legend.position = &quot;none&quot;,
+       text = element_text(family = &quot;Georgia&quot;))</code></pre>
+<p><img src="06--Chapter-5_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Although it isn’t a perfect linear relationship, it seems mostly fine.</p>
+<p>Next, we will build our model.</p>
+<pre class="r"><code>pokemon_design_vs_points_fit &lt;- lm(total_points ~ design_mean, data = pokemon_design_vs_points)
+summary(pokemon_design_vs_points_fit)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = total_points ~ design_mean, data = pokemon_design_vs_points)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -285.68  -95.92   16.03   82.03  349.58 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  281.780     17.296   16.29   &lt;2e-16 ***
+## design_mean   24.774      2.702    9.17   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 115.6 on 1010 degrees of freedom
+## Multiple R-squared:  0.07685,    Adjusted R-squared:  0.07594 
+## F-statistic: 84.08 on 1 and 1010 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Design seems to be very statistically correlated with stat total. But only about 7.7 percent of the variation in stat total is accounted for by the variation in design mean.</p>
+<p>Let’s make sure our model does not violate linear regression assumptions.</p>
+<pre class="r"><code>#Checking for Normality
+residuals(pokemon_design_vs_points_fit )</code></pre>
+<pre><code>##             1             2             3             4             5             6             7             8             9            10 
+## -164.22548419  -63.71228438  108.08831488  181.06191527 -130.43368480  -36.68588476   45.01791591  176.54871546  131.50471610 -163.72108425 
+##            11            12            13            14            15            16            17            18            19            20 
+##  -50.19908457   83.80971530  186.06191527 -201.64188540 -151.10228598   -6.14628534 -176.86768576 -173.62428566  -15.15508521   57.81851517 
+##            21            22            23            24            25            26            27            28            29            30 
+## -145.64188540  -58.90288524   44.07071514  130.55751533 -143.64188540 -109.85888588   47.88891415   56.89771402 -136.89408537   63.37571434 
+##            31            32            33            34            35            36            37            38            39            40 
+##  -70.35448595   62.61911444 -177.99088396  -72.49528390   23.04431552   27.54871546 -139.43368480 -166.46008441   -2.94688460  -27.72108425 
+##            41            42            43            44            45            46            47            48            49            50 
+## -117.13748547  -74.43368480   83.58391495 -148.41608505  -38.39848531  103.85371466 -114.18148483   63.83611492 -185.47768416 -203.49528390 
+##            51            52            53            54            55            56            57            58            59            60 
+##   13.76571594   -1.99968384 -176.19028470  -17.94688460 -113.35448595   80.88011428 -128.44248467   38.89771402   55.07071514 -104.88528550 
+##            61            62            63            64            65            66            67            68            69            70 
+##   33.13231424  -82.63308553   46.60151469 -131.64188540 -115.87648563   30.61031456   48.62791431 -142.67708489 -138.17268496  -72.85888588 
+##            71            72            73            74            75            76            77            78            79            80 
+##  -12.94688460   65.88011428  -99.16388508  101.10591463  -75.87648563   67.36691447 -141.23428406  102.05311540 -139.43368480  -40.92048499 
+##            81            82            83            84            85            86            87            88            89            90 
+##  102.09711476 -131.68588476    1.10591463  116.87131440  187.59271482 -107.40728518   12.86251453   81.33171498 -146.19028470    9.12351437 
+##            91            92            93            94            95            96            97            98            99           100 
+##   93.35811460  -41.37208569  140.88011428  -58.35448595  -78.62428566    6.87131440    4.61911444  107.36691447   78.08831488  -45.19908457 
+##           101           102           103           104           105           106           107           108           109           110 
+##  -69.97328422   60.56631520   47.05311540  -70.38088556   97.86251453  188.85371466  -60.38088556   68.35811460  -66.93808473  -46.66828502 
+##           111           112           113           114           115           116           117           118           119           120 
+## -106.91168512   84.61911444 -143.71228438   10.79211556  -35.60668592  -28.85008601  152.90651389  134.88891415  -87.13748547  126.10591463 
+##           121           122           123           124           125           126           127           128           129           130 
+##  -41.59788604   -5.15508521   85.34051485  189.84491479    4.12351437  -50.62428566  135.90651389  -49.11988572  100.88011428  -21.59788604 
+##           131           132           133           134           135           136           137           138           139           140 
+##  131.64551405  -44.61548579  146.87131440  128.85371466 -123.93808473   23.85371466  -43.71228438   69.61911444   26.82731504  -13.89408537 
+##           141           142           143           144           145           146           147           148           149           150 
+##  -25.11108585  133.89771402   84.34931472  -62.90288524   61.33171498   15.07071514   47.36691447   55.07071514  166.33171498 -135.42488492 
+##           151           152           153           154           155           156           157           158           159           160 
+##   32.09711476 -105.92048499   42.09711476  -70.15508521  109.84491479   72.36691447   58.85371466   44.80091543  119.16751373   91.10591463 
+##           161           162           163           164           165           166           167           168           169           170 
+##   69.07951501  123.62791431  241.64551405   91.10591463 -203.39848531  100.56631520  196.06191527   57.27891575 -189.72108425 -161.72988412 
+##           171           172           173           174           175           176           177           178           179           180 
+##  -65.24308393   38.27011588   51.78331568   58.53991559   20.88011428  -84.43368480  118.62791431  -25.87648563   98.35811460  122.86251453 
+##           181           182           183           184           185           186           187           188           189           190 
+##  184.57511508   82.54871546  115.79211556  169.84491479  131.55751533 -161.95568448  -68.98208409  124.53111572  227.05311540  349.57511508 
+##           191           192           193           194           195           196           197           198           199           200 
+##  313.53991559  120.02671578 -143.95568448  -43.44248467   60.79211556 -134.93808473  -29.92928486   99.07071514 -134.44248467  -11.91168512 
+##           201           202           203           204           205           206           207           208           209           210 
+##   92.81851517 -222.18148483  -40.19908457 -154.91168512   35.08831488 -156.41608505  -62.94688460 -157.90288524   -3.39848531  113.58391495 
+##           211           212           213           214           215           216           217           218           219           220 
+##  -95.92048499   11.55751533 -256.95568448 -237.19908457 -260.96448435 -198.93808473  -43.44248467  -92.40728518   55.34051485 -172.94688460 
+##           221           222           223           224           225           226           227           228           229           230 
+##  -83.44248467   54.80091543  145.79211556   48.31411524 -193.93808473   -8.17268496  -18.17268496   65.07071514 -189.43368480  -94.92928486 
+##           231           232           233           234           235           236           237           238           239           240 
+##   29.57511508  -56.91168512 -254.92928486   26.10591463  -11.14628534 -224.92928486   -0.42488492   56.28771562   58.53991559    1.60151469 
+##           241           242           243           244           245           246           247           248           249           250 
+##   52.81851517    0.07071514  -92.17268496   -5.15508521    4.30531536  -84.11988572   54.84491479   -8.66828502   28.85371466   54.80091543 
+##           251           252           253           254           255           256           257           258           259           260 
+##  136.78331568 -119.16388508   33.08831488   29.84491479   26.78331568  122.27891575   72.32291511   56.06191527  165.07071514  -13.93808473 
+##           261           262           263           264           265           266           267           268           269           270 
+## -107.18148483   49.30531536 -137.63308553   26.60151469 -173.66828502   39.84491479  -18.17268496   -4.65948515 -103.39848531   36.06191527 
+##           271           272           273           274           275           276           277           278           279           280 
+## -107.18148483   27.54871546   23.31411524  -73.39848531   47.05311540  115.52231584  111.82731504 -118.44248467  101.10591463   86.82731504 
+##           281           282           283           284           285           286           287           288           289           290 
+##   32.32291511 -196.19028470 -229.43368480   38.08831488 -116.41608505  -79.43368480  -69.92928486   66.33171498   78.04431552  142.81851517 
+##           291           292           293           294           295           296           297           298           299           300 
+##  120.29651549  129.30531536  -98.89408537   -6.91168512  169.57511508  251.55751533  260.83611492  206.78331568  117.77451581 -125.93026262 
+##           301           302           303           304           305           306           307           308           309           310 
+##  -33.68295147   91.31704853  169.29553773 -175.47866192  -41.94101802   66.54284888  152.77940463 -161.71521767  -55.70446227   93.56435968 
+##           311           312           313           314           315           316           317           318           319           320 
+##  190.81167083 -215.93026262  -57.22059537 -171.15606298 -206.94101802  -10.42488492    8.84393702 -238.17757377 -206.15606298  -29.91950722 
+##           321           322           323           324           325           326           327           328           329           330 
+## -175.87648563  -17.89799643 -188.40337413  -43.62917448   57.83318162 -188.40337413  -95.93026262   57.83318162 -149.41412953   43.84393702 
+##           331           332           333           334           335           336           337           338           339           340 
+## -165.93026262   37.10200357 -248.94101802 -157.93026262   49.03747118  116.00520498 -183.44639572   -6.70446227 -102.39261873   15.81167083 
+##           341           342           343           344           345           346           347           348           349           350 
+## -133.90875183   48.11275897  264.34931472 -145.15606298   47.59662587 -191.67219607 -160.14530758  -40.14530758   81.59662587 -193.42488492 
+##           351           352           353           354           355           356           357           358           359           360 
+##   60.09124817 -273.45715112  -36.15606298 -197.95177342  -82.72597307  -20.14530758   44.06973738  -75.19908457    8.28478233  -97.67219607 
+##           361           362           363           364           365           366           367           368           369           370 
+##    5.08049278   74.80091543  144.52133808 -158.68295147  -14.91950722   63.05898198  -99.63992988   -4.97328422  114.29553773  -41.94101802 
+##           371           372           373           374           375           376           377           378           379           380 
+##  -63.96252882    2.32780393   27.10200357  -68.96252882 -106.40337413   33.82242623 -108.90875183   10.30629313   66.26327153  -35.93026262 
+##           381           382           383           384           385           386           387           388           389           390 
+##   39.29553773 -130.93026262   29.57511508  124.06973738   28.56435968 -130.70446227   75.36007012  -75.93026262 -143.17757377  -40.87648563 
+##           391           392           393           394           395           396           397           398           399           400 
+##   84.06973738  -89.91950722   94.12351437 -150.70446227   -0.98403962  101.76864923   13.81167083   74.37082552   54.34931472   35.08049278 
+##           401           402           403           404           405           406           407           408           409           410 
+##  -98.38186333   56.84393702  -59.11304138   56.84393702  -69.86573023   80.58587047  -34.13455218   83.84393702  -53.40337413   61.82242623 
+##           411           412           413           417           418           419           420           421           422           423 
+## -191.88724103   65.53209348  -73.73672847   17.83318162 -135.42488492   60.36007012  119.06973738 -121.66144068   41.09124817   -3.45715112 
+##           424           425           426           427           428           429           430           431           432           433 
+##   30.08049278  -12.22059537   68.51058268 -189.69370687 -116.66144068   68.84393702  138.56435968 -181.71521767  -61.71521767   80.30629313 
+##           434           435           436           437           438           439           440           441           442           443 
+## -101.94101802  109.62889207   68.33855932   98.61813667  -86.66144068 -122.16681838   25.36007012  114.52133808  206.26327153 -113.90875183 
+##           444           445           446           447           448           449           450           451           452           453 
+##  -35.19908457  117.27402693  236.54284888  113.79016003  116.54284888  108.28478233  131.03747118  222.77940463  114.52133808  214.52133808 
+##           454           455           456           457           458           459           460           461           462           463 
+##  173.51058268  248.73638303  181.76864923  292.77940463  197.27402693  255.98369418  111.76864923  139.29553773  122.77940463  144.80091543 
+##           464           465           466           467           468           469           470           471           472           473 
+##  136.54284888 -153.71521767  -47.44639572   50.53209348 -148.95177342  -50.19908457   59.53209348 -165.97328422  -69.46790652   44.52133808 
+##           474           475           476           477           478           479           480           481           482           483 
+## -188.17757377  -90.42488492   35.30629313 -185.93026262   -9.41412953 -236.42488492  -43.67219607 -192.19908457  -78.43564032   45.77940463 
+##           484           485           486           487           488           489           490           491           492           493 
+## -166.94101802   68.05898198  -91.43564032   31.54284888  -77.67219607   70.08049278 -189.90875183   -9.17757377   10.09124817   -3.67219607 
+##           494           495           496           497           498           499           500           501           502           503 
+##   -0.91950722 -197.43564032   43.57511508  -66.71521767 -138.96252882   39.80091543 -174.69370687   -7.95177342 -121.94101802   33.56435968 
+##           504           505           506           507           508           509           510           511           512           513 
+##   29.55360428 -107.19908457   51.05898198  -91.43564032   16.54284888   97.27402693   31.54284888   44.29553773 -134.18832917   46.34931472 
+##           514           515           516           517           518           519           520           521           522           523 
+## -148.17757377 -104.17757377   29.30629313 -111.15606298   66.82242623 -156.94101802 -136.94101802 -213.17757377  -38.69370687   40.81167083 
+##           524           525           526           527           528           529           530           531           532           533 
+## -149.69370687  -25.93026262  136.54284888  236.54284888  -54.18832917 -153.68295147   53.28478233  150.53209348  -67.39261873  116.59662587 
+##           534           535           536           537           538           539           540           541           542           543 
+## -108.68295147   80.58587047 -138.68295147   37.55360428   34.58587047 -100.42488492   29.57511508  -88.17757377 -112.94101802   60.82242623 
+##           544           545           546           547           548           549           550           551           552           553 
+##  119.53209348   32.77940463   90.81167083  103.84393702   93.56435968  110.08049278   76.54284888   90.30629313   98.05898198   65.30629313 
+##           554           555           556           557           558           559           561           562           563           564 
+##   61.54284888   56.03747118   90.58587047   96.82242623   99.06973738   60.04822658  111.09124817   61.54284888   16.54284888  -17.95177342 
+##           565           566           567           568           569           570           571           572           573           574 
+##   81.31704853   81.31704853   78.56435968   70.30629313   78.56435968  133.05898198  122.04822658  102.77940463  208.28478233  183.51058268 
+##           575           576           577           578           579           580           581           582           583           584 
+##  183.33855932  195.53209348  216.54284888  208.28478233  125.53209348   44.06973738  128.28478233  120.02671578  128.28478233  136.54284888 
+##           585           586           587           588           589           590           591           592           593           594 
+##  253.79016003  128.28478233 -140.44248467  -46.70348451   72.80091543 -171.97328422   -7.92048499  102.07951501 -151.70348451  -24.18148483 
+##           595           596           597           598           599           600           601           602           603           604 
+##   63.79211556 -137.13748547   25.61031456 -175.69468464  -64.92928486   71.82731504 -167.44248467  -11.45128454 -107.66828502   83.34051485 
+##           605           606           607           608           609           610           611           612           613           614 
+## -112.17268496   74.33171498 -127.93808473   65.32291511 -151.93808473   56.57511508 -130.38968544  -61.16388508   53.07071514 -180.46888428 
+##           615           616           617           618           619           620           621           622           623           624 
+##   37.29651549 -116.64188540  -17.90288524   86.82731504  -98.41608505   17.09711476  -73.14628534   93.34051485    7.81851517   96.55751533 
+##           625           626           627           628           629           630           631           632           633           634 
+## -111.91168512   28.62791431  124.12351437 -131.92048499   -8.13748547  103.34931472   84.12351437  102.14111412 -138.44248467  -57.18148483 
+##           635           636           637           638           639           640           641           642           643           644 
+##   85.34051485 -118.62428566  -32.13748547   79.34931472 -157.18148483   33.80971530 -163.93808473   -2.22548419   99.39331408   90.38451421 
+##           645           646           647           648           649           650           651           652           653           654 
+## -142.92928486  -63.65948515   95.33171498 -110.92048499 -113.17268496   67.59271482  132.09711476   65.34051485  123.08831488   21.56631520 
+##           655           656           657           658           659           660           661           662           663           664 
+## -139.20788444   81.60151469  -64.40728518   95.86251453   37.05311540  -95.89408537 -125.17268496   70.59271482  -64.16388508   91.60151469 
+##           665           666           667           668           669           670           671           672           673           674 
+##   -0.14628534  134.32291511 -101.42488492   66.09711476 -140.96448435   70.56631520 -148.44248467    8.04431552 -138.17268496  -47.18148483 
+##           675           676           677           678           679           680           681           682           683           684 
+##   91.10591463 -180.96448435 -100.96448435   12.27891575 -138.93808473   60.59271482 -134.43368480  -12.90288524  100.07071514 -140.46888428 
+##           685           686           687           688           689           690           691           692           693           694 
+##   24.30531536  -49.72108425 -101.91168512   98.35811460 -154.44248467   44.83611492  -86.41608505   33.80971530   73.35811460 -131.69468464 
+##           695           696           697           698           699           700           701           702           703           704 
+##   28.06191527  -98.39848531   67.58391495  -92.13748547   29.84491479  116.60151469 -137.40728518   17.36691447  116.10591463  -61.64188540 
+##           705           706           707           708           709           710           711           712           713           714 
+##   92.86251453 -177.94688460 -100.96448435   42.27891575 -157.72108425   -2.40728518  123.08831488 -159.20788444   76.82731504  134.12351437 
+##           715           716           717           718           719           720           721           722           723           724 
+##  -98.39848531  111.87131440   69.85371466   69.85371466  -75.92048499   70.56631520  104.12351437 -109.40728518   36.80971530  -54.38968544 
+##           725           726           727           728           729           730           731           732           733           734 
+##   70.83611492   57.32291511  -69.16388508   97.59271482   -4.11988572  135.88011428   94.11471450   69.34051485 -134.92928486   -8.17268496 
+##           735           736           737           738           739           740           741           742           743           744 
+##  160.56631520  -43.39848531   83.53991559  154.07951501  167.59271482  113.53991559  169.84491479  176.60151469  174.34931472  165.34051485 
+##           745           746           747           748           749           750           751           752           753           754 
+##  215.79211556  224.80091543  201.10591463  201.10591463  249.84491479  271.82731504  265.07071514  127.05311540  102.27891575  120.02671578 
+##           755           756           757           758           759           760           761           762           763           764 
+##  120.02671578  212.36691447 -151.48940944  -31.61843484   53.12349074 -163.68295935  -61.68295935   38.54284100 -122.61843484  -37.81198475 
+##           765           766           767           768           769           770           771           772           773           774 
+##   22.15574118  153.83316587 -196.52165988  -16.71520979 -164.81198475  -70.10230962   19.02671578 -196.36036041 -217.42488492  -41.10230962 
+##           775           776           777           778           779           780           781           782           783           784 
+##  -64.52165988   11.54284100 -121.23133501  -71.81198475  106.09124030  -55.65068528   88.18801525  -97.90875970   55.28479021   53.96221490 
+##           785           788           789           792           793           794           795           796           797           798 
+##  -94.00553466  -77.55391032   14.47834012  -89.42488492   25.38156516  -70.84423519   80.54286464 -136.23133501   63.96221490 -112.03778510 
+##           799           800           801           802           803           804           805           806           807           808 
+##   32.41381560 -116.61843484   14.02671578  -78.74746023   69.57511508 -160.00553466   28.89769038 -117.97328422   44.12349074 -117.97328422 
+##           809           810           811           812           813           814           815           816           817           818 
+##   16.25251613   29.54284100   29.31704065    6.76866499   63.38156516 -127.32810997   27.76866499  138.60736552   48.86543994 -124.52165988 
+##           819           820           824           828           829           830           831           832           833           834 
+##   28.09124030  -70.65068528   91.44608968 -120.23133501  117.63963959 -231.87650926   64.31704065  190.73639091  200.02671578  141.70414047 
+##           835           836           837           838           839           840           841           842           843           844 
+##   64.86543994  249.70414047  157.18801525  220.02671578  163.38156516  234.09124030  129.31704065 -169.88296408  -20.33456478   82.23317532 
+##           845           846           847           848           849           850           851           852           853           854 
+## -145.10876443  -50.06360436   67.36865553 -155.01844429  -59.97328422   27.72993610 -212.49586426  -87.81198475    9.98155571 -219.54102433 
+##           855           856           857           858           859           860           861           862           863           864 
+##   39.60093434 -157.67650454    4.25899458   81.96221490  -84.99262503   94.64609441   25.75575536   -6.45070418   -1.49586426   13.36865553 
+##           865           866           867           869           870           871           872           873           874           875 
+## -138.81198475   -6.06360436 -214.83780401    4.54929582    9.50413574    9.50413574 -233.12810524  241.60093434  -95.69584535   72.00737497 
+##           876           877           878           879           880           881           882           883           884           885 
+##  -60.28940471   37.36865553 -153.99262503    8.71059529 -234.92812415   12.41381560 -157.81198475  -37.81198475 -100.51520507   29.75575536 
+##           886           887           888           889           890           891           892           893           894           895 
+## -120.15392450   39.84607550 -235.28940471 -170.15392450   39.93639564    0.07187585   89.30415465   32.32349546 -188.03778510   69.84607550 
+##           896           897           898           899           900           901           902           903           904           905 
+##  -83.17326531   69.39447479  -22.90230489   71.36865553   87.54929582   36.82673469   37.36865553   -2.45070418   49.62027515  -10.28940471 
+##           906           907           908           909           910           911           912           913           914           915 
+##   -6.45070418  101.55577427   27.32349546   66.75575536 -162.63134447  -25.28940471  107.63961596   92.50413574   97.45897567  124.71059529 
+##           916           917           918           919           920           921           922           923           924           925 
+##   90.02671578 -282.45070418  -99.79264394  157.91057638  170.29767620  119.75575536  117.27833539   92.50413574  119.75575536  151.96221490 
+##           926           927           928           929           930           931           932           933           934           935 
+##   87.54929582  104.89123557  157.18801525  187.63961596  182.68477603  259.16219599  144.80091543  134.89123557  -57.49586426   74.89123557 
+##           936           937           938           939           940           941           942           943           944           945 
+##  161.87189476   85.07187585  127.45897567 -142.81198475  152.23317532 -185.45715900  -59.97328422   56.22026569 -185.45715900  -41.39263448 
+##           946           947           948           949           950           951           952           953           954           955 
+##   59.31704065 -169.97328422  -13.52165988   90.28479021 -201.87650926  -13.77973431 -207.10230962  -74.71520979    2.63961596 -256.61843484 
+##           956           957           958           959           960           961           962           963           964           965 
+## -120.19908457   62.18801525 -225.68295935  -12.58618440 -223.77973431  -13.77973431 -197.58618440   37.89769038 -155.71520979   20.51059056 
+##           966           967           968           969           970           971           972           973           974           975 
+## -222.36038404   -5.45715900 -181.13456006  -11.13456006   67.18801525 -192.10230962   54.57511508   -7.36038404 -109.23133501   95.05898986 
+##           976           977           978           979           980           981           982           983           984           985 
+##   60.05898986 -131.84423519   93.63963959 -219.39263448   52.99446534   71.57511508 -119.23133501   75.99446534 -154.48940944   40.28479021 
+##           986           987           988           989           990           991           992           993           994           995 
+## -178.16683413   31.12349074 -218.07005918 -106.87650926   36.22026569 -162.32810997  -60.42488492   64.09124030   43.12349074    6.47834012 
+##           996           997           998           999          1000          1001          1002          1003          1004          1005 
+##   79.57511508   42.51059056   70.99446534   64.96221490 -188.29585953   -6.65070891   -9.97328422   13.86543994 -285.68295935  -11.16683413 
+##          1006          1007          1008          1009          1010          1011          1012          1013          1014          1015 
+##   14.80091543   14.80091543    8.60736552   -1.87650926   -4.97328422  -37.77973431  -37.77973431 -146.87650926   35.51059056   43.60736552 
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 12 entries ]</code></pre>
+<pre class="r"><code>qqnorm(residuals(pokemon_design_vs_points_fit ), col= &quot;orange1&quot; )
+qqline(residuals(pokemon_design_vs_points_fit ))</code></pre>
+<p><img src="06--Chapter-5_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<pre class="r"><code>#Checking for Constant Conditional SDs and Linearity
+plot(fitted(pokemon_design_vs_points_fit),resid(pokemon_design_vs_points_fit), col= &quot;orange1&quot;, pch= 19)
+abline(h=0) </code></pre>
+<p><img src="06--Chapter-5_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<p>The constant conditional SDs and linearity assumption seem to be okay. However the normality assumption seems to have been violated according to the QQ plot. What we are probably seeing is a distribution that is more narrow than the expected normal distribution. What might be causing this is the fact that the Pokemon only received 8-11 ratings which probably affected the mean design scores and consequently the distribution.</p>
+<p>Let’s get to the plotting:</p>
+<pre class="r"><code>visreg(pokemon_design_vs_points_fit, &quot;design_mean&quot;, gg= TRUE, 
+       line= list(col =&quot;orange2&quot;),
+       xlab = &quot;Mean Design Score&quot;, 
+       ylab = &quot;Total Stat Point&quot;,
+       fill = list(col = &quot;grey85&quot;))+ 
+  theme_bw()+
+  labs(title = &quot;Design Rating vs Total Stats Regression&quot;)+
+  theme(text = element_text(family = &quot;Georgia&quot;),
+        plot.title = element_text(size = 13, margin(b = 10), hjust = 0.5, family = &quot;Georgia&quot;))</code></pre>
+<p><img src="06--Chapter-5_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>As we can see, there is a significant correlation between a Pokemon’s design and its stat total. As stated above, one significant caveat to these findings was the amount of survey participants. Only 8-11 participants submitted responses meaning the “design means” may not have been the best representations of the public’s opinion on Pokemon designs. To improve this study, at least 20-25 survey participants would be needed. Nevertheless, these results do show us an interesting feature of Pokemon: Gamefreak may be putting more effort into designing their stronger Pokemon.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
