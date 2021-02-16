@@ -283,13 +283,13 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Home</a>
+  <a href="index.html">About</a>
 </li>
 <li>
-  <a href="Summer-Research-2018-Markdown.html">Summer Research Project 2018 (R)</a>
+  <a href="Summer-Research-2018-Markdown.html">Project 1: Summer Research Project 2018 (R)</a>
 </li>
 <li>
-  <a href="pokemon-project-2020.html">Exploratory Pokemon Analysis 2020 (R)</a>
+  <a href="pokemon-project-2020.html">Project 2: Exploratory Pokemon Analysis 2020 (R)</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -2823,14 +2823,14 @@ summary(pokemon_design_vs_points_fit)</code></pre>
 <p>Design seems to be very statistically correlated with stat total. But only about 7.7 percent of the variation in stat total is accounted for by the variation in design mean.</p>
 <p>Let’s make sure our model does not violate linear regression assumptions.</p>
 <pre class="r"><code>#Checking for Normality
-residuals(pokemon_design_vs_points_fit )
-qqnorm(residuals(pokemon_design_vs_points_fit ), col= &quot;orange1&quot; )
+residuals(pokemon_design_vs_points_fit )</code></pre>
+<pre class="r"><code>qqnorm(residuals(pokemon_design_vs_points_fit ), col= &quot;orange1&quot; )
 qqline(residuals(pokemon_design_vs_points_fit ))</code></pre>
-<p><img src="06--Chapter-5_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="06--Chapter-5_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <pre class="r"><code>#Checking for Constant Conditional SDs and Linearity
 plot(fitted(pokemon_design_vs_points_fit),resid(pokemon_design_vs_points_fit), col= &quot;orange1&quot;, pch= 19)
 abline(h=0) </code></pre>
-<p><img src="06--Chapter-5_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="06--Chapter-5_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>The constant conditional SDs and linearity assumption seem to be okay. However the normality assumption seems to have been violated according to the QQ plot. What we are probably seeing is a distribution that is more narrow than the expected normal distribution. What might be causing this is the fact that the Pokemon only received 8-11 ratings which probably affected the mean design scores and consequently the distribution.</p>
 <p>Let’s get to the plotting:</p>
 <pre class="r"><code>visreg(pokemon_design_vs_points_fit, &quot;design_mean&quot;, gg= TRUE, 
@@ -2842,7 +2842,7 @@ abline(h=0) </code></pre>
   labs(title = &quot;Design Rating vs Total Stats Regression&quot;)+
   theme(text = element_text(family = &quot;Georgia&quot;),
         plot.title = element_text(size = 13, margin(b = 10), hjust = 0.5, family = &quot;Georgia&quot;))</code></pre>
-<p><img src="06--Chapter-5_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="06--Chapter-5_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>As we can see, there is a significant correlation between a Pokemon’s design and its stat total. As stated above, one significant caveat to these findings was the amount of survey participants. Only 8-11 participants submitted responses meaning the “design means” may not have been the best representations of the public’s opinion on Pokemon designs. To improve this study, at least 20-25 survey participants would be needed. Nevertheless, these results do show us an interesting feature of Pokemon: Gamefreak may be putting more effort into designing their stronger Pokemon.</p>
 </div>
 

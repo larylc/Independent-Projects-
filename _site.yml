@@ -3,11 +3,11 @@ output_dir: "."
 navbar:
   title: "Cedric's Independent Projects"
   left:
-    - text: "Home"
+    - text: "About"
       href: index.html
-    - text: "Summer Research Project 2018 (R)"
+    - text: "Project 1: Summer Research Project 2018 (R)"
       href: Summer-Research-2018-Markdown.html
-    - text: "Exploratory Pokemon Analysis 2020 (R)"
+    - text: "Project 2: Exploratory Pokemon Analysis 2020 (R)"
       href: pokemon-project-2020.html
 output:
   html_document:

@@ -213,13 +213,13 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li>
-        <a href="index.html">Home</a>
+        <a href="index.html">About</a>
       </li>
       <li>
-        <a href="Summer-Research-2018-Markdown.html">Summer Research Project 2018 (R)</a>
+        <a href="Summer-Research-2018-Markdown.html">Project 1: Summer Research Project 2018 (R)</a>
       </li>
       <li>
-        <a href="pokemon-project-2020.html">Exploratory Pokemon Analysis 2020 (R)</a>
+        <a href="pokemon-project-2020.html">Project 2: Exploratory Pokemon Analysis 2020 (R)</a>
       </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -2669,26 +2669,26 @@
 <p>Design seems to be very statistically correlated with stat total. But only about 7.7 percent of the variation in stat total is accounted for by the variation in design mean.</p>
 <p>Let’s make sure our model does not violate linear regression assumptions.</p>
 <div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Checking for Normality</span></span>
-<span id="cb147-2"><a href="#cb147-2" aria-hidden="true" tabindex="-1"></a><span class="fu">residuals</span>(pokemon_design_vs_points_fit )</span>
-<span id="cb147-3"><a href="#cb147-3" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">residuals</span>(pokemon_design_vs_points_fit ), <span class="at">col=</span> <span class="st">&quot;orange1&quot;</span> )</span>
-<span id="cb147-4"><a href="#cb147-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">residuals</span>(pokemon_design_vs_points_fit ))</span></code></pre></div>
-<p><img src="pokemon-project-2020_files/figure-html/unnamed-chunk-53-1.png" width="768" /></p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Checking for Constant Conditional SDs and Linearity</span></span>
-<span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">fitted</span>(pokemon_design_vs_points_fit),<span class="fu">resid</span>(pokemon_design_vs_points_fit), <span class="at">col=</span> <span class="st">&quot;orange1&quot;</span>, <span class="at">pch=</span> <span class="dv">19</span>)</span>
-<span id="cb148-3"><a href="#cb148-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>) </span></code></pre></div>
+<span id="cb147-2"><a href="#cb147-2" aria-hidden="true" tabindex="-1"></a><span class="fu">residuals</span>(pokemon_design_vs_points_fit )</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">residuals</span>(pokemon_design_vs_points_fit ), <span class="at">col=</span> <span class="st">&quot;orange1&quot;</span> )</span>
+<span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">residuals</span>(pokemon_design_vs_points_fit ))</span></code></pre></div>
 <p><img src="pokemon-project-2020_files/figure-html/unnamed-chunk-54-1.png" width="768" /></p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Checking for Constant Conditional SDs and Linearity</span></span>
+<span id="cb149-2"><a href="#cb149-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">fitted</span>(pokemon_design_vs_points_fit),<span class="fu">resid</span>(pokemon_design_vs_points_fit), <span class="at">col=</span> <span class="st">&quot;orange1&quot;</span>, <span class="at">pch=</span> <span class="dv">19</span>)</span>
+<span id="cb149-3"><a href="#cb149-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>) </span></code></pre></div>
+<p><img src="pokemon-project-2020_files/figure-html/unnamed-chunk-55-1.png" width="768" /></p>
 <p>The constant conditional SDs and linearity assumption seem to be okay. However the normality assumption seems to have been violated according to the QQ plot. What we are probably seeing is a distribution that is more narrow than the expected normal distribution. What might be causing this is the fact that the Pokemon only received 8-11 ratings which probably affected the mean design scores and consequently the distribution.</p>
 <p>Let’s get to the plotting:</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visreg</span>(pokemon_design_vs_points_fit, <span class="st">&quot;design_mean&quot;</span>, <span class="at">gg=</span> <span class="cn">TRUE</span>, </span>
-<span id="cb149-2"><a href="#cb149-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">line=</span> <span class="fu">list</span>(<span class="at">col =</span><span class="st">&quot;orange2&quot;</span>),</span>
-<span id="cb149-3"><a href="#cb149-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&quot;Mean Design Score&quot;</span>, </span>
-<span id="cb149-4"><a href="#cb149-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">&quot;Total Stat Point&quot;</span>,</span>
-<span id="cb149-5"><a href="#cb149-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="fu">list</span>(<span class="at">col =</span> <span class="st">&quot;grey85&quot;</span>))<span class="sc">+</span> </span>
-<span id="cb149-6"><a href="#cb149-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
-<span id="cb149-7"><a href="#cb149-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Design Rating vs Total Stats Regression&quot;</span>)<span class="sc">+</span></span>
-<span id="cb149-8"><a href="#cb149-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">&quot;Georgia&quot;</span>),</span>
-<span id="cb149-9"><a href="#cb149-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>, <span class="fu">margin</span>(<span class="at">b =</span> <span class="dv">10</span>), <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">family =</span> <span class="st">&quot;Georgia&quot;</span>))</span></code></pre></div>
-<p><img src="pokemon-project-2020_files/figure-html/unnamed-chunk-55-1.png" width="768" /></p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visreg</span>(pokemon_design_vs_points_fit, <span class="st">&quot;design_mean&quot;</span>, <span class="at">gg=</span> <span class="cn">TRUE</span>, </span>
+<span id="cb150-2"><a href="#cb150-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">line=</span> <span class="fu">list</span>(<span class="at">col =</span><span class="st">&quot;orange2&quot;</span>),</span>
+<span id="cb150-3"><a href="#cb150-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&quot;Mean Design Score&quot;</span>, </span>
+<span id="cb150-4"><a href="#cb150-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">&quot;Total Stat Point&quot;</span>,</span>
+<span id="cb150-5"><a href="#cb150-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="fu">list</span>(<span class="at">col =</span> <span class="st">&quot;grey85&quot;</span>))<span class="sc">+</span> </span>
+<span id="cb150-6"><a href="#cb150-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb150-7"><a href="#cb150-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Design Rating vs Total Stats Regression&quot;</span>)<span class="sc">+</span></span>
+<span id="cb150-8"><a href="#cb150-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">&quot;Georgia&quot;</span>),</span>
+<span id="cb150-9"><a href="#cb150-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>, <span class="fu">margin</span>(<span class="at">b =</span> <span class="dv">10</span>), <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">family =</span> <span class="st">&quot;Georgia&quot;</span>))</span></code></pre></div>
+<p><img src="pokemon-project-2020_files/figure-html/unnamed-chunk-56-1.png" width="768" /></p>
 <p>As we can see, there is a significant correlation between a Pokemon’s design and its stat total. As stated above, one significant caveat to these findings was the amount of survey participants. Only 8-11 participants submitted responses meaning the “design means” may not have been the best representations of the public’s opinion on Pokemon designs. To improve this study, at least 20-25 survey participants would be needed. Nevertheless, these results do show us an interesting feature of Pokemon: Gamefreak may be putting more effort into designing their stronger Pokemon.</p>
 </div>
 </div>
@@ -2697,40 +2697,40 @@
 <div id="task-16-what-would-a-pca-of-pokemon-look-like-based-on-their-stats" class="section level2">
 <h2>Task 16: What would a PCA of pokemon look like based on their stats?</h2>
 <p>Since this task is mostly an exercise in using visualization tools I will first create a simple principle component analysis to get a cursory glance at how the Pokemon are being placed.</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a>pokemon_pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(pokemon_data_full[,<span class="fu">c</span>(<span class="dv">19</span><span class="sc">:</span><span class="dv">24</span>)], <span class="at">center=</span>T, <span class="at">scale=</span>T)<span class="co">#Ex 1</span></span>
-<span id="cb150-2"><a href="#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pokemon_pca)</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a>pokemon_pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(pokemon_data_full[,<span class="fu">c</span>(<span class="dv">19</span><span class="sc">:</span><span class="dv">24</span>)], <span class="at">center=</span>T, <span class="at">scale=</span>T)<span class="co">#Ex 1</span></span>
+<span id="cb151-2"><a href="#cb151-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pokemon_pca)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2    PC3    PC4     PC5     PC6
 ## Standard deviation     1.6561 1.0521 0.8875 0.8189 0.66131 0.50473
 ## Proportion of Variance 0.4571 0.1845 0.1313 0.1118 0.07289 0.04246
 ## Cumulative Proportion  0.4571 0.6416 0.7729 0.8847 0.95754 1.00000</code></pre>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
-<span id="cb152-2"><a href="#cb152-2" aria-hidden="true" tabindex="-1"></a>scores <span class="ot">&lt;-</span> pokemon_pca<span class="sc">$</span>x</span>
-<span id="cb152-3"><a href="#cb152-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(scores[,<span class="dv">1</span>], scores[,<span class="dv">2</span>], <span class="at">type=</span><span class="st">&quot;n&quot;</span>)</span>
-<span id="cb152-4"><a href="#cb152-4" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(scores[,<span class="dv">1</span>], scores[,<span class="dv">2</span>], <span class="at">label=</span> pokemon_data_full<span class="sc">$</span>name, <span class="at">repel =</span> <span class="cn">TRUE</span>, <span class="at">cex=</span>.<span class="dv">5</span>)</span></code></pre></div>
-<p><img src="pokemon-project-2020_files/figure-html/unnamed-chunk-56-1.png" width="768" /></p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb153-2"><a href="#cb153-2" aria-hidden="true" tabindex="-1"></a>scores <span class="ot">&lt;-</span> pokemon_pca<span class="sc">$</span>x</span>
+<span id="cb153-3"><a href="#cb153-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(scores[,<span class="dv">1</span>], scores[,<span class="dv">2</span>], <span class="at">type=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb153-4"><a href="#cb153-4" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(scores[,<span class="dv">1</span>], scores[,<span class="dv">2</span>], <span class="at">label=</span> pokemon_data_full<span class="sc">$</span>name, <span class="at">repel =</span> <span class="cn">TRUE</span>, <span class="at">cex=</span>.<span class="dv">5</span>)</span></code></pre></div>
+<p><img src="pokemon-project-2020_files/figure-html/unnamed-chunk-57-1.png" width="768" /></p>
 <p>Eternatus Eternamax probably needs to be removed in order to get a better glance at the Pokemon.</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a>pokemon_data_biplot <span class="ot">&lt;-</span> pokemon_data_full[,<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">19</span><span class="sc">:</span><span class="dv">24</span>)]</span>
-<span id="cb153-2"><a href="#cb153-2" aria-hidden="true" tabindex="-1"></a>pokemon_data_biplot<span class="ot">&lt;-</span> pokemon_data_biplot[<span class="sc">-</span><span class="dv">1028</span>,]</span>
-<span id="cb153-3"><a href="#cb153-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(pokemon_data_biplot)<span class="ot">&lt;-</span> pokemon_data_biplot[,<span class="dv">1</span>]</span>
-<span id="cb153-4"><a href="#cb153-4" aria-hidden="true" tabindex="-1"></a>pokemon_data_biplot[,<span class="dv">1</span>]<span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb153-5"><a href="#cb153-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb153-6"><a href="#cb153-6" aria-hidden="true" tabindex="-1"></a>pokemon_biplot<span class="ot">&lt;-</span><span class="fu">prcomp</span>(pokemon_data_biplot,<span class="at">center =</span>T, <span class="at">scale=</span> T) </span>
-<span id="cb153-7"><a href="#cb153-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pokemon_biplot)</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a>pokemon_data_biplot <span class="ot">&lt;-</span> pokemon_data_full[,<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">19</span><span class="sc">:</span><span class="dv">24</span>)]</span>
+<span id="cb154-2"><a href="#cb154-2" aria-hidden="true" tabindex="-1"></a>pokemon_data_biplot<span class="ot">&lt;-</span> pokemon_data_biplot[<span class="sc">-</span><span class="dv">1028</span>,]</span>
+<span id="cb154-3"><a href="#cb154-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(pokemon_data_biplot)<span class="ot">&lt;-</span> pokemon_data_biplot[,<span class="dv">1</span>]</span>
+<span id="cb154-4"><a href="#cb154-4" aria-hidden="true" tabindex="-1"></a>pokemon_data_biplot[,<span class="dv">1</span>]<span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb154-5"><a href="#cb154-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb154-6"><a href="#cb154-6" aria-hidden="true" tabindex="-1"></a>pokemon_biplot<span class="ot">&lt;-</span><span class="fu">prcomp</span>(pokemon_data_biplot,<span class="at">center =</span>T, <span class="at">scale=</span> T) </span>
+<span id="cb154-7"><a href="#cb154-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pokemon_biplot)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2    PC3    PC4     PC5     PC6
 ## Standard deviation     1.6461 1.0547 0.8955 0.8304 0.65364 0.50923
 ## Proportion of Variance 0.4516 0.1854 0.1337 0.1149 0.07121 0.04322
 ## Cumulative Proportion  0.4516 0.6370 0.7706 0.8856 0.95678 1.00000</code></pre>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the results</span></span>
-<span id="cb155-2"><a href="#cb155-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
-<span id="cb155-3"><a href="#cb155-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-4"><a href="#cb155-4" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(pokemon_biplot, <span class="at">labelsize =</span> <span class="dv">2</span>, <span class="at">geom =</span> <span class="st">&quot;text&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb155-5"><a href="#cb155-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb155-6"><a href="#cb155-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Biplot of Pokemon by Stats&quot;</span>)<span class="sc">+</span></span>
-<span id="cb155-7"><a href="#cb155-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">&quot;Georgia&quot;</span>),</span>
-<span id="cb155-8"><a href="#cb155-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>, <span class="fu">margin</span>(<span class="at">b =</span> <span class="dv">10</span>), <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">family =</span> <span class="st">&quot;Georgia&quot;</span>))</span></code></pre></div>
-<p><img src="pokemon-project-2020_files/figure-html/unnamed-chunk-57-1.png" width="768" /></p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the results</span></span>
+<span id="cb156-2"><a href="#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
+<span id="cb156-3"><a href="#cb156-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb156-4"><a href="#cb156-4" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(pokemon_biplot, <span class="at">labelsize =</span> <span class="dv">2</span>, <span class="at">geom =</span> <span class="st">&quot;text&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb156-5"><a href="#cb156-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb156-6"><a href="#cb156-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Biplot of Pokemon by Stats&quot;</span>)<span class="sc">+</span></span>
+<span id="cb156-7"><a href="#cb156-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">&quot;Georgia&quot;</span>),</span>
+<span id="cb156-8"><a href="#cb156-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>, <span class="fu">margin</span>(<span class="at">b =</span> <span class="dv">10</span>), <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">family =</span> <span class="st">&quot;Georgia&quot;</span>))</span></code></pre></div>
+<p><img src="pokemon-project-2020_files/figure-html/unnamed-chunk-58-1.png" width="768" /></p>
 <p>The <strong>first principal component (PC1)</strong> accounts for 45.2% of the variance. We can make the case that it probably measures total stats because we see the weakest unevolved Pokemon on left and the strongest mega evolved legendary Pokemon on the right. The <strong>second principal component (PC2)</strong>, which accounts for 18.5 percent of the variation, seperates Pokemon based on their offensive and defensive capabilities. Pokemon at the bottom of the plot have a larger proportion of their stats devoted to speed and offense. Pokemon at the top have a larger proportion of their stats devoted to defenses. Thus a principal component analysis that uses stats as the variables seperates pokemon by their functions in battle.</p>
 </div>
 </div>
