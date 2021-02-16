@@ -9,7 +9,7 @@ output:
 ---
 
 <center>
-![Mountain Lake Biological Station, 6/8/2018.](C:\Users\laryl\Downloads\IMG-0048.jpg){#id .class width=50% height=50%}
+![Mountain Lake Biological Station, 6/8/2018.](C:\Users\laryl\Documents\Independent-Projects-\img\IMG-0048.jpg){#id .class width=50% height=50%}
 </center>
 
 # Abstract 

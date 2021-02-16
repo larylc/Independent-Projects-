@@ -8,7 +8,7 @@
 ---
 <center>
 
-![ Mountain Lake Biological Station, 08/09/2018.](C:\Users\laryl\Downloads\IMG-0380.jpg){#id .class width=50% height=50%}
+![ Mountain Lake Biological Station, 08/09/2018.](C:\Users\laryl\Documents\Independent-Projects-\img\IMG-0380.JPG){#id .class width=50% height=50%}
 
 </center>
 
