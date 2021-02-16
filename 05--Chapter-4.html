@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>05--Chapter-4.utf8</title>
+
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Cedric's Independent Projects</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Summer-Research-2018-Markdown.html">Summer Research Project 2018 (R)</a>
+</li>
+<li>
+  <a href="pokemon-project-2020.html">Exploratory Pokemon Analysis 2020 (R)</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<div id="task-11-is-typing-significantly-correlated-with-stat-total-does-typing-predict-overall-stats" class="section level2">
+<h2>Task 11: Is typing significantly correlated with stat total? Does typing predict overall stats?</h2>
+<p>We already know from the previous tasks that average stat totals differ between the types. This time, we want to statistically show how significant that difference is.</p>
+<p>For this task, since my explanatory variable is categorical and my response variable is numeric, I am going to perform an ANOVA.</p>
+<pre class="r"><code>type_vs_stat&lt;- lm(total_points ~ type, data = predict_type )
+summary(type_vs_stat)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = total_points ~ type, data = predict_type)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -294.39  -98.09   15.22   76.91  706.91 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    383.86      12.49  30.726  &lt; 2e-16 ***
+## typeDark        64.20      18.89   3.399 0.000693 ***
+## typeDragon     155.53      18.74   8.300 2.24e-16 ***
+## typeElectric    63.73      18.74   3.401 0.000689 ***
+## typeFairy       56.95      19.47   2.925 0.003490 ** 
+## typeFighting    92.66      18.89   4.906 1.03e-06 ***
+## typeFire        78.47      18.09   4.337 1.54e-05 ***
+## typeFlying      67.65      16.62   4.071 4.92e-05 ***
+## typeGhost       65.42      19.21   3.406 0.000676 ***
+## typeGrass       33.24      16.62   2.000 0.045646 *  
+## typeGround      56.43      18.21   3.099 0.001978 ** 
+## typeIce         74.14      20.28   3.655 0.000266 ***
+## typeNormal      20.92      16.36   1.279 0.201054    
+## typePoison      34.24      18.40   1.861 0.062962 .  
+## typePsychic     98.89      16.71   5.917 4.02e-09 ***
+## typeRock        63.49      18.53   3.426 0.000628 ***
+## typeSteel      106.13      18.81   5.641 2.00e-08 ***
+## typeWater       45.84      15.74   2.911 0.003650 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 118.5 on 1552 degrees of freedom
+## Multiple R-squared:  0.07562,    Adjusted R-squared:  0.0655 
+## F-statistic: 7.469 on 17 and 1552 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>anova(type_vs_stat)</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: total_points
+##             Df   Sum Sq Mean Sq F value    Pr(&gt;F)    
+## type        17  1783456  104909  7.4687 &lt; 2.2e-16 ***
+## Residuals 1552 21800142   14046                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>library(car)
+Anova(type_vs_stat, type = 3)</code></pre>
+<pre><code>## Anova Table (Type III tests)
+## 
+## Response: total_points
+##               Sum Sq   Df  F value    Pr(&gt;F)    
+## (Intercept) 13261058    1 944.0839 &lt; 2.2e-16 ***
+## type         1783456   17   7.4687 &lt; 2.2e-16 ***
+## Residuals   21800142 1552                       
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Unsurprisingly, according to this table, there is a significant positive relationship between typing and stat total.</p>
+</div>
+<div id="task-12-is-dual-typing-significantly-correlated-with-stat-total" class="section level2">
+<h2>Task 12: Is dual typing significantly correlated with stat total?</h2>
+<p>Again, although we were able to visualize the difference between mono-types and dual-types, we now want to examine how correlated number of types and total points are using ANOVA.</p>
+<p>We will use one of the older data frame (pokemon_dual_comparison) to examine this question because the type number variable was already turned into a categorical variable.</p>
+<pre class="r"><code>pokemon_dual_comparison_fit&lt;-lm(total_points~ type_number, data = pokemon_dual_comparison)
+summary(pokemon_dual_comparison_fit)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = total_points ~ type_number, data = pokemon_dual_comparison)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -276.60 -100.77   13.40   76.23  663.40 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   410.772      5.400  76.070  &lt; 2e-16 ***
+## type_number2   50.832      7.437   6.835  1.4e-11 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 119 on 1026 degrees of freedom
+## Multiple R-squared:  0.04355,    Adjusted R-squared:  0.04262 
+## F-statistic: 46.72 on 1 and 1026 DF,  p-value: 1.403e-11</code></pre>
+<pre class="r"><code>anova(pokemon_dual_comparison_fit)</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: total_points
+##               Df   Sum Sq Mean Sq F value    Pr(&gt;F)    
+## type_number    1   662082  662082  46.719 1.403e-11 ***
+## Residuals   1026 14539931   14171                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Like we saw in the box plots earlier, there is a statistically significant difference between mono-type and dual-type total stat points.</p>
+</div>
+<div id="task-13-is-typing-correlated-with-sub-legendary-mythical-legendary-status" class="section level2">
+<h2>Task 13: Is typing correlated with sub-legendary /mythical/ legendary status?</h2>
+<p>Before getting started, it is important to understand what the status variable in this data set represents. There are 4 statuses: legendary, sub-legendary, mythical, and normal. Legendary Pokemon and sub-legendary, are typically very rare and powerful Pokemon that usually represent certain philosophical, mythical, or cultural ideas. Mythical Pokemon, which are a similar category of special Pokemon, are considered to be more elusive and mysterious than their legendary counterparts. Because of their rarity and power, these Pokemon are often restricted to some extent in competative gameplay. Although fans of the game might disagree with the specific categories listed above or where Pokemon might belong, the four statuses we are working with in this data set were created using serebii.net’s understanding of status. For more information checkout this link: <a href="https://www.serebii.net/pokemon/legendary.shtml" class="uri">https://www.serebii.net/pokemon/legendary.shtml</a></p>
+<p>In order to accomplish this task, a mosaic plot is needed. This will allow us to visualize the relationship between two or more categorical variables:</p>
+<pre class="r"><code>#View all the categories in status 
+table(pokemon_data_full$status)</code></pre>
+<pre><code>## 
+##     Legendary      Mythical        Normal Sub Legendary 
+##            39            29           915            45</code></pre>
+<pre class="r"><code># Create dataframe that counts both types
+pokemon_special1&lt;- data.frame(pokemon_data_full[,c(10,7)])
+pokemon_special2&lt;- data.frame(pokemon_data_full[,c(11,7)])
+names(pokemon_special1)[names(pokemon_special1) == &quot;type_1&quot;]&lt;- &quot;type&quot;
+names(pokemon_special2)[names(pokemon_special2) == &quot;type_2&quot;]&lt;- &quot;type&quot;
+
+
+pokemon_special&lt;- rbind(pokemon_special1, pokemon_special2)
+
+#Eliminate blanks  
+pokemon_special&lt;- data.frame(pokemon_special[pokemon_special$type != &quot;&quot;,])
+str(pokemon_special)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    1570 obs. of  2 variables:
+##  $ type  : chr  &quot;Grass&quot; &quot;Grass&quot; &quot;Grass&quot; &quot;Grass&quot; ...
+##  $ status: chr  &quot;Normal&quot; &quot;Normal&quot; &quot;Normal&quot; &quot;Normal&quot; ...</code></pre>
+<pre class="r"><code>#Rename types so the figure isn&#39;t too crowded
+library(dplyr)
+pokemon_special &lt;- pokemon_special %&gt;% 
+  mutate(type = dplyr::recode(type,
+                       &quot;Bug&quot; = &quot;B&quot;,
+                       &quot;Dark&quot; = &quot;D&quot;,
+                       &quot;Dragon&quot; = &quot;Dr&quot;,
+                       &quot;Electric&quot; = &quot;E&quot;,
+                       &quot;Fairy&quot; = &quot;Fa&quot;,
+                       &quot;Fire&quot; = &quot;Fr&quot;,
+                       &quot;Fighting&quot; = &quot;Fg&quot;,
+                       &quot;Flying&quot; = &quot;Fl&quot;,
+                       &quot;Grass&quot; = &quot;Gr&quot;,
+                       &quot;Ghost&quot; = &quot;Gh&quot;,
+                       &quot;Ground&quot; = &quot;Gd&quot;,
+                       &quot;Ice&quot; = &quot;I&quot;,
+                       &quot;Normal&quot; = &quot;N&quot;,
+                       &quot;Poison&quot; = &quot;P&quot;,
+                       &quot;Water&quot; = &quot;W&quot;,
+                       &quot;Psychic&quot; = &quot;Ps&quot;,
+                       &quot;Rock&quot; = &quot;R&quot;,
+                       &quot;Steel&quot; = &quot;S&quot;))
+pokemon_special &lt;- pokemon_special %&gt;% 
+  mutate(status = dplyr::recode(status,
+                                &quot;Lengendary&quot; = &quot;L&quot;,
+                                &quot;Mythical&quot; = &quot;M&quot;,
+                                &quot;Normal&quot;= &quot;N&quot;,
+                                &quot;Legendary&quot; = &quot;L&quot;, 
+                                &quot;Sub Legendary&quot; = &quot;S&quot;))
+
+#Mosiac Plot
+library(vcd)
+tbl_status&lt;- xtabs(~ type + status,  pokemon_special)
+ftable(tbl_status)</code></pre>
+<pre><code>##      status   L   M   N   S
+## type                       
+## B             0   1  87   2
+## D             1   2  66   1
+## Dr           17   0  49   6
+## E             1   1  64   6
+## Fa            3   3  53   4
+## Fg            3   4  58   5
+## Fl            5   1 101  10
+## Fr            3   2  73   4
+## Gd            5   0  73   2
+## Gh            4   2  59   1
+## Gr            0   3 111   3
+## I             3   0  50   2
+## N             0   3 120   3
+## P             2   0  72   3
+## Ps           12  11  82   9
+## R             0   2  69   4
+## S             5   5  55   6
+## W             3   5 143   2</code></pre>
+<pre class="r"><code>mosaic(tbl_status, labeling_args = list(rot_labels = c(top = 0, left = 0),
+ offset_varnames = c(top = 1, left = 2), offset_labels = c(left = 0.5, top =0.5)), 
+ spacing = spacing_increase(start = unit(0.45, &quot;lines&quot;), rate = 1), 
+ margins = c(top = 0.25, bottom = 0.5),
+ gp = shading_hcl,
+ legend = T)</code></pre>
+<p><img src="05--Chapter-4_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>The rectangles represent the amount of Pokemon that fit a particular type and status. The larger the area of the rectangle, the more Pokemon are in it. If there are no Pokemon that fit a particular criteria, the rectangle is represented as a line with a circle at its center. For example, if we look at the top left corner, there are no bug Pokemon that are legendary.</p>
+<p>The Pearson residual colors, essentially, tell us whether we have more or less Pokemon than expected. Blue indicates more than expected while red represents less. If we were to assume that status and typing are independent (as in there is no relationship), then a rectangle should be grey.</p>
+<p>Because there are 18 types and 4 status categories, the cells have been condensed for organizational purposes. Luckily for us, there are only a few types that diverge from our independency expectations: dragon type, psychic type, grass type, normal type, and steel type. Unsurprisingly, there are more legendary dragons, relatively speaking, than we would expect if typing and status were independent of each other. With 17 legendary dragon Pokemon out of a possible 72, there is a slim chance that this isn’t an example of an interaction between type and status. Similarly, there is a relatively large amount of legendary and mythical psychic Pokemon. On the other hand, there are no grass or normal legendaries. Finally, there is an unexpectedly large amount of mythical steel Pokemon.</p>
+<p>Based on the fact that 5 of the 18 types seem to diverge from our independency assumptions, I think it is safe to say that typing could be a predictor of legendary status. This holds especially true for dragon and psychic Pokemon. Gamefreak’s tendency to choose dragon Pokemon as legendaries may have something to with the lore surrounding dragons. “Legendary Pokemon” are supposed to be the most powerful Pokemon in the games. So it makes sense that 25 percent of all legendary Pokemon are dragons. For mythical Pokemon, which are supposed to the most elusive Pokemon with the strangest powers, psychic Pokemon, which possess supernatural abilities (even by Pokemon standards) also fit that bill.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

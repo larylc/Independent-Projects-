@@ -1,4 +1,5 @@
 name: "Cedric's Independent Projects"
+output_dir: "."
 navbar:
   title: "Cedric's Independent Projects"
   left:
