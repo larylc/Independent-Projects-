@@ -307,12 +307,14 @@ summary(pokemon_design_vs_points_fit)
 Design seems to be very statistically correlated with stat total. But only about 7.7 percent of the variation in stat total is accounted for by the variation in design mean. 
 
 Let's make sure our model does not violate linear regression assumptions.
-```{r message=FALSE}
+```{r message=FALSE, results='hide'}
 #Checking for Normality
 residuals(pokemon_design_vs_points_fit )
 qqnorm(residuals(pokemon_design_vs_points_fit ), col= "orange1" )
 qqline(residuals(pokemon_design_vs_points_fit ))
+```
 
+```{r message=FALSE}
 #Checking for Constant Conditional SDs and Linearity
 plot(fitted(pokemon_design_vs_points_fit),resid(pokemon_design_vs_points_fit), col= "orange1", pch= 19)
 abline(h=0) 
