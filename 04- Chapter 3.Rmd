@@ -84,12 +84,17 @@ The first multiple regression shows that about **25 percent** of the variation i
 At this point, either of the multiple regression models could work. However, since the interaction effect in the second model is so small, I will continue with the more general model.
 
 But before moving forward, we need to check whether we violated any of the assumptions that come with building regression models.
-```{r output = FALSE}
+```{r message = FALSE, results='hide'}
 #Checking for Normaility
 residuals(fit_sweepers)
+```
+
+```{r message = FALSE}
 qqnorm(residuals(fit_sweepers), col= "slateblue" )
 qqline(residuals(fit_sweepers))
+```
 
+```{r}
 #Checking for Constant Conditional SDs and Linearity
 plot(fitted(fit_sweepers),resid(fit_sweepers), col= "slateblue", pch= 19)
 abline(h=0) 
