@@ -45,7 +45,7 @@ For me this project served a few purposes. It not only permitted me to practice 
 # **Sources**
 
 The first data set was obtained from Kaggle user Mario Tormo Romero:
-https://www.kaggle.com/mariotormo/complete-pokemon-data set-updated-090420 
+https://www.kaggle.com/mariotormo/complete-pokemon-dataset-updated-090420
 
 The 8 secondary data sets were produced from 8 google form surveys that asked respondents to rate the designs of most of the pokemon on a scale from 1-10. All of the pictures used in the surveys were obtained from https://www.serebii.net/pokemon/.
 
