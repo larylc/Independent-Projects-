@@ -19,17 +19,18 @@ See Project:
 
 <details>
 <summary>See Libaries Used</summary>
-  + library(knitr)
-  + library(plyr)
-  + library(doBy)
-  + library(ggplot2) 
-  + library(visreg)
-  + library(effects)
-  + library(lattice)
-  + library(lme4)
-  + library(car) 
-  + library(lsmeans)
++ library(knitr)
++ library(plyr)
++ library(doBy)
++ library(ggplot2) 
++ library(visreg)
++ library(effects)
++ library(lattice)
++ library(lme4)
++ library(car) 
++ library(lsmeans)
 </details>
+
 ### Project 2: Exploratory Pokemon Analysis 2020 
 
 
