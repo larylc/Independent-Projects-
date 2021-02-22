@@ -19,7 +19,7 @@ Following the link above will lead you to my project website. There, I will be p
 * [Poster](https://github.com/larylc/Summer-Research-2018/blob/main/Sigma%20Xi%20Research%20Poster%20Summer%202018%20Cedric%20Lary-%20Ultra.pdf)
 
 <details>
-<summary>See Libaries Used:</summary>
+<b>See Libaries Used:</b>
  
 * library(knitr)
 * library(plyr)
