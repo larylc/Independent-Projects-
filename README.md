@@ -19,7 +19,7 @@ Following the link above will lead you to my project website. There, I will be p
 * [Poster](https://github.com/larylc/Summer-Research-2018/blob/main/Sigma%20Xi%20Research%20Poster%20Summer%202018%20Cedric%20Lary-%20Ultra.pdf)
 
 <details>
-<summary>See Libaries Used</summary>
+<summary>See Libaries Used:</summary>
  
 * library(knitr)
 * library(plyr)
@@ -36,4 +36,39 @@ Following the link above will lead you to my project website. There, I will be p
 
 ### Project 2: Exploratory Pokemon Analysis 2020 
 ---
+
+**Summary**: This is a detailed 
+
+<details>
+<summary>See Libaries Used:</summary>
+ 
+* library(knitr)
+* library(stringr)
+* library(ggplot2)
+* library(lattice)
+* library(latticeExtra)
+* library(scales)
+* library(ggthemes)
+* library(hrbrthemes)
+* library(treemapify)
+* library(gridExtra)
+* library(ggbeeswarm)
+* library(ggridges) 
+* library(ggcorrplot)
+* library(visreg)
+* library(car)
+* library(dplyr)
+* library(vcd)
+* library(readr)
+* library(factoextra)
+
+</details>
+
+**Table of Contents**:
+
+
+
+
+
+
 
