@@ -12,7 +12,7 @@ Following the link above will lead you to my project website. There, I will be p
 
 ### Project 1: Summer Research 2018
 ----
-**Summary**: To determine which individual properties, predict an individual social network position, I analyzed the bracket to bracket movements of Forked Fungus Beetles within populations during the Summer of 2016. 
+**Summary**: To determine which individual properties, predict an individual's social network position, I analyzed the bracket to bracket movements of Forked Fungus Beetles within populations during the Summer of 2016. 
 
 **See Project**:
 * [Project Folder](https://github.com/larylc/Summer-Research-2018)
@@ -33,6 +33,8 @@ Following the link above will lead you to my project website. There, I will be p
 * library(lsmeans)
 
 </details>
+
+**Table of Contents**:
 
 ### Project 2: Exploratory Pokemon Analysis 2020 
 ---
