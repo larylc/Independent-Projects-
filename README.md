@@ -10,27 +10,30 @@ Following the link above will lead you to my project website. There, I will be p
 
 ## Major Projects
 
-### Project 1: Summer Research 2018 
-Summary: 
+### Project 1: Summer Research 2018
+----
+**Summary**: To determine which individual properties, predict an individual social network position, I analyzed the bracket to bracket movements of Forked Fungus Beetles within populations during the Summer of 2016. 
 
-See Project:
-* [**Project Folder**](https://github.com/larylc/Summer-Research-2018)
-* [**Poster**](https://github.com/larylc/Summer-Research-2018/blob/main/Sigma%20Xi%20Research%20Poster%20Summer%202018%20Cedric%20Lary-%20Ultra.pdf)
+**See Project**:
+* [Project Folder](https://github.com/larylc/Summer-Research-2018)
+* [Poster](https://github.com/larylc/Summer-Research-2018/blob/main/Sigma%20Xi%20Research%20Poster%20Summer%202018%20Cedric%20Lary-%20Ultra.pdf)
 
 <details>
 <summary>See Libaries Used</summary>
-+ library(knitr)
-+ library(plyr)
-+ library(doBy)
-+ library(ggplot2) 
-+ library(visreg)
-+ library(effects)
-+ library(lattice)
-+ library(lme4)
-+ library(car) 
-+ library(lsmeans)
+ 
+* library(knitr)
+* library(plyr)
+* library(doBy)
+* library(ggplot2) 
+* library(visreg)
+* library(effects)
+* library(lattice)
+* library(lme4)
+* library(car) 
+* library(lsmeans)
+
 </details>
 
 ### Project 2: Exploratory Pokemon Analysis 2020 
-
+---
 
