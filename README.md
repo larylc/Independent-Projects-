@@ -74,14 +74,14 @@ Following the link above will lead you to my project website. There, I will be p
 
 <details>
  
-<summary><b>Introduction</b></summary>
+<summary>Introduction</summary>
 * Goals
 * Potential Questions and Tasks
 
 </details>
 
 <details>
-<summary><b>Visualization Tasks and Questions:</b></summary>
+<summary>Visualization Tasks and Questions</summary>
  
 * Visualize the number of Pokemon per type.
 * Are there more dual-types than mono-types?
@@ -95,7 +95,7 @@ Following the link above will lead you to my project website. There, I will be p
 </details>
 
 <details>
-<summary><b>Correlational Tasks</b></summary>
+<summary>Correlational Tasks</summary>
  
 * What stats are correlated with each other?
 * What stats are correlated with individual types?
@@ -108,18 +108,18 @@ Following the link above will lead you to my project website. There, I will be p
 </details>
 
 <details>
-<summary><b>Multivariate Studies</b></summary>
+<summary>Multivariate Studies</summary>
  
 * What would a PCA cluster of Pokemon look like based on their stats?
 * 
 </details>
 
 <details>
-<summary><b>Conclusion</b></summary>
+<summary>Conclusion</summary>
 </details>
 
 <details>
-<summary><b>Sources</b></summary>
+<summary>Sources</summary>
 </details>
 
 
