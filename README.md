@@ -35,11 +35,15 @@ Following the link above will lead you to my project website. There, I will be p
 </details>
 
 **Table of Contents**:
+* Abstract
+* Sources and Acknowledgements 
+* Data and Preparation
+* Conclusions
 
 ### Project 2: Exploratory Pokemon Analysis 2020 
 ---
 
-**Summary**: This is a detailed 
+**Summary**: This is an extensive exploratory analysis of Pokemon game characteristics.
 
 <details>
 <summary><b>See Libaries Used:</b></summary>
@@ -67,6 +71,33 @@ Following the link above will lead you to my project website. There, I will be p
 </details>
 
 **Table of Contents**:
+Introduction
+Goals
+Potential Questions and Tasks
+<details>
+<summary><b>Visualization Tasks and Questions:</b></summary>
+* Visualize the number of Pokemon per type.
+* Are there more dual-types than mono-types?
+* Are Pokemon with dual-types on average stronger than mono-type Pokemon?
+* On average, what is the strongest and weakest type?
+* Which types have the most of each stat?
+* Are some generations on average stronger than others?
+* Do newer generations have more variation in their stats?
+* Which stats have the most and least variation?
+*
+</details>
+
+Correlational Tasks
+What stats are correlated with each other?
+What stats are correlated with individual types?
+Is typing significantly correlated with stat total? Does typing predict overall stats?
+Is dual typing significantly correlated with stat total?
+Is typing correlated with sub-legendary /mystical/ legendary status?
+Which stat(s) are most useful for predicting legendary/ sub legendary/ mythical status?
+Do pokemon with better designs have higher stats?
+Multivariate Studies
+What would a PCA cluster of Pokemon look like based on their stats?
+
 
 
 
