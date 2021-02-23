@@ -71,9 +71,14 @@ Following the link above will lead you to my project website. There, I will be p
 </details>
 
 **Table of Contents**:
-Introduction
-Goals
-Potential Questions and Tasks
+
+<details>
+ 
+<summary><b>Introduction</b></summary>
+* Goals
+* Potential Questions and Tasks
+
+</details>
 
 <details>
 <summary><b>Visualization Tasks and Questions:</b></summary>
@@ -89,20 +94,33 @@ Potential Questions and Tasks
 
 </details>
 
+<details>
+<summary><b>Correlational Tasks</b></summary>
+ 
+* What stats are correlated with each other?
+* What stats are correlated with individual types?
+* Is typing significantly correlated with stat total? Does typing predict overall stats?
+* Is dual typing significantly correlated with stat total?
+* Is typing correlated with sub-legendary /mystical/ legendary status?
+* Which stat(s) are most useful for predicting legendary/ sub legendary/ mythical status?
+* Do pokemon with better designs have higher stats?
 
-Correlational Tasks
-What stats are correlated with each other?
-What stats are correlated with individual types?
-Is typing significantly correlated with stat total? Does typing predict overall stats?
-Is dual typing significantly correlated with stat total?
-Is typing correlated with sub-legendary /mystical/ legendary status?
-Which stat(s) are most useful for predicting legendary/ sub legendary/ mythical status?
-Do pokemon with better designs have higher stats?
-Multivariate Studies
-What would a PCA cluster of Pokemon look like based on their stats?
+</details>
 
+<details>
+<summary><b>Multivariate Studies</b></summary>
+ 
+* What would a PCA cluster of Pokemon look like based on their stats?
+* 
+</details>
 
+<details>
+<summary><b>Conclusion</b></summary>
+</details>
 
+<details>
+<summary><b>Sources</b></summary>
+</details>
 
 
 
