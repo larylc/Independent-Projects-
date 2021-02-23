@@ -42,7 +42,7 @@ Following the link above will lead you to my project website. There, I will be p
 **Summary**: This is a detailed 
 
 <details>
-<summary>See Libaries Used:</summary>
+<summary><b>See Libaries Used:</b></summary>
  
 * library(knitr)
 * library(stringr)
