@@ -74,8 +74,10 @@ Following the link above will lead you to my project website. There, I will be p
 Introduction
 Goals
 Potential Questions and Tasks
+
 <details>
 <summary><b>Visualization Tasks and Questions:</b></summary>
+ 
 * Visualize the number of Pokemon per type.
 * Are there more dual-types than mono-types?
 * Are Pokemon with dual-types on average stronger than mono-type Pokemon?
@@ -84,8 +86,9 @@ Potential Questions and Tasks
 * Are some generations on average stronger than others?
 * Do newer generations have more variation in their stats?
 * Which stats have the most and least variation?
-*
+
 </details>
+
 
 Correlational Tasks
 What stats are correlated with each other?
