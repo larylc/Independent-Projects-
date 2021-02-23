@@ -3,15 +3,17 @@
 Under Construction...
 
 ## Website 
+---
 https://larylc.github.io/Independent-Projects-/index.html
 
 ## About 
+---
 Following the link above will lead you to my project website. There, I will be posting both major and minor projects. The major projects so far are in R. But I plan to be positing some of my Python projects as soon as they are completed.
 
 ## Major Projects
+---
 
 ### Project 1: Summer Research 2018
-----
 **Summary**: To determine which individual properties, predict an individual's social network position, I analyzed the bracket to bracket movements of Forked Fungus Beetles within populations during the Summer of 2016. 
 
 **See Project**:
@@ -40,9 +42,8 @@ Following the link above will lead you to my project website. There, I will be p
 * Data and Preparation
 * Conclusions
 
-### Project 2: Exploratory Pokemon Analysis 2020 
----
 
+### Project 2: Exploratory Pokemon Analysis 2020 
 **Summary**: This is an extensive exploratory analysis of Pokemon game characteristics.
 
 <details>
