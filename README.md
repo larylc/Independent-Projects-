@@ -45,6 +45,7 @@ Following the link above will lead you to my project website. There, I will be p
 * Conclusions
 
 </details>
+---
 
 ### **Project 2: Exploratory Pokemon Analysis 2020** 
 
