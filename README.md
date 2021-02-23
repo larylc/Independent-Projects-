@@ -1,4 +1,4 @@
-# Independent-Projects-
+# Independent Projects
 
 Under Construction...
 
