@@ -76,7 +76,8 @@ Following the link above will lead you to my project website. There, I will be p
 
 </details>
 
-**Table of Contents**:
+<details>
+<summary>**Table of Contents**:</summary>
 
 <details>
  
@@ -126,6 +127,8 @@ Following the link above will lead you to my project website. There, I will be p
 
 <details>
 <summary>Sources</summary>
+</details>
+
 </details>
 
 
