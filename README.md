@@ -118,7 +118,6 @@ Following the link above will lead you to my project website. There, I will be p
 <summary>Multivariate Studies</summary>
  
 * What would a PCA cluster of Pokemon look like based on their stats?
-* 
 </details>
 
 <details>
