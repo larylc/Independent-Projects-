@@ -1,0 +1,13 @@
+name: anime1
+title: anime1
+username:
+account: loganlary
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3751249
+bundleId: 4313717
+url: https://loganlary.shinyapps.io/anime1/
+when: 1615156523.76908
+asMultiple: FALSE
+asStatic: TRUE
+ignoredFiles: _site.yml|01-intro.html|01-intro.Rmd|02--Chapter-1.html|02- Chapter 1.Rmd|03--Chapter-2.html|03- Chapter 2.Rmd|04--Chapter-3.html|04- Chapter 3.Rmd|05--Chapter-4.html|05- Chapter 4.Rmd|06--Chapter-5.html|06- Chapter 5.Rmd|07-Chapter-6.html|07-Chapter 6.Rmd|index.html|index.Rmd|mini_projects.html|mini_projects.Rmd|pokemon-project-2020.html|pokemon-project-2020.Rmd|README.md|Summer-Research-2018-Markdown.html|Summer Research 2018 Markdown.Rmd|tvanalysis.html|02--Chapter-1_files/figure-html/unnamed-chunk-10-1.png|02--Chapter-1_files/figure-html/unnamed-chunk-4-1.png|02--Chapter-1_files/figure-html/unnamed-chunk-5-1.png|02--Chapter-1_files/figure-html/unnamed-chunk-7-1.png|05--Chapter-4_files/figure-html/unnamed-chunk-3-1.png|07-Chapter-6_files/figure-html/unnamed-chunk-1-1.png|07-Chapter-6_files/figure-html/unnamed-chunk-2-1.png|anime1_files/figure-html/unnamed-chunk-14-1.png|anime1_files/figure-html/unnamed-chunk-14-2.png|anime1_files/figure-html/unnamed-chunk-14-3.png|anime1_files/figure-html/unnamed-chunk-14-4.png|anime1_files/figure-html/unnamed-chunk-8-1.png|img/IMG-0048.jpg|img/IMG-0380.JPG|img/Moth 2.png|_site|03--Chapter-2_files|04--Chapter-3_files|06--Chapter-5_files|pokemon-project-2020_files|site_libs|Summer-Research-2018-Markdown_files
