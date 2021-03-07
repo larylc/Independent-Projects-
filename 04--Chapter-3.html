@@ -286,10 +286,16 @@ $(document).ready(function () {
   <a href="index.html">About</a>
 </li>
 <li>
-  <a href="Summer-Research-2018-Markdown.html">Project 1: Summer Research Project 2018 (R)</a>
+  <a href="Summer-Research-2018-Markdown.html">Project 1 (R)</a>
 </li>
 <li>
-  <a href="pokemon-project-2020.html">Project 2: Exploratory Pokemon Analysis 2020 (R)</a>
+  <a href="pokemon-project-2020.html">Project 2 (R)</a>
+</li>
+<li>
+  <a href="anime1.html">Minor Project 1 (R)</a>
+</li>
+<li>
+  <a href="tvanalysis.html">Minor Project 2 (Python)</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -307,14 +313,14 @@ $(document).ready(function () {
 </div>
 
 
-<div id="correlational-studies" class="section level1">
-<h1><strong>Correlational Studies</strong></h1>
+<div id="correlation-studies" class="section level1">
+<h1><strong>Correlation Studies</strong></h1>
 <p>The previous section was just a warm up and an opportunity to practice creating a variety of graphs. This section will focus on analyzing statistical trends in the data set.</p>
 <div id="task-9-what-stats-are-correlated-with-each-other" class="section level2">
 <h2>Task 9: What stats are correlated with each other?</h2>
 <p>One of the easiest ways to get a preliminary look at the relationship between two variables is to use a correlation plot:</p>
-<pre class="r"><code>stat_study&lt;-pokemon_data_clean %&gt;% 
-  select(hp, attack, defense, sp_attack, sp_defense, speed)
+<pre class="r"><code>library(dplyr)
+stat_study&lt;-select(pokemon_data_clean, hp, attack, defense, sp_attack, sp_defense, speed)
 
 stat_study_cor &lt;- cor(stat_study, use = &quot;complete.obs&quot;)
 round(stat_study_cor,2)</code></pre>

@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="pandoc" />
+
+        <meta name="author" content="Cedric Lary" />
+    
+    
+    <title>Understanding Anime Genre Trends</title>
+
+        <script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+        <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="site_libs/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+        <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+        <script src="site_libs/navigation-1.1/tabsets.js"></script>
+        <script src="site_libs/navigation-1.1/codefolding.js"></script>
+        <link href="site_libs/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
+        <script src="site_libs/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
+        <link href="site_libs/robobook-0.1/robobook.css" rel="stylesheet" />
+        <link href="site_libs/robobook-0.1/robobook_fonts_embed.css" rel="stylesheet" />
+        <script src="site_libs/robobook-0.1/robobook.js"></script>
+        <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+        <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+    
+    
+        <style type="text/css">code{white-space: pre;}</style>
+    <style type="text/css">
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+          background-color: #ffffff;
+          color: #a0a0a0;
+        }
+      pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+      div.sourceCode
+        { color: #1f1c1b; background-color: #ffffff; }
+      @media screen {
+      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+      code span { color: #1f1c1b; } /* Normal */
+      code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+      code span.an { color: #ca60ca; } /* Annotation */
+      code span.at { color: #0057ae; } /* Attribute */
+      code span.bn { color: #b08000; } /* BaseN */
+      code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+      code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+      code span.ch { color: #924c9d; } /* Char */
+      code span.cn { color: #aa5500; } /* Constant */
+      code span.co { color: #898887; } /* Comment */
+      code span.cv { color: #0095ff; } /* CommentVar */
+      code span.do { color: #607880; } /* Documentation */
+      code span.dt { color: #0057ae; } /* DataType */
+      code span.dv { color: #b08000; } /* DecVal */
+      code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+      code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+      code span.fl { color: #b08000; } /* Float */
+      code span.fu { color: #644a9b; } /* Function */
+      code span.im { color: #ff5500; } /* Import */
+      code span.in { color: #b08000; } /* Information */
+      code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+      code span.op { color: #1f1c1b; } /* Operator */
+      code span.ot { color: #006e28; } /* Other */
+      code span.pp { color: #006e28; } /* Preprocessor */
+      code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+      code span.sc { color: #3daee9; } /* SpecialChar */
+      code span.ss { color: #ff5500; } /* SpecialString */
+      code span.st { color: #bf0303; } /* String */
+      code span.va { color: #0057ae; } /* Variable */
+      code span.vs { color: #bf0303; } /* VerbatimString */
+      code span.wa { color: #bf0303; } /* Warning */
+    </style>
+    
+    
+    <!-- tabsets -->
+    <script>
+      $(document).ready(function () {
+	  window.buildTabsets("toc");
+      });
+      $(document).ready(function () {
+	  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+	      $(this).parent().toggleClass('nav-tabs-open')
+	  });
+      });
+    </script>
+
+    <!-- code folding -->
+        <script>
+      $(document).ready(function () {
+	  	  	  window.initializeCodeFolding("hide" === "show");
+	        });
+    </script>
+    
+    <!-- code download -->
+    
+    <!-- tabsets dropdown -->
+
+    <style type="text/css">
+      .tabset-dropdown > .nav-tabs {
+	  display: inline-table;
+	  max-height: 500px;
+	  min-height: 44px;
+	  overflow-y: auto;
+	  background: white;
+	  border: 1px solid #ddd;
+	  border-radius: 4px;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+	  content: "&#xe258;";
+	  border: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active {
+	  display: block;
+      }
+
+      .tabset-dropdown > .nav-tabs > li.active a {
+  	  padding: 0 15px !important;
+      }
+
+      .tabset-dropdown > .nav-tabs > li > a,
+      .tabset-dropdown > .nav-tabs > li > a:focus,
+      .tabset-dropdown > .nav-tabs > li > a:hover {
+	  border: none;
+	  display: inline-block;
+	  border-radius: 4px;
+	  background-color: transparent;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+	  display: block;
+	  float: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li {
+	  display: none;
+	  margin-left: 0 !important;
+      }
+    </style>
+    
+</head>
+
+<body class="preload">
+
+   	
+            <!-- robobook start -->   
+   <div class="book with-summary">
+      <div class="book-summary">
+        <ul>
+          <li class="title">Understanding Anime Genre Trends</li>
+          <li class="divider"></li>
+        </ul>
+        <nav role="navigation" id="toc">
+          <ul>
+          <li><a href="#section-motivation">Motivation</a></li>
+          <li><a href="#section-questions">Questions</a></li>
+          <li><a href="#section-data-preparation">Data Preparation</a></li>
+          <li><a href="#section-visualization">Visualization</a></li>
+          <li><a href="#section-conclusion">Conclusion</a></li>
+          <li><a href="#section-source">Source</a></li>
+          </ul>
+        </nav>
+        <ul class="authors">
+          <li class="divider"></li>
+                                <li><span><i class="glyphicon glyphicon-user"></i> Cedric Lary</span></li>
+                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 3/5/2021</span></li>
+                  </ul>     
+      </div>
+      <div class="book-body fixed">
+        <div class="body-inner">
+            <a class="btn pull-left js-toolbar-action toggle-sidebar" aria-label="Toggle Sidebar" title="Toggle Sidebar" href="#">
+              <span class="glyphicon glyphicon-menu-hamburger"></span>
+            </a>
+            <div class="page-inner">
+              <section id="content" class="normal">
+      
+      <div class="btn-group pull-right">
+     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+     <ul class="dropdown-menu" style="min-width: 50px;">
+	    	    <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+	    <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+	    	    	         </ul>
+   </div>
+   
+      
+      <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Cedric's Independent Projects</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li>
+        <a href="index.html">About</a>
+      </li>
+      <li>
+        <a href="Summer-Research-2018-Markdown.html">Project 1 (R)</a>
+      </li>
+      <li>
+        <a href="pokemon-project-2020.html">Project 2 (R)</a>
+      </li>
+      <li>
+        <a href="anime1.html">Minor Project 1 (R)</a>
+      </li>
+      <li>
+        <a href="tvanalysis.html">Minor Project 2 (Python)</a>
+      </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container -->
+      </div><!--/.navbar -->
+        
+      <h1 class="title">Understanding Anime Genre Trends</h1>
+      
+        
+
+   
+      
+   
+<!-- Don't indent these lines or it will mess pre blocks indentation --> 
+<style>
+body, h1, h2, h3, h4 {
+  font-family: "Bookman";
+  }
+
+a, a:hover {
+  color: steelblue3;
+}
+pre {
+  font-size: 10px;
+
+}
+
+</style>
+<div id="section-motivation" class="section level2">
+<h2>Motivation</h2>
+<p>The goal of this project was to practice string manipulation and creating shiny apps. The challenge with this data set was finding a way to take the individual genres and tags that were nested in the tags column and display each one’s popularity. Because this data was scraped from a popular anime website there were several ways to showcase popularity and preference for genres. What I do in this project is examine what popularity looks like in terms of demand (how frequently certain genres are made) over time, and how popularity looks like across several measures (amount of views, interest in watching the anime, ratings, and votes)</p>
+</div>
+<div id="section-questions" class="section level2">
+<h2>Questions</h2>
+<p>What genres/tags get the most attention or highest ratings?</p>
+</div>
+<div id="section-data-preparation" class="section level2">
+<h2>Data Preparation</h2>
+<p>To start, I am going to be reading in the data.</p>
+<div class="sourceCode" id="section-cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="section-cb1-1"><a href="#section-cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Users/laryl/Desktop/Data Sets&quot;</span>)</span>
+<span id="section-cb1-2"><a href="#section-cb1-2" aria-hidden="true" tabindex="-1"></a>big_anime <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;anime.csv&quot;</span>)</span></code></pre></div>
+<p>Next, I am going to do a quick inspection of the data types for the columns.</p>
+<div class="sourceCode" id="section-cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="section-cb2-1"><a href="#section-cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="section-cb2-2"><a href="#section-cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(big_anime)</span></code></pre></div>
+<pre><code>## Rows: 14,578
+## Columns: 18
+## $ title        &lt;chr&gt; &quot;Fullmetal Alchemist: Brotherhood&quot;, &quot;your name.&quot;, &quot;A S...
+## $ mediaType    &lt;chr&gt; &quot;TV&quot;, &quot;Movie&quot;, &quot;Movie&quot;, &quot;TV&quot;, &quot;TV&quot;, &quot;TV&quot;, &quot;TV&quot;, &quot;TV&quot;, ...
+## $ eps          &lt;int&gt; 64, 1, 1, 10, 10, 26, 25, 148, 1, 51, 13, 24, 25, 10, ...
+## $ duration     &lt;int&gt; NA, 107, 130, NA, NA, NA, NA, NA, 111, NA, NA, NA, NA,...
+## $ ongoing      &lt;chr&gt; &quot;False&quot;, &quot;False&quot;, &quot;False&quot;, &quot;False&quot;, &quot;False&quot;, &quot;False&quot;, ...
+## $ startYr      &lt;int&gt; 2009, 2016, 2016, 2016, 2019, 2019, 2015, 2011, 2013, ...
+## $ finishYr     &lt;int&gt; 2010, 2016, 2016, 2016, 2019, 2019, 2016, 2014, 2013, ...
+## $ sznOfRelease &lt;chr&gt; &quot;Spring&quot;, &quot;&quot;, &quot;&quot;, &quot;Fall&quot;, &quot;Spring&quot;, &quot;Spring&quot;, &quot;Fall&quot;, ...
+## $ description  &lt;chr&gt; &quot;The foundation of alchemy is based on the law of equi...
+## $ studios      &lt;chr&gt; &quot;[&#39;Bones&#39;]&quot;, &quot;[&#39;CoMix Wave Films&#39;]&quot;, &quot;[&#39;Kyoto Animatio...
+## $ tags         &lt;chr&gt; &quot;[&#39;Action&#39;, &#39;Adventure&#39;, &#39;Drama&#39;, &#39;Fantasy&#39;, &#39;Mystery&#39;...
+## $ contentWarn  &lt;chr&gt; &quot;[&#39;Animal Abuse&#39;, &#39;Mature Themes&#39;, &#39;Violence&#39;, &#39;Domest...
+## $ watched      &lt;int&gt; 103707, 58831, 45892, 25134, 21308, 28708, 31329, 5019...
+## $ watching     &lt;int&gt; 14351, 1453, 946, 2183, 3217, 10844, 3861, 17730, 280,...
+## $ wantWatch    &lt;int&gt; 25810, 21733, 17148, 8082, 7864, 13156, 8664, 19219, 6...
+## $ dropped      &lt;int&gt; 2656, 124, 132, 167, 174, 600, 264, 2132, 150, 647, 21...
+## $ rating       &lt;dbl&gt; 4.702, 4.663, 4.661, 4.660, 4.650, 4.647, 4.639, 4.635...
+## $ votes        &lt;int&gt; 86547, 43960, 33752, 17422, 15789, 24765, 22819, 46853...</code></pre>
+<div class="sourceCode" id="section-cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="section-cb4-1"><a href="#section-cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(big_anime<span class="sc">$</span>tags)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>At this stage, we do have a significant issue. Every observation (anime) within the tag column contains all of the tags and genres associated with that observation. With the genres/tags being nested like this, it makes it very difficult to examine individual genres trends. The solution I came up with was to split the genres from their nested position and count each anime multiple times for every tag/genre it is associated with. For example. if an anime was associated with “Action” and “Fantasy,” then that anime would be counted twice.</p>
+<div class="sourceCode" id="section-cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="section-cb6-1"><a href="#section-cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="section-cb6-2"><a href="#section-cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="section-cb6-3"><a href="#section-cb6-3" aria-hidden="true" tabindex="-1"></a>big_anime_genres_split <span class="ot">&lt;-</span> big_anime <span class="sc">%&gt;%</span></span>
+<span id="section-cb6-4"><a href="#section-cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tags =</span> <span class="fu">str_remove_all</span>(tags, <span class="fu">fixed</span>(<span class="st">&quot;&#39;&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="section-cb6-5"><a href="#section-cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tags =</span> <span class="fu">str_remove</span>(tags, <span class="fu">fixed</span>(<span class="st">&quot;[&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="section-cb6-6"><a href="#section-cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tags =</span> <span class="fu">str_remove</span>(tags, <span class="fu">fixed</span>(<span class="st">&quot;]&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="section-cb6-7"><a href="#section-cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">genres =</span> <span class="fu">str_split</span>(tags, <span class="st">&quot;, &quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="section-cb6-8"><a href="#section-cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>() <span class="sc">%&gt;%</span></span>
+<span id="section-cb6-9"><a href="#section-cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() </span></code></pre></div>
+<p>The genre split was successful. To show proof of this I am going to display the first few observations using the Fullmetal Alchemist: Brotherhood anime series:</p>
+<div class="sourceCode" id="section-cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="section-cb7-1"><a href="#section-cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="section-cb7-2"><a href="#section-cb7-2" aria-hidden="true" tabindex="-1"></a>first_observations <span class="ot">&lt;-</span> big_anime_genres_split <span class="sc">%&gt;%</span></span>
+<span id="section-cb7-3"><a href="#section-cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(title, genres)<span class="sc">%&gt;%</span></span>
+<span id="section-cb7-4"><a href="#section-cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span>
+<span id="section-cb7-5"><a href="#section-cb7-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="section-cb7-6"><a href="#section-cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(first_observations)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">title</th>
+<th align="left">genres</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Fullmetal Alchemist: Brotherhood</td>
+<td align="left">Action</td>
+</tr>
+<tr class="even">
+<td align="left">Fullmetal Alchemist: Brotherhood</td>
+<td align="left">Adventure</td>
+</tr>
+<tr class="odd">
+<td align="left">Fullmetal Alchemist: Brotherhood</td>
+<td align="left">Drama</td>
+</tr>
+<tr class="even">
+<td align="left">Fullmetal Alchemist: Brotherhood</td>
+<td align="left">Fantasy</td>
+</tr>
+<tr class="odd">
+<td align="left">Fullmetal Alchemist: Brotherhood</td>
+<td align="left">Mystery</td>
+</tr>
+<tr class="even">
+<td align="left">Fullmetal Alchemist: Brotherhood</td>
+<td align="left">Shounen</td>
+</tr>
+<tr class="odd">
+<td align="left">Fullmetal Alchemist: Brotherhood</td>
+<td align="left">Conspiracy</td>
+</tr>
+<tr class="even">
+<td align="left">Fullmetal Alchemist: Brotherhood</td>
+<td align="left">Military</td>
+</tr>
+<tr class="odd">
+<td align="left">Fullmetal Alchemist: Brotherhood</td>
+<td align="left">Siblings</td>
+</tr>
+<tr class="even">
+<td align="left">Fullmetal Alchemist: Brotherhood</td>
+<td align="left">Based on a Manga</td>
+</tr>
+</tbody>
+</table>
+<p>Next, we want to convert the character column to a factor column.</p>
+<div class="sourceCode" id="section-cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="section-cb8-1"><a href="#section-cb8-1" aria-hidden="true" tabindex="-1"></a>big_anime_genres_split<span class="sc">$</span>genres <span class="ot">&lt;-</span><span class="fu">as.factor</span>(big_anime_genres_split<span class="sc">$</span>genres)</span>
+<span id="section-cb8-2"><a href="#section-cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(big_anime_genres_split)</span></code></pre></div>
+<pre><code>## tibble [72,435 x 19] (S3: tbl_df/tbl/data.frame)
+##  $ title       : chr [1:72435] &quot;Fullmetal Alchemist: Brotherhood&quot; &quot;Fullmetal Alchemist: Brotherhood&quot; &quot;Fullmetal Alchemist: Brotherhood&quot; &quot;Fullmetal Alchemist: Brotherhood&quot; ...
+##  $ mediaType   : chr [1:72435] &quot;TV&quot; &quot;TV&quot; &quot;TV&quot; &quot;TV&quot; ...
+##  $ eps         : int [1:72435] 64 64 64 64 64 64 64 64 64 64 ...
+##  $ duration    : int [1:72435] NA NA NA NA NA NA NA NA NA NA ...
+##  $ ongoing     : chr [1:72435] &quot;False&quot; &quot;False&quot; &quot;False&quot; &quot;False&quot; ...
+##  $ startYr     : int [1:72435] 2009 2009 2009 2009 2009 2009 2009 2009 2009 2009 ...
+##  $ finishYr    : int [1:72435] 2010 2010 2010 2010 2010 2010 2010 2010 2010 2010 ...
+##  $ sznOfRelease: chr [1:72435] &quot;Spring&quot; &quot;Spring&quot; &quot;Spring&quot; &quot;Spring&quot; ...
+##  $ description : chr [1:72435] &quot;The foundation of alchemy is based on the law of equivalent exchange; you cannot produce something from nothing&quot;| __truncated__ &quot;The foundation of alchemy is based on the law of equivalent exchange; you cannot produce something from nothing&quot;| __truncated__ &quot;The foundation of alchemy is based on the law of equivalent exchange; you cannot produce something from nothing&quot;| __truncated__ &quot;The foundation of alchemy is based on the law of equivalent exchange; you cannot produce something from nothing&quot;| __truncated__ ...
+##  $ studios     : chr [1:72435] &quot;[&#39;Bones&#39;]&quot; &quot;[&#39;Bones&#39;]&quot; &quot;[&#39;Bones&#39;]&quot; &quot;[&#39;Bones&#39;]&quot; ...
+##  $ tags        : chr [1:72435] &quot;Action, Adventure, Drama, Fantasy, Mystery, Shounen, Conspiracy, Military, Siblings, Based on a Manga&quot; &quot;Action, Adventure, Drama, Fantasy, Mystery, Shounen, Conspiracy, Military, Siblings, Based on a Manga&quot; &quot;Action, Adventure, Drama, Fantasy, Mystery, Shounen, Conspiracy, Military, Siblings, Based on a Manga&quot; &quot;Action, Adventure, Drama, Fantasy, Mystery, Shounen, Conspiracy, Military, Siblings, Based on a Manga&quot; ...
+##  $ contentWarn : chr [1:72435] &quot;[&#39;Animal Abuse&#39;, &#39;Mature Themes&#39;, &#39;Violence&#39;, &#39;Domestic Abuse&#39;]&quot; &quot;[&#39;Animal Abuse&#39;, &#39;Mature Themes&#39;, &#39;Violence&#39;, &#39;Domestic Abuse&#39;]&quot; &quot;[&#39;Animal Abuse&#39;, &#39;Mature Themes&#39;, &#39;Violence&#39;, &#39;Domestic Abuse&#39;]&quot; &quot;[&#39;Animal Abuse&#39;, &#39;Mature Themes&#39;, &#39;Violence&#39;, &#39;Domestic Abuse&#39;]&quot; ...
+##  $ watched     : int [1:72435] 103707 103707 103707 103707 103707 103707 103707 103707 103707 103707 ...
+##  $ watching    : int [1:72435] 14351 14351 14351 14351 14351 14351 14351 14351 14351 14351 ...
+##  $ wantWatch   : int [1:72435] 25810 25810 25810 25810 25810 25810 25810 25810 25810 25810 ...
+##  $ dropped     : int [1:72435] 2656 2656 2656 2656 2656 2656 2656 2656 2656 2656 ...
+##  $ rating      : num [1:72435] 4.7 4.7 4.7 4.7 4.7 ...
+##  $ votes       : int [1:72435] 86547 86547 86547 86547 86547 86547 86547 86547 86547 86547 ...
+##  $ genres      : Factor w/ 495 levels &quot;&quot;,&quot;\&quot;Japan Animators Exhibition\&quot;&quot;,..: 11 14 166 186 310 411 130 293 414 68 ...</code></pre>
+<p>We also want to check to seeing if the conversion was successful.</p>
+<div class="sourceCode" id="section-cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="section-cb10-1"><a href="#section-cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(big_anime_genres_split<span class="sc">$</span>genres)</span></code></pre></div>
+<pre><code>##   [1] &quot;&quot;                                  &quot;\&quot;Japan Animators Exhibition\&quot;&quot;   
+##   [3] &quot;\&quot;Valentines Day\&quot;&quot;                &quot;15th Century&quot;                     
+##   [5] &quot;16th Century&quot;                      &quot;17th Century&quot;                     
+##   [7] &quot;18th Century&quot;                      &quot;19th Century&quot;                     
+##   [9] &quot;Abstract&quot;                          &quot;Acting&quot;                           
+##  [11] &quot;Action&quot;                            &quot;Adult Couples&quot;                    
+##  [13] &quot;Adult Industry&quot;                    &quot;Adventure&quot;                        
+##  [15] &quot;Africa&quot;                            &quot;Afterlife&quot;                        
+##  [17] &quot;Age Gap&quot;                           &quot;Age Transformation&quot;               
+##  [19] &quot;Aging&quot;                             &quot;Agriculture&quot;                      
+##  [21] &quot;Alcohol&quot;                           &quot;Alice in Wonderland&quot;              
+##  [23] &quot;Aliens&quot;                            &quot;All-Boys School&quot;                  
+##  [25] &quot;All-Girls School&quot;                  &quot;America&quot;                          
+##  [27] &quot;Amnesia&quot;                           &quot;Amusement Park&quot;                   
+##  [29] &quot;Ancient China&quot;                     &quot;Androids&quot;                         
+##  [31] &quot;Androphobia&quot;                       &quot;Angels&quot;                           
+##  [33] &quot;Animal Characteristics&quot;            &quot;Animal Protagonists&quot;              
+##  [35] &quot;Animal Transformation&quot;             &quot;Anime Bancho&quot;                     
+##  [37] &quot;Anime Industry&quot;                    &quot;Anime no Chikara&quot;                 
+##  [39] &quot;Anime no Me&quot;                       &quot;Anime Tamago&quot;                     
+##  [41] &quot;Animeism&quot;                          &quot;Anthropomorphic&quot;                  
+##  [43] &quot;Apartment Life&quot;                    &quot;Apocalypse&quot;                       
+##  [45] &quot;Apprenticeship&quot;                    &quot;Archery&quot;                          
+##  [47] &quot;Arranged Marriage&quot;                 &quot;Art&quot;                              
+##  [49] &quot;Art School&quot;                        &quot;Assassins&quot;                        
+##  [51] &quot;Astronauts&quot;                        &quot;Astronomy&quot;                        
+##  [53] &quot;Australia&quot;                         &quot;Autobiographies&quot;                  
+##  [55] &quot;Aviation&quot;                          &quot;Badminton&quot;                        
+##  [57] &quot;Baking&quot;                            &quot;Ballet Dancing&quot;                   
+##  [59] &quot;Bar&quot;                               &quot;Baseball&quot;                         
+##  [61] &quot;Based on a 4-Koma Manga&quot;           &quot;Based on a Card Game&quot;             
+##  [63] &quot;Based on a Cartoon&quot;                &quot;Based on a Comic Book&quot;            
+##  [65] &quot;Based on a Doujinshi&quot;              &quot;Based on a Fairy Tale&quot;            
+##  [67] &quot;Based on a Light Novel&quot;            &quot;Based on a Manga&quot;                 
+##  [69] &quot;Based on a Mobile Game&quot;            &quot;Based on a Movie&quot;                 
+##  [71] &quot;Based on a Novel&quot;                  &quot;Based on a Picture Book&quot;          
+##  [73] &quot;Based on a Religious Text&quot;         &quot;Based on a Song&quot;                  
+##  [75] &quot;Based on a TV Series&quot;              &quot;Based on a Video Game&quot;            
+##  [77] &quot;Based on a Visual Novel&quot;           &quot;Based on an Eroge&quot;                
+##  [79] &quot;Based on an Otome Game&quot;            &quot;Basketball&quot;                       
+##  [81] &quot;Battle Royale&quot;                     &quot;BDSM&quot;                             
+##  [83] &quot;Bears&quot;                             &quot;Billiards&quot;                        
+##  [85] &quot;Biographies&quot;                       &quot;Birds&quot;                            
+##  [87] &quot;BL&quot;                                &quot;Black and White&quot;                  
+##  [89] &quot;Blackmail&quot;                         &quot;Board Games&quot;                      
+##  [91] &quot;Boarding House&quot;                    &quot;Boarding School&quot;                  
+##  [93] &quot;Body Sharing&quot;                      &quot;Body Swapping&quot;                    
+##  [95] &quot;Bodyguards&quot;                        &quot;Bookstore&quot;                        
+##  [97] &quot;Borderline H&quot;                      &quot;Boss-Employee Relationship&quot;       
+##  [99] &quot;Bounty Hunters&quot;                    &quot;Boxing&quot;                           
+## [101] &quot;Breaking the Fourth Wall&quot;          &quot;Brother Complex&quot;                  
+## [103] &quot;Buddhism&quot;                          &quot;Butlers&quot;                          
+## [105] &quot;Cafe&quot;                              &quot;Canada&quot;                           
+## [107] &quot;Card Battles&quot;                      &quot;Cars&quot;                             
+## [109] &quot;Cats&quot;                              &quot;Centaurs&quot;                         
+## [111] &quot;CEOs&quot;                              &quot;CG Animation&quot;                     
+## [113] &quot;Cheats&quot;                            &quot;Chibi&quot;                            
+## [115] &quot;Childcare&quot;                         &quot;Childhood Friends&quot;                
+## [117] &quot;Childhood Promise&quot;                 &quot;Chinese Animation&quot;                
+## [119] &quot;Christianity&quot;                      &quot;Christmas&quot;                        
+## [121] &quot;Circus&quot;                            &quot;Classical Music&quot;                  
+## [123] &quot;Cohabitation&quot;                      &quot;Collections&quot;                      
+## [125] &quot;College&quot;                           &quot;Combining Mecha&quot;                  
+## [127] &quot;Comedy&quot;                            &quot;Coming of Age&quot;                    
+## [129] &quot;Commercials&quot;                       &quot;Conspiracy&quot;                       
+## [131] &quot;Contemporary Fantasy&quot;              &quot;Convenience Store&quot;                
+## [133] &quot;Cooking&quot;                           &quot;Countryside&quot;                      
+## [135] &quot;Coworkers&quot;                         &quot;Criminals&quot;                        
+## [137] &quot;Crossdressing&quot;                     &quot;Crossover&quot;                        
+## [139] &quot;Crude&quot;                             &quot;Culinary School&quot;                  
+## [141] &quot;Cultivation&quot;                       &quot;Curse&quot;                            
+## [143] &quot;Cyberpunk&quot;                         &quot;Cyborgs&quot;                          
+## [145] &quot;Cycling&quot;                           &quot;Dancing&quot;                          
+## [147] &quot;Dark Comedy&quot;                       &quot;Dark Fantasy&quot;                     
+## [149] &quot;Deal with the Devil&quot;               &quot;Debt&quot;                             
+## [151] &quot;Delinquents&quot;                       &quot;Demon King&quot;                       
+## [153] &quot;Demons&quot;                            &quot;Desert&quot;                           
+## [155] &quot;Detectives&quot;                        &quot;Dinosaurs&quot;                        
+## [157] &quot;Disability&quot;                        &quot;Disney&quot;                           
+## [159] &quot;Divorce&quot;                           &quot;Doctors&quot;                          
+## [161] &quot;Dodgeball&quot;                         &quot;Dogs&quot;                             
+## [163] &quot;Doujinshi Industry&quot;                &quot;Dragon Quest&quot;                     
+## [165] &quot;Dragons&quot;                           &quot;Drama&quot;                            
+## [167] &quot;Dream World&quot;                       &quot;Dungeon&quot;                          
+## [169] &quot;Dystopia&quot;                          &quot;Earthquake&quot;                       
+## [171] &quot;Ecchi&quot;                             &quot;Economics&quot;                        
+## [173] &quot;Editors&quot;                           &quot;Educational&quot;                      
+## [175] &quot;Egyptian Mythology&quot;                &quot;Elemental Powers&quot;                 
+## [177] &quot;Elves&quot;                             &quot;England&quot;                          
+## [179] &quot;Environmental&quot;                     &quot;Episodic&quot;                         
+## [181] &quot;Europe&quot;                            &quot;Explicit Violence&quot;                
+## [183] &quot;Fake Romance&quot;                      &quot;Family Friendly&quot;                  
+## [185] &quot;Family Life&quot;                       &quot;Fantasy&quot;                          
+## [187] &quot;Fashion&quot;                           &quot;Fated Lovers&quot;                     
+## [189] &quot;Fetish&quot;                            &quot;Feudal Japan&quot;                     
+## [191] &quot;Finland&quot;                           &quot;Firefighters&quot;                     
+## [193] &quot;Fishing&quot;                           &quot;Flash Animation&quot;                  
+## [195] &quot;Food and Beverage&quot;                 &quot;Food Protagonists&quot;                
+## [197] &quot;Football&quot;                          &quot;Forest&quot;                           
+## [199] &quot;France&quot;                            &quot;French Revolution&quot;                
+## [201] &quot;Frogs&quot;                             &quot;Fujoshi&quot;                          
+## [203] &quot;Ga-nime&quot;                           &quot;Gag&quot;                              
+## [205] &quot;Gambling&quot;                          &quot;Gangs&quot;                            
+## [207] &quot;Gender Bender&quot;                     &quot;Germany&quot;                          
+## [209] &quot;Ghibli Museum Shorts&quot;              &quot;Ghost Hunters&quot;                    
+## [211] &quot;Ghosts&quot;                            &quot;GL&quot;                               
+## [213] &quot;God-Human Relationship&quot;            &quot;Gods&quot;                             
+## [215] &quot;Golf&quot;                              &quot;Greece&quot;                           
+## [217] &quot;Greek Mythology&quot;                   &quot;Guilds&quot;                           
+## [219] &quot;Guns&quot;                              &quot;Gyaru&quot;                            
+## [221] &quot;Gymnastics&quot;                        &quot;Gynophobia&quot;                       
+## [223] &quot;Hacking&quot;                           &quot;Hamsters&quot;                         
+## [225] &quot;Hand to Hand Combat&quot;               &quot;Happy Science&quot;                    
+## [227] &quot;Harem&quot;                             &quot;Heaven&quot;                           
+## [229] &quot;Hell&quot;                              &quot;Henshin Heroes&quot;                   
+## [231] &quot;High Stakes Games&quot;                 &quot;Historical&quot;                       
+## [233] &quot;Horror&quot;                            &quot;Hosts&quot;                            
+## [235] &quot;Hotels and Inns&quot;                   &quot;Human Experimentation&quot;            
+## [237] &quot;Ice Skating&quot;                       &quot;Idols&quot;                            
+## [239] &quot;Illness&quot;                           &quot;Impersonation&quot;                    
+## [241] &quot;India&quot;                             &quot;Inheritance&quot;                      
+## [243] &quot;Insects&quot;                           &quot;Interspecies Relationship&quot;        
+## [245] &quot;Isekai&quot;                            &quot;Island&quot;                           
+## [247] &quot;Isolated Society&quot;                  &quot;Italy&quot;                            
+## [249] &quot;Iyashikei&quot;                         &quot;Japanese Anime Classic Collection&quot;
+## [251] &quot;Japanese Mythology&quot;                &quot;Josei&quot;                            
+## [253] &quot;Journalism&quot;                        &quot;Journey to the West&quot;              
+## [255] &quot;Jungle&quot;                            &quot;Kaijuu&quot;                           
+## [257] &quot;Kendo&quot;                             &quot;Kickboxing&quot;                       
+## [259] &quot;Kidnapping&quot;                        &quot;Koalas&quot;                           
+## [261] &quot;Korean Animation&quot;                  &quot;Landlords&quot;                        
+## [263] &quot;Lawyers&quot;                           &quot;Leijiverse&quot;                       
+## [265] &quot;LGBT Themes&quot;                       &quot;Library&quot;                          
+## [267] &quot;Lifestyle Change&quot;                  &quot;Loneliness&quot;                       
+## [269] &quot;Love Confession&quot;                   &quot;Love Triangle&quot;                    
+## [271] &quot;Mafia&quot;                             &quot;Magic&quot;                            
+## [273] &quot;Magic School&quot;                      &quot;Magical Girl&quot;                     
+## [275] &quot;Mahjong&quot;                           &quot;Maids&quot;                            
+## [277] &quot;Manga Industry&quot;                    &quot;Mansion&quot;                          
+## [279] &quot;Married Life&quot;                      &quot;Martial Arts&quot;                     
+## [281] &quot;Martial Arts School&quot;               &quot;Marvel Comics&quot;                    
+## [283] &quot;Master-Servant Relationship&quot;       &quot;Mature Romance&quot;                   
+## [285] &quot;Mecha&quot;                             &quot;Medical&quot;                          
+## [287] &quot;Medieval&quot;                          &quot;Melancholy&quot;                       
+## [289] &quot;Mental Illness&quot;                    &quot;Mercenaries&quot;                      
+## [291] &quot;Mermaids&quot;                          &quot;Middle Eastern&quot;                   
+## [293] &quot;Military&quot;                          &quot;Military School&quot;                  
+## [295] &quot;Mind Games&quot;                        &quot;Minna no Uta&quot;                     
+## [297] &quot;MMORPG&quot;                            &quot;Modelling&quot;                        
+## [299] &quot;Modern Knowledge&quot;                  &quot;Monster-of-the-week&quot;              
+## [301] &quot;Monster Girls&quot;                     &quot;Monster School&quot;                   
+## [303] &quot;Monsters&quot;                          &quot;Motorcycles&quot;                      
+## [305] &quot;Mountain Climbing&quot;                 &quot;Music&quot;                            
+## [307] &quot;Music School&quot;                      &quot;Mysterious Benefactor&quot;            
+## [309] &quot;Mysterious Shop&quot;                   &quot;Mystery&quot;                          
+## [311] &quot;Natural Disaster&quot;                  &quot;NEET&quot;                             
+## [313] &quot;Neighbors&quot;                         &quot;Newly Co-ed School&quot;               
+## [315] &quot;Ninja&quot;                             &quot;No Dialogue&quot;                      
+## [317] &quot;Nobility&quot;                          &quot;Noir&quot;                             
+## [319] &quot;noitaminA&quot;                         &quot;Non-Human Protagonists&quot;           
+## [321] &quot;Norse Mythology&quot;                   &quot;Novel Industry&quot;                   
+## [323] &quot;Nurses&quot;                            &quot;Ocean&quot;                            
+## [325] &quot;Opposites Attract&quot;                 &quot;Original Work&quot;                    
+## [327] &quot;Orphans&quot;                           &quot;Otaku Culture&quot;                    
+## [329] &quot;Outer Space&quot;                       &quot;Outside World&quot;                    
+## [331] &quot;Overpowered Main Characters&quot;       &quot;Pandas&quot;                           
+## [333] &quot;Pandemic&quot;                          &quot;Panty Shots&quot;                      
+## [335] &quot;Parody&quot;                            &quot;Person in a Strange World&quot;        
+## [337] &quot;Pets&quot;                              &quot;Photography&quot;                      
+## [339] &quot;Picture Drama&quot;                     &quot;Pigs&quot;                             
+## [341] &quot;Ping Pong&quot;                         &quot;Pirates&quot;                          
+## [343] &quot;Play or Die&quot;                       &quot;Playboys&quot;                         
+## [345] &quot;Police&quot;                            &quot;Political&quot;                        
+## [347] &quot;Post-apocalyptic&quot;                  &quot;POV&quot;                              
+## [349] &quot;Poverty&quot;                           &quot;Power Suits&quot;                      
+## [351] &quot;Pregnancy&quot;                         &quot;Prehistoric&quot;                      
+## [353] &quot;Prison&quot;                            &quot;Promotional&quot;                      
+## [355] &quot;Prophecy&quot;                          &quot;Proxy Battles&quot;                    
+## [357] &quot;Psychic Powers&quot;                    &quot;Psychological&quot;                    
+## [359] &quot;Psychopaths&quot;                       &quot;PVE&quot;                              
+## [361] &quot;PVP&quot;                               &quot;Rabbits&quot;                          
+## [363] &quot;Racing&quot;                            &quot;Rakugo&quot;                           
+## [365] &quot;Real Robot&quot;                        &quot;Rebellions&quot;                       
+## [367] &quot;Recap&quot;                             &quot;Recipes&quot;                          
+## [369] &quot;Reincarnation&quot;                     &quot;Religion&quot;                         
+## [371] &quot;Remarriage&quot;                        &quot;Restaurants&quot;                      
+## [373] &quot;Revenge&quot;                           &quot;Reverse Harem&quot;                    
+## [375] &quot;Reverse Isekai&quot;                    &quot;Rivalries&quot;                        
+## [377] &quot;Robots&quot;                            &quot;Rock Music&quot;                       
+## [379] &quot;Romance&quot;                           &quot;Romance of the Three Kingdoms&quot;    
+## [381] &quot;Romantic Comedy&quot;                   &quot;Roommates&quot;                        
+## [383] &quot;Royalty&quot;                           &quot;RPG&quot;                              
+## [385] &quot;Rugby&quot;                             &quot;Running&quot;                          
+## [387] &quot;Russia&quot;                            &quot;Salaryman&quot;                        
+## [389] &quot;Samurai&quot;                           &quot;San-X Characters&quot;                 
+## [391] &quot;Sanrio Characters&quot;                 &quot;Satire&quot;                           
+## [393] &quot;School Club&quot;                       &quot;School Life&quot;                      
+## [395] &quot;Sci Fi&quot;                            &quot;Scuba Diving&quot;                     
+## [397] &quot;Secret Identity&quot;                   &quot;Seinen&quot;                           
+## [399] &quot;Senpai-Kouhai Relationship&quot;        &quot;Sentai&quot;                           
+## [401] &quot;Sentient Mecha&quot;                    &quot;Serial Killers&quot;                   
+## [403] &quot;Sexual Content&quot;                    &quot;Sherlock Holmes&quot;                  
+## [405] &quot;Shinigami&quot;                         &quot;Ship&quot;                             
+## [407] &quot;Short Episodes&quot;                    &quot;Shorts&quot;                           
+## [409] &quot;Shoujo&quot;                            &quot;Shoujo-ai&quot;                        
+## [411] &quot;Shounen&quot;                           &quot;Shounen-ai&quot;                       
+## [413] &quot;Showbiz&quot;                           &quot;Siblings&quot;                         
+## [415] &quot;Single Parent&quot;                     &quot;Sister Complex&quot;                   
+## [417] &quot;Skeletons&quot;                         &quot;Slapstick&quot;                        
+## [419] &quot;Slice of Life&quot;                     &quot;Slimes&quot;                           
+## [421] &quot;Smut&quot;                              &quot;Soccer&quot;                           
+## [423] &quot;Social Gap&quot;                        &quot;Social Media&quot;                     
+## [425] &quot;Space Opera&quot;                       &quot;Space Pirates&quot;                    
+## [427] &quot;Split Personality&quot;                 &quot;Sports&quot;                           
+## [429] &quot;Stalkers&quot;                          &quot;Star-Crossed Lovers&quot;              
+## [431] &quot;Steampunk&quot;                         &quot;Stockholm Syndrome&quot;               
+## [433] &quot;Stop Motion Animation&quot;             &quot;Student-Teacher Relationship&quot;     
+## [435] &quot;Student Council&quot;                   &quot;Submarine&quot;                        
+## [437] &quot;Sudden Girlfriend Appearance&quot;      &quot;Summoned Into Another World&quot;      
+## [439] &quot;Sumo Wrestling&quot;                    &quot;Super Robot&quot;                      
+## [441] &quot;Superheroes&quot;                       &quot;Supernatural&quot;                     
+## [443] &quot;Superpowers&quot;                       &quot;Survival&quot;                         
+## [445] &quot;Swimming&quot;                          &quot;Switzerland&quot;                      
+## [447] &quot;Swordplay&quot;                         &quot;Teaching&quot;                         
+## [449] &quot;Tennis&quot;                            &quot;Terrorism&quot;                        
+## [451] &quot;The Great Outdoors&quot;                &quot;Thieves&quot;                          
+## [453] &quot;Thriller&quot;                          &quot;Time Travel&quot;                      
+## [455] &quot;Tokusatsu&quot;                         &quot;Tourism&quot;                          
+## [457] &quot;Tournaments&quot;                       &quot;Track and Field&quot;                  
+## [459] &quot;Trains&quot;                            &quot;Transfer Students&quot;                
+## [461] &quot;Transforming Mecha&quot;                &quot;Trapped in a Video Game&quot;          
+## [463] &quot;Treasure Hunters&quot;                  &quot;Tsundere&quot;                         
+## [465] &quot;Tutors&quot;                            &quot;Unrequited Love&quot;                  
+## [467] &quot;Urban Fantasy&quot;                     &quot;Urban Legend&quot;                     
+## [469] &quot;Vampires&quot;                          &quot;Video Game Industry&quot;              
+## [471] &quot;Vigilantes&quot;                        &quot;Virtual Reality&quot;                  
+## [473] &quot;Vocaloid&quot;                          &quot;Voice Acting&quot;                     
+## [475] &quot;Volleyball&quot;                        &quot;Voyeurism&quot;                        
+## [477] &quot;War&quot;                               &quot;Weak to Strong&quot;                   
+## [479] &quot;Werewolves&quot;                        &quot;Western&quot;                          
+## [481] &quot;Witches&quot;                           &quot;Work Life&quot;                        
+## [483] &quot;World Masterpiece Theater&quot;         &quot;World War 2&quot;                      
+## [485] &quot;Wrestling&quot;                         &quot;Writers&quot;                          
+## [487] &quot;Wuxia&quot;                             &quot;Xianxia&quot;                          
+## [489] &quot;Yakuza&quot;                            &quot;Yaoi&quot;                             
+## [491] &quot;Yaoi Hand Syndrome&quot;                &quot;Youkai&quot;                           
+## [493] &quot;Yuri&quot;                              &quot;Zombies&quot;                          
+## [495] &quot;Zoo&quot;</code></pre>
+<p>I noticed that one of the categories in genres was labeled as empty string, so we are going to eliminate it, taking care to remove it as possible factor.</p>
+<div class="sourceCode" id="section-cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="section-cb12-1"><a href="#section-cb12-1" aria-hidden="true" tabindex="-1"></a>big_anime_genres_split <span class="ot">&lt;-</span> big_anime_genres_split <span class="sc">%&gt;%</span></span>
+<span id="section-cb12-2"><a href="#section-cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(genres <span class="sc">!=</span> <span class="st">&quot;&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="section-cb12-3"><a href="#section-cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">droplevels</span>()</span>
+<span id="section-cb12-4"><a href="#section-cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="section-cb12-5"><a href="#section-cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(big_anime_genres_split<span class="sc">$</span>genres)</span></code></pre></div>
+<pre><code>##   [1] &quot;\&quot;Japan Animators Exhibition\&quot;&quot;    &quot;\&quot;Valentines Day\&quot;&quot;               
+##   [3] &quot;15th Century&quot;                      &quot;16th Century&quot;                     
+##   [5] &quot;17th Century&quot;                      &quot;18th Century&quot;                     
+##   [7] &quot;19th Century&quot;                      &quot;Abstract&quot;                         
+##   [9] &quot;Acting&quot;                            &quot;Action&quot;                           
+##  [11] &quot;Adult Couples&quot;                     &quot;Adult Industry&quot;                   
+##  [13] &quot;Adventure&quot;                         &quot;Africa&quot;                           
+##  [15] &quot;Afterlife&quot;                         &quot;Age Gap&quot;                          
+##  [17] &quot;Age Transformation&quot;                &quot;Aging&quot;                            
+##  [19] &quot;Agriculture&quot;                       &quot;Alcohol&quot;                          
+##  [21] &quot;Alice in Wonderland&quot;               &quot;Aliens&quot;                           
+##  [23] &quot;All-Boys School&quot;                   &quot;All-Girls School&quot;                 
+##  [25] &quot;America&quot;                           &quot;Amnesia&quot;                          
+##  [27] &quot;Amusement Park&quot;                    &quot;Ancient China&quot;                    
+##  [29] &quot;Androids&quot;                          &quot;Androphobia&quot;                      
+##  [31] &quot;Angels&quot;                            &quot;Animal Characteristics&quot;           
+##  [33] &quot;Animal Protagonists&quot;               &quot;Animal Transformation&quot;            
+##  [35] &quot;Anime Bancho&quot;                      &quot;Anime Industry&quot;                   
+##  [37] &quot;Anime no Chikara&quot;                  &quot;Anime no Me&quot;                      
+##  [39] &quot;Anime Tamago&quot;                      &quot;Animeism&quot;                         
+##  [41] &quot;Anthropomorphic&quot;                   &quot;Apartment Life&quot;                   
+##  [43] &quot;Apocalypse&quot;                        &quot;Apprenticeship&quot;                   
+##  [45] &quot;Archery&quot;                           &quot;Arranged Marriage&quot;                
+##  [47] &quot;Art&quot;                               &quot;Art School&quot;                       
+##  [49] &quot;Assassins&quot;                         &quot;Astronauts&quot;                       
+##  [51] &quot;Astronomy&quot;                         &quot;Australia&quot;                        
+##  [53] &quot;Autobiographies&quot;                   &quot;Aviation&quot;                         
+##  [55] &quot;Badminton&quot;                         &quot;Baking&quot;                           
+##  [57] &quot;Ballet Dancing&quot;                    &quot;Bar&quot;                              
+##  [59] &quot;Baseball&quot;                          &quot;Based on a 4-Koma Manga&quot;          
+##  [61] &quot;Based on a Card Game&quot;              &quot;Based on a Cartoon&quot;               
+##  [63] &quot;Based on a Comic Book&quot;             &quot;Based on a Doujinshi&quot;             
+##  [65] &quot;Based on a Fairy Tale&quot;             &quot;Based on a Light Novel&quot;           
+##  [67] &quot;Based on a Manga&quot;                  &quot;Based on a Mobile Game&quot;           
+##  [69] &quot;Based on a Movie&quot;                  &quot;Based on a Novel&quot;                 
+##  [71] &quot;Based on a Picture Book&quot;           &quot;Based on a Religious Text&quot;        
+##  [73] &quot;Based on a Song&quot;                   &quot;Based on a TV Series&quot;             
+##  [75] &quot;Based on a Video Game&quot;             &quot;Based on a Visual Novel&quot;          
+##  [77] &quot;Based on an Eroge&quot;                 &quot;Based on an Otome Game&quot;           
+##  [79] &quot;Basketball&quot;                        &quot;Battle Royale&quot;                    
+##  [81] &quot;BDSM&quot;                              &quot;Bears&quot;                            
+##  [83] &quot;Billiards&quot;                         &quot;Biographies&quot;                      
+##  [85] &quot;Birds&quot;                             &quot;BL&quot;                               
+##  [87] &quot;Black and White&quot;                   &quot;Blackmail&quot;                        
+##  [89] &quot;Board Games&quot;                       &quot;Boarding House&quot;                   
+##  [91] &quot;Boarding School&quot;                   &quot;Body Sharing&quot;                     
+##  [93] &quot;Body Swapping&quot;                     &quot;Bodyguards&quot;                       
+##  [95] &quot;Bookstore&quot;                         &quot;Borderline H&quot;                     
+##  [97] &quot;Boss-Employee Relationship&quot;        &quot;Bounty Hunters&quot;                   
+##  [99] &quot;Boxing&quot;                            &quot;Breaking the Fourth Wall&quot;         
+## [101] &quot;Brother Complex&quot;                   &quot;Buddhism&quot;                         
+## [103] &quot;Butlers&quot;                           &quot;Cafe&quot;                             
+## [105] &quot;Canada&quot;                            &quot;Card Battles&quot;                     
+## [107] &quot;Cars&quot;                              &quot;Cats&quot;                             
+## [109] &quot;Centaurs&quot;                          &quot;CEOs&quot;                             
+## [111] &quot;CG Animation&quot;                      &quot;Cheats&quot;                           
+## [113] &quot;Chibi&quot;                             &quot;Childcare&quot;                        
+## [115] &quot;Childhood Friends&quot;                 &quot;Childhood Promise&quot;                
+## [117] &quot;Chinese Animation&quot;                 &quot;Christianity&quot;                     
+## [119] &quot;Christmas&quot;                         &quot;Circus&quot;                           
+## [121] &quot;Classical Music&quot;                   &quot;Cohabitation&quot;                     
+## [123] &quot;Collections&quot;                       &quot;College&quot;                          
+## [125] &quot;Combining Mecha&quot;                   &quot;Comedy&quot;                           
+## [127] &quot;Coming of Age&quot;                     &quot;Commercials&quot;                      
+## [129] &quot;Conspiracy&quot;                        &quot;Contemporary Fantasy&quot;             
+## [131] &quot;Convenience Store&quot;                 &quot;Cooking&quot;                          
+## [133] &quot;Countryside&quot;                       &quot;Coworkers&quot;                        
+## [135] &quot;Criminals&quot;                         &quot;Crossdressing&quot;                    
+## [137] &quot;Crossover&quot;                         &quot;Crude&quot;                            
+## [139] &quot;Culinary School&quot;                   &quot;Cultivation&quot;                      
+## [141] &quot;Curse&quot;                             &quot;Cyberpunk&quot;                        
+## [143] &quot;Cyborgs&quot;                           &quot;Cycling&quot;                          
+## [145] &quot;Dancing&quot;                           &quot;Dark Comedy&quot;                      
+## [147] &quot;Dark Fantasy&quot;                      &quot;Deal with the Devil&quot;              
+## [149] &quot;Debt&quot;                              &quot;Delinquents&quot;                      
+## [151] &quot;Demon King&quot;                        &quot;Demons&quot;                           
+## [153] &quot;Desert&quot;                            &quot;Detectives&quot;                       
+## [155] &quot;Dinosaurs&quot;                         &quot;Disability&quot;                       
+## [157] &quot;Disney&quot;                            &quot;Divorce&quot;                          
+## [159] &quot;Doctors&quot;                           &quot;Dodgeball&quot;                        
+## [161] &quot;Dogs&quot;                              &quot;Doujinshi Industry&quot;               
+## [163] &quot;Dragon Quest&quot;                      &quot;Dragons&quot;                          
+## [165] &quot;Drama&quot;                             &quot;Dream World&quot;                      
+## [167] &quot;Dungeon&quot;                           &quot;Dystopia&quot;                         
+## [169] &quot;Earthquake&quot;                        &quot;Ecchi&quot;                            
+## [171] &quot;Economics&quot;                         &quot;Editors&quot;                          
+## [173] &quot;Educational&quot;                       &quot;Egyptian Mythology&quot;               
+## [175] &quot;Elemental Powers&quot;                  &quot;Elves&quot;                            
+## [177] &quot;England&quot;                           &quot;Environmental&quot;                    
+## [179] &quot;Episodic&quot;                          &quot;Europe&quot;                           
+## [181] &quot;Explicit Violence&quot;                 &quot;Fake Romance&quot;                     
+## [183] &quot;Family Friendly&quot;                   &quot;Family Life&quot;                      
+## [185] &quot;Fantasy&quot;                           &quot;Fashion&quot;                          
+## [187] &quot;Fated Lovers&quot;                      &quot;Fetish&quot;                           
+## [189] &quot;Feudal Japan&quot;                      &quot;Finland&quot;                          
+## [191] &quot;Firefighters&quot;                      &quot;Fishing&quot;                          
+## [193] &quot;Flash Animation&quot;                   &quot;Food and Beverage&quot;                
+## [195] &quot;Food Protagonists&quot;                 &quot;Football&quot;                         
+## [197] &quot;Forest&quot;                            &quot;France&quot;                           
+## [199] &quot;French Revolution&quot;                 &quot;Frogs&quot;                            
+## [201] &quot;Fujoshi&quot;                           &quot;Ga-nime&quot;                          
+## [203] &quot;Gag&quot;                               &quot;Gambling&quot;                         
+## [205] &quot;Gangs&quot;                             &quot;Gender Bender&quot;                    
+## [207] &quot;Germany&quot;                           &quot;Ghibli Museum Shorts&quot;             
+## [209] &quot;Ghost Hunters&quot;                     &quot;Ghosts&quot;                           
+## [211] &quot;GL&quot;                                &quot;God-Human Relationship&quot;           
+## [213] &quot;Gods&quot;                              &quot;Golf&quot;                             
+## [215] &quot;Greece&quot;                            &quot;Greek Mythology&quot;                  
+## [217] &quot;Guilds&quot;                            &quot;Guns&quot;                             
+## [219] &quot;Gyaru&quot;                             &quot;Gymnastics&quot;                       
+## [221] &quot;Gynophobia&quot;                        &quot;Hacking&quot;                          
+## [223] &quot;Hamsters&quot;                          &quot;Hand to Hand Combat&quot;              
+## [225] &quot;Happy Science&quot;                     &quot;Harem&quot;                            
+## [227] &quot;Heaven&quot;                            &quot;Hell&quot;                             
+## [229] &quot;Henshin Heroes&quot;                    &quot;High Stakes Games&quot;                
+## [231] &quot;Historical&quot;                        &quot;Horror&quot;                           
+## [233] &quot;Hosts&quot;                             &quot;Hotels and Inns&quot;                  
+## [235] &quot;Human Experimentation&quot;             &quot;Ice Skating&quot;                      
+## [237] &quot;Idols&quot;                             &quot;Illness&quot;                          
+## [239] &quot;Impersonation&quot;                     &quot;India&quot;                            
+## [241] &quot;Inheritance&quot;                       &quot;Insects&quot;                          
+## [243] &quot;Interspecies Relationship&quot;         &quot;Isekai&quot;                           
+## [245] &quot;Island&quot;                            &quot;Isolated Society&quot;                 
+## [247] &quot;Italy&quot;                             &quot;Iyashikei&quot;                        
+## [249] &quot;Japanese Anime Classic Collection&quot; &quot;Japanese Mythology&quot;               
+## [251] &quot;Josei&quot;                             &quot;Journalism&quot;                       
+## [253] &quot;Journey to the West&quot;               &quot;Jungle&quot;                           
+## [255] &quot;Kaijuu&quot;                            &quot;Kendo&quot;                            
+## [257] &quot;Kickboxing&quot;                        &quot;Kidnapping&quot;                       
+## [259] &quot;Koalas&quot;                            &quot;Korean Animation&quot;                 
+## [261] &quot;Landlords&quot;                         &quot;Lawyers&quot;                          
+## [263] &quot;Leijiverse&quot;                        &quot;LGBT Themes&quot;                      
+## [265] &quot;Library&quot;                           &quot;Lifestyle Change&quot;                 
+## [267] &quot;Loneliness&quot;                        &quot;Love Confession&quot;                  
+## [269] &quot;Love Triangle&quot;                     &quot;Mafia&quot;                            
+## [271] &quot;Magic&quot;                             &quot;Magic School&quot;                     
+## [273] &quot;Magical Girl&quot;                      &quot;Mahjong&quot;                          
+## [275] &quot;Maids&quot;                             &quot;Manga Industry&quot;                   
+## [277] &quot;Mansion&quot;                           &quot;Married Life&quot;                     
+## [279] &quot;Martial Arts&quot;                      &quot;Martial Arts School&quot;              
+## [281] &quot;Marvel Comics&quot;                     &quot;Master-Servant Relationship&quot;      
+## [283] &quot;Mature Romance&quot;                    &quot;Mecha&quot;                            
+## [285] &quot;Medical&quot;                           &quot;Medieval&quot;                         
+## [287] &quot;Melancholy&quot;                        &quot;Mental Illness&quot;                   
+## [289] &quot;Mercenaries&quot;                       &quot;Mermaids&quot;                         
+## [291] &quot;Middle Eastern&quot;                    &quot;Military&quot;                         
+## [293] &quot;Military School&quot;                   &quot;Mind Games&quot;                       
+## [295] &quot;Minna no Uta&quot;                      &quot;MMORPG&quot;                           
+## [297] &quot;Modelling&quot;                         &quot;Modern Knowledge&quot;                 
+## [299] &quot;Monster-of-the-week&quot;               &quot;Monster Girls&quot;                    
+## [301] &quot;Monster School&quot;                    &quot;Monsters&quot;                         
+## [303] &quot;Motorcycles&quot;                       &quot;Mountain Climbing&quot;                
+## [305] &quot;Music&quot;                             &quot;Music School&quot;                     
+## [307] &quot;Mysterious Benefactor&quot;             &quot;Mysterious Shop&quot;                  
+## [309] &quot;Mystery&quot;                           &quot;Natural Disaster&quot;                 
+## [311] &quot;NEET&quot;                              &quot;Neighbors&quot;                        
+## [313] &quot;Newly Co-ed School&quot;                &quot;Ninja&quot;                            
+## [315] &quot;No Dialogue&quot;                       &quot;Nobility&quot;                         
+## [317] &quot;Noir&quot;                              &quot;noitaminA&quot;                        
+## [319] &quot;Non-Human Protagonists&quot;            &quot;Norse Mythology&quot;                  
+## [321] &quot;Novel Industry&quot;                    &quot;Nurses&quot;                           
+## [323] &quot;Ocean&quot;                             &quot;Opposites Attract&quot;                
+## [325] &quot;Original Work&quot;                     &quot;Orphans&quot;                          
+## [327] &quot;Otaku Culture&quot;                     &quot;Outer Space&quot;                      
+## [329] &quot;Outside World&quot;                     &quot;Overpowered Main Characters&quot;      
+## [331] &quot;Pandas&quot;                            &quot;Pandemic&quot;                         
+## [333] &quot;Panty Shots&quot;                       &quot;Parody&quot;                           
+## [335] &quot;Person in a Strange World&quot;         &quot;Pets&quot;                             
+## [337] &quot;Photography&quot;                       &quot;Picture Drama&quot;                    
+## [339] &quot;Pigs&quot;                              &quot;Ping Pong&quot;                        
+## [341] &quot;Pirates&quot;                           &quot;Play or Die&quot;                      
+## [343] &quot;Playboys&quot;                          &quot;Police&quot;                           
+## [345] &quot;Political&quot;                         &quot;Post-apocalyptic&quot;                 
+## [347] &quot;POV&quot;                               &quot;Poverty&quot;                          
+## [349] &quot;Power Suits&quot;                       &quot;Pregnancy&quot;                        
+## [351] &quot;Prehistoric&quot;                       &quot;Prison&quot;                           
+## [353] &quot;Promotional&quot;                       &quot;Prophecy&quot;                         
+## [355] &quot;Proxy Battles&quot;                     &quot;Psychic Powers&quot;                   
+## [357] &quot;Psychological&quot;                     &quot;Psychopaths&quot;                      
+## [359] &quot;PVE&quot;                               &quot;PVP&quot;                              
+## [361] &quot;Rabbits&quot;                           &quot;Racing&quot;                           
+## [363] &quot;Rakugo&quot;                            &quot;Real Robot&quot;                       
+## [365] &quot;Rebellions&quot;                        &quot;Recap&quot;                            
+## [367] &quot;Recipes&quot;                           &quot;Reincarnation&quot;                    
+## [369] &quot;Religion&quot;                          &quot;Remarriage&quot;                       
+## [371] &quot;Restaurants&quot;                       &quot;Revenge&quot;                          
+## [373] &quot;Reverse Harem&quot;                     &quot;Reverse Isekai&quot;                   
+## [375] &quot;Rivalries&quot;                         &quot;Robots&quot;                           
+## [377] &quot;Rock Music&quot;                        &quot;Romance&quot;                          
+## [379] &quot;Romance of the Three Kingdoms&quot;     &quot;Romantic Comedy&quot;                  
+## [381] &quot;Roommates&quot;                         &quot;Royalty&quot;                          
+## [383] &quot;RPG&quot;                               &quot;Rugby&quot;                            
+## [385] &quot;Running&quot;                           &quot;Russia&quot;                           
+## [387] &quot;Salaryman&quot;                         &quot;Samurai&quot;                          
+## [389] &quot;San-X Characters&quot;                  &quot;Sanrio Characters&quot;                
+## [391] &quot;Satire&quot;                            &quot;School Club&quot;                      
+## [393] &quot;School Life&quot;                       &quot;Sci Fi&quot;                           
+## [395] &quot;Scuba Diving&quot;                      &quot;Secret Identity&quot;                  
+## [397] &quot;Seinen&quot;                            &quot;Senpai-Kouhai Relationship&quot;       
+## [399] &quot;Sentai&quot;                            &quot;Sentient Mecha&quot;                   
+## [401] &quot;Serial Killers&quot;                    &quot;Sexual Content&quot;                   
+## [403] &quot;Sherlock Holmes&quot;                   &quot;Shinigami&quot;                        
+## [405] &quot;Ship&quot;                              &quot;Short Episodes&quot;                   
+## [407] &quot;Shorts&quot;                            &quot;Shoujo&quot;                           
+## [409] &quot;Shoujo-ai&quot;                         &quot;Shounen&quot;                          
+## [411] &quot;Shounen-ai&quot;                        &quot;Showbiz&quot;                          
+## [413] &quot;Siblings&quot;                          &quot;Single Parent&quot;                    
+## [415] &quot;Sister Complex&quot;                    &quot;Skeletons&quot;                        
+## [417] &quot;Slapstick&quot;                         &quot;Slice of Life&quot;                    
+## [419] &quot;Slimes&quot;                            &quot;Smut&quot;                             
+## [421] &quot;Soccer&quot;                            &quot;Social Gap&quot;                       
+## [423] &quot;Social Media&quot;                      &quot;Space Opera&quot;                      
+## [425] &quot;Space Pirates&quot;                     &quot;Split Personality&quot;                
+## [427] &quot;Sports&quot;                            &quot;Stalkers&quot;                         
+## [429] &quot;Star-Crossed Lovers&quot;               &quot;Steampunk&quot;                        
+## [431] &quot;Stockholm Syndrome&quot;                &quot;Stop Motion Animation&quot;            
+## [433] &quot;Student-Teacher Relationship&quot;      &quot;Student Council&quot;                  
+## [435] &quot;Submarine&quot;                         &quot;Sudden Girlfriend Appearance&quot;     
+## [437] &quot;Summoned Into Another World&quot;       &quot;Sumo Wrestling&quot;                   
+## [439] &quot;Super Robot&quot;                       &quot;Superheroes&quot;                      
+## [441] &quot;Supernatural&quot;                      &quot;Superpowers&quot;                      
+## [443] &quot;Survival&quot;                          &quot;Swimming&quot;                         
+## [445] &quot;Switzerland&quot;                       &quot;Swordplay&quot;                        
+## [447] &quot;Teaching&quot;                          &quot;Tennis&quot;                           
+## [449] &quot;Terrorism&quot;                         &quot;The Great Outdoors&quot;               
+## [451] &quot;Thieves&quot;                           &quot;Thriller&quot;                         
+## [453] &quot;Time Travel&quot;                       &quot;Tokusatsu&quot;                        
+## [455] &quot;Tourism&quot;                           &quot;Tournaments&quot;                      
+## [457] &quot;Track and Field&quot;                   &quot;Trains&quot;                           
+## [459] &quot;Transfer Students&quot;                 &quot;Transforming Mecha&quot;               
+## [461] &quot;Trapped in a Video Game&quot;           &quot;Treasure Hunters&quot;                 
+## [463] &quot;Tsundere&quot;                          &quot;Tutors&quot;                           
+## [465] &quot;Unrequited Love&quot;                   &quot;Urban Fantasy&quot;                    
+## [467] &quot;Urban Legend&quot;                      &quot;Vampires&quot;                         
+## [469] &quot;Video Game Industry&quot;               &quot;Vigilantes&quot;                       
+## [471] &quot;Virtual Reality&quot;                   &quot;Vocaloid&quot;                         
+## [473] &quot;Voice Acting&quot;                      &quot;Volleyball&quot;                       
+## [475] &quot;Voyeurism&quot;                         &quot;War&quot;                              
+## [477] &quot;Weak to Strong&quot;                    &quot;Werewolves&quot;                       
+## [479] &quot;Western&quot;                           &quot;Witches&quot;                          
+## [481] &quot;Work Life&quot;                         &quot;World Masterpiece Theater&quot;        
+## [483] &quot;World War 2&quot;                       &quot;Wrestling&quot;                        
+## [485] &quot;Writers&quot;                           &quot;Wuxia&quot;                            
+## [487] &quot;Xianxia&quot;                           &quot;Yakuza&quot;                           
+## [489] &quot;Yaoi&quot;                              &quot;Yaoi Hand Syndrome&quot;               
+## [491] &quot;Youkai&quot;                            &quot;Yuri&quot;                             
+## [493] &quot;Zombies&quot;                           &quot;Zoo&quot;</code></pre>
+</div>
+<div id="section-visualization" class="section level2">
+<h2>Visualization</h2>
+<p>We can now see how all of this data can be visualized. At this point, we are going to create a bar plot that measures the overall amount of anime produced per genre.</p>
+<div class="sourceCode" id="section-cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="section-cb14-1"><a href="#section-cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="section-cb14-2"><a href="#section-cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="section-cb14-3"><a href="#section-cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(extrafont)</span>
+<span id="section-cb14-4"><a href="#section-cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="section-cb14-5"><a href="#section-cb14-5" aria-hidden="true" tabindex="-1"></a>theme_cerulean <span class="ot">&lt;-</span> <span class="cf">function</span> (){</span>
+<span id="section-cb14-6"><a href="#section-cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>() <span class="sc">+</span> </span>
+<span id="section-cb14-7"><a href="#section-cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="section-cb14-8"><a href="#section-cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">&quot;Georgia&quot;</span>),</span>
+<span id="section-cb14-9"><a href="#section-cb14-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="section-cb14-10"><a href="#section-cb14-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>,<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="section-cb14-11"><a href="#section-cb14-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>, <span class="at">color =</span> <span class="st">&quot;darkslategrey&quot;</span>, <span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">b =</span><span class="dv">10</span>), <span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="section-cb14-12"><a href="#section-cb14-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="section-cb14-13"><a href="#section-cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="section-cb14-14"><a href="#section-cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="section-cb14-15"><a href="#section-cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="section-cb14-16"><a href="#section-cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="section-cb14-17"><a href="#section-cb14-17" aria-hidden="true" tabindex="-1"></a>big_anime_genres_plot <span class="ot">&lt;-</span> big_anime_genres_split <span class="sc">%&gt;%</span></span>
+<span id="section-cb14-18"><a href="#section-cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(genres) <span class="sc">%&gt;%</span></span>
+<span id="section-cb14-19"><a href="#section-cb14-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">25</span>, n) <span class="sc">%&gt;%</span></span>
+<span id="section-cb14-20"><a href="#section-cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(genres, n) , <span class="at">y =</span> n))<span class="sc">+</span></span>
+<span id="section-cb14-21"><a href="#section-cb14-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_col</span>(<span class="at">fill=</span> <span class="st">&quot;steelblue3&quot;</span>)  <span class="sc">+</span> </span>
+<span id="section-cb14-22"><a href="#section-cb14-22" aria-hidden="true" tabindex="-1"></a>       <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Number of Animes Produced&quot;</span>,</span>
+<span id="section-cb14-23"><a href="#section-cb14-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Genres&quot;</span>)<span class="sc">+</span></span>
+<span id="section-cb14-24"><a href="#section-cb14-24" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme_cerulean</span>() <span class="sc">+</span></span>
+<span id="section-cb14-25"><a href="#section-cb14-25" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, </span>
+<span id="section-cb14-26"><a href="#section-cb14-26" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="section-cb14-27"><a href="#section-cb14-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="section-cb14-28"><a href="#section-cb14-28" aria-hidden="true" tabindex="-1"></a>big_anime_genres_plot</span></code></pre></div>
+<p><img src="anime1_files/figure-html/unnamed-chunk-8-1.png" width="768" /></p>
+<p>Overall, it looks like viewers have a strong preference for comedic, manga-based, and action anime. None of this is too surprising. But have genre demand changed over the years. This gives us an opportunity to use shiny to see how anime genres have trended over time.</p>
+<p>Let’s first make the data frame by grouping anime genres and the year they were produced together so that they can be counted.</p>
+<div class="sourceCode" id="section-cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="section-cb15-1"><a href="#section-cb15-1" aria-hidden="true" tabindex="-1"></a>big_anime_genres_split_count <span class="ot">&lt;-</span> big_anime_genres_split <span class="sc">%&gt;%</span></span>
+<span id="section-cb15-2"><a href="#section-cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(genres, startYr) <span class="sc">%&gt;%</span></span>
+<span id="section-cb15-3"><a href="#section-cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(genres) <span class="sc">%&gt;%</span></span>
+<span id="section-cb15-4"><a href="#section-cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>( <span class="sc">!</span><span class="fu">is.na</span>(startYr)) </span></code></pre></div>
+<p>Visualizing time!</p>
+<div class="sourceCode" id="section-cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="section-cb16-1"><a href="#section-cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="section-cb16-2"><a href="#section-cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinythemes)</span>
+<span id="section-cb16-3"><a href="#section-cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="section-cb16-4"><a href="#section-cb16-4" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span><span class="fu">fluidPage</span>(</span>
+<span id="section-cb16-5"><a href="#section-cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">&quot;Anime Genres Over The Years&quot;</span>),</span>
+<span id="section-cb16-6"><a href="#section-cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">theme =</span> shinythemes<span class="sc">::</span><span class="fu">shinytheme</span>(<span class="st">&quot;cosmo&quot;</span>),</span>
+<span id="section-cb16-7"><a href="#section-cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
+<span id="section-cb16-8"><a href="#section-cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(</span>
+<span id="section-cb16-9"><a href="#section-cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sliderInput</span>(<span class="st">&#39;year&#39;</span>,<span class="st">&#39;Select Year&#39;</span>, <span class="at">value =</span> <span class="dv">2000</span>, <span class="at">min=</span> <span class="dv">1907</span> , <span class="at">max=</span> <span class="dv">2026</span> )), </span>
+<span id="section-cb16-10"><a href="#section-cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mainPanel</span>(</span>
+<span id="section-cb16-11"><a href="#section-cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabsetPanel</span>( </span>
+<span id="section-cb16-12"><a href="#section-cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">&#39;Plot&#39;</span>, plotly<span class="sc">::</span><span class="fu">plotlyOutput</span>(<span class="st">&#39;plot_top25&#39;</span>)),</span>
+<span id="section-cb16-13"><a href="#section-cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">&#39;Table&#39;</span>, DT<span class="sc">::</span><span class="fu">DTOutput</span>(<span class="st">&#39;table_top25&#39;</span>))</span>
+<span id="section-cb16-14"><a href="#section-cb16-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="section-cb16-15"><a href="#section-cb16-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="section-cb16-16"><a href="#section-cb16-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="section-cb16-17"><a href="#section-cb16-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="section-cb16-18"><a href="#section-cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="section-cb16-19"><a href="#section-cb16-19" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session ){</span>
+<span id="section-cb16-20"><a href="#section-cb16-20" aria-hidden="true" tabindex="-1"></a>   tops <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="section-cb16-21"><a href="#section-cb16-21" aria-hidden="true" tabindex="-1"></a>    big_anime_genres_split_count <span class="sc">%&gt;%</span> </span>
+<span id="section-cb16-22"><a href="#section-cb16-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(startYr <span class="sc">==</span> input<span class="sc">$</span>year) <span class="sc">%&gt;%</span></span>
+<span id="section-cb16-23"><a href="#section-cb16-23" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ungroup</span>()<span class="sc">%&gt;%</span></span>
+<span id="section-cb16-24"><a href="#section-cb16-24" aria-hidden="true" tabindex="-1"></a>       <span class="fu">top_n</span>(<span class="dv">25</span>, n) <span class="sc">%&gt;%</span></span>
+<span id="section-cb16-25"><a href="#section-cb16-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(genres, n) , <span class="at">y =</span> n))<span class="sc">+</span></span>
+<span id="section-cb16-26"><a href="#section-cb16-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_col</span>(<span class="at">fill=</span> <span class="st">&quot;steelblue3&quot;</span>)  <span class="sc">+</span> </span>
+<span id="section-cb16-27"><a href="#section-cb16-27" aria-hidden="true" tabindex="-1"></a>       <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Number of Animes Produced&quot;</span>,</span>
+<span id="section-cb16-28"><a href="#section-cb16-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Genres&quot;</span>)<span class="sc">+</span></span>
+<span id="section-cb16-29"><a href="#section-cb16-29" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme_cerulean</span>() <span class="sc">+</span></span>
+<span id="section-cb16-30"><a href="#section-cb16-30" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, </span>
+<span id="section-cb16-31"><a href="#section-cb16-31" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="section-cb16-32"><a href="#section-cb16-32" aria-hidden="true" tabindex="-1"></a>   }</span>
+<span id="section-cb16-33"><a href="#section-cb16-33" aria-hidden="true" tabindex="-1"></a>   output<span class="sc">$</span>plot_top25 <span class="ot">&lt;-</span> plotly<span class="sc">::</span><span class="fu">renderPlotly</span>({</span>
+<span id="section-cb16-34"><a href="#section-cb16-34" aria-hidden="true" tabindex="-1"></a>     <span class="fu">tops</span>()</span>
+<span id="section-cb16-35"><a href="#section-cb16-35" aria-hidden="true" tabindex="-1"></a>   })</span>
+<span id="section-cb16-36"><a href="#section-cb16-36" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>table_top25 <span class="ot">&lt;-</span> DT<span class="sc">::</span><span class="fu">renderDT</span>({</span>
+<span id="section-cb16-37"><a href="#section-cb16-37" aria-hidden="true" tabindex="-1"></a>     big_anime_genres_split_count <span class="sc">%&gt;%</span> </span>
+<span id="section-cb16-38"><a href="#section-cb16-38" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(startYr <span class="sc">==</span> input<span class="sc">$</span>year) <span class="sc">%&gt;%</span></span>
+<span id="section-cb16-39"><a href="#section-cb16-39" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ungroup</span>()<span class="sc">%&gt;%</span></span>
+<span id="section-cb16-40"><a href="#section-cb16-40" aria-hidden="true" tabindex="-1"></a>       <span class="fu">top_n</span>(<span class="dv">25</span>, n) </span>
+<span id="section-cb16-41"><a href="#section-cb16-41" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="section-cb16-42"><a href="#section-cb16-42" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="section-cb16-43"><a href="#section-cb16-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="section-cb16-44"><a href="#section-cb16-44" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code></pre></div>
+<p><iframe data-deferred-src="appb989f9abb4ed8082a437b1060f7a7119/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe> Using this plot there are many trends that could be more thoroughly analyzed. What drew my attention immediately was the demand for fantasy anime which has been steadily increasing since 2010. Although I do not watch as many anime as used to, I can attest to the fantasy genre growth trend because I was one of the those viewers who watched a lot of fantasy anime back in the early to mid 2010s.</p>
+<p>Now that we have examined the frequency of genres overall and based on time. I now want to analyze genre popularity based on viewer opinions. The 4 attributes in the data set I felt like gave the most comprehensive picture of popularity were the amount of views(watched), interest in watching(wantWatch), rating, and amount of votes(votes). To compare the genres I will produce a data frame where I take the mean of all of these metrics by genres.</p>
+<div class="sourceCode" id="section-cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="section-cb17-1"><a href="#section-cb17-1" aria-hidden="true" tabindex="-1"></a>big_anime_genres_split_pop <span class="ot">&lt;-</span> big_anime_genres_split <span class="sc">%&gt;%</span></span>
+<span id="section-cb17-2"><a href="#section-cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(genres)<span class="sc">%&gt;%</span></span>
+<span id="section-cb17-3"><a href="#section-cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_watched =</span> <span class="fu">mean</span>(watched, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="section-cb17-4"><a href="#section-cb17-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">avg_want =</span> <span class="fu">mean</span>(wantWatch, <span class="at">na.rm =</span> <span class="cn">TRUE</span> ), </span>
+<span id="section-cb17-5"><a href="#section-cb17-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">avg_rating =</span><span class="fu">mean</span>(rating, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="section-cb17-6"><a href="#section-cb17-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">avg_votes =</span><span class="fu">mean</span>(votes, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) )</span></code></pre></div>
+<p>I want to then take the top 25 genres for each metric.</p>
+<div class="sourceCode" id="section-cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="section-cb18-1"><a href="#section-cb18-1" aria-hidden="true" tabindex="-1"></a>big_anime_genres_split_watch <span class="ot">&lt;-</span> big_anime_genres_split_pop <span class="sc">%&gt;%</span></span>
+<span id="section-cb18-2"><a href="#section-cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">25</span>, avg_watched)</span>
+<span id="section-cb18-3"><a href="#section-cb18-3" aria-hidden="true" tabindex="-1"></a>big_anime_genres_split_want <span class="ot">&lt;-</span> big_anime_genres_split_pop <span class="sc">%&gt;%</span></span>
+<span id="section-cb18-4"><a href="#section-cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">25</span>, avg_want)</span>
+<span id="section-cb18-5"><a href="#section-cb18-5" aria-hidden="true" tabindex="-1"></a>big_anime_genres_split_rating <span class="ot">&lt;-</span> big_anime_genres_split_pop <span class="sc">%&gt;%</span></span>
+<span id="section-cb18-6"><a href="#section-cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">25</span>, avg_rating)</span>
+<span id="section-cb18-7"><a href="#section-cb18-7" aria-hidden="true" tabindex="-1"></a>big_anime_genres_split_votes <span class="ot">&lt;-</span> big_anime_genres_split_pop <span class="sc">%&gt;%</span></span>
+<span id="section-cb18-8"><a href="#section-cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">25</span>, avg_votes)</span></code></pre></div>
+<p>Now we are going to plot them all using Cleveland Dot Plots (or lollipop graphs).</p>
+<div class="sourceCode" id="section-cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="section-cb19-1"><a href="#section-cb19-1" aria-hidden="true" tabindex="-1"></a>plotter<span class="ot">&lt;-</span> <span class="cf">function</span> (x, y, d) {</span>
+<span id="section-cb19-2"><a href="#section-cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(d,</span>
+<span id="section-cb19-3"><a href="#section-cb19-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> x,</span>
+<span id="section-cb19-4"><a href="#section-cb19-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="fu">reorder</span>(y, x)))<span class="sc">+</span></span>
+<span id="section-cb19-5"><a href="#section-cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, </span>
+<span id="section-cb19-6"><a href="#section-cb19-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">&quot;steelblue3&quot;</span>)<span class="sc">+</span></span>
+<span id="section-cb19-7"><a href="#section-cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x=</span> <span class="dv">0</span>, </span>
+<span id="section-cb19-8"><a href="#section-cb19-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">xend =</span> x <span class="sc">-</span> x<span class="sc">*</span>.<span class="dv">0090</span>,</span>
+<span id="section-cb19-9"><a href="#section-cb19-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> <span class="fu">reorder</span>(y, x),</span>
+<span id="section-cb19-10"><a href="#section-cb19-10" aria-hidden="true" tabindex="-1"></a>                   <span class="at">yend =</span> <span class="fu">reorder</span>(y, x)),</span>
+<span id="section-cb19-11"><a href="#section-cb19-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">&quot;black&quot;</span>)<span class="sc">+</span> </span>
+<span id="section-cb19-12"><a href="#section-cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="section-cb19-13"><a href="#section-cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_cerulean</span>() <span class="sc">+</span></span>
+<span id="section-cb19-14"><a href="#section-cb19-14" aria-hidden="true" tabindex="-1"></a>     <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">&quot;Georgia&quot;</span>),</span>
+<span id="section-cb19-15"><a href="#section-cb19-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="fu">margin</span>(<span class="at">b =</span> <span class="dv">10</span>), <span class="at">family =</span> <span class="st">&quot;Georgia&quot;</span>), </span>
+<span id="section-cb19-16"><a href="#section-cb19-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="section-cb19-17"><a href="#section-cb19-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>()) </span>
+<span id="section-cb19-18"><a href="#section-cb19-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="section-cb19-19"><a href="#section-cb19-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="section-cb19-20"><a href="#section-cb19-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="section-cb19-21"><a href="#section-cb19-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="section-cb19-22"><a href="#section-cb19-22" aria-hidden="true" tabindex="-1"></a>pop_plot1<span class="ot">&lt;-</span><span class="fu">plotter</span>(big_anime_genres_split_watch<span class="sc">$</span>avg_watched, big_anime_genres_split_watch<span class="sc">$</span>genres, big_anime_genres_split_watch)<span class="sc">+</span></span>
+<span id="section-cb19-23"><a href="#section-cb19-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Top 25 Anime Genres by Popularity Metrics&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Average Amount of Views&quot;</span>)</span>
+<span id="section-cb19-24"><a href="#section-cb19-24" aria-hidden="true" tabindex="-1"></a>pop_plot2<span class="ot">&lt;-</span><span class="fu">plotter</span>(big_anime_genres_split_want<span class="sc">$</span>avg_want, big_anime_genres_split_want<span class="sc">$</span>genres, big_anime_genres_split_want)<span class="sc">+</span></span>
+<span id="section-cb19-25"><a href="#section-cb19-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Top 25 Anime Genres by Popularity Metrics&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Average Amount of Viewers Wanting to Watch&quot;</span>)</span>
+<span id="section-cb19-26"><a href="#section-cb19-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="section-cb19-27"><a href="#section-cb19-27" aria-hidden="true" tabindex="-1"></a>pop_plot3<span class="ot">&lt;-</span><span class="fu">plotter</span>(big_anime_genres_split_rating<span class="sc">$</span>avg_rating, big_anime_genres_split_rating<span class="sc">$</span>genres, big_anime_genres_split_rating)<span class="sc">+</span></span>
+<span id="section-cb19-28"><a href="#section-cb19-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Top 25 Anime Genres by Popularity Metrics&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Average Rating&quot;</span>)</span>
+<span id="section-cb19-29"><a href="#section-cb19-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="section-cb19-30"><a href="#section-cb19-30" aria-hidden="true" tabindex="-1"></a>pop_plot4<span class="ot">&lt;-</span><span class="fu">plotter</span>(big_anime_genres_split_votes<span class="sc">$</span>avg_votes, big_anime_genres_split_votes<span class="sc">$</span>genres, big_anime_genres_split_votes)<span class="sc">+</span></span>
+<span id="section-cb19-31"><a href="#section-cb19-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Top 25 Anime Genres by Popularity Metrics&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Average Amount of Votes&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="section-cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="section-cb20-1"><a href="#section-cb20-1" aria-hidden="true" tabindex="-1"></a>pop_plot1  </span></code></pre></div>
+<p><img src="anime1_files/figure-html/unnamed-chunk-14-1.png" width="768" /></p>
+<div class="sourceCode" id="section-cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="section-cb21-1"><a href="#section-cb21-1" aria-hidden="true" tabindex="-1"></a>pop_plot2  </span></code></pre></div>
+<p><img src="anime1_files/figure-html/unnamed-chunk-14-2.png" width="768" /></p>
+<div class="sourceCode" id="section-cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="section-cb22-1"><a href="#section-cb22-1" aria-hidden="true" tabindex="-1"></a>pop_plot3  </span></code></pre></div>
+<p><img src="anime1_files/figure-html/unnamed-chunk-14-3.png" width="768" /></p>
+<div class="sourceCode" id="section-cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="section-cb23-1"><a href="#section-cb23-1" aria-hidden="true" tabindex="-1"></a>pop_plot4  </span></code></pre></div>
+<p><img src="anime1_files/figure-html/unnamed-chunk-14-4.png" width="768" /> So these results are interesting because in our earlier plots, we were seeing genres be the most popular. But these last 4 graphs show that viewers are more likely to rate tags more highly. Where we draw the line between tags and genres is up for debate. Because of the limitations of this project, this is as far as it is going to go.</p>
+</div>
+<div id="section-conclusion" class="section level2">
+<h2>Conclusion</h2>
+<p>I think this project cemented for me the fact that whenever a broad question is asked, time needs to be taken to carefully examine all of the metrics that could be used to answer the question. For this project, once the data was curated, there were many ways to evaluate genre popularity. I think this exploratory analysis went well, and this analysis definitely gives me some more ideas for future projects using this data set.</p>
+</div>
+<div id="section-source" class="section level2">
+<h2>Source</h2>
+<p>This dataset was provided by Kaggle user Alan Mathew: <a href="https://www.kaggle.com/alancmathew/anime-dataset" class="uri">https://www.kaggle.com/alancmathew/anime-dataset</a></p>
+</div>
+
+   
+   
+           </section>
+  </div>
+  </div>
+  </div>
+  </div>
+      
+      
+
+  <script>
+    $(document).ready(function () {
+
+		// add bootstrap table styles to pandoc tables
+	$('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+		
+ 		
+	    });
+  </script>
+
+
+
+    <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+	var script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+	document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+  
+</body>
+</html>

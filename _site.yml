@@ -5,10 +5,15 @@ navbar:
   left:
     - text: "About"
       href: index.html
-    - text: "Project 1: Summer Research Project 2018 (R)"
+    - text: "Project 1 (R)"
       href: Summer-Research-2018-Markdown.html
-    - text: "Project 2: Exploratory Pokemon Analysis 2020 (R)"
+    - text: "Project 2 (R)"
       href: pokemon-project-2020.html
+    - text: "Minor Project 1 (R)"
+      href: anime1.html
+    - text: "Minor Project 2 (Python)"
+      href: tvanalysis.html
+
 output:
   html_document:
     theme: cosmo

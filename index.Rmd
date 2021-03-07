@@ -14,4 +14,24 @@
 
 ---
 
-This is where I will show all of my long independent projects. 
+**Welcome to my project website!** 
+
+<details>
+<summary><b> Project 1: Summer Research Project 2018 </b></summary>
+* Investigated how movement affects forked fungus beetle social network position. 
+</details>
+
+<details>
+<summary><b> Project 2: Exploratory Pokemon Analysis 2020 </b></summary>
+* Explored data visualization using pokemon gaming data.
+</details>
+
+<details>
+<summary><b> Minor Project 1: Understanding Anime Genre Trends </b></summary>
+* Examined popularity of anime genres. 
+</details>
+
+<details>
+<summary><b> Minor Project 2: Do Children Have Bad Taste </b></summary>
+* Explored how tv show ratings differ across age categories.
+</details>

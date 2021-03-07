@@ -216,10 +216,16 @@
         <a href="index.html">About</a>
       </li>
       <li>
-        <a href="Summer-Research-2018-Markdown.html">Project 1: Summer Research Project 2018 (R)</a>
+        <a href="Summer-Research-2018-Markdown.html">Project 1 (R)</a>
       </li>
       <li>
-        <a href="pokemon-project-2020.html">Project 2: Exploratory Pokemon Analysis 2020 (R)</a>
+        <a href="pokemon-project-2020.html">Project 2 (R)</a>
+      </li>
+      <li>
+        <a href="anime1.html">Minor Project 1 (R)</a>
+      </li>
+      <li>
+        <a href="tvanalysis.html">Minor Project 2 (Python)</a>
       </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -253,7 +259,7 @@
       <li><a href="#task-7-do-newer-generations-have-more-variation-in-their-total-stat-distributions">Task 7: Do newer generations have more variation in their total stat distributions?</a></li>
       <li><a href="#task-8-which-stats-have-the-most-and-least-variation">Task 8: Which stats have the most and least variation?</a></li>
       </ul></li>
-      <li><a href="#correlational-studies"><strong>Correlational Studies</strong></a>
+      <li><a href="#correlation-studies"><strong>Correlation Studies</strong></a>
       <ul>
       <li><a href="#task-9-what-stats-are-correlated-with-each-other">Task 9: What stats are correlated with each other?</a></li>
       <li><a href="#task-10-what-stats-are-correlated-with-each-individual-types">Task 10: What stats are correlated with each individual types?</a></li>
@@ -1072,14 +1078,14 @@
 <p>Although the offensive stats appear to be the most varied, the variation between the stats is actually very similar. I think, more than anything else, this graph really highlights the large difference between the average attack stat and all the others.</p>
 </div>
 </div>
-<div id="correlational-studies" class="section level1">
-<h1><strong>Correlational Studies</strong></h1>
+<div id="correlation-studies" class="section level1">
+<h1><strong>Correlation Studies</strong></h1>
 <p>The previous section was just a warm up and an opportunity to practice creating a variety of graphs. This section will focus on analyzing statistical trends in the data set.</p>
 <div id="task-9-what-stats-are-correlated-with-each-other" class="section level2">
 <h2>Task 9: What stats are correlated with each other?</h2>
 <p>One of the easiest ways to get a preliminary look at the relationship between two variables is to use a correlation plot:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>stat_study<span class="ot">&lt;-</span>pokemon_data_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hp, attack, defense, sp_attack, sp_defense, speed)</span>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>stat_study<span class="ot">&lt;-</span><span class="fu">select</span>(pokemon_data_clean, hp, attack, defense, sp_attack, sp_defense, speed)</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>stat_study_cor <span class="ot">&lt;-</span> <span class="fu">cor</span>(stat_study, <span class="at">use =</span> <span class="st">&quot;complete.obs&quot;</span>)</span>
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(stat_study_cor,<span class="dv">2</span>)</span></code></pre></div>

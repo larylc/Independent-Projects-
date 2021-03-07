@@ -1,0 +1,283 @@
+---
+title: "Understanding Anime Genre Trends"
+author: "Cedric Lary"
+date: "3/5/2021"
+output: 
+  rmdformats::robobook:
+    code_folding: hide
+    df_print: paged
+runtime: shiny
+---
+
+```{=html}
+<style>
+body, h1, h2, h3, h4 {
+  font-family: "Bookman";
+  }
+
+a, a:hover {
+  color: steelblue3;
+}
+pre {
+  font-size: 10px;
+
+}
+
+</style>
+```
+## Motivation
+
+The goal of this project was to practice string manipulation and creating shiny apps. The challenge with this data set was finding a way to take the individual genres and tags that were nested in the tags column and display each one's popularity. Because this data was scraped from a popular anime website there were several ways to showcase popularity and preference for genres. What I do in this project is examine what popularity looks like in terms of demand (how frequently certain genres are made) over time, and how popularity looks like across several measures (amount of views, interest in watching the anime, ratings, and votes)
+
+## Questions
+
+What genres/tags get the most attention or highest ratings?
+
+## Data Preparation
+
+To start, I am going to be reading in the data.
+
+```{r}
+setwd("C:/Users/laryl/Desktop/Data Sets")
+big_anime <- read.csv("anime.csv")
+```
+
+Next, I am going to do a quick inspection of the data types for the columns.
+
+```{r message=FALSE}
+library(dplyr)
+glimpse(big_anime)
+class(big_anime$tags)
+
+```
+
+At this stage, we do have a significant issue. Every observation (anime) within the tag column contains all of the tags and genres associated with that observation. With the genres/tags being nested like this, it makes it very difficult to examine individual genres trends. The solution I came up with was to split the genres from their nested position and count each anime multiple times for every tag/genre it is associated with. For example. if an anime was associated with "Action" and "Fantasy," then that anime would be counted twice.
+
+```{r message=FALSE, warning=FALSE}
+
+library(stringr)
+library(tidyverse)
+big_anime_genres_split <- big_anime %>%
+  mutate(tags = str_remove_all(tags, fixed("'"))) %>%
+  mutate(tags = str_remove(tags, fixed("["))) %>%
+  mutate(tags = str_remove(tags, fixed("]"))) %>%
+  mutate(genres = str_split(tags, ", ")) %>%
+  unnest() %>%
+  distinct() 
+
+```
+
+
+The genre split was successful. To show proof of this I am going to display the first few observations using the Fullmetal Alchemist: Brotherhood anime series: 
+```{r}
+library(knitr)
+first_observations <- big_anime_genres_split %>%
+  select(title, genres)%>%
+  head(10)
+  
+kable(first_observations)
+```
+
+Next, we want to convert the character column  to a factor column. 
+```{r}
+
+big_anime_genres_split$genres <-as.factor(big_anime_genres_split$genres)
+str(big_anime_genres_split)
+```
+
+
+We also want to check to seeing if the conversion was successful.
+```{r}
+levels(big_anime_genres_split$genres)
+```
+
+I noticed that one of the categories in genres was labeled as empty string, so we are going to eliminate it, taking care to remove it as possible factor.
+```{r}
+
+big_anime_genres_split <- big_anime_genres_split %>%
+  filter(genres != "")%>%
+  droplevels()
+
+levels(big_anime_genres_split$genres)
+```
+
+
+##  Visualization
+
+We can now see how all of this data can be visualized. At this point, we are going to create a bar plot that measures the overall amount of anime produced per genre. 
+```{r}
+
+library(ggplot2)
+library(ggthemes)
+library(extrafont)
+
+theme_cerulean <- function (){
+  theme_economist() + 
+  theme(legend.position = "none",
+        text = element_text(family = "Georgia"),
+        panel.grid.major.x = element_blank(),
+        plot.title = element_text(size = 20,hjust = 0.5),
+        plot.subtitle = element_text(size = 8, color = "darkslategrey", margin = margin(b =10), hjust = 0.5))
+}
+
+
+
+
+big_anime_genres_plot <- big_anime_genres_split %>%
+  count(genres) %>%
+  top_n(25, n) %>%
+    ggplot(aes(x = reorder(genres, n) , y = n))+
+      geom_col(fill= "steelblue3")  + 
+       labs(y = "Number of Animes Produced",
+       x = "Genres")+
+       theme_cerulean() +
+       theme(axis.text.x = element_text(angle = 90, 
+                                   hjust = 1))
+  
+big_anime_genres_plot
+```
+ 
+Overall, it looks like viewers have a strong preference for comedic, manga-based, and action anime. None of this is too surprising. But have genre demand changed over the years. This gives us an opportunity to use shiny to see how anime genres have trended over time. 
+
+
+Let's first make the data frame by grouping anime genres and the year they were produced together so that they can be counted.
+```{r}
+big_anime_genres_split_count <- big_anime_genres_split %>%
+  group_by(genres, startYr) %>%
+  count(genres) %>%
+  filter( !is.na(startYr)) 
+```
+
+
+Visualizing time!
+```{r message=FALSE, warning=FALSE}
+
+
+library(shiny)
+library(shinythemes)
+
+ui <-fluidPage(
+  titlePanel("Anime Genres Over The Years"),
+  theme = shinythemes::shinytheme("cosmo"),
+  sidebarLayout(
+    sidebarPanel(
+  sliderInput('year','Select Year', value = 2000, min= 1907 , max= 2026 )), 
+  mainPanel(
+  tabsetPanel( 
+    tabPanel('Plot', plotly::plotlyOutput('plot_top25')),
+    tabPanel('Table', DT::DTOutput('table_top25'))
+  )
+  )
+  )
+)
+
+server <- function(input, output, session ){
+   tops <- function() {
+    big_anime_genres_split_count %>% 
+      filter(startYr == input$year) %>%
+       ungroup()%>%
+       top_n(25, n) %>%
+    ggplot(aes(x = reorder(genres, n) , y = n))+
+      geom_col(fill= "steelblue3")  + 
+       labs(y = "Number of Animes Produced",
+       x = "Genres")+
+       theme_cerulean() +
+       theme(axis.text.x = element_text(angle = 90, 
+                                   hjust = 1))
+   }
+   output$plot_top25 <- plotly::renderPlotly({
+     tops()
+   })
+    output$table_top25 <- DT::renderDT({
+     big_anime_genres_split_count %>% 
+      filter(startYr == input$year) %>%
+       ungroup()%>%
+       top_n(25, n) 
+    })
+}
+
+shinyApp(ui = ui, server = server)
+
+```
+Using this plot there are many trends that could be more thoroughly analyzed. What drew my attention immediately was the demand for fantasy anime which has been steadily increasing since 2010. Although I do not watch as many anime as used to, I can attest to the fantasy genre growth trend because I was one of the those viewers who watched a lot of fantasy anime back in the early to mid 2010s. 
+
+
+Now that we have examined the frequency of genres overall and based on time. I now want to analyze genre popularity based on viewer opinions. The 4 attributes in the data set I felt like gave the most comprehensive picture of popularity were the amount of views(watched), interest in watching(wantWatch), rating, and amount of votes(votes). To compare the genres I will produce a data frame where I take the mean of all of these metrics by genres.
+
+```{r message=FALSE, warning=FALSE}
+big_anime_genres_split_pop <- big_anime_genres_split %>%
+  group_by(genres)%>%
+  summarize(avg_watched = mean(watched, na.rm = TRUE), 
+            avg_want = mean(wantWatch, na.rm = TRUE ), 
+            avg_rating =mean(rating, na.rm = TRUE), 
+            avg_votes =mean(votes, na.rm = TRUE) )
+```
+
+I want to then take the top 25 genres for each metric. 
+```{r}
+big_anime_genres_split_watch <- big_anime_genres_split_pop %>%
+  top_n(25, avg_watched)
+big_anime_genres_split_want <- big_anime_genres_split_pop %>%
+  top_n(25, avg_want)
+big_anime_genres_split_rating <- big_anime_genres_split_pop %>%
+  top_n(25, avg_rating)
+big_anime_genres_split_votes <- big_anime_genres_split_pop %>%
+  top_n(25, avg_votes)
+  
+```
+
+Now we are going to plot them all using Cleveland Dot Plots (or lollipop graphs).
+```{r message=FALSE, warning=FALSE}
+plotter<- function (x, y, d) {
+  ggplot(d,
+       aes(x = x,
+           y = reorder(y, x)))+
+  geom_point(size = 2, 
+             color = "steelblue3")+
+  geom_segment(aes(x= 0, 
+                   xend = x - x*.0090,
+                   y = reorder(y, x),
+                   yend = reorder(y, x)),
+               color = "black")+ 
+    theme_minimal()+
+    theme_cerulean() +
+     theme(text = element_text(family = "Georgia"),
+        plot.title = element_text(size = 15, margin(b = 10), family = "Georgia"), 
+       panel.grid.minor = element_blank(),
+        panel.grid.major.x = element_blank()) 
+    
+    
+}
+
+pop_plot1<-plotter(big_anime_genres_split_watch$avg_watched, big_anime_genres_split_watch$genres, big_anime_genres_split_watch)+
+  labs(title = "Top 25 Anime Genres by Popularity Metrics", y = "", x = "Average Amount of Views")
+pop_plot2<-plotter(big_anime_genres_split_want$avg_want, big_anime_genres_split_want$genres, big_anime_genres_split_want)+
+    labs(title = "Top 25 Anime Genres by Popularity Metrics", y = "", x = "Average Amount of Viewers Wanting to Watch")
+
+pop_plot3<-plotter(big_anime_genres_split_rating$avg_rating, big_anime_genres_split_rating$genres, big_anime_genres_split_rating)+
+  labs(title = "Top 25 Anime Genres by Popularity Metrics", y = "", x = "Average Rating")
+
+pop_plot4<-plotter(big_anime_genres_split_votes$avg_votes, big_anime_genres_split_votes$genres, big_anime_genres_split_votes)+
+    labs(title = "Top 25 Anime Genres by Popularity Metrics", y = "", x = "Average Amount of Votes")
+
+
+```
+
+```{r}
+
+pop_plot1  
+pop_plot2  
+pop_plot3  
+pop_plot4  
+
+```
+So these results are interesting because in our earlier plots, we were seeing genres be the most popular. But these last 4 graphs show that viewers are more likely to rate tags more highly. Where we draw the line between tags and genres is up for debate. Because of the limitations of this project, this is as far as it is going to go.
+
+
+## Conclusion
+
+I think this project cemented for me the fact that whenever a broad question is asked, time needs to be taken to carefully examine all of the metrics that could be used to answer the question. For this project, once the data was curated, there were many ways to evaluate genre popularity. I think this exploratory analysis went well, and this analysis definitely gives me some more ideas for future projects using this data set.
+
+## Source
+
+This dataset was provided by Kaggle user Alan Mathew: <https://www.kaggle.com/alancmathew/anime-dataset>

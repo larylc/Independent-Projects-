@@ -1,6 +1,6 @@
 
 
-# **Correlational Studies**
+# **Correlation Studies**
 
 The previous section was just a warm up and an opportunity to practice creating a variety of graphs. 
 This section will focus on analyzing statistical trends in the data set.
@@ -9,8 +9,8 @@ This section will focus on analyzing statistical trends in the data set.
 
 One of the easiest ways to get a preliminary look at the relationship between two variables is to use a correlation plot:
 ```{r message=FALSE}
-stat_study<-pokemon_data_clean %>% 
-  select(hp, attack, defense, sp_attack, sp_defense, speed)
+library(dplyr)
+stat_study<-select(pokemon_data_clean, hp, attack, defense, sp_attack, sp_defense, speed)
 
 stat_study_cor <- cor(stat_study, use = "complete.obs")
 round(stat_study_cor,2)
@@ -94,14 +94,16 @@ qqnorm(residuals(fit_sweepers), col= "slateblue" )
 qqline(residuals(fit_sweepers))
 ```
 
-```{r}
+```{r warning=TRUE}
 #Checking for Constant Conditional SDs and Linearity
 plot(fitted(fit_sweepers),resid(fit_sweepers), col= "slateblue", pch= 19)
 abline(h=0) 
 ```
 
 None of the assumptions seem to have been violated, so we can move to the last stage and plot our multiple regression.
+
 ```{r, warning=FALSE}
+
 library(visreg)
 
 visreg(fit_sweepers, "sp_attack", by= "attack", gg= TRUE, 

@@ -1,0 +1,10 @@
+---
+title: "Mini Projects"
+output_dir: "."
+navbar:
+  left:
+output:
+  html_document:
+    theme: cosmo
+    highlight: textmate
+---
