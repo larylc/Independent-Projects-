@@ -169,8 +169,9 @@ Following the link above will lead you to my project website. There, I will be p
 
 ## Contact Me
 
-|**Contact Method**  |                    |
-| -------------------| ------------------ |
-| Professional Email | clary1@gmail.com   |
+|**Contact Method**  |                          |
+| -------------------| -------------------------|
+| Professional Email | cedric.lary1@gmail.com   |
+
 
 
