@@ -140,7 +140,6 @@ Following the link above will lead you to my project website. There, I will be p
  
 * library(knitr)
 * library(extrafont)
-* library(shiny)
 * library(stringr)
 * library(ggplot2)
 * library(ggthemes)
@@ -152,7 +151,7 @@ Following the link above will lead you to my project website. There, I will be p
 
 </details>
 
-### **Minor Project 2: Do Children Have Bad Taste ** 
+### **Minor Project 2: Do Children Have Bad Taste** 
 **Summary**: Explored the differences in tv show ratings across target audience age groups. 
 
 <details>
