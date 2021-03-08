@@ -52,7 +52,7 @@ Following the link above will lead you to my project website. There, I will be p
 **Summary**: This is an extensive exploratory analysis of Pokemon game characteristics.
 
 <details>
-<summary><b>See Libaries Used:</b></summary>
+<summary><b>See Packages Used:</b></summary>
  
 * library(knitr)
 * library(stringr)
@@ -130,6 +130,40 @@ Following the link above will lead you to my project website. There, I will be p
 
 </details>
 
+## Minor Projects 
+
+### **Minor Project 1: Understanding Anime Genre Trends** 
+**Summary**: Examined popularity of anime genres over time and overall. 
+
+<details>
+<summary><b>See Packages Used:</b></summary>
+ 
+* library(knitr)
+* library(extrafont)
+* library(shiny)
+* library(stringr)
+* library(ggplot2)
+* library(ggthemes)
+* library(shiny)
+* library(shinythemes)
+* library(dplyr)
+* library(tidyverse)
+* library(readr)
+
+</details>
+
+### **Minor Project 2: Do Children Have Bad Taste ** 
+**Summary**: Explored the differences in tv show ratings across target audience age groups. 
+
+<details>
+<summary><b>See Libaries Used:</b></summary>
+ 
+* numpy
+* pandas
+* matplotlib
+* seaborn
+
+</details>
 
 
 ## Contact Me
