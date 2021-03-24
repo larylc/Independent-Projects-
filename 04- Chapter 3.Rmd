@@ -225,7 +225,7 @@ The water and fire models did not change much in terms of significance. In the d
 
 At this point in the analysis, if we really wanted to assess how well our logistic models predicted typing, we would create confusion matrices to assess each model's "accuracy" and "recall". Accuracy would be a decent measure of our models because it measures how well a model classifies both the specified type and the non-specified types. Recall would be another good metric to measure because it calculates how many of the actual specified type were correctly guessed. However, because our goal for this task was to find out if typing was correlated with specific stats, this kind of analysis lies outside of the scope of what we were planning to do.
 
-But we can still do a cursory validation analysis for one of our models for fun: 
+But we can still do a cursory validation analysis for one of our models for fun:
 ```{r message=FALSE, warning=FALSE}
 pred_log_odds_s<- predict(fit_predict_steel1)
 pred_prob_s<- 1/(1 + exp(-pred_log_odds_s))
