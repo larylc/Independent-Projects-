@@ -76,7 +76,7 @@ prob_mythical<- predict(predict_mythical_fit2, predict_mythical, type = "respons
 table(Predicted_Value = prob_mythical > 0.5 , Actual_Value = predict_mythical$status )
 ```
 
-The legendary model's accuracy was 96.7 percent. The sub-legendary model's accuracy is 95.5 percent, and the mythical model's accuracy was equal to 97.2 percent. However, we, once again, are finding that the sensitivities of the models are not great. The sensitivities for the legendary, sub-legendary, and mythical models are 33%, 0%, and 3.5 percent, respectively. Like before, these models seem to be too conservative because they are better at classifying the non-specified categories of Pokemon rather than the one specified category we are looking for. This means that the 0.5 threshold values need to be decreased to allow for better classification to occur. But once again, this is beyond this task's goal.
+The legendary model's accuracy was 96.7 percent. The sub-legendary model's accuracy is 95.5 percent, and the mythical model's accuracy was equal to 97.2 percent. However, we, once again, are finding that the recall of the models are not great. The recall for the legendary, sub-legendary, and mythical models are 33%, 0%, and 3.5 percent, respectively. Like before, these models seem to be too conservative because they are better at classifying the non-specified categories of Pokemon rather than the one specified category we are looking for. This means that the 0.5 threshold values need to be decreased to allow for better classification to occur. But once again, this is beyond this task's goal.
 
 Here are some plots so we can visualize all of this:
 ```{r message=FALSE, warning=FALSE}
