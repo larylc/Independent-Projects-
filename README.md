@@ -131,7 +131,7 @@ Following the link above will lead you to my project website. There, I will be p
 </details>
 
 ---
-### Major Project 3: Features of One Gender Schools
+### Project 3: Features of One Gender Schools
 **Summary**: This is an exploratory analysis of differences between single-sex colleges and co-ed colleges.
 
 
