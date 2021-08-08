@@ -1,0 +1,1108 @@
+---
+title: "Features of One Gender Schools"
+author: "Cedric Lary"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: 
+  rmdformats::downcute:
+    code_folding: hide
+    df_print: paged
+    toc_depth: 3
+---
+
+<style>
+
+h1, h2, h3, h4 {
+  color: #1298d0;
+  font-family: Georgia
+}
+
+body {
+  font-family: Georgia
+}
+
+
+</style>
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(fig.align = 'center', echo = TRUE)
+```
+
+
+
+## Introduction
+
+[US News](https://www.usnews.com/education/best-colleges/articles/how-many-universities-are-in-the-us-and-why-that-number-is-changing) reports that the United States has nearly 4000 degree-granting institutions as of 2020. In addition to degree-granting colleges and universities, there are hundreds of other post-secondary schools that provide students with certifications and professional licenses. With such a wide variety of post-secondary options, students have to pay close attention to the various distinctions that make these schools unique. Although the [US Department of Education](https://collegescorecard.ed.gov/data/) collects data on hundreds of institutional attributes, students only really consider a few of these variables. Some of the common considerations are ranking, size, diversity, student life, and program success. 
+
+One variable that stands out is whether or not a school is a single-sex institution. Given the [history of mixed-sex education](https://en.wikipedia.org/wiki/Mixed-sex_education) and the progression of women's rights in the United States, single-sex  education might seem like a relic of the past, but there are still a few dozen institutions that are committed to keeping genders separate. 
+
+With this in mind, this project will try to examine some of the key differences between co-ed and single-sex colleges. We will be using the US Department of Education's [college-scorecard data set](https://collegescorecard.ed.gov/data/), which contains all of the possible institution-level data one could ask for. 
+
+
+## Data Preparation 
+
+Here, let's unpack the `data set` by selecting relevant variables. 
+```{r warning=FALSE, message=FALSE}
+setwd("C:/Users/laryl/Desktop/Data Sets/College Score Card")
+
+library(data.table) 
+college_scorecard_raw <- fread("Most-Recent-Cohorts-All-Data-Elements.csv", 
+                                       select = c('INSTNM', 'MENONLY', 'WOMENONLY','CURROPER', # Institutional Attributes
+                                                  'LATITUDE','LONGITUDE', # Geography 
+                                                  
+                                                  'HBCU','PBI', 'ANNHI', 'TRIBAL', 'AANAPII',
+                                                  'HSI','NANTI','RELAFFIL', # Categorical Demographics 
+                                                  
+                                                  'UGDS', 'UGDS_WHITE', 'UGDS_BLACK', 'UGDS_HISP','UGDS_ASIAN',
+                                                  'UGDS_AIAN','UGDS_NHPI','UGDS_2MOR','UGDS_NRA','UGDS_UNKN', # Numerical Demographics
+                                                  
+                                                  'ADM_RATE', 'ADM_RATE_ALL',  'SATVRMID', 'SATMTMID',
+                                                  'SATWRMID', 'ACTCMMID', 'ACTENMID', 
+                                                  'ACTMTMID', 'ACTWRMID', 'SAT_AVG', 'SAT_AVG_ALL', # Admission Statistics 
+                                                  
+                                                  'PCIP01', 'PCIP03', 'PCIP04', 'PCIP05', 'PCIP09', 'PCIP10', 'PCIP11', 'PCIP12', 
+                                                  'PCIP13', 'PCIP14', 'PCIP15', 'PCIP16', 'PCIP19', 'PCIP22',
+                                                  'PCIP23', 'PCIP24', 'PCIP25', 'PCIP26', 'PCIP27', 
+                                                  'PCIP29', 'PCIP30', 'PCIP31', 'PCIP38', 'PCIP39', 
+                                                  'PCIP40', 'PCIP41', 'PCIP42', 'PCIP43','PCIP44', 'PCIP45', 'PCIP46', 'PCIP47', 'PCIP48',                                                      'PCIP49', 'PCIP50', 'PCIP51', 'PCIP52', 'PCIP54', # Percentage of Majors
+                                                  
+                                                  'MN_EARN_WNE_P10', 'MD_EARN_WNE_P10', # Earnings After College
+                                                  
+                                                  'AVGFACSAL', 'PFTFAC', # Faculty Employment 
+                                                  
+                                                  'C150_4','C150_4_WHITE', 'C150_4_BLACK', 'C150_4_HISP',
+                                                  'C150_4_ASIAN', 'C150_4_AIAN', 'C150_4_NHPI',
+                                                  'C150_4_2MOR', 'C150_4_NRA', 'C150_4_UNKN', # Completion 
+                                                  
+                                                  'RET_FT4_POOLED', #Retention
+                                                  'MEDIAN_HH_INC', 'LN_MEDIAN_HH_INC'))# Household Income
+
+str(college_scorecard_raw)
+```
+
+Clearly, 90 variables is a lot to consider. But as we move through this analysis, some of the variables will be eliminated or fused with other variables. For now, our concern is improving the data type of these attributes. For whatever reason, the `fread function` unpacked many of the numeric variables in the data set as character variables. So our first step will be to change the attributes to their appropriate types. 
+
+```{r warning = FALSE}
+college_scorecard_clean <- college_scorecard_raw[, c(5:6, 15:90) :=lapply(.SD, as.numeric), .SDcols= c(5:6, 15:90 )]
+
+str(college_scorecard_clean)
+
+```
+
+Our current data set has two columns that tell us the sex-specific status of our institutions ("MENONLY" and "WOMENONLY). Let's take a look at what values these variables contain:   
+```{r}
+
+table(college_scorecard_clean$MENONLY)
+table(college_scorecard_clean$WOMENONLY)
+
+```
+Although this is great information and we can see which colleges are male-only and female-only, there are a few problems. First, there are null values that are not beneficial to us. The second problem is the fact that we don't need the variables to be separate from each other. That separation is going to make creating graphs later slightly more challenging. Lastly, there is no easy way to view co-ed colleges, as both columns only tell us whether a college is for a specific sex or not. This means there isn't a clear way to quickly distinguish co-ed colleges from the other sex-specific colleges when using one of the columns. 
+
+Thus, our next block will eliminate the null values, fuse the MENONLY and WOMENONLY columns, and create a new category called "CO-ED." We will also make sure the college is operational. 
+
+```{r message=FALSE, warning=FALSE}
+# Load data manipulation packages
+library(dplyr)
+library(tidyr)
+
+# Get rid of nulls in both columns
+college_scorecard_null_less <- college_scorecard_clean[MENONLY %in% c(0,1)][WOMENONLY %in% c(0,1)] 
+
+#Rename values so that instead of 1 = sex-specific and 0 = the other options, we have it clearly tell us that it the sex or other options
+college_scorecard_rewritten<- college_scorecard_null_less %>%  
+  mutate(MENONLY = if_else(MENONLY == 0, 'NA', 'MENONLY')) %>% 
+  mutate(WOMENONLY = if_else(WOMENONLY == 0, 'NA', 'WOMENONLY'))
+
+# Fuse columns
+college_scorecard_fused <-  unite(college_scorecard_rewritten, MENONLY, WOMENONLY, col = "SEX_SPECIFIC", sep = "_")
+
+
+# Rewrite categories so that we have are three distinct categories 
+college_scorecard_prepped <- college_scorecard_fused %>%
+  mutate(SEX_SPECIFIC = dplyr::recode(SEX_SPECIFIC,
+                            'MENONLY_NA' = 'MEN ONLY', 
+                            'NA_NA' = 'CO-ED', 
+                            'NA_WOMENONLY'= 'WOMEN ONLY' ))
+
+
+# Filter for colleges that are operational 
+college_scorecard_completely_prepped <- college_scorecard_prepped[CURROPER == "1"]
+
+table(college_scorecard_completely_prepped[["SEX_SPECIFIC"]])
+
+
+
+```
+
+
+As we can see, there are 3 distinct categories in a single variable. We can now begin to get some insights from the data.
+
+
+## At a Glance
+
+Before going any further, we should get a good glance at what our data visually looks like. This may reveal information that might not be as apparent when looking at raw statistics. I think this is the perfect opportunity to create a map that shows the location of the colleges filtered by sex-specificity. 
+
+```{r}
+#Create three data sets, one for each sex-specific category
+Coed<- college_scorecard_prepped[SEX_SPECIFIC == "CO-ED"]
+Men_only <- college_scorecard_prepped[SEX_SPECIFIC == "MEN ONLY"]
+Women_only <- college_scorecard_prepped[SEX_SPECIFIC == "WOMEN ONLY"]
+
+```
+
+
+Let's create the map:
+```{r message=FALSE, warning=FALSE}
+#Load map packages
+library(leaflet)
+library(leaflet.extras)
+library(htmltools)
+
+#Create Map 
+map <- leaflet() %>%
+  addProviderTiles("CartoDB") %>%
+  addCircleMarkers(data = Men_only,
+                   radius = 1, 
+                   color = "#1298d0", 
+                   label = ~htmlEscape(Men_only[["INSTNM"]]),
+                   group = "MEN ONLY") %>%
+    addCircleMarkers(data = Women_only,
+                   radius = 1, 
+                   color = "#f1cb35", 
+                   label = ~htmlEscape(Women_only[["INSTNM"]]),
+                   group = "WOMEN ONLY") %>%
+    addCircleMarkers(data = Coed,
+                   radius = 1, 
+                   color = "#cc8834", 
+                   label = ~htmlEscape(Coed[["INSTNM"]]),
+                   group = "CO-ED") %>%
+  addLayersControl(overlayGroups = c("MEN ONLY", "WOMEN ONLY", "CO-ED"))%>%
+  setView(lat = 39.8282, lng = -98.5795, zoom = 4)
+
+#Display Map
+map
+
+```
+This map displays quite a bit of information. First, we can see the difference in the number of colleges there are in each of the categories. Additionally, we can see that most of the colleges that are sex-specific are concentrated along the eastern side of the United States. Moreover, as you hover over the male-only colleges you can see that many of them are religiously affiliated. 
+
+
+
+
+## Key Variables 
+
+Now that we produced a clear picture of how the data looks, have some interesting information about what colleges are sex-specific, and figured out where they are located, we can begin to analyze some of the variables that might distinguish the sex-specific categories.  
+
+
+
+The variables we will be focusing on are: 
+
+- Demographics (Categorically and Numerically)
+- Admission Statistics 
+- Percentage of Degrees Awarded in Academic Divisions 
+- Completion Rates by Ethnicities 
+- Retention Rates
+- Faculty Employment Information
+- Household Income 
+
+
+### Demographics 
+
+Starting with one of the categorical demographic variables, there are 8 columns of interest: 
+
+                                                 
+- HBCU (Flag for Historically Black College or University)
+- PBI (Flag for predominantly black institution)
+- ANNHI (Flag for Alaska Native Hawaiian serving institution)
+- TRIBAL (Flag for tribal college and university)
+- AANAPII (Flag for Asian American, Native American, and Pacific Islander-serving institution)
+- HSI (Flag for Hispanic-serving institution)
+- NANTI  (Flag for Native American non-tribal institution)
+- RELAFFIL (Religious affiliation of the institution)
+
+
+
+Let's take a look it look at what values one of these columns has.
+```{r}
+table(college_scorecard_completely_prepped$PBI)
+```
+
+Like the sex-specific variables above, we have null values which don't give us useful information. Moreover, because there are so many categories we don't want to create a chart for each one. Instead, we will be fusing the first 7 variables that are flagged for particular ethnicities, just like we did for the sex-specific categories.
+
+Additionally, because the religious column has dozens of categories, creating a chart for all of them just does not make sense. Instead, we are going to collapse all of the categories into religious and non-religious. 
+```{r}
+# Data Manipulations 
+library(forcats) 
+
+
+# Change values so that they are strings 
+college_scorecard_cat_demographics_rw <- college_scorecard_completely_prepped %>%  
+  mutate(HBCU = dplyr::recode(HBCU,
+                             '0' = 'Not HBCU', 
+                             '1' = 'HBCU', 
+                             'NULL'= 'Not HBCU' )) %>%
+  mutate(PBI = dplyr::recode(PBI,
+                             '0' = 'Not PBI', 
+                             '1' = 'PBI', 
+                             'NULL'= 'Not PBI' )) %>%
+  mutate(ANNHI = dplyr::recode(ANNHI,
+                             '0' = 'Not ANNHI', 
+                             '1' = 'ANNHI', 
+                             'NULL'= 'Not ANNHI' )) %>%
+  mutate(TRIBAL = dplyr::recode(TRIBAL,
+                             '0' = 'Not TRIBAL', 
+                             '1' = 'TRIBAL', 
+                             'NULL'= 'Not TRIBAL' )) %>%
+  mutate(AANAPII = dplyr::recode(AANAPII,
+                             '0' = 'Not AANAPII', 
+                             '1' = 'AANAPII', 
+                             'NULL'= 'Not AANAPII' )) %>%
+  mutate(HSI = dplyr::recode(HSI,
+                             '0' = 'Not HSI', 
+                             '1' = 'HSI', 
+                             'NULL'= 'Not HSI' )) %>%
+  mutate(NANTI = dplyr::recode(NANTI,
+                             '0' = 'Not NANTI', 
+                             '1' = 'NANTI', 
+                             'NULL'= 'Not NANTI' )) %>%  
+# Collapse categories so that we have No Affiliation and  Religious Affiliation 
+  mutate(RELAFFIL = fct_other(RELAFFIL,
+                              keep = "NULL"))%>%
+  mutate(RELAFFIL = dplyr::recode(RELAFFIL, 
+                           "NULL" = "No Affiliation", 
+                           "Other" = "Religious Affiliation"))
+
+# Fuse categories into one variable 
+college_scorecard_cat_demographics_fused <-  unite(college_scorecard_cat_demographics_rw, HBCU, PBI, ANNHI, TRIBAL, AANAPII,HSI, NANTI, col = "DEMOGRAPHICS", sep = "/")
+
+table(college_scorecard_cat_demographics_fused$DEMOGRAPHICS)
+
+```
+
+
+As we can see from the various categories that were created, there are many schools that fit into multiple categories. Again having many categories does not give us a clear picture. The solution to this problem is to collapse the categories that have multiple flags into a single one called "Multiple."
+
+```{r}
+#Clean up categories
+college_scorecard_cat_demographics_complete <-  college_scorecard_cat_demographics_fused %>%
+  mutate(DEMOGRAPHICS = dplyr::recode(DEMOGRAPHICS,
+                            'HBCU/Not PBI/Not ANNHI/Not TRIBAL/Not AANAPII/Not HSI/Not NANTI' = 'HBCU', 
+                            'Not HBCU/Not PBI/ANNHI/Not TRIBAL/Not AANAPII/HSI/NANTI' = 'ANNHI/HSI/NANTI',
+                            'Not HBCU/Not PBI/ANNHI/Not TRIBAL/Not AANAPII/Not HSI/Not NANTI' = 'ANNHI',
+                            'Not HBCU/Not PBI/ANNHI/TRIBAL/Not AANAPII/Not HSI/Not NANTI' = 'ANNHI/TRIBAL',
+                            'Not HBCU/Not PBI/Not ANNHI/Not TRIBAL/AANAPII/Not HSI/Not NANTI' = 'AANAPII',
+                            'Not HBCU/Not PBI/Not ANNHI/Not TRIBAL/Not AANAPII/HSI/Not NANTI' = 'HSI',
+                            'Not HBCU/Not PBI/Not ANNHI/Not TRIBAL/Not AANAPII/Not HSI/Not NANTI' = 'None',
+                            'Not HBCU/PBI/Not ANNHI/Not TRIBAL/AANAPII/HSI/Not NANTI'= 'PBI/AANAPII/HSI',
+                            'Not HBCU/PBI/Not ANNHI/Not TRIBAL/Not AANAPII/HSI/Not NANTI' = 'PBI/HSI', 
+                            
+                            'Not HBCU/Not PBI/ANNHI/Not TRIBAL/AANAPII/Not HSI/Not NANTI' = 'ANNHI/AANAPII',
+                            'Not HBCU/Not PBI/ANNHI/Not TRIBAL/Not AANAPII/Not HSI/NANTI' = 'ANNHI/NANTI',
+                            'Not HBCU/Not PBI/ANNHI/TRIBAL/AANAPII/Not HSI/Not NANTI' = 'ANNHI/TRIBAL/AANAPII',
+                            'Not HBCU/Not PBI/Not ANNHI/Not TRIBAL/AANAPII/HSI/Not NANTI' = 'AANAPII/HSI',
+                            'Not HBCU/Not PBI/Not ANNHI/Not TRIBAL/Not AANAPII/HSI/NANTI'= 'HSI/NANTI',
+                            'Not HBCU/Not PBI/Not ANNHI/Not TRIBAL/Not AANAPII/Not HSI/NANTI' = 'NANTI',
+                            'Not HBCU/Not PBI/Not ANNHI/TRIBAL/Not AANAPII/Not HSI/Not NANTI' = 'TRIBAL',
+                            'Not HBCU/PBI/Not ANNHI/Not TRIBAL/AANAPII/Not HSI/Not NANTI' = 'PBI/AANAPII',
+                            'Not HBCU/PBI/Not ANNHI/Not TRIBAL/Not AANAPII/Not HSI/Not NANTI' = 'PBI')) %>%
+  # Collapse all multi-categories into a single one
+  mutate(DEMOGRAPHICS = fct_collapse(DEMOGRAPHICS, 
+                                     "Multiple" = c( 'ANNHI/HSI/NANTI', 'ANNHI/TRIBAL', 'PBI/AANAPII/HSI',
+                                                     'PBI/HSI', 'ANNHI/AANAPII', 'ANNHI/NANTI',
+                                                     'ANNHI/TRIBAL/AANAPII', 'AANAPII/HSI', 
+                                                     'HSI/NANTI', 'PBI/AANAPII'
+                                                  )))
+
+table(college_scorecard_cat_demographics_complete$DEMOGRAPHICS)
+
+```
+
+Now the 18 categories have been reduced to 10, we can now proceed to the next phase which is to produce a plot that will test if there is a relationship between sex-specificity and demographics. One of the options we can use to plot a categorical variable against another categorical variable is a mosaic plot. 
+
+```{r  message=FALSE, warning=FALSE}
+
+library(vcd)
+tbl_status<- xtabs(~ DEMOGRAPHICS + SEX_SPECIFIC, college_scorecard_cat_demographics_complete)
+ftable(tbl_status)
+
+mosaic(tbl_status,
+       labeling_args = list(rot_labels = c(top = 90, left = 0),
+                            gp_labels=gpar(fontsize= 9), 
+ offset_varnames = c(top = 2, left = 2), offset_labels = c(left = 0.5, top =2)), 
+ spacing = spacing_increase(start = unit(0.45, "lines"), rate = 1), 
+ margins = c(top = 0.25, bottom = 0.5),
+ gp = shading_hcl,
+ legend = T)
+
+```
+In this plot, each rectangle represents the intersection of 1 category from one variable and another category from another variable. For example, the largest rectangle represents the number of colleges that are both co-ed and have no ethnic flag. The larger the area of the rectangle, the more observations are in it. If there is no intersection between the variable categories, a circle with a line is used. 
+
+The Pearson residual colors, essentially, tell us whether we have more or fewer colleges than expected if we were to assume that demographics and sex-specificity are independent (as in there is no relationship). The presence of blue and red tells us that the variables are not independent meaning they have some kind of relationship. As we can clearly see in the plot, all of the rectangles are grey, which indicates that the two variables are independent.  
+
+
+
+Now, if we take a look at religious affiliation and plot it against sex-specificity, we might get something different. 
+```{r}
+
+tbl_status2<- xtabs(~ RELAFFIL +SEX_SPECIFIC, college_scorecard_cat_demographics_complete)
+ftable(tbl_status2)
+
+mosaic(tbl_status2,
+       labeling_args = list(rot_labels = c(top = 90, left = 0),
+                            gp_labels=gpar(fontsize= 8), 
+ offset_varnames = c(top = 2, left = 4), offset_labels = c(left = 3, top =2)), 
+ spacing = spacing_increase(start = unit(0.45, "lines"), rate = 1), 
+ margins = c(top = 0.25, bottom = 0.5),
+ gp = shading_hcl,
+ legend = T)
+```
+Now, we have some color! It looks like for men-only and women-only colleges, there are more values than expected when they are religiously affiliated. This matches some of the observations we made when we first looked at the map.
+
+
+
+Let's take a less confusing look by plotting the relationship between these two variables using an interactive stacked bar chart. 
+
+```{r message=FALSE, warning=FALSE}
+library(extrafont)
+library(plotly)
+plot_data <- college_scorecard_cat_demographics_complete %>%
+  filter(SEX_SPECIFIC != "CO-ED")  %>%
+  count(RELAFFIL, SEX_SPECIFIC) 
+
+
+
+
+  plot_ly(x = plot_data[['SEX_SPECIFIC']], y = plot_data[['n']], color = plot_data[['RELAFFIL']], colors = c("#f1cb35",
+"#cc8834")) %>%
+  add_bars() %>%
+  layout(barmode = "stack",
+         font = list(family = "Georgia"))
+```
+From this chart, we can clearly see that around half of both men-only and women-only colleges are religious. 
+
+To continue our examination of the relationship between sex-specificity and demographics, we will be using a logistic regression framework. Specifically, we want to answer the question "does the proportion of ethnic groups help predict sex-specificity?" 
+
+From our data set there are a number of numeric demographic variables to examine:
+
+- UGDS_WHITE (proportion of students that are white)
+- UGDS_BLACK (proportion of students that are black) 
+- UGDS_HISP (proportion of students that are Hispanic )
+- UGDS_ASIAN (proportion of students that are Asian )
+- UGDS_AIAN (proportion of students that are American Indian/ Alaskan natives)
+- UGDS_NHPI (proportion of students that Native Hawaiian/Pacific Islander)
+- UGDS_2MOR (proportion of students that are 2 or more ethnicities)
+- UGDS_NRA (proportion of students that are non-resident aliens [ I may refer to them as international]) 
+- UGDS_UNKN (proportion of students with unknown race)
+
+
+
+With so many variables to consider, the easiest way to investigate their relationship with sex-specificity is to create a logistic regression summary table and see which variables have the most significant relationships. Because we need the variables to be binary, we will be using one of the data sets from earlier on in our project.  There are a few clean-up steps like making sure the MENONLY and WOMENONLY columns are numeric and have no null values. 
+
+
+```{r message=FALSE, warning=FALSE}
+#Make character variables to be numeric 
+college_scorecard_full_num_demographics<- college_scorecard_clean[, c(2:3) :=lapply(.SD, as.numeric), .SDcols= c(2:3)]
+
+college_scorecard_dem_glance<- college_scorecard_full_num_demographics %>%
+  select(UGDS, UGDS_WHITE, UGDS_BLACK, UGDS_HISP, UGDS_ASIAN,
+          UGDS_AIAN, UGDS_NHPI, UGDS_2MOR, UGDS_NRA, UGDS_UNKN)
+
+# Visualize Missing Values
+library(visdat)
+vis_miss(college_scorecard_dem_glance)+
+  theme(legend.position = "none",
+        text = element_text(family = "Georgia"), 
+        plot.title = element_text(size = 15, margin(b = 10), hjust = 0.5, family = "Georgia"))
+```
+
+Now our goal is to get rid of the missing rows so that we can run our logistic regression models. 
+```{r message=FALSE, warning=FALSE}
+
+college_scorecard_full_num_demographics2 <- college_scorecard_full_num_demographics %>%
+  filter(UGDS != is.na(UGDS))
+
+
+college_scorecard_dem_glance2<- college_scorecard_full_num_demographics2 %>%
+  select(UGDS, UGDS_WHITE, UGDS_BLACK, UGDS_HISP, UGDS_ASIAN,
+          UGDS_AIAN, UGDS_NHPI, UGDS_2MOR, UGDS_NRA, UGDS_UNKN)
+
+vis_miss(college_scorecard_dem_glance2)+
+  theme(legend.position = "none",
+        text = element_text(family = "Georgia"), 
+        plot.title = element_text(size = 15, margin(b = 10), hjust = 0.5, family = "Georgia"))
+
+#Exclude non-operational colleges 
+college_scorecard_full_num_demographics_final<- college_scorecard_full_num_demographics2[CURROPER == "1"]
+```
+
+First, we will create a table that shows the relationship between each explanatory numeric demographic variable and the MENONLY response variable.
+```{r message=FALSE, warning=FALSE}
+library(broom)
+#Create logistic regression model for predicting male-only colleges 
+demographics_mod_male1 <- tidy(glm(MENONLY ~  UGDS_WHITE,  family= binomial,  data = college_scorecard_full_num_demographics_final))
+
+demographics_mod_male2 <- tidy(glm(MENONLY ~  UGDS_BLACK, family= binomial,  data = college_scorecard_full_num_demographics_final))
+
+
+demographics_mod_male3 <- tidy(glm(MENONLY ~   UGDS_HISP, family= binomial,  data = college_scorecard_full_num_demographics_final))
+demographics_mod_male4 <- tidy(glm(MENONLY ~   UGDS_ASIAN, family= binomial,  data = college_scorecard_full_num_demographics_final))
+
+demographics_mod_male5 <- tidy(glm(MENONLY ~   UGDS_AIAN,  family= binomial,  data = college_scorecard_full_num_demographics_final))
+
+demographics_mod_male6 <- tidy(glm(MENONLY ~  UGDS_NHPI,  family= binomial,  data = college_scorecard_full_num_demographics_final))
+
+demographics_mod_male7 <- tidy(glm(MENONLY ~  UGDS_2MOR,  family= binomial,  data = college_scorecard_full_num_demographics_final))
+
+demographics_mod_male8 <- tidy(glm(MENONLY ~  UGDS_NRA,  family= binomial,  data = college_scorecard_full_num_demographics_final))
+
+demographics_mod_male9 <- tidy(glm(MENONLY ~  UGDS_UNKN,  family= binomial,  data = college_scorecard_full_num_demographics_final))
+
+demographics_mod_male_main<-bind_rows(demographics_mod_male1, demographics_mod_male2, demographics_mod_male3,
+          demographics_mod_male4, demographics_mod_male5, demographics_mod_male6,
+          demographics_mod_male7, demographics_mod_male8, demographics_mod_male9)
+
+demographics_mod_male_main
+
+```
+
+Because we cannot visualize a logistic regression that is more than 4 dimensions (3 explanatory variables and 1 response variable) we need to select the explanatory variables that are the most significant for our final model. There is also an extra incentive to get rid of some of these demographic variables because they are closely related and could create numerical instability because of collinearity.  From this table, we can see that most of the explanatory variables independently have significant relationships with the MENONLY variable. The NRA variable and NHPI variables seem to have the least significant relationships with the MENONLY variable.
+
+Now we will create a multivariate logistic model that takes into account all of the remaining variables to see if we can eliminate more explanatory variables. 
+
+```{r message=FALSE, warning=FALSE}
+demographics_mod_male_main2 <- glm(MENONLY ~   UGDS_WHITE +  UGDS_BLACK + UGDS_HISP + UGDS_ASIAN + 
+UGDS_AIAN +  UGDS_2MOR +  UGDS_UNKN, family= binomial,  data = college_scorecard_full_num_demographics_final)
+
+summary(demographics_mod_male_main2)
+
+```
+
+Here, some of these variables seem to have very large standard errors. The larger the standard error, the less accurate the statistic, meaning the samples may not closely represent the population. A large standard error could be caused by having a small sample size, a large standard deviation, or a combination of both. To keep things simple, we will be removing the AIAN, 2MOR, and UNKN variables too because of their very large standard errors.
+
+
+
+```{r message=FALSE, warning=FALSE}
+demographics_mod_male3 <- glm(MENONLY ~    UGDS_WHITE +  UGDS_BLACK + UGDS_HISP  +UGDS_ASIAN, family= binomial,  data = college_scorecard_full_num_demographics_final)
+
+summary(demographics_mod_male3)
+
+```
+Now, our table shows UGDS_ASIAN is not only statistically insignificant but also has a large standard error compared to the other three variables. Additionally, UGDS_HISP also appears to be statistically insignificant. With this in mind, our final model will only incorporate two variables (UGDS_WHITE and UGDS_BLACK). 
+
+But before we do the finalizing. We should perform a couple of steps. First, we should check if there is collinearity between our two variables so that it does not create instability in our model.
+```{r warning=FALSE}
+
+#Collinearity Check 
+college_scorecard_full_num_demographics_final %>%
+  plot_ly(y = ~UGDS_BLACK, x= ~UGDS_WHITE, colors = "#44668b", text = ~INSTNM) %>%
+  add_markers()
+
+#Correlation Check 
+cor(college_scorecard_full_num_demographics_final$UGDS_WHITE, college_scorecard_full_num_demographics_final$UGDS_BLACK)
+```
+
+So it looks like the variables are very correlated but not so much that they create instability. 
+
+Second, we should compare our model (with proportion of black and white students) to a model without black students so that we can see if the standard errors drastically change. 
+
+We are just going to rename the UGDS_BLACK variables so that our final plot is easier to to read.
+```{r}
+# Rename variables 
+college_scorecard_full_num_demographics_final2 <- college_scorecard_full_num_demographics_final %>%
+  rename( Black_Students = UGDS_BLACK)
+  
+  
+#  Final Male Models
+demographics_mod_male_final <- glm(MENONLY ~    UGDS_WHITE + Black_Students, family= binomial,  
+                                   data = college_scorecard_full_num_demographics_final2) # White and Black Students 
+
+
+demographics_mod_male_final2 <- glm(MENONLY ~    UGDS_WHITE,  family= binomial,  
+                                   data = college_scorecard_full_num_demographics_final2) # White Students Only
+summary(demographics_mod_male_final)
+summary(demographics_mod_male_final2)
+
+```
+The standard errors between models don't differ much, so we are free to use our first one (with both black and white students).
+
+
+Our final model shows that there is a significant relationship between being a men-only institution and particular proportions of certain ethnicities. Specifically, we can see that there is a positive relationship between men-only institutions and white students as well as a negative relationship between men-only institutions and black students. This finding does not seem to surprising because our map above showed that many of these institutions were seminary schools, which one can safely assume are mostly white men. But for the sake of transparency lets take a quick look at a table of these institutions: 
+
+```{r}
+library(knitr)
+Men_only_glance <- Men_only %>% 
+  select(INSTNM, UGDS_WHITE, UGDS_BLACK)
+
+kable(Men_only_glance,  col.names = c('Name',  'Prop. White', 'Prop. Black'), align = 'cc', caption = "Table 1.1 The Proportion of White and Black Students Per Institution")
+
+```
+
+
+For women-only colleges, we will follow a similar procedure. 
+```{r message=FALSE, warning=FALSE}
+#Create logistic regression model for predicting female-only colleges 
+demographics_mod_female1 <- tidy(glm(WOMENONLY ~  UGDS_WHITE,  family= binomial,  data = college_scorecard_full_num_demographics_final))
+
+demographics_mod_female2 <- tidy(glm(WOMENONLY ~  UGDS_BLACK, family= binomial,  data = college_scorecard_full_num_demographics_final))
+
+
+demographics_mod_female3 <- tidy(glm(WOMENONLY ~   UGDS_HISP, family= binomial,  data = college_scorecard_full_num_demographics_final))
+demographics_mod_female4 <- tidy(glm(WOMENONLY ~   UGDS_ASIAN, family= binomial,  data = college_scorecard_full_num_demographics_final))
+
+demographics_mod_female5 <- tidy(glm(WOMENONLY ~   UGDS_AIAN,  family= binomial,  data = college_scorecard_full_num_demographics_final))
+
+demographics_mod_female6 <- tidy(glm(WOMENONLY ~  UGDS_NHPI,  family= binomial,  data = college_scorecard_full_num_demographics_final))
+
+demographics_mod_female7 <- tidy(glm(WOMENONLY ~  UGDS_2MOR,  family= binomial,  data = college_scorecard_full_num_demographics_final))
+
+demographics_mod_female8 <- tidy(glm(WOMENONLY ~  UGDS_NRA,  family= binomial,  data = college_scorecard_full_num_demographics_final))
+
+demographics_mod_female9 <- tidy(glm(WOMENONLY ~  UGDS_UNKN,  family= binomial,  data = college_scorecard_full_num_demographics_final))
+
+demographics_mod_female_main<-bind_rows(demographics_mod_female1, demographics_mod_female2, demographics_mod_female3,
+          demographics_mod_female4, demographics_mod_female5, demographics_mod_female6,
+          demographics_mod_female7, demographics_mod_female8, demographics_mod_female9)
+
+demographics_mod_female_main
+
+
+```
+
+Based on some of the standard errors in this table. We will be getting rid of UGDS_AIAN and UGDS_NHPI. Additionally, there appear to be only two variables that are significant (UGDS_NRA, UGDS_2MOR).
+
+```{r}
+demographics_mod_female_main <- glm(WOMENONLY ~  UGDS_2MOR + UGDS_NRA, family= binomial,  data = college_scorecard_full_num_demographics_final)
+
+summary(demographics_mod_female_main)
+
+
+```
+Because UGDS_2MOR did not reach our p-value threshold we have to exclude it from the final model. 
+```{r}
+demographics_mod_female_final <- glm(WOMENONLY ~ UGDS_NRA, family= binomial,  data = college_scorecard_full_num_demographics_final)
+
+summary(demographics_mod_female_final)
+
+
+```
+Based on this table, we can conclude that there is a significant relationship between proportion of nonresident alien students and women-only colleges. This finding was unexpected. So I think a look at what is going on would be helpful: 
+
+```{r message=FALSE, warning=FALSE}
+library(knitr)
+Women_only_glance <- Women_only %>% 
+  select(INSTNM, UGDS_NRA)
+
+
+kable(Women_only_glance, col.names = c('Name',  'Prop. Nonresident Aliens'), align = 'cc', caption = "Table 1.2 The Proportion of Nonresident Students Per Institution")
+
+nra_avges <- college_scorecard_completely_prepped %>% 
+  select(SEX_SPECIFIC, UGDS_NRA) %>% 
+  group_by(SEX_SPECIFIC) %>% 
+  summarize( UGDS_NRA_AVG= mean(UGDS_NRA, na.rm = TRUE))
+
+kable(nra_avges, col.names = c('Institution Type',  'Mean Proportion Nonresident Aliens'), align = 'cc', caption = "Table 1.3 The Average Proportion of Nonresident Students Per Type of Institution")
+
+```
+
+
+Although an average of 4.9 % of the student body being international does not seem like much, when compared to the other types of schools, it looks like women colleges have more international students. 
+
+```{r message=FALSE, warning=FALSE}
+
+
+library(visreg)
+visreg(demographics_mod_male_final, "UGDS_WHITE", by = "Black_Students",
+       rug = FALSE ,
+       band= FALSE,
+       xlab = "Proportion of White Students", 
+       ylab = "Probabiltiy of Men-Only College",
+       line= list(col ="#1298d0"),
+       scale="response",
+       gg = TRUE)+ 
+  theme_bw()+ 
+  labs(title = "Logistic Regression Prediction of Being Men-Only College")+
+  theme(legend.position = "none",
+        text = element_text(family = "Georgia"), 
+        plot.title = element_text(size = 15, margin(b = 10), hjust = 0.5, family = "Georgia"), 
+        strip.background = element_rect(
+        color="Black", fill="#1298d0",  linetype="solid"))
+
+
+visreg(demographics_mod_female_final, "UGDS_NRA", 
+       rug = FALSE ,
+       band= FALSE,
+       xlab = "Proportion of Nonresident Aliens", 
+       ylab = "Probabiltiy of Being Women-Only College",
+       line= list(col ="#f1cb35"),
+       scale="response",
+       gg = TRUE)+ 
+  theme_bw()+ 
+  labs(title = "Logistic Regression Prediction of Women-Only College")+
+  theme(legend.position = "none",
+        text = element_text(family = "Georgia"), 
+        plot.title = element_text(size = 15, margin(b = 10), hjust = 0.5, family = "Georgia") )
+
+```
+As we can see from the graphs, the relationships between these demographic variables and sex-specificity is still fairly small despite the statistical significance of the models. Testing the accuracy or recall of the models does not seem appropriate given how weak the relationships here are. 
+
+
+
+
+### Admission Statistics
+
+Our next step is to try to answer, "how do admission standards differ across the sex-specific colleges?"
+
+Here are our explanatory variables:
+
+- ADM_RATE (Admission Rate)
+- SATVRMID (SAT Verbal Median)
+- SATMTMID (SAT Math Median)
+- SATWRMID (SAT Writing Median)
+- SAT_AVG (SAT Overall Average)
+- ACTCMMID (ACT Cumulative Median)
+- ACTENMID (ACT English Median)
+- ACTMTMID (ACT Math Median)
+- ACTWRMID (ACT Writing Median)
+
+Because there is a strong possibility that these variables will be collinear, it would be a good idea to take a look at what the overall averages are for each sex:
+
+```{r message= FALSE, warning=FALSE}
+college_scorecard_completely_prepped %>%
+  select(SEX_SPECIFIC, 
+         ADM_RATE, 
+         SATVRMID, SATMTMID, SAT_AVG,
+         ACTCMMID, ACTENMID, 
+         ACTMTMID, ACTWRMID)%>%
+  group_by(SEX_SPECIFIC)  %>%
+  summarize(ADM_RATE = mean(ADM_RATE, na.rm= TRUE), 
+         SATVRMID= mean(SATVRMID, na.rm= TRUE),  SATMTMID= mean(SATMTMID, na.rm= TRUE), SAT_AVG= mean(SAT_AVG, na.rm= TRUE),
+         ACTCMMID= mean(ACTCMMID, na.rm= TRUE), ACTENMID=  mean(ACTENMID, na.rm= TRUE), 
+         ACTMTMID= mean(ACTMTMID, na.rm= TRUE), ACTWRMID= mean(ACTWRMID, na.rm= TRUE)) %>%
+  kable(align = 'cc', caption = "Table 1.4 The Average Adission Statistics Per Type of Institution")
+
+```
+
+Women-only colleges being on average more selective  is not surprising. With only 35 of them and there being very well know selective institutions like Scripps College and Barnard College, these findings were more or less expected. However, what came as a bit of a surprise was the selectivity of men-only colleges. Normally as admission rates go down scores up. Notice that the admission rates for men-only colleges is much higher than co-ed and women-only colleges. If men-only colleges are more selective, then we should see an admission rate under 60 percent. Additionally, since 
+none of the men-only colleges are as selective as the most selective women-only colleges, what is driving these averages up so high? 
+
+
+
+Let's take a look: 
+```{r}
+
+admissions_table <- function(sex) {
+  college_scorecard_completely_prepped %>%
+  filter(SEX_SPECIFIC == sex)  %>%
+  select(INSTNM, 
+         ADM_RATE, 
+         SAT_AVG, SATVRMID, SATMTMID,
+         ACTCMMID, ACTENMID, 
+         ACTMTMID, ACTWRMID) %>%
+    kable(align = 'cc', caption = "Tables 1.4 Admission Statistics for Institution Type")
+}
+
+admissions_table("MEN ONLY")
+admissions_table("WOMEN ONLY")
+
+```
+
+I knew it! Something was indeed going on here! Because most of the male colleges have NA's, for their admission test statistics, only 5/61 contributed their numbers to those averages. This means that while most of the women-only college standards were averaged, only the more selective men-only college averages were used. This also makes sense because if most of your colleges are seminary schools, how could your average be so high? 
+
+
+This finding actually makes our job easier because the only valid variable to use is admission rate given the scarcity of data for the admission tests. 
+
+```{r}
+summary( lm( ADM_RATE ~ SEX_SPECIFIC, data= college_scorecard_completely_prepped ))
+```
+Here, we can clearly see that there is a significant positive relationship between admission rates and men-only institutions. Although women colleges did not cross the significance threshold, you can clearly see that there is a negative relationship between admission rate and women-only colleges. 
+
+
+### Majors 
+
+For this section. I had two interesting questions:
+
+Does attending a sex-specific school affect degree outcomes? 
+Does going to a women-only college affect STEM degree outcomes?
+
+
+Because the US Department of Education collects data on the percentage of students that graduate with particular majors, there are a lot of variables to work with! 
+
+However, since we are only interested in major academic divisions we should be able to fuse most of these percentages and compare them that way. I decided to group them by three major divisions: Liberal Arts, STEM, and Professional/Vocational/Other. 
+
+**Disclaimer:** Many of these majors could have fit into a couple of groups, but in the interest of keeping things simple, I based my decisions mostly on this [wikipedia page about academics fields](https://en.wikipedia.org/wiki/List_of_academic_fields#Professions_and_applied_sciences). 
+
+
+Here is the breakdown of the variables: 
+
+#### Liberal Arts (arts, social sciences, and humanities)
+- PCIP05  (ethnic, gender, culture studies)
+- PCIP13 (education)
+- PCIP16 (languages and linguistics)
+- PCIP23 (English)
+- PCIP24 (general and humanities)
+- PCIP38 (philosophy and religion)
+- PCIP39 (theology)
+- PCIP42 (psych)
+- PCIP45 (social science) 
+- PCIP50 (visual and performing arts)
+- PCIP54 (history)
+ 
+#### STEM
+- PCIP01  (agriculture)
+- PCIP03 (Conservation)
+- PCIP11 (computer science)
+- PCIP14 (engineering)
+- PCIP15 (engineering tech)
+- PCIP26 (bio)
+- PCIP27 (math)
+- PCIP29 (applied science)
+- PCIP40 (physics)
+- PCIP41 (tech science)
+- PCIP51 (health)
+
+#### Professions, Vocations, and Other (everything I couldn t classify in the other 2)
+- PCIP04 (architecture)
+- PCIP09 (journalism/communication) 
+- PCIP10 (communications technology) 
+- PCIP12 (culinary)
+- PCIP19 (consumer/human sciences)
+- PCIP22 (legal)
+- PCIP25 (library)
+- PCIP30 (interdisciplinary)
+- PCIP31 (recreation and fitness)
+- PCIP43 (law enforcement/protective services)
+- PCIP44 (social service)
+- PCIP46 (construction)
+- PCIP47 (mechanic)
+- PCIP48 (precision production)
+- PCIP49 (transportation/logistics)
+- PCIP52 (business)
+
+
+```{r}
+
+college_scorecard_majors<-  college_scorecard_completely_prepped %>%
+  transmute(INSTNM, 
+            SEX_SPECIFIC , 
+            LIB_ARTS = PCIP05 + PCIP13 + PCIP16 + PCIP23 + PCIP24 + PCIP38 + PCIP39 +PCIP42 + PCIP45 + PCIP50 + PCIP54, 
+            STEM = PCIP01 + PCIP03 + PCIP11 + PCIP14 + PCIP15 + PCIP26 + PCIP27+PCIP29 + PCIP40 +  PCIP41 +  PCIP51, 
+            PROF_VOC_OTHERS =  PCIP04 + PCIP09 + PCIP10 + PCIP12 + PCIP19 + PCIP22 +
+              PCIP25 + PCIP30 + PCIP31 + PCIP43 + PCIP44 + PCIP46 + PCIP47 + PCIP48 + PCIP49 + PCIP52 )
+
+
+
+kable(col.names = c("Name", 'Institution Type',  'Liberal Arts', 'STEM', "Professional & Vocation"), head(college_scorecard_majors),
+      align = 'cc', caption = "Table 1.5: Sample Proportion of Degree's Conferred Per Instituion")
+```
+
+
+```{r}
+summary(lm(LIB_ARTS ~ SEX_SPECIFIC, data = college_scorecard_majors)) 
+
+summary(lm(STEM ~ SEX_SPECIFIC, data = college_scorecard_majors)) 
+
+summary(lm(PROF_VOC_OTHERS ~ SEX_SPECIFIC, data = college_scorecard_majors)) 
+
+```
+The liberal arts model shows that both men-only and women-only institutions have a positive relationship with proportion of liberal arts degrees. This makes sense because many of these institutions (especially men-only) award religious and humanities degrees. For the STEM model, both men-only and women-only colleges have a negative relationship with percentage of STEM degrees. However, only the men-only relationship with STEM degrees is significant. Lastly, both men-only and women-only institutions have significant negative relationships with the percentage of professional and vocational degrees (men-only more significant).
+
+
+Let's take a look at what this looks like visually:
+```{r message= FALSE, warning=FALSE}
+college_scorecard_majors %>% 
+  group_by(SEX_SPECIFIC) %>% 
+  summarize(mean_stem = mean(STEM, na.rm= TRUE), mean_lb_arts = mean(LIB_ARTS, na.rm= TRUE),mean_prof_voc = mean(PROF_VOC_OTHERS, na.rm= TRUE)) %>%
+  plot_ly(x = ~SEX_SPECIFIC, y = ~mean_stem, type= 'bar', name= 'STEM Degrees', marker = list(color = "#44668b")) %>%
+  add_trace(y = ~mean_lb_arts, name= 'Liberal Arts Degrees', marker = list(color = "#f1cb35"))%>%
+  add_trace(y = ~mean_prof_voc, name= 'Professional and Vocational Degrees', marker = list(color = "#bdb8b8"))%>%
+  layout(barmode = "group", 
+         xaxis = list(title = ""),
+         yaxis = list(title = "Proportion of Degrees Conferred"),
+         font = list(family = "Georgia"))
+```
+I think it is pretty safe to say that if you are attending one of these male-only colleges, you are probably going to end up with a liberal arts degree. 
+
+
+One limitation of these methods is the fact that we could not get data that showed the degrees conferred by gender for co-ed institutions.  Although co-ed institutions give more STEM degrees than women-only colleges, we need to keep in mind that this is the average for both genders. This means that going to a women-only college might very well significantly increase STEM degree outcomes because the average proportion of STEM degrees conferred for women-only colleges may be higher than the conference of STEM degrees to women in co-ed colleges. Because the number of men in STEM is usually higher than women in general, we could hypothesize that the average proportion of degrees conferred to women in co-ed colleges is lower than what is seen above. 
+
+
+
+### Earning Outcomes
+
+
+Here we want to know if earning outcomes are affected by sex-specific schools? 
+ 
+'MN_EARN_WNE_P10'  (Mean earnings of students working and not enrolled 10 years after entry)
+'MD_EARN_WNE_P10' (Median earnings of students working and not enrolled 10 years after entry)
+
+```{r message=FALSE, warning=FALSE}
+earning_outcomes_table <- bind_rows(
+tidy(lm(MN_EARN_WNE_P10 ~ SEX_SPECIFIC, data= college_scorecard_completely_prepped)),
+tidy(lm(MD_EARN_WNE_P10~ SEX_SPECIFIC, data= college_scorecard_completely_prepped))
+)
+
+earning_outcomes_table
+```
+From this table, it looks like both mean and median earning outcomes are positively associated with women-only colleges, albeit slightly. Both measurements are negatively associated with men-only colleges, but they are insignificant. One thing to note is that the median outcome for men-only colleges is almost significant.  
+
+
+
+```{r message=FALSE, warning=FALSE}
+college_scorecard_completely_prepped %>% 
+  group_by(SEX_SPECIFIC) %>% 
+  summarize(avg_mean = mean(MN_EARN_WNE_P10, na.rm= TRUE), 
+            avg_md = mean(MD_EARN_WNE_P10, na.rm= TRUE)) %>%
+  plot_ly(x = ~SEX_SPECIFIC, y = ~avg_mean, type= 'bar', name= 'Mean Earning ', marker = list(color = "#44668b")) %>%
+  add_trace(y = ~avg_md, name= 'Median Earnings', marker = list(color = "#f1cb35"))%>%
+  layout(barmode = "group", 
+         xaxis = list(title = ""),
+         yaxis = list(title = "Average Earnings After 10 Years"),
+         font = list(family = "Georgia"))
+
+```
+
+
+### Completion 
+
+
+Next, does being at a sex-specific school affect completion rates for different ethnic groups? 
+
+Variables:
+
+- C150_4_WHITE (Completion rate for first-time, full-time students at four-year institutions (150% of expected time to completion) for white students)
+
+- C150_4_BLACK (Completion rate for first-time, full-time students at four-year institutions (150% of expected time to completion) for black students)
+
+- C150_4_HISP (Completion rate for first-time, full-time students at four-year institutions (150% of expected time to completion) for Hispanic students)
+
+- C150_4_ASIAN (Completion rate for first-time, full-time students at four-year institutions (150% of expected time to completion) for Asian students)
+
+- C150_4_AIAN (Completion rate for first-time, full-time students at four-year institutions (150% of expected time to completion) for American Indian/Alaska Native students)
+
+- C150_4_NHPI (Completion rate for first-time, full-time students at four-year institutions (150% of expected time to completion) for Native Hawaiian/Pacific Islander students)
+
+- C150_4_2MOR (Completion rate for first-time, full-time students at four-year institutions (150% of expected time to completion) for students of two-or-more-races)
+
+- C150_4_NRA (Completion rate for first-time, full-time students at four-year institutions (150% of expected time to completion) for non-resident alien students)
+
+- C150_4_UNKN (Completion rate for first-time, full-time students at four-year institutions (150% of expected time to completion) for students whose race is unknown)
+
+
+```{r}
+summary(lm(C150_4_WHITE~ SEX_SPECIFIC, data= college_scorecard_completely_prepped))
+summary(lm(C150_4_BLACK~ SEX_SPECIFIC, data= college_scorecard_completely_prepped))
+summary(lm(C150_4_HISP~ SEX_SPECIFIC, data= college_scorecard_completely_prepped))
+summary(lm(C150_4_ASIAN~ SEX_SPECIFIC, data= college_scorecard_completely_prepped))
+summary(lm(C150_4_AIAN~ SEX_SPECIFIC, data= college_scorecard_completely_prepped))
+
+```
+
+Here is the summary of the summary tables: 
+
+White Student Completion Rate: 
+
+- significant negative relationship for men-only
+- slightly significant positive relationship for women-only
+
+Black Student Completion Rate:
+
+- moderately significant positive relationship for women-only
+
+Hispanic Student Completion Rate:
+
+- moderately significant positive relationship for women-only
+
+Asian Student Completion Rate: 
+
+- no significant relationship for both men-only and women-only colleges
+
+American Indian/ Alaskan Native Student Completion Rate:
+
+- no significant relationship for both men-only and women-only colleges
+
+Here is what it looks like visually:
+```{r message=FALSE, warning=FALSE}
+college_scorecard_completely_prepped %>% 
+  group_by(SEX_SPECIFIC) %>% 
+  summarize(avg_completion_w = mean(C150_4_WHITE, na.rm= TRUE), 
+            avg_completion_b = mean(C150_4_BLACK, na.rm= TRUE), 
+            avg_completion_h = mean(C150_4_HISP, na.rm= TRUE), 
+            avg_completion_as = mean(C150_4_ASIAN, na.rm= TRUE), 
+            avg_completion_ai = mean(C150_4_AIAN, na.rm= TRUE)) %>%
+  plot_ly(x = ~SEX_SPECIFIC, y = ~avg_completion_w, type= 'bar', name= 'White', marker = list(color = "#44668b")) %>%
+  add_trace(y = ~avg_completion_b, name= 'Black', marker = list(color = "#f1cb35"))%>%
+  add_trace(y = ~avg_completion_h, name= 'Hispanic', marker = list(color = "#1298d0"))%>%
+  add_trace(y = ~avg_completion_as, name= 'Asian', marker = list(color = "#cc8834"))%>%
+  add_trace(y = ~avg_completion_ai, name= 'American Indian/ Alaska Native', marker = list(color = "#bdb8b8"))%>%
+  layout(barmode = "group", 
+         xaxis = list(title = ""),
+         yaxis = list(title = "Average Completion Rate"),
+         font = list(family = "Georgia"))
+```
+
+
+```{r}
+summary(lm(C150_4_NHPI~ SEX_SPECIFIC, data= college_scorecard_completely_prepped))
+summary(lm(C150_4_2MOR~ SEX_SPECIFIC, data= college_scorecard_completely_prepped))
+summary(lm(C150_4_NRA~ SEX_SPECIFIC, data= college_scorecard_completely_prepped))
+summary(lm(C150_4_UNKN~ SEX_SPECIFIC, data= college_scorecard_completely_prepped))
+```
+
+Another summary of the summaries: 
+
+Native Hawaiian/Pacific Islander Completion Rate: 
+
+- no significant relationship for both men-only and women-only colleges
+
+2 or More Races Completion Rate: 
+
+- no significant relationship for both men-only and women-only colleges
+
+Nonresident Aliens Completion Rate:
+
+- very significant negative relationship for men-only
+
+Unknown Completion Rate: 
+
+- no significant relationship for both men-only and women-only colleges
+
+
+
+Here is the visual: 
+```{r, message=FALSE, warning=FALSE}
+college_scorecard_completely_prepped %>% 
+  group_by(SEX_SPECIFIC) %>% 
+  summarize(avg_completion_nhpi = mean(C150_4_NHPI, na.rm= TRUE), 
+            avg_completion_2M = mean(C150_4_2MOR, na.rm= TRUE), 
+            avg_completion_nra = mean(C150_4_NRA, na.rm= TRUE), 
+            avg_completion_u = mean(C150_4_UNKN, na.rm= TRUE))%>%
+  plot_ly(x = ~SEX_SPECIFIC, y = ~avg_completion_nhpi, type= 'bar', name= 'Native Hawaiian/Pacific Islander', marker = list(color = "#44668b")) %>%
+  add_trace(y = ~avg_completion_2M, name= '2 or More Races', marker = list(color = "#1298d0"))%>%
+  add_trace(y = ~avg_completion_nra, name= 'Nonresident Aliens', marker = list(color = "#f1cb35"))%>%
+  add_trace(y = ~avg_completion_u, name= 'Unknown', marker = list(color = "#cc8834"))%>%
+  layout(barmode = "group", 
+         xaxis = list(title = ""),
+         yaxis = list(title = "Average Completion Rate"),
+         font = list(family = "Georgia"))
+```
+
+
+### Retention
+
+Do sex-specific schools affect retention? 
+
+Here is the variable we are looking at:
+
+RET_FT4_POOLED (First-time, full-time student retention rate at four-year institutions)
+
+```{r}
+summary(lm(RET_FT4_POOLED~ SEX_SPECIFIC, data= college_scorecard_completely_prepped))
+
+
+```
+It looks like there is no significant relationship. 
+
+
+### Faculty Employment 
+
+Next, we will be investigating the question: "Is there a difference in faculty salary and employment at different colleges?" 
+
+Variables:
+
+- AVGFACSAL (Average faculty salary)
+- PFTFAC (Proportion of faculty that is full-time)
+
+
+```{r}
+summary(lm(AVGFACSAL~ SEX_SPECIFIC, data= college_scorecard_completely_prepped))
+summary(lm(PFTFAC~ SEX_SPECIFIC, data= college_scorecard_completely_prepped))
+
+```
+The first summary table shows a significant negative relationship between faculty salary and being employed at a men-only institution. In contrast, there is a positive relationship (albeit slightly significant) between faculty salary and being at a women-only college. Additionally, the second table shows a very significant positive relationship between the proportion of full-time faculty and men-only institutions.
+
+
+```{r message=FALSE, warning=FALSE}
+faculty_data <- college_scorecard_completely_prepped %>% 
+  group_by(SEX_SPECIFIC) %>% 
+  summarize(avg_fascal = mean(AVGFACSAL, na.rm= TRUE), 
+            avg_pftfac = mean(PFTFAC, na.rm= TRUE)) 
+
+faculty_data %>%
+  plot_ly(x = ~SEX_SPECIFIC, y = ~avg_fascal, type= 'bar', marker = list(color = "#1298d0"))%>%
+  layout(barmode = "group", 
+         xaxis = list(title = ""),
+         yaxis = list(title = "Average Faculty Salary (Monthly)"), 
+         font = list(family = "Georgia")) 
+
+faculty_data %>%
+  plot_ly(x = ~SEX_SPECIFIC, y = ~avg_pftfac, type= 'bar', marker = list(color = "#cc8834"))%>%
+  layout(barmode = "group", 
+         xaxis = list(title = ""),
+         yaxis = list(title = "Average Proportion of Full Time Faculty"),
+         font = list(family = "Georgia"))
+
+```
+So men-only colleges pay you less on average but expect you stick around. 
+
+
+### Household Income 
+
+How is household income related to sex-specific schools? 
+
+
+Our Variables:
+
+- MEDIAN_HH_INC (Median household income)
+- LN_MEDIAN_HH_INC (Log of the median household income)
+
+```{r message=FALSE, warning=FALSE}
+
+summary(hh_income_mod_male <- lm( MEDIAN_HH_INC ~ SEX_SPECIFIC,  data = college_scorecard_completely_prepped))
+
+college_scorecard_completely_prepped %>% 
+  group_by(SEX_SPECIFIC) %>% 
+  summarize(avg_median_hh = mean(MEDIAN_HH_INC, na.rm= TRUE)) %>%
+  plot_ly(x = ~SEX_SPECIFIC, y = ~avg_median_hh, type= 'bar', marker = list(color = "#1298d0"))%>%
+  layout(barmode = "group", 
+         xaxis = list(title = ""),
+         yaxis = list(title = "Average Median Household Income"),
+         font = list(family = "Georgia"))
+
+```
+
+
+It looks like there is a significant positive relationship between median household income and attending a women-only college. Conversely, there is a slightly negative relationship between median household income and attending a men-only college.  
+
+## Conclusion 
+
+Overall, this project was an opportunity to use a variety of new tools to answer some interesting questions. I made use of spatial tools, data manipulation tools, and interactive graphical tools. Considering the extensive amount of findings in this project, I think it is safe to say that there are key features that distinguish men-only and women-only colleges. Here is a summary table of all variables that had significant relationships with the particular school types:
+
+
+
+|                 **MEN ONLY**                                      |                          **WOMEN ONLY**                          |
+|-------------------------------------------------------------------|------------------------------------------------------------------|
+| Religious Affiliation  (positive)                                 |  Religious Affiliation ( positive )                              | 
+| Proportion of White Students (strong positive)                    |  Proportion of Nonresident Aliens (weak positive)                |
+| Proportion of Black Students (moderate negative)                  |  Percentage Liberal Arts Degrees (strong positive)               |
+| Admission Rate   (strong positive )                               |  Percentage Professional & Vocational Degrees (strong negative)  |
+| Percentage Liberal Arts   (strong positive)                       |  Mean & Median Earning Outcomes (weak positive)                  |
+| Percentage STEM Degrees   (strong negative)                       |  White Student Completion Rate (weak positive)                   |
+| Professional & Vocational Degrees (strong negative)               |  Black Student Completion Rate (moderate positive)               |
+| White Student Completion Rate (strong negative)                   |  Hispanic Student Completion Rate (moderate positive)            |
+| Nonresident Alien Completion Rate (strong negative)               |  Faculty Salary (weak positive)                                  |
+| Faculty Salary (strong negative )                                 |  Median Household Income (strong positive )                      |
+| Proportion of Full Time Faculty  (strong positive)                |                                                                  |
+| Median Household Income  (weak negative)                          |                                                                  |
+
+
+With all of these results in mind, I think the next step would be to use some the variables in this table to create more complex multivariate logistic regression models that could predict sex-specific institutions. 
+
+
+## Source 
+
+The data for this project comes from the US Department of Education's College Score Card: https://collegescorecard.ed.gov/data/
+
+The academic division groupings came from this wikipedia page: https://en.wikipedia.org/wiki/List_of_academic_fields#Professions_and_applied_sciences
+
+US College Information: https://www.usnews.com/education/best-colleges/articles/how-many-universities-are-in-the-us-and-why-that-number-is-changing
+
+Mixed Sex Education: https://en.wikipedia.org/wiki/Mixed-sex_education
+

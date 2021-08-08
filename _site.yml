@@ -9,6 +9,8 @@ navbar:
       href: Summer-Research-2018-Markdown.html
     - text: "Project 2 (R)"
       href: pokemon-project-2020.html
+    - text: "Project 3 (R)"
+      href: gendered_education_project_complete.html
     - text: "Minor Project 1 (R)"
       href: https://loganlary.shinyapps.io/anime1_030521/?_ga=2.199251374.1633841057.1615147342-569369622.1613318148
     - text: "Minor Project 2 (Python)"
@@ -17,6 +19,6 @@ navbar:
 output:
   html_document:
     theme: cosmo
-    highlight: textmate
+
     
     

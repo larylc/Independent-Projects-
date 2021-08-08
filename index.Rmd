@@ -1,37 +1,87 @@
-
-
-## **About** 
-
-
-
-
 ---
+title: About
+---
+<style>
+
+h1.title, h1, h2, h3, h4 {
+  font-family: Georgia;
+  text-align: center;
+  font-weight: bold;
+  color: #5dcf3ef2;
+}
+
+body {
+  font-family: Georgia;
+  background-color: #f7e7b0;
+
+}
+
+.navbar-default {
+   background-color: #5dcf3ef2;
+}
+
+
+.navbar-default .navbar-nav>.open>a, 
+.navbar-default .navbar-nav>.active>a, 
+a.dropdown-toggle:hover {
+  background-color: #d3f590;
+}
+
+.navbar-default .dropdown-menu>.active>a
+.navbar-default .navbar-nav:hover, 
+.navbar-default .navbar-nav>li>a:hover, 
+a.navbar-brand:hover {
+  color: #000000;
+  background-color: #d3f590;
+}
+
+item.active, .list-group-item.active:hover {
+  background-color: #000000;
+}
+</style>
+
+
 <center>
 
-![ Mountain Lake Biological Station, 08/09/2018.](C:\Users\laryl\Documents\Independent-Projects-\img\IMG-0380.JPG){#id .class width=45% height=45%}
-
+![ Mountain Lake Biological Station, 08/09/2018.](C:\Users\laryl\Documents\Independent-Projects-\img\IMG-0380.JPG#thumbnail)
 </center>
 
----
+<style>
+img[src*="#thumbnail"]{
+height: 450px;
+border-radius: 50%;
+</style>
 
-**Welcome to my project website!** 
+<center>
+
+
+
+
+
+### <b> Welcome to my project website! </b>
 
 <details>
-<summary><b> Project 1: Summer Research Project 2018 </b></summary>
+<summary><b> Project 1: </b> Summer Research Project 2018 </summary>
 * Investigated how movement affects forked fungus beetle social network position. 
 </details>
 
 <details>
-<summary><b> Project 2: Exploratory Pokemon Analysis 2020 </b></summary>
-* Explored data visualization using pokemon gaming data.
+<summary><b> Project 2:</b> Exploratory Pokemon Analysis 2020 </summary>
+* Explored data visualization using Pokemon gaming data.
 </details>
 
 <details>
-<summary><b> Minor Project 1: Understanding Anime Genre Trends </b></summary>
+<summary><b> Project 3: </b> Features of One Gender Schools </summary>
+* Analyzed the key differences between co-ed colleges and single sex colleges.
+</details>
+
+<details>
+<summary><b> Minor Project 1:</b> Understanding Anime Genre Trends </summary>
 * Examined popularity of anime genres. 
 </details>
 
 <details>
-<summary><b> Minor Project 2: Do Children Have Bad Taste </b></summary>
+<summary><b> Minor Project 2: </b> Do Children Have Bad Taste </summary>
 * Explored how tv show ratings differ across age categories.
 </details>
+</center>
