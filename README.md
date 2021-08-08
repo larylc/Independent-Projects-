@@ -130,6 +130,48 @@ Following the link above will lead you to my project website. There, I will be p
 
 </details>
 
+---
+### Major Project 3: Features of One Gender Schools
+**Summary**: This is an exploratory analysis of differences between single-sex colleges and co-ed colleges.
+
+
+<details>
+<summary><b>See Libaries Used:</b></summary>
+ 
+* library(knitr)
+* library(data.table) 
+* library(dplyr)
+* library(tidyr)
+* library(leaflet)
+* library(leaflet.extras)
+* library(htmltools)
+* library(forcats) 
+* library(vcd)
+* library(extrafont)
+* library(plotly)
+* library(visdat)
+* library(broom)
+* library(visreg)
+* library(effects)
+
+
+</details>
+
+<details>
+<summary><b>Table of Contents</b></summary>
+ 
+* Introduction
+* Data Preparation 
+* At a Glance
+* Key Variables
+* Conclusion 
+* Source 
+ 
+ 
+
+</details>
+
+---
 ## Minor Projects 
 
 ### **Minor Project 1: Understanding Anime Genre Trends** 
