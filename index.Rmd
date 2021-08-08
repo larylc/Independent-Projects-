@@ -43,14 +43,10 @@ item.active, .list-group-item.active:hover {
 
 <center>
 
-![ Mountain Lake Biological Station, 08/09/2018.](C:\Users\laryl\Documents\Independent-Projects-\img\IMG-0380.JPG#thumbnail)
+![ Mountain Lake Biological Station, 08/09/2018.](C:\Users\laryl\Documents\Independent-Projects-\img\IMG-0380.JPG){#id .class style="border-radius:50%" height="450"}
 </center>
 
-<style>
-img[src*="#thumbnail"]{
-height: 450px;
-border-radius: 50%;
-</style>
+
 
 <center>
 
