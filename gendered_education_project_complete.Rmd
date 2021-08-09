@@ -97,7 +97,7 @@ table(college_scorecard_clean$WOMENONLY)
 ```
 Although this is great information and we can see which colleges are male-only and female-only, there are a few problems. First, there are null values that are not beneficial to us. The second problem is the fact that we don't need the variables to be separate from each other. That separation is going to make creating graphs later slightly more challenging. Lastly, there is no easy way to view co-ed colleges, as both columns only tell us whether a college is for a specific sex or not. This means there isn't a clear way to quickly distinguish co-ed colleges from the other sex-specific colleges when using one of the columns. 
 
-Thus, our next block will eliminate the null values, fuse the MENONLY and WOMENONLY columns, and create a new category called "CO-ED." We will also make sure the college is operational. 
+Thus, our next block will eliminate the null values, fuse the MENONLY and WOMENONLY columns, and create a new category called "CO-ED." We will also make sure the colleges are operational. 
 
 ```{r message=FALSE, warning=FALSE}
 # Load data manipulation packages
@@ -139,7 +139,7 @@ As we can see, there are 3 distinct categories in a single variable. We can now 
 
 ## At a Glance
 
-Before going any further, we should get a good glance at what our data visually looks like. This may reveal information that might not be as apparent when looking at raw statistics. I think this is the perfect opportunity to create a map that shows the location of the colleges filtered by sex-specificity. 
+Before going any further, we should get a good glance at what our data set visually looks like. This may reveal information that might not be as apparent when looking at raw statistics. I think this is the perfect opportunity to create a map that shows the location of the colleges filtered by sex-specificity. 
 
 ```{r}
 #Create three data sets, one for each sex-specific category
@@ -189,11 +189,11 @@ This map displays quite a bit of information. First, we can see the difference i
 
 ## Key Variables 
 
-Now that we produced a clear picture of how the data looks, have some interesting information about what colleges are sex-specific, and figured out where they are located, we can begin to analyze some of the variables that might distinguish the sex-specific categories.  
+Now, we can begin to analyze some of the variables that might distinguish the sex-specific categories.  
 
 
 
-The variables we will be focusing on are: 
+The variables are: 
 
 - Demographics (Categorically and Numerically)
 - Admission Statistics 
@@ -221,13 +221,14 @@ Starting with one of the categorical demographic variables, there are 8 columns 
 
 
 Let's take a look it look at what values one of these columns has.
+
 ```{r}
 table(college_scorecard_completely_prepped$PBI)
 ```
 
-Like the sex-specific variables above, we have null values which don't give us useful information. Moreover, because there are so many categories we don't want to create a chart for each one. Instead, we will be fusing the first 7 variables that are flagged for particular ethnicities, just like we did for the sex-specific categories.
+Like the sex-specific variables above, we have null values which don't give us useful information. Moreover, because there are so many categories, we don't want to create a chart for each one. Instead, we will be fusing the first 7 variables that are flagged for particular ethnicities, just like we did for the sex-specific categories.
 
-Additionally, because the religious column has dozens of categories, creating a chart for all of them just does not make sense. Instead, we are going to collapse all of the categories into religious and non-religious. 
+Additionally, because the religious column has dozens of categories, creating a chart for all of them does not make sense. Instead, we are going to collapse all of the categories into religious and non-religious. 
 ```{r}
 # Data Manipulations 
 library(forcats) 
@@ -278,7 +279,7 @@ table(college_scorecard_cat_demographics_fused$DEMOGRAPHICS)
 ```
 
 
-As we can see from the various categories that were created, there are many schools that fit into multiple categories. Again having many categories does not give us a clear picture. The solution to this problem is to collapse the categories that have multiple flags into a single one called "Multiple."
+As we can see from the various categories that were created, there are many schools that fit into multiple categories. Again, having many categories does not give us a clear picture. The solution to this problem is to collapse the categories that have multiple flags into a single one called "Multiple."
 
 ```{r}
 #Clean up categories
@@ -315,7 +316,7 @@ table(college_scorecard_cat_demographics_complete$DEMOGRAPHICS)
 
 ```
 
-Now the 18 categories have been reduced to 10, we can now proceed to the next phase which is to produce a plot that will test if there is a relationship between sex-specificity and demographics. One of the options we can use to plot a categorical variable against another categorical variable is a mosaic plot. 
+The 18 categories have been reduced to 10. We can now proceed to the next phase, which is to produce a plot that will test if there is a relationship between sex-specificity and demographics. One of the options we can use to plot a categorical variable against another categorical variable is a mosaic plot. 
 
 ```{r  message=FALSE, warning=FALSE}
 
@@ -463,7 +464,7 @@ demographics_mod_male_main
 
 ```
 
-Because we cannot visualize a logistic regression that is more than 4 dimensions (3 explanatory variables and 1 response variable) we need to select the explanatory variables that are the most significant for our final model. There is also an extra incentive to get rid of some of these demographic variables because they are closely related and could create numerical instability because of collinearity.  From this table, we can see that most of the explanatory variables independently have significant relationships with the MENONLY variable. The NRA variable and NHPI variables seem to have the least significant relationships with the MENONLY variable.
+Because we cannot visualize a logistic regression that is more than 4 dimensions (3 explanatory variables and 1 response variable), we need to select the explanatory variables that are the most significant for our final model. There is also an extra incentive to get rid of some of these demographic variables because they are closely related and could create numerical instability.  From this table, we can see that most of the explanatory variables independently have significant relationships with the MENONLY variable. The NRA variable and NHPI variables seem to have the least significant relationships with the MENONLY variable.
 
 Now we will create a multivariate logistic model that takes into account all of the remaining variables to see if we can eliminate more explanatory variables. 
 
@@ -487,7 +488,7 @@ summary(demographics_mod_male3)
 ```
 Now, our table shows UGDS_ASIAN is not only statistically insignificant but also has a large standard error compared to the other three variables. Additionally, UGDS_HISP also appears to be statistically insignificant. With this in mind, our final model will only incorporate two variables (UGDS_WHITE and UGDS_BLACK). 
 
-But before we do the finalizing. We should perform a couple of steps. First, we should check if there is collinearity between our two variables so that it does not create instability in our model.
+But before we do the finalizing, we should perform a couple of steps. First, we should check if there is collinearity between our two variables so that it does not create instability in our model.
 ```{r warning=FALSE}
 
 #Collinearity Check 
@@ -524,7 +525,7 @@ summary(demographics_mod_male_final2)
 The standard errors between models don't differ much, so we are free to use our first one (with both black and white students).
 
 
-Our final model shows that there is a significant relationship between being a men-only institution and particular proportions of certain ethnicities. Specifically, we can see that there is a positive relationship between men-only institutions and white students as well as a negative relationship between men-only institutions and black students. This finding does not seem to surprising because our map above showed that many of these institutions were seminary schools, which one can safely assume are mostly white men. But for the sake of transparency lets take a quick look at a table of these institutions: 
+Our final model shows that there is a significant relationship between being a men-only institution and particular proportions of certain ethnicities. Specifically, we can see that there is a positive relationship between men-only institutions and white students as well as a negative relationship between men-only institutions and black students. This finding does not seem too surprising because our map above showed that many of these institutions were seminary schools, which one can safely assume are mostly white men. But for the sake of transparency let's take a quick look at a table of these institutions: 
 
 ```{r}
 library(knitr)
@@ -566,7 +567,7 @@ demographics_mod_female_main
 
 ```
 
-Based on some of the standard errors in this table. We will be getting rid of UGDS_AIAN and UGDS_NHPI. Additionally, there appear to be only two variables that are significant (UGDS_NRA, UGDS_2MOR).
+Based on some of the standard errors in this table, we will be getting rid of UGDS_AIAN and UGDS_NHPI. Additionally, there appears to be only two variables that are significant (UGDS_NRA, UGDS_2MOR).
 
 ```{r}
 demographics_mod_female_main <- glm(WOMENONLY ~  UGDS_2MOR + UGDS_NRA, family= binomial,  data = college_scorecard_full_num_demographics_final)
@@ -575,7 +576,7 @@ summary(demographics_mod_female_main)
 
 
 ```
-Because UGDS_2MOR did not reach our p-value threshold we have to exclude it from the final model. 
+Because UGDS_2MOR did not reach our p-value threshold, we have to exclude it from the final model. 
 ```{r}
 demographics_mod_female_final <- glm(WOMENONLY ~ UGDS_NRA, family= binomial,  data = college_scorecard_full_num_demographics_final)
 
@@ -583,7 +584,7 @@ summary(demographics_mod_female_final)
 
 
 ```
-Based on this table, we can conclude that there is a significant relationship between proportion of nonresident alien students and women-only colleges. This finding was unexpected. So I think a look at what is going on would be helpful: 
+Based on this table, we can conclude that there is a significant relationship between proportion of nonresident alien students and women-only colleges. This finding was unexpected. I think a look at what is going on would be helpful: 
 
 ```{r message=FALSE, warning=FALSE}
 library(knitr)
@@ -641,14 +642,14 @@ visreg(demographics_mod_female_final, "UGDS_NRA",
         plot.title = element_text(size = 15, margin(b = 10), hjust = 0.5, family = "Georgia") )
 
 ```
-As we can see from the graphs, the relationships between these demographic variables and sex-specificity is still fairly small despite the statistical significance of the models. Testing the accuracy or recall of the models does not seem appropriate given how weak the relationships here are. 
+As we can see from the graphs, the relationships between these demographic variables and sex-specificity are still fairly small despite the statistical significance of the models. Testing the accuracy or recall of the models does not seem appropriate given how weak the relationships are. 
 
 
 
 
 ### Admission Statistics
 
-Our next step is to try to answer, "how do admission standards differ across the sex-specific colleges?"
+Our next step is to answer, "how do admission standards differ across the sex-specific colleges?"
 
 Here are our explanatory variables:
 
@@ -680,7 +681,7 @@ college_scorecard_completely_prepped %>%
 
 ```
 
-Women-only colleges being on average more selective  is not surprising. With only 35 of them and there being very well know selective institutions like Scripps College and Barnard College, these findings were more or less expected. However, what came as a bit of a surprise was the selectivity of men-only colleges. Normally as admission rates go down scores up. Notice that the admission rates for men-only colleges is much higher than co-ed and women-only colleges. If men-only colleges are more selective, then we should see an admission rate under 60 percent. Additionally, since 
+Women-only colleges being on average more selective is not surprising. With only 35 of them and there being very well known selective institutions like Scripps College and Barnard College, these findings were more or less expected. However, what came as a bit of a surprise was the selectivity of men-only colleges. Normally, as admission rates go down scores go up. Notice that the admission rates for men-only colleges is much higher than co-ed and women-only colleges. If men-only colleges are more selective, then we should see an admission rate under 60 percent. Additionally, since 
 none of the men-only colleges are as selective as the most selective women-only colleges, what is driving these averages up so high? 
 
 
@@ -717,7 +718,7 @@ Here, we can clearly see that there is a significant positive relationship betwe
 
 ### Majors 
 
-For this section. I had two interesting questions:
+For this section, I had two interesting questions:
 
 Does attending a sex-specific school affect degree outcomes? 
 Does going to a women-only college affect STEM degree outcomes?
@@ -725,7 +726,7 @@ Does going to a women-only college affect STEM degree outcomes?
 
 Because the US Department of Education collects data on the percentage of students that graduate with particular majors, there are a lot of variables to work with! 
 
-However, since we are only interested in major academic divisions we should be able to fuse most of these percentages and compare them that way. I decided to group them by three major divisions: Liberal Arts, STEM, and Professional/Vocational/Other. 
+However, since we are only interested in major academic divisions, we should be able to fuse most of these percentages and compare them that way. I decided to group them by three major divisions: Liberal Arts, STEM, and Professional/Vocational/Other. 
 
 **Disclaimer:** Many of these majors could have fit into a couple of groups, but in the interest of keeping things simple, I based my decisions mostly on this [wikipedia page about academics fields](https://en.wikipedia.org/wiki/List_of_academic_fields#Professions_and_applied_sciences). 
 
@@ -821,14 +822,13 @@ college_scorecard_majors %>%
 I think it is pretty safe to say that if you are attending one of these male-only colleges, you are probably going to end up with a liberal arts degree. 
 
 
-One limitation of these methods is the fact that we could not get data that showed the degrees conferred by gender for co-ed institutions.  Although co-ed institutions give more STEM degrees than women-only colleges, we need to keep in mind that this is the average for both genders. This means that going to a women-only college might very well significantly increase STEM degree outcomes because the average proportion of STEM degrees conferred for women-only colleges may be higher than the conference of STEM degrees to women in co-ed colleges. Because the number of men in STEM is usually higher than women in general, we could hypothesize that the average proportion of degrees conferred to women in co-ed colleges is lower than what is seen above. 
-
+One limitation of these methods is the fact that we could not get data that showed the degrees conferred by gender for co-ed institutions.  Although co-ed institutions give more STEM degrees than women-only colleges, we need to keep in mind that this is the average for both genders. Because the number of men in STEM is usually higher than women in general, we could hypothesize that the average proportion of degrees conferred to women in co-ed colleges is lower than what is seen above. 
 
 
 ### Earning Outcomes
 
 
-Here we want to know if earning outcomes are affected by sex-specific schools? 
+Here, we want to know if earning outcomes are affected by sex-specific schools.
  
 'MN_EARN_WNE_P10'  (Mean earnings of students working and not enrolled 10 years after entry)
 'MD_EARN_WNE_P10' (Median earnings of students working and not enrolled 10 years after entry)
@@ -1040,7 +1040,7 @@ faculty_data %>%
          font = list(family = "Georgia"))
 
 ```
-So men-only colleges pay you less on average but expect you stick around. 
+So men-only colleges pay you less on average but expect you to stick around. 
 
 
 ### Household Income 
@@ -1048,10 +1048,9 @@ So men-only colleges pay you less on average but expect you stick around.
 How is household income related to sex-specific schools? 
 
 
-Our Variables:
+Our Variable:
 
 - MEDIAN_HH_INC (Median household income)
-- LN_MEDIAN_HH_INC (Log of the median household income)
 
 ```{r message=FALSE, warning=FALSE}
 
