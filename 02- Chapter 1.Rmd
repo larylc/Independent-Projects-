@@ -66,7 +66,7 @@ table(pokemon_types$type)
 
 
 Now that every observation of a type has been accounted for, we are ready to visualize the data!
-```{r message=FALSE}
+```{r message=FALSE, warning=FALSE}
 
 #Count number of Pokemon in each type category
 library(dplyr)
@@ -80,6 +80,7 @@ library(latticeExtra)
 library(scales)
 library(ggthemes)
 library(hrbrthemes)
+library(extrafont)
 
 ggplot(plotdata, 
        aes(x=reorder(type, n),

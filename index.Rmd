@@ -38,6 +38,10 @@ a.navbar-brand:hover {
 item.active, .list-group-item.active:hover {
   background-color: #000000;
 }
+
+a {
+color: #5dcf3ef2;
+}
 </style>
 
 
@@ -51,10 +55,11 @@ item.active, .list-group-item.active:hover {
 <center>
 
 
+<b> Welcome to my project website! </b>
+This is where I post my projects in their entirety. These projects are formatted so that readers are  <b>1)</b> taken through my data science thinking process and <b>2)</b> provided with all of the technical tools I use for these projects. For a more detailed summary of the projects please visit my [GitHub page](https://github.com/larylc/Independent-Projects-).
 
 
-
-### <b> Welcome to my project website! </b>
+### Project Descriptions 
 
 <details>
 <summary><b> Project 1: </b> Summer Research Project 2018 </summary>
@@ -67,17 +72,18 @@ item.active, .list-group-item.active:hover {
 </details>
 
 <details>
-<summary><b> Project 3: </b> Features of One Gender Schools </summary>
+<summary><b> Project 3: </b> Features of One Gender Schools (2021) </summary>
 * Analyzed the key differences between co-ed colleges and single sex colleges.
 </details>
 
 <details>
-<summary><b> Minor Project 1:</b> Understanding Anime Genre Trends </summary>
+<summary><b> Minor Project 1:</b> Understanding Anime Genre Trends (2021) </summary>
 * Examined popularity of anime genres. 
 </details>
 
 <details>
-<summary><b> Minor Project 2: </b> Do Children Have Bad Taste </summary>
+<summary><b> Minor Project 2: </b> Do Children Have Bad Taste (2021) </summary>
 * Explored how tv show ratings differ across age categories.
 </details>
+
 </center>
