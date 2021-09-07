@@ -37,6 +37,7 @@ One variable that stands out is whether or not a school is a single-sex institut
 
 With this in mind, this project will try to examine some of the key differences between co-ed and single-sex colleges. We will be using the US Department of Education's [college-scorecard data set](https://collegescorecard.ed.gov/data/), which contains all of the possible institution-level data one could ask for. 
 
+This is a very long analysis, so for a summary of all the findings, skip to the conclusion. 
 
 ## Data Preparation 
 
@@ -167,22 +168,23 @@ map <- leaflet() %>%
                    group = "MEN ONLY") %>%
     addCircleMarkers(data = Women_only,
                    radius = 1, 
-                   color = "#f1cb35", 
+                   color = "#cc8834", 
                    label = ~htmlEscape(Women_only[["INSTNM"]]),
                    group = "WOMEN ONLY") %>%
     addCircleMarkers(data = Coed,
                    radius = 1, 
-                   color = "#cc8834", 
+                   color = "#f1cb35", 
                    label = ~htmlEscape(Coed[["INSTNM"]]),
                    group = "CO-ED") %>%
   addLayersControl(overlayGroups = c("MEN ONLY", "WOMEN ONLY", "CO-ED"))%>%
-  setView(lat = 39.8282, lng = -98.5795, zoom = 4)
+  setView(lat = 39.8282, lng = -98.5795, zoom = 4) 
+  
 
 #Display Map
 map
 
 ```
-This map displays quite a bit of information. First, we can see the difference in the number of colleges there are in each of the categories. Additionally, we can see that most of the colleges that are sex-specific are concentrated along the eastern side of the United States. Moreover, as you hover over the male-only colleges you can see that many of them are religiously affiliated. 
+This interactive map displays quite a bit of information. First, we can see the difference in the number of colleges there are in each of the categories by changing the **layers in the top right corner**. Additionally, we can see that most of the colleges that are sex-specific are concentrated along the eastern side of the United States. Moreover, as you hover over the male-only colleges you can see that many of them are religiously affiliated. 
 
 
 
@@ -365,19 +367,21 @@ Let's take a less confusing look by plotting the relationship between these two 
 library(extrafont)
 library(plotly)
 plot_data <- college_scorecard_cat_demographics_complete %>%
-  filter(SEX_SPECIFIC != "CO-ED")  %>%
-  count(RELAFFIL, SEX_SPECIFIC) 
+  count(RELAFFIL, SEX_SPECIFIC) %>%
+  add_count(SEX_SPECIFIC, wt= n) %>%
+  mutate(percentage = (n/nn))
 
 
 
 
-  plot_ly(x = plot_data[['SEX_SPECIFIC']], y = plot_data[['n']], color = plot_data[['RELAFFIL']], colors = c("#f1cb35",
+  plot_ly(x = plot_data[['SEX_SPECIFIC']], y = plot_data[['percentage']], color = plot_data[['RELAFFIL']], colors = c("#f1cb35",
 "#cc8834")) %>%
   add_bars() %>%
   layout(barmode = "stack",
-         font = list(family = "Georgia"))
+         font = list(family = "Georgia"), 
+         yaxis = list(tickformat = "%"))
 ```
-From this chart, we can clearly see that around half of both men-only and women-only colleges are religious. 
+From this chart, we can clearly see that around half of both men-only and women-only colleges are religious wheres 14% percent of coed colleges are religious. 
 
 To continue our examination of the relationship between sex-specificity and demographics, we will be using a logistic regression framework. Specifically, we want to answer the question "does the proportion of ethnic groups help predict sex-specificity?" 
 
@@ -409,9 +413,8 @@ college_scorecard_dem_glance<- college_scorecard_full_num_demographics %>%
 # Visualize Missing Values
 library(visdat)
 vis_miss(college_scorecard_dem_glance)+
-  theme(legend.position = "none",
-        text = element_text(family = "Georgia"), 
-        plot.title = element_text(size = 15, margin(b = 10), hjust = 0.5, family = "Georgia"))
+  theme(axis.text.x = element_text(angle = 90, hjust = 0.65),
+        text = element_text(family = "Georgia"))
 ```
 
 Now our goal is to get rid of the missing rows so that we can run our logistic regression models. 
@@ -426,13 +429,14 @@ college_scorecard_dem_glance2<- college_scorecard_full_num_demographics2 %>%
           UGDS_AIAN, UGDS_NHPI, UGDS_2MOR, UGDS_NRA, UGDS_UNKN)
 
 vis_miss(college_scorecard_dem_glance2)+
-  theme(legend.position = "none",
-        text = element_text(family = "Georgia"), 
-        plot.title = element_text(size = 15, margin(b = 10), hjust = 0.5, family = "Georgia"))
+  theme(axis.text.x = element_text(angle = 90, hjust = 0.65),
+        text = element_text(family = "Georgia"))
 
 #Exclude non-operational colleges 
 college_scorecard_full_num_demographics_final<- college_scorecard_full_num_demographics2[CURROPER == "1"]
 ```
+
+One important thing to address is the amount of colleges that were removed because of these clean up steps. We went from **6806**  colleges to **5751**. Because the missing values were consistent throughout these numeric demographics, the most likely reason they were left blank was because the researchers did not have access to the information. 
 
 First, we will create a table that shows the relationship between each explanatory numeric demographic variable and the MENONLY response variable.
 ```{r message=FALSE, warning=FALSE}
@@ -476,7 +480,7 @@ summary(demographics_mod_male_main2)
 
 ```
 
-Here, some of these variables seem to have very large standard errors. The larger the standard error, the less accurate the statistic, meaning the samples may not closely represent the population. A large standard error could be caused by having a small sample size, a large standard deviation, or a combination of both. To keep things simple, we will be removing the AIAN, 2MOR, and UNKN variables too because of their very large standard errors.
+Here, some of these variables seem to have very large standard errors. The larger the standard error, the less precise the statistic, meaning the samples may not closely represent the population. A large standard error could be caused by having a small sample size, a large standard deviation, or a combination of both. To keep things simple, we will be removing the AIAN, 2MOR, and UNKN variables too because of their very large standard errors.
 
 
 
@@ -576,7 +580,7 @@ summary(demographics_mod_female_main)
 
 
 ```
-Because UGDS_2MOR did not reach our p-value threshold, we have to exclude it from the final model. 
+Because UGDS_2MOR did not reach our p-value threshold, we will exclude it from the final model. 
 ```{r}
 demographics_mod_female_final <- glm(WOMENONLY ~ UGDS_NRA, family= binomial,  data = college_scorecard_full_num_demographics_final)
 
@@ -632,7 +636,7 @@ visreg(demographics_mod_female_final, "UGDS_NRA",
        band= FALSE,
        xlab = "Proportion of Nonresident Aliens", 
        ylab = "Probabiltiy of Being Women-Only College",
-       line= list(col ="#f1cb35"),
+       line= list(col ="#cc8834"),
        scale="response",
        gg = TRUE)+ 
   theme_bw()+ 
@@ -648,6 +652,9 @@ As we can see from the graphs, the relationships between these demographic varia
 
 
 ### Admission Statistics
+
+
+During the previous section, we had the numeric variable be the explanatory variable and the sex-specificity (a categorical variable) be the response variable. In this section and for the rest of the sections, sex-specificity is going to become the response variable. This transition was made, firstly, because creating logistic regression models for each one of these questions is going to be too much of a pain. Secondly, because these variables under investigation seem to have, for the most part, small relationships with gender, I feel the best thing would be to use a logistic regression framework using only the most significant variables. What would probably work best for an exploratory analysis like this one would be an anova framework that allows us to get a quick glance at the data using bar charts. 
 
 Our next step is to answer, "how do admission standards differ across the sex-specific colleges?"
 
@@ -713,8 +720,8 @@ This finding actually makes our job easier because the only valid variable to us
 ```{r}
 summary( lm( ADM_RATE ~ SEX_SPECIFIC, data= college_scorecard_completely_prepped ))
 ```
-Here, we can clearly see that there is a significant positive relationship between admission rates and men-only institutions. Although women colleges did not cross the significance threshold, you can clearly see that there is a negative relationship between admission rate and women-only colleges. 
 
+Here, we can clearly see that there is a significant positive relationship between admission rates and men-only institutions. Although women colleges did not cross the significance threshold, you can clearly see that there is a negative relationship between admission rate and women-only colleges. 
 
 ### Majors 
 

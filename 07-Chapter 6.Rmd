@@ -51,3 +51,5 @@ The 8 secondary data sets were produced from 8 google form surveys that asked re
 
 To verify the accuracy of some of the results I used https://pokemondb.net/type/. 
 
+Many of the graphs used in this project were inspired by [Rob Kabacoff's data visualization book](https://rkabacoff.github.io/datavis/).
+
