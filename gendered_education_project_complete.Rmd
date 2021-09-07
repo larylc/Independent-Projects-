@@ -39,6 +39,7 @@ With this in mind, this project will try to examine some of the key differences 
 
 This is a very long analysis, so for a summary of all the findings, skip to the conclusion. 
 
+
 ## Data Preparation 
 
 Here, let's unpack the `data set` by selecting relevant variables. 
