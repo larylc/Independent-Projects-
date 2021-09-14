@@ -1,0 +1,631 @@
+---
+title: "Grandmaster B-days and B-dates"
+author: "Cedric Lary"
+date: "9/13/2021"
+output: 
+  rmdformats::html_clean:
+    code_folding: hide
+    df_print: paged
+    toc_depth: 3
+---
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+
+h1.title, #toc {
+  margin-top: 5em;
+}
+
+
+
+h1, h2, h3, body {
+  font-family: 'Libre Baskerville',  serif;
+}
+
+h1.title {
+  font-weight: bold;
+}
+
+h1 {
+  font-weight: bold;
+}
+
+h2 {
+  font-weight: bold;
+}
+
+
+
+
+
+</style>
+
+
+```{r setup, echo=FALSE}
+knitr::knit_engines$set(python = reticulate::eng_python)
+```
+
+# Introduction 
+
+My goal for this project is to gather as many chess grandmaster birthdates and birthplaces as possible using web-scraping tools. Despite having so much chess player data available to the public, finding more personal data can be quite difficult, especially when dealing with non-famous chess players. To deal with this problem, I will be dividing this project into 2 parts. 
+
+In part 1, I will be using a combination of web-scraping tools to extract birthdates and birthplaces from the Wikipedia pages of chess players over a rating of 2600. This standard was set because once a player reaches the 2600 rating threshold, they usually become more visible in the chess world and are more likely to have a Wikipedia page. 
+
+In part 2, for grandmasters below this rating threshold, I will be extracting almost all of their birth information from a [list of grandmasters Wikipedia page](https://en.wikipedia.org/wiki/List_of_chess_grandmasters). The reason this method is not being used for all of the grandmasters is because I found this page after I had already devised my own web-scraping methods for part 1. By using a more complex framework for the first part of this project, I get the opportunity to practice new python and R web-scraping tools.
+
+I do make use of the list of grandmasters page in the first part of the project when my web-scraper does not extract the correct information. There are some conflicts that arise between the list of grandmasters page and the players' Wikipedia pages, so as we progress through this project, I will detail my process for solving these inconsistencies. 
+
+
+# Part 1: Getting 2600 Birth Information
+
+## Data Preparation 
+
+Before anything else, we need to load the package that permits us to use both R and Python.
+```{r}
+library(reticulate)
+```
+
+
+Let's load the libraries we need for python. 
+```{python}
+import pandas as pd
+from bs4 import BeautifulSoup
+import requests
+from IPython.display import display
+import pprint as pp
+import lxml.html as lh
+
+```
+
+Next, we will be loading our chess rating data, which we obtained from the [FIDE website](https://ratings.fide.com/download_lists.phtml).  I chose the September ratings. 
+```{python}
+file = 'C:/Users/laryl/Desktop/Data Sets/players_list_foa_sept.txt'
+chess = pd.read_fwf(file)
+
+```
+
+
+Let's filter for players over 2600. 
+```{python}
+grandmaster_2600_raw = chess[chess['SRtng']  >= 2600]
+display(grandmaster_2600_raw.info())
+
+```
+
+
+From the output above, we have **266 players** to find information for. Because the players' last names are first, we need to flip them with their first names so that our search queries are more effective later on. Luckily, we can easily do this in R and clean up some of the names at the same time. Here is a preview of the data:
+```{r warning=FALSE, message=FALSE}
+# Flip the players' names
+library(tidyverse)
+grandmaster_2600_r <- py$grandmaster_2600_raw %>%
+  separate(Name, c("Last", "First"), sep = ", ", remove = TRUE, convert = FALSE) %>%
+  unite(Name, First, Last, sep = " ") %>%
+  arrange(Name)
+
+# Fix some problematic names for the next phase
+grandmaster_2600_cleanish <- grandmaster_2600_r %>%
+  mutate(Name = dplyr::recode(Name, 
+                                   "A.R. Saleh Salem" = "Salem Saleh (chess player)",
+                                   "B. Adhiban" = "Adhiban Baskaran",
+                                   "Chao b Li" = "Li Chao (chess player)",
+                                   "Chithambaram VR. Aravindh" = "Aravindh Chithambaram",
+                                   "David W L Howell" = "David Howell (chess player)",
+                                   "Hao Wang" = "Wang Hao (chess player)",
+                                   "NA Narayanan.S.L" = "S.L. Narayanan",
+                                   "NA Nihal Sarin" = "Nihal Sarin",
+                                   "NA Praggnanandhaa R"= "Rameshbabu Praggnanandhaa", 
+                              "Johan-Sebastian Christiansen" = "Johan-Sebastian Christiansen wikipedia" ))
+
+head(grandmaster_2600_cleanish)
+```
+
+## Getting Data Using Google and Wikipedia 
+The Wikipedia URLs of chess players are fairly consistent. The formula for any person is (and we'll use the world champion as an example):
+
+the base URL(https://en.wikipedia.org/wiki/)  + First Name(Magnus) + Last Name(_Carlsen) = https://en.wikipedia.org/wiki/Magnus_Carlsen
+
+However, because the data set was made by FIDE and not Wikipedia, there are a number of inconsistencies that will arise if we just blindly follow the formula above. Here are some of the issues:
+
++ Names from data set could be misspelled
++ Data set first and last names could be flipped (even after we rearranged them)
++ Names that are long are sometimes abbreviated
++ Wikipedia pages are sometimes case sensitive (especially for dutch players)
++ Player Wikipedia pages sometimes only exist in different languages (some of the Spanish and Latino players only have pages in Spanish)
++ Some players have special characters in their names (like accents from other languages)
++ Some players have common names( so we need to ensure that we get the chess player)
++ Some players may not even have a Wikipedia page
+
+
+With all of these issues in mind, I decided to use Google searches so that I could ensure that I get Wikipedia URLs that exist. Luckily, there is a python library that can return webpage links using search queries made in python. So let's make our queries using the names in our data set.
+```{python}
+
+grandmaster_list = list(r.grandmaster_2600_cleanish["Name"])
+
+grandmaster_list_wiki_query = [player + ' wiki chess player' for player in grandmaster_list]
+pp.pprint(grandmaster_list_wiki_query)
+```
+
+We will now use our queries to acquire the URLs. 
+```{python}
+#Load library
+from googlesearch import search
+
+#List to store URLs
+player_wiki_pages = []
+
+# Loop to so that we get one URL for every query
+for p in grandmaster_list_wiki_query:
+  for i in search(p, 
+    tld= 'co.in', 
+    num= 1, 
+    stop= 1, 
+    pause= 2.0):
+    player_wiki_pages.append(i)
+pp.pprint(player_wiki_pages)
+
+```
+
+This worked really well because only a few pages are incorrect. We can deal with this in R by cutting out URLs with inconsistent patterns.
+```{r}
+#Look for URLs that don't have a particular pattern
+player_wiki_pages_test<- grepl(pattern = "^https://en.wikipedia.org/wiki/",  x= py$player_wiki_pages)
+
+# Clean URLs
+player_wiki_pages_clean <- py$player_wiki_pages[player_wiki_pages_test]
+
+# Problematic URLS
+problematic_player_pages <- py$player_wiki_pages[!player_wiki_pages_test]
+problematic_player_pages
+```
+Some problematic pages were not detected because the base URLs were present. Their queries actually generated Wikipedia lists of chess players from particular countries.
+
+
+Because we don't have a way to get these players' URLs through web-scraping, we will manually insert their data into our final data frame. 
+```{r}
+Name <- c( "Jaime, Santos Latasa", "Yu Yangyi", "Georgy, Pilavov", "Suri, Vaibhav", "Aram, Hakobyan")
+Birthdate <- c('1996-07-03',  '1994-06-08',  "1974-12-13", "1997-02-08", "2001-04-01")
+City_of_birth <- c( 'San Sebastián', 'Hubei', "Luhansk", "New Delhi", "Yerevan" )
+
+
+
+problematic_grandmaster_bios <- data.frame(Name, Birthdate, City_of_birth)
+problematic_grandmaster_bios
+```
+
+
+Before we do the actual Wikipedia web-scraping, we need a few helper functions that will make our scraping easier.
+```{python}
+# Function to extract name from url so we can keep track of who's page we are scraping
+def trim_url(x):
+    y = x.replace("https://en.wikipedia.org/wiki/", "").replace("_(chess_player)", "").replace('_'," ")
+    return(y)
+
+# Function to combine web-scraping elements and convert them to strings
+def combine_strings(x):
+  y = ", ".join((str(elements) for elements in x)) 
+  return(y)
+
+# Function that eliminates unnecessary strings
+def extra_string_remover(x):
+  y = combine_strings(x).split(",", 1)
+  z = y[0]
+  return(z)
+```
+
+Let's now convert our clean pages vector above into a list in python and view the amount of players we are working with.
+```{python}
+player_wiki_pages_final = list(r.player_wiki_pages_clean)
+len(player_wiki_pages_final)
+```
+This number we are seeing is the combination of the "clean" chess players and the lists of chess players from particular countries. 
+
+Now, let's use the "Scrapy" library to extract birthdate and birthplace information from each player's Wikipedia page.
+```{python}
+from scrapy import Selector
+player_bios = []
+for url in list(r.player_wiki_pages_clean):
+  html = requests.get(url).content
+  sel = Selector( text = html ) 
+  bday_text = sel.xpath( '//span[@class="bday"]/text()').extract()
+  birthplace = sel.xpath( '//td[@class="infobox-data"]//a/text()').extract()
+  birthplace_clean = extra_string_remover(birthplace)
+  url_name = trim_url(url)
+  player_bios.append( url_name + ": "+   combine_strings(bday_text) + ": "+  birthplace_clean)
+pp.pprint(player_bios)
+
+
+```
+Although we can see some mistakes like ratings and blanks in place of birthplaces, the web-scraper did extract the majority of the data we needed.
+
+We will first convert the information into a data frame in python. 
+```{python}
+player_bios_table_raw = pd.DataFrame(player_bios, columns= ["Bio"])
+print(player_bios_table_raw)
+
+```
+
+Next, we will use R to split the "Bio" column into the three variables we need. We will then combine the "clean" chess players and the problematic ones. 
+```{r}
+player_bios_table_cleanish <- py$player_bios_table_raw %>%
+  separate(Bio, c("Name", "Birthdate", "City_of_birth"), sep = ": ", remove = TRUE, convert = FALSE)%>%
+  filter(Name != "List of Armenian chess players" & Name != "List of Indian chess players")
+
+
+player_bios_table_updated <- rbind(player_bios_table_cleanish, problematic_grandmaster_bios) %>%
+  arrange(Name)
+```
+
+
+Our last step is to produce a final data set that will undergo cleaning and validating using information found in the list of grandmasters Wikipedia page. To make sure our data set can be joined with the data from the Wikipedia list, we need to flip the first and last names back to where they were before and add another "Birthdate" column and "Name" column to our data set because the current "Birthdate" and "Name" columns have issues. As successful as our web-scraper was, it was not perfect, so we do need variables that we know don't have mistakes in them for data validation later on. 
+```{r}
+# Flip first and last names so that last names come first again
+player_bios_table_updated2 <- player_bios_table_updated %>%
+  separate(Name, c("First", "Last"), sep = " ", remove = TRUE, convert = FALSE) %>%
+  unite(Name, Last, First, sep = ", ")%>%
+  arrange(Name)
+
+# Supplemental validation columns from original data frame
+grandmaster_2600_supplement<- py$grandmaster_2600_raw %>%
+  select(Name, `B-day`) %>%
+  rename(Birthdate= `B-day`)
+
+
+# Join supplemental data to bio table using the names and birthdate columns as the keys
+library(fuzzyjoin)
+grandmaster_biotable_2600 <- player_bios_table_updated2 %>%
+  stringdist_left_join(grandmaster_2600_supplement, by = c("Name", "Birthdate"), method= "qgram", q=2, max_dist = 9 ) 
+  
+
+str(grandmaster_biotable_2600)
+
+```
+For transparency, let's go over the similar columns:
+
++ **Name.x**: web-scraped names 
++ **Birthdate.x**: web-scraped birthdates
++ **Name.y**: original names 
++ **Birthdate.y**: original birth years 
+
+## Data Cleaning 
+
+### Dealing with Names
+
+Because we went from **266** observations to **281**, we know for a fact that there are duplicates that were created during the joining process. This was allowed because we needed the function to join as many records as possible. But duplicates are only part of the problem; missing values in the "Name.y" column are present too because we did not achieve a 100% match while joining. For now, let's take a look at the duplicate names and the amount of missing data. 
+```{r}
+# Find duplicate names 
+grandmaster_biotable_2600_dups <- (duplicated(grandmaster_biotable_2600$Name.x))
+grandmaster_biotable_2600$Name.x[grandmaster_biotable_2600_dups]
+
+# Save missing values as data frame
+grandmaster_biotable_2600_missing <- grandmaster_biotable_2600 %>%
+  filter(is.na(Name.y )) 
+
+print(grandmaster_biotable_2600_missing)
+```
+With 15 duplicate web-scraped names and 25 missing original names, we have quite a bit of work to do. For the missing values, there are a number of ways to fill them in. At this point in the project, we have successfully created and executed our web-scraper. Because we have the list of grandmasters Wikipedia page available, the easiest way to handle some of our issues is to continuously merge and clean our web-scraped data using the grandmaster list. This should significantly reduce the amount of manual insertions we need to do. 
+
+Let's load the data from grandmaster list inside R. 
+```{python}
+
+df = pd.read_html('https://en.wikipedia.org/wiki/List_of_chess_grandmasters', attrs = {'id' : 'grandmasters'})
+all_grandmaster_wiki_table = df[0]
+all_grandmaster_wiki_table =  all_grandmaster_wiki_table.drop(labels=0, axis=0)
+pp.pprint(all_grandmaster_wiki_table.info())
+
+```
+Using the missing names table we created, let's try to fill in as many of the missing values as possible, clean the data, and fuse those missing values back into our main table. 
+```{r, warning=FALSE, message=FALSE}
+# Merge missing table with grandmaster list data and clean it
+grandmaster_biotable_2600_miss_resolved <- grandmaster_biotable_2600_missing %>%
+  stringdist_left_join(py$all_grandmaster_wiki_table, by = c("Birthdate.x" = "Born"), method= "lcs" , max_dist = 1 ) %>%
+  mutate(Name = dplyr::recode(Name, 
+    "Nguy<U+1EC5>n Ng<U+1ECD>c Tru<U+1EDD>ng Son" = "Nguyen, Ngoc Truong Son"
+    )) %>%
+  arrange(Name)%>%
+  distinct(`Name.x`, .keep_all = TRUE)
+
+
+library(data.table)
+grandmaster_biotable_2600_miss_resolved <- data.table(grandmaster_biotable_2600_miss_resolved)
+
+# Manually fill in missing chess players  
+grandmaster_biotable_2600_miss_resolved <- grandmaster_biotable_2600_miss_resolved[23, 6 := "Banusz, Tamas"][23, 2 := "1989-04-08"][24, 6 := "Indjic, Aleksandar" ][24, 2 := "1995-08-24"][25, 6 := "Salgado López, Iván"][25, 2 := "1991-06-29"]
+
+grandmaster_biotable_2600_miss_resolved <- grandmaster_biotable_2600_miss_resolved %>%
+  select( Name, Birthdate.x, Birthplace)
+  
+
+
+
+```
+
+Let's take a look at the filled in missing values. 
+```{r}
+
+print(grandmaster_biotable_2600_miss_resolved)
+
+```
+
+Now, we are going to merge the resolved missing data with our main table and observe any changes. We will also fill in our missing Name.y values (the clean names) with the brand new names we got from the resolved missing table.
+```{r warning=FALSE}
+# Merge main bio table and resolved missing data table
+grandmaster_biotable_2600_updated<- grandmaster_biotable_2600 %>%
+  stringdist_left_join(grandmaster_biotable_2600_miss_resolved, by = c("Birthdate.x" , "City_of_birth" = "Birthplace"), method= "qgram", max_dist = 4 ) %>%
+  mutate(Name.y= coalesce(Name.y, Name))%>%
+  select(Name.x, Name.y,  Birthdate.x.x, Birthdate.y, City_of_birth, Birthplace ) %>%
+  rename(Name = Name.y, 
+         Birthdate.x = Birthdate.x.x, 
+         Birthyear = Birthdate.y) %>%
+  arrange(Name) 
+
+# Convert updated bio table data frame to data table class observe how many missing values there are 
+grandmaster_biotable_2600_updated <- setDT(grandmaster_biotable_2600_updated)
+
+print(paste(c(sum(is.na(grandmaster_biotable_2600_updated$Name)), "missing values!"), collapse = " "))
+
+# See the missing values 
+library(knitr)
+kable(grandmaster_biotable_2600_updated[is.na(grandmaster_biotable_2600_updated$Name)])
+
+```
+
+The merge appears to be a success because we managed to fill **16 missing "clean" names**. With only **9 missing "clean" names** left, it should easy to fill them in manually. 
+```{r}
+# Fill in missing clean names 
+grandmaster_biotable_2600_updated2 <- grandmaster_biotable_2600_updated[273, Name := "Almasi, Zoltan" ][274, Name := "Banusz, Tamas"][275, Name := "Baskarans, Adhiban"][276, Name := "Gujrathi Vidit"][277, Name := "Henriquez, Cristobal"][278, Name := "Indjic, Aleksandar" ][279, Name := "Martirosyan, Haik M."][ 280, Name := "Salgado López, Iván"][281, Name := "Van Foreest, Jorden"]
+
+# Check how many missing names are left
+
+print(paste(c(sum(is.na(grandmaster_biotable_2600_updated2$Name)), "missing values!"), collapse = " "))
+
+```
+
+Now, we can begin dealing with the duplicates. Remember that the "Name.x" variable is where the web-scraped names are. This means that if we want to detect any duplicates, it is going to show in that column.
+```{r}
+grandmaster_biotable_2600_duplicates <- grandmaster_biotable_2600_updated2 %>%
+  count(Name.x) %>%
+  filter(n>1)%>%
+  rename(Copies = n)
+
+kable(grandmaster_biotable_2600_duplicates)
+```
+
+
+We can eliminate all of the duplicates using R's distinct function.
+```{r}
+grandmaster_biotable_2600_unique <-  grandmaster_biotable_2600_updated2 %>%
+  distinct(`Name.x`, .keep_all = TRUE)
+
+grandmaster_biotable_2600_unique
+
+```
+Now that the duplicates are gone, there are a number of manual corrections that need to be made due to the merging mistakes that were created earlier. 
+
+```{r warning=FALSE, message=FALSE}
+
+# Corrections 
+
+grandmaster_biotable_2600_almost <- grandmaster_biotable_2600_unique[10, Name :=  "Gyimesi, Zoltan"][10, Birthyear :=  "1977"][20, Name :=  "Donchenko, Alexander"][20, Birthdate.x :=  "1998-03-22"][20, Birthyear :=  "1998"][130, Name :=  "Nielsen, Peter Heine"][130, Birthyear :=  "1973"][138, Name :=  "Narayanan, S. L." ][138, Birthyear :=  "1998" ][139, Name :=  "Sethuraman, S. P." ][139, Birthyear :=  "1993"][139, City_of_birth :=  "Chennai"][165, Name :=  "Paravyan, David"][165, Birthdate.x :=  "1998-03-08"][165, Birthyear :=  "1998"][197, Name :=  "Van Kampen, Robin"][222, Name :=  "Wei, Yi"][222, Birthyear :=  "1999"][222, City_of_birth := "Wuxi"][246, Name :=  "Wang, Yue" ][246, Birthyear :=  "1987" ][247, Name :=  "Yangyi, Yu" ][247, Birthyear :=  "1994" ][259, Name :=  "Banusz, Tamas"][259, Birthdate.x :=  "1989-04-08"][259, Birthyear :=  "1989"][260, Birthyear :=  "1992"]
+
+```
+
+Let's check out our data. 
+```{r}
+# Clean up data a bit
+grandmaster_biotable_2600_almost2 <- grandmaster_biotable_2600_almost %>%
+  arrange(Name) %>%
+  select(Name, Birthdate.x, Birthyear, City_of_birth, Birthplace)
+
+grandmaster_biotable_2600_almost2
+
+
+```
+### Dealing with Birthdates
+
+Phase 2 of the data cleaning now involves making sure our birthdates are correct. Our main issue is that the "Birthdate" column has a number of blank observations. To fix this, we will be doing another merge with the grandmaster list table, using the "Born" column in that data set to fill in the missing blanks. This merge will also permit us to include the "FIDE ID" column so that future merges are more exact. 
+```{r}
+
+# Fill in missing birthdates with born column
+grandmaster_biotable_2600_almost3<- grandmaster_biotable_2600_almost2 %>%
+  stringdist_left_join(py$all_grandmaster_wiki_table, by = c("Name"), method= "qgram", max_dist = 2 )%>%
+  mutate(Birthdate.x = ifelse(Birthdate.x == "", NA, Birthdate.x)) %>%
+  mutate(Birthdate.x=  coalesce(Birthdate.x, Born)) %>%
+  select(`FIDE ID`, Name.x,  Birthdate.x,  Birthyear, City_of_birth ) %>%
+  rename(ID= `FIDE ID`)
+
+grandmaster_biotable_2600_almost3 <- data.table(grandmaster_biotable_2600_almost3)
+
+# View missing data 
+
+print(paste(c(sum(is.na(grandmaster_biotable_2600_almost3$Birthdate.x)) , "missing values!"), collapse = " "))
+```
+
+Now we only have 2 birthdates to manually insert. We can also use the opportunity to fix the FIDE IDs as well. 
+```{r}
+# Manual Corrections
+grandmaster_biotable_2600_almost4 <- grandmaster_biotable_2600_almost3[5, ID := 4157770 ][5, Birthdate.x := "1954-04-02"][10, ID := 702293 ][16, ID := 	4107012 ][18, ID:= 5072786][18, Birthdate.x := "1999-09-11" ][27, ID := 722413 ][31, ID := 5018471 ][79, ID := 3800024 ][92, ID := 3409350 ][139, ID := 8604436 ][200, ID := 11600098 ]
+```
+
+### Dealing with Birthplaces
+
+During the web-scraping process, some of the birthplaces either came out as ratings or blanks. To solve this, we will mutate the columns so that those mistakes become NA values. 
+```{r}
+#Replace problematic birthplaces with NA values
+grandmaster_biotable_2600_almost5 <-  grandmaster_biotable_2600_almost4 %>%
+  mutate(City_of_birth = ifelse(str_detect(City_of_birth , ".*\\d") , NA, City_of_birth) )%>%
+  mutate(City_of_birth = ifelse(City_of_birth == "", NA, City_of_birth))
+
+```
+
+
+
+Using our grandmaster list table, we will fill in our missing city of birth data using the "Birthplace" column from the list. 
+```{r}
+#Load wiki table list in R
+all_grandmaster_wiki_table_r <- py$all_grandmaster_wiki_table
+all_grandmaster_wiki_table_r$Birthplace <- unlist(all_grandmaster_wiki_table_r$Birthplace )
+
+# Join and fill in missing values
+grandmaster_biotable_2600_almost6 <- grandmaster_biotable_2600_almost5 %>%
+  left_join(all_grandmaster_wiki_table_r, by = c("ID" = "FIDE ID") )  %>%
+  mutate(City_of_birth =  coalesce(City_of_birth, Birthplace))%>%
+  select(ID, Name.x, Birthdate.x, Birthyear, City_of_birth, Birthplace )
+
+
+
+grandmaster_biotable_2600_almost6
+```
+With the necessary columns being filled, it's time to move on to validating the data. 
+
+
+## Data Validation
+
+### Validation of dates
+
+The reason we kept the birth year column throughout the merges is because we needed some way to ensure that the birthdates matched the players. Because the birth years came with the players, it is an excellent column for validating the birthdates. Using R's stringdist package, we can compare the string distances between the two columns. If they are accurate, there should only be a distance of 6 because of the additional 2 hyphens and 4 numbers in the "Birthdate" column.
+
+```{r warning=FALSE, message=FALSE}
+library(stringdist)
+stringdist(grandmaster_biotable_2600_almost6$Birthdate.x, grandmaster_biotable_2600_almost6$Birthyear)
+```
+The NA values are being caused by the blanks in the birth year column. Overall, it seems that all of our work payed off because we are only seeing string distances equal to 6. 
+
+
+### Validation of Birthplaces
+
+Validating birthplaces is actually very difficult because of one problem: conflicts between the Wikipedia pages (City_of_birth variable) and the grandmaster list (Birthplace variable). The conflicts are mainly caused by inaccuracies, outdated information, and historical changes. For example, a number of Russian cities have gone through recent political transitions, so their names have changed in the past 20-30 years. Additionally, some cities in Russia and Ukraine have names that are the same. Moreover, it may be difficult to know where a Russian or Ukrainian is born because some players were born in one country but were raised in the other.
+
+Let's take a look at the birthplace conflicts.
+```{r}
+grandmaster_biotable_2600_almost6[grandmaster_biotable_2600_almost6$City_of_birth != grandmaster_biotable_2600_almost6$Birthplace]
+```
+There are 45 conflicts and there is no automated way to deal with them. The best thing to do is to go through them manually and decide which ones or worth changing. The grandmaster list Wikipedia page does support many of their records with FIDE applications, which  sometimes contain player birthplaces. For our purposes, if the grandmaster list has documentation supporting their data (mainly in the form of grandmaster title applications) then that location was chosen over the web-scraped data. Otherwise, the Wikipedia birth places were left alone. 
+
+I could not find a function that could be used to substitute the "City_of_birth" variable with the "Birthplace" variable, so I made my own function. 
+```{r}
+# Correction based on the grandmaster list 
+grandmaster_biotable_2600_almost7 <- grandmaster_biotable_2600_almost6[142, City_of_birth := "Yekaterinburg"][258, City_of_birth := "Tashkent"]
+
+# Row numbers that are going to change
+changing_indices = c(6,9, 19, 28, 55, 67, 74, 90, 92, 99, 100,  105, 106,  133, 140, 160, 239, 245, 261)
+
+# Function that replaces City_of_birth information with Birthplace information
+row_substitute <- function(dt, index) {
+  value= dt[index, Birthplace]
+  dt = dt[index, City_of_birth := value]
+  dt
+}
+
+
+
+for (i in changing_indices){
+  row_substitute(grandmaster_biotable_2600_almost7,i)
+}
+
+grandmaster_biotable_2600_almost7[grandmaster_biotable_2600_almost7$City_of_birth != grandmaster_biotable_2600_almost7$Birthplace]
+
+```
+The last 27 conflicts were left as is. 
+
+
+Here is a glimpse of the final data set after removing chess players that are not grandmasters (Afromeev, Vladimir and  Rausis, Igors). 
+```{r}
+grandmaster_biotable_2600_complete <- grandmaster_biotable_2600_almost7%>%
+  select(ID, Name.x, Birthdate.x, City_of_birth) %>%
+  mutate(City_of_birth = ifelse(City_of_birth == "NaN", NA, City_of_birth))%>%
+  rename(Name = Name.x, 
+         Birthdate = Birthdate.x) %>%
+  filter(Name != "Afromeev, Vladimir" & Name != "Rausis, Igors" ) # Filter out non grandmasters
+str(grandmaster_biotable_2600_complete)
+
+```
+
+
+
+# Part 2: Getting the Rest of the Grandmasters
+
+Unlike Part 1, there is not enough information on Wikipedia for many of these grandmasters. The best thing to do is to get the majority of the information from the grandmaster list. 
+
+## Data Preparation
+
+Let's filter our FIDE data for grandmasters below 2600 and prepare our data sets for merging. 
+```{python}
+# Filter for grandmasters under 2600
+grandmaster_rest_raw = chess[(chess['SRtng']  < 2600) & (chess["Tit"] == "GM") ]
+print(grandmaster_rest_raw.info())
+
+
+```
+
+```{r}
+# Data set preparation
+grandmaster_rest_raw_r <- py$grandmaster_rest_raw %>% 
+  rename(ID = `ID Number`)%>%
+  select(ID, Name)
+  
+
+all_grandmaster_wiki_table_r2 <- all_grandmaster_wiki_table_r %>% 
+  rename(ID = `FIDE ID`) %>%
+  select(ID, Born, Birthplace)
+  
+```
+
+## Merging 
+Now, we can merge the data and find the number of missing birthplace and birthdate values. 
+```{r}
+grandmaster_biotable_rest <- grandmaster_rest_raw_r %>% 
+  left_join(all_grandmaster_wiki_table_r2, by= "ID") %>%
+  rename(Birthdate= Born, 
+         City_of_birth = Birthplace)%>% 
+  mutate(City_of_birth = ifelse(City_of_birth == "NaN", NA, City_of_birth)) 
+  
+
+print(paste(c(sum(is.na(grandmaster_biotable_rest$City_of_birth)), "missing birthplace values!"), collapse = " "))
+print(paste(c(sum(is.na(grandmaster_biotable_rest$Birthdate)), "missing birthdate values!"), collapse = " "))
+```
+
+
+We can fill in these missing birthdate values using chess.com and Wikipedia.
+```{r}
+grandmaster_biotable_rest <- setDT(grandmaster_biotable_rest)
+grandmaster_biotable_rest_complete <- grandmaster_biotable_rest[865, Birthdate := "2009-02-05"][1268, Birthdate := "2005-03-22"]
+
+```
+
+
+258 missing birthplace values is not the only problem; some grandmaster birthdates only have birth years. Unfortunately, this is the best that can be done for this data set. It's now time to append the two data sets.
+
+
+# Part 3: The Final Merge
+
+Let's show the final table and export all of the data sets. 
+```{r}
+
+grandmaster_bdates_bplaces <- rbind(grandmaster_biotable_2600_complete, grandmaster_biotable_rest_complete) %>%
+  arrange(Name) 
+
+grandmaster_bdates_bplaces
+
+
+write.csv(grandmaster_bdates_bplaces,"C:/Users/laryl/Desktop/Data Sets//grandmaster_bdates_bplaces.csv")
+write.csv(grandmaster_biotable_2600_complete,"C:/Users/laryl/Desktop/Data Sets//grandmaster_biotable_2600_complete.csv")
+write.csv(grandmaster_biotable_rest_complete,"C:/Users/laryl/Desktop/Data Sets//grandmaster_biotable_rest.csv")
+
+```
+
+
+# Conclusion 
+
+Although this project began with the simple goal of obtaining grandmaster birthdates, we ended up acquiring birthplaces too. This project proved to be very challenging especially during part 1.  But along with these challenges came the opportunity to combine new R and Python tools like the "fuzzyjoins" package and the "googlesearch" library. The data extracted from this project will be combined with other original data sets from previous chess web-scraping projects so that questions about chess player origins and rating trajectories can be answered. 
+
+
+# Sources 
+
++ For the September chess player ratings, check out the [FIDE Website](https://ratings.fide.com/download_lists.phtml).
+
++ For some of the birthplace information, I used [chess.com's top chess players page](https://www.chess.com/players)
+ 
++ For the birth information, check out the [List of chess grandmasters](https://en.wikipedia.org/wiki/List_of_chess_grandmasters).
+
++ For information about the highest rated FIDE Master, check out Vladmir_Afromeev's [chessgames page  ](https://www.chessgames.com/player/vladimir_afromeev.html) and [Wikipedia page](https://en.wikipedia.org/wiki/Vladimir_Afromeev).

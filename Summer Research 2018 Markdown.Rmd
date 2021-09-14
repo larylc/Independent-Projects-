@@ -7,6 +7,14 @@ output:
     code_folding: hide
     df_print: paged
 ---
+<style>
+
+h1.title, #toc {
+  margin-top: 3em;
+}
+
+
+</style>
 
 <center>
 ![Mountain Lake Biological Station, 6/8/2018.](C:\Users\laryl\Documents\Independent-Projects-\img\IMG-0048.jpg){#id .class width=50% height=50%}

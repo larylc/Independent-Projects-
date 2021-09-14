@@ -18,6 +18,7 @@ body {
 
 .navbar-default {
    background-color: #5dcf3ef2;
+   font-size: 14px;
 }
 
 
@@ -33,6 +34,12 @@ a.dropdown-toggle:hover {
 a.navbar-brand:hover {
   color: #000000;
   background-color: #d3f590;
+  font-size: 14px;
+}
+
+a.navbar-brand {
+  color: #000000;
+  font-size: 14px;
 }
 
 item.active, .list-group-item.active:hover {
@@ -55,7 +62,7 @@ color: #5dcf3ef2;
 <center>
 
 
-<b> Welcome to my project website! </b>
+<span style = "color:#5dcf3ef2"><b> Welcome to my project website! </b> </span>
 This is where I post my projects in their entirety. These projects are formatted so that readers are  <b>1)</b> taken through my data science thinking process and <b>2)</b> provided with all of the technical tools I use for these projects. For a more detailed summary of the projects please visit my [GitHub page](https://github.com/larylc/Independent-Projects-).
 
 
@@ -63,27 +70,32 @@ This is where I post my projects in their entirety. These projects are formatted
 
 <details>
 <summary><b> Project 1: </b> Summer Research Project 2018 </summary>
-* Investigated how movement affects forked fungus beetle social network position. 
+Investigated how movement affects forked fungus beetle social network position. 
 </details>
 
 <details>
 <summary><b> Project 2:</b> Exploratory Pokemon Analysis 2020 </summary>
-* Explored data visualization using Pokemon gaming data.
+Explored data visualization using Pokemon gaming data.
 </details>
 
 <details>
 <summary><b> Project 3: </b> Features of One Gender Schools (2021) </summary>
-* Analyzed the key differences between co-ed colleges and single sex colleges.
+Analyzed the key differences between co-ed colleges and single sex colleges.
+</details>
+
+<details>
+<summary><b> Project 4: </b> Grandmaster B-days and B-dates (2021) </summary>
+Created original data set of chess grandmaster birth information using web-scraping tools and Wikipedia pages.
 </details>
 
 <details>
 <summary><b> Minor Project 1:</b> Understanding Anime Genre Trends (2021) </summary>
-* Examined popularity of anime genres. 
+Examined popularity of anime genres. 
 </details>
 
 <details>
 <summary><b> Minor Project 2: </b> Do Children Have Bad Taste (2021) </summary>
-* Explored how tv show ratings differ across age categories.
+Explored how tv show ratings differ across age categories.
 </details>
 
 </center>
