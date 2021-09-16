@@ -14,7 +14,7 @@ output:
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
 
 h1.title, #toc {
-  margin-top: 5em;
+  margin-top: 150px;
 }
 
 
@@ -608,9 +608,9 @@ grandmaster_bdates_bplaces <- rbind(grandmaster_biotable_2600_complete, grandmas
 grandmaster_bdates_bplaces
 
 
-write.csv(grandmaster_bdates_bplaces,"C:/Users/laryl/Desktop/Data Sets//grandmaster_bdates_bplaces.csv")
-write.csv(grandmaster_biotable_2600_complete,"C:/Users/laryl/Desktop/Data Sets//grandmaster_biotable_2600_complete.csv")
-write.csv(grandmaster_biotable_rest_complete,"C:/Users/laryl/Desktop/Data Sets//grandmaster_biotable_rest.csv")
+write.csv(grandmaster_bdates_bplaces,"C:/Users/laryl/Desktop/Data Sets//all_grandmaster_bdates_bplaces.csv")
+write.csv(grandmaster_biotable_2600_complete,"C:/Users/laryl/Desktop/Data Sets//top_grandmaster_bdates_bplaces.csv")
+write.csv(grandmaster_biotable_rest_complete,"C:/Users/laryl/Desktop/Data Sets//rest_of_grandmaster_bdates_bplaces.csv")
 
 ```
 

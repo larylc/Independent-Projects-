@@ -1,0 +1,332 @@
+---
+title: "Finding the Missing Records"
+author: "Cedric Lary"
+date: "9/2/2021"
+output: 
+  rmdformats::html_clean:
+    code_folding: hide
+    df_print: paged
+    toc_depth: 3
+---
+
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+
+h1, h2, h3 {
+  font-family: Libre Baskerville;
+  font-weight: bold;
+}
+
+h1.title, #toc {
+  margin-top: 150px;
+}
+
+body {
+  font-family: Libre Baskerville;
+}
+</style>
+
+
+# Introduction 
+
+This project aims to extract rating history data from the [OlimpBase website](https://www.olimpbase.org/Elo/Elo200110e.html). Because the official FIDE website only publishes data from January 2000 to now, there is a lot of missing data especially for older chess players. This is where OlimpBase comes in. Unlike, most chess websites, OlimpBase actually has rating information dating back to the late 70s.
+
+Our procedure for this project will be web-scraping OlimpBase's monthly rating records using individual player OlimpBase URLs. Although OlimpBase player URLs follow a fairly consistent pattern, there are inconsistencies that will make accessing these pages difficult. Additionally, because the website is outdated, extracting information will require a combination of new tools. 
+
+
+# Data Preparation 
+
+Like previous web-scraping projects, we will be getting player names using [FIDE's downloadable monthly data](https://ratings.fide.com/download_lists.phtml). From there, we will take the names and combine them with the OlimpBase's root URL so that we can access individual player pages. 
+
+
+Let's load the necessary packages and libraries. 
+```{r}
+library(reticulate)
+```
+
+
+```{python}
+import pandas as pd
+from bs4 import BeautifulSoup
+import requests
+from IPython.display import display
+import pprint as pp
+import lxml.html as lh
+from googlesearch import search
+from scrapy import Selector
+
+```
+
+
+Let's load the September monthly data and convert the "B-day" variable to the numeric class.
+```{python}
+file = 'C:/Users/laryl/Desktop/Data Sets/players_list_foa_sept.txt'
+chess = pd.read_fwf(file)
+chess['B-day'] = pd.to_numeric(chess["B-day"])
+print(chess.info())
+
+
+```
+
+Because our focus is older grandmasters, we need to filter for not only players with grandmaster titles but also players born before a particular year. Our future projects will only really be concerned with ratings after players reach the age of 10. Ten years before the start of the FIDE website data is 1990. So that will be our cutoff. Additionally, our future projects will be focused on the strongest chess players, so we can use the 2600 cutoff to reduce the players we need to gather information for. 
+```{python}
+
+players_before_1990 = chess[(chess["B-day"] < 1990) & (chess["Tit"] == "GM")]
+players_before_1990_clean = players_before_1990[players_before_1990["SRtng"] >= 2600]
+players_before_1990_cut= players_before_1990_clean[["ID Number", "Name", "B-day"]]
+
+pp.pprint(players_before_1990_cut.info())
+```
+With only 149 players to work with. It's time to get started. 
+
+
+Our first real problem comes from the inconsistencies in the URLs of the chess players. Because some players have 3 names or have initials in their names, this makes it difficult to easily generate player URLs. So we are going to separate the chess players into "problematic" players and "clean" players using the amount of spaces between the players names as filters.
+```{r warning=FALSE, message=FALSE}
+library(tidyverse)
+
+# Count spaces between names
+players_before_1990_counted <- py$players_before_1990_cut %>% 
+  mutate(space_count = str_count(Name, " "))
+
+# Problematic players with more than 1 space between names
+problematic_players_df <- players_before_1990_counted %>%
+  filter(space_count > 1) %>%
+  filter(Name != "Li, Chao b" & Name != "Iturrizaga Bonelli, Eduardo" ) %>%
+  arrange(Name)
+
+# Clean players with only 1 space between names
+clean_players_df <- players_before_1990_counted %>%
+  filter(space_count == 1) 
+
+str(problematic_players_df)
+str(clean_players_df)
+```
+We had to exclude two problematic chess players because they did not have any records on OlimpBase.
+
+In these next few code blocks, we are going to take our clean chess players and append their first and last names to a base URL so that we can access their OlimpBase webpages.
+```{r}
+clean_players_df_updated<- clean_players_df %>%
+  separate(Name, c("Last", "First"), sep = ", ", remove = TRUE, convert = FALSE)
+
+lastname <- clean_players_df_updated$Last
+firstname <- clean_players_df_updated$First
+
+
+```
+
+```{python}
+lastname_list = list(r.lastname)
+firstname_list = list(r.firstname)
+
+```
+
+```{python}
+
+index_python = list(range(0,len(lastname_list),1))
+
+prepped_olimpbase_pages = []
+for p in index_python: 
+  player_page = "https://www.olimpbase.org/Elo/player/" + lastname_list[p] + ",%20" + firstname_list[p] + ".html"
+  prepped_olimpbase_pages.append(player_page)
+
+print("Our clean list contains", len(prepped_olimpbase_pages), "webpages!")
+```
+
+
+As tempting as it would be to find a method that would allow us to create URLs from these problematic players, it is probably best to manually insert these 14 URLs. 
+```{python}
+problematic_olimpbase_pages = [
+  "https://www.olimpbase.org/Elo/player/Bruzon,%20Lazaro.html",
+  "https://www.olimpbase.org/Elo/player/Dominguez,%20Lenier.html",
+  "https://www.olimpbase.org/Elo/player/Fedorchuk,%20Sergey%20A..html",
+  "https://www.olimpbase.org/Elo/player/Ganguly,%20Surya%20Shekhar.html",
+  "https://www.olimpbase.org/Elo/player/Granda%20Zuniga,%20Julio%20E..html",
+  "https://www.olimpbase.org/Elo/player/Hodgson,%20Julian%20M..html",
+  "http://www.olimpbase.org/Elo/player/Illescas%20Cordoba,%20Miguel.html",
+  "https://www.olimpbase.org/Elo/player/Jones,%20Gawain%20C..html",
+  "https://www.olimpbase.org/Elo/player/Mc%20Shane,%20Luke%20J..html",
+  "https://www.olimpbase.org/Elo/player/Nielsen,%20Peter%20Heine.html",
+  "https://www.olimpbase.org/Elo/player/Sadler,%20Matthew.html",
+  "https://www.olimpbase.org/Elo/player/Short,%20Nigel%20D..html",
+  "https://www.olimpbase.org/Elo/player/Vallejo%20Pons,%20Francisco.html",
+  "https://www.olimpbase.org/Elo/player/Van%20Wely,%20Loek.html"
+]
+
+print("Our problematic list contains",  len(problematic_olimpbase_pages), "webpages!")
+```
+
+
+Let's put all of the pages together. 
+```{python}
+all_olimpbase_pages = [*prepped_olimpbase_pages, *problematic_olimpbase_pages]
+print("In total, our master list contains",  len(all_olimpbase_pages), "webpages!")
+
+```
+
+# Webscraping 
+
+As mentioned above, one of the biggest issues with extracting information from OlimpBase is the outdated structure of its webpages. Essentially, the key thing that this web-scraper does is extract specific text elements using a combination of string matching functions and the Scrapy library. 
+
+But before doing any web-scraping, there is one more issue to resolve. There were 2 chess players who's missing 1994 data caused my web-scraper to err. The 2 chess players were Garry Kasparov and Nigel Short. Why did they cause problems? It's because in 1993 Kasparov and Short, frustrated with the FIDE regulations, split from the federation and held their own World Championship. This lead to FIDE stripping them of their titles, which explains why they were missing their 1994 rating data and caused problems for my web-scraper. For more information, check out this [Wikipedia page](https://en.wikipedia.org/wiki/World_Chess_Championship_1993).
+
+This means we need to extract Kasparov and Short's data separately.
+```{python}
+# Extract Kasparov and Short's URLs from main lis.
+all_olimpbase_pages.remove("https://www.olimpbase.org/Elo/player/Kasparov,%20Garry.html")
+all_olimpbase_pages.remove("https://www.olimpbase.org/Elo/player/Short,%20Nigel%20D..html")
+all_olimpbase_pages_updated = all_olimpbase_pages
+
+print("There are now", len(all_olimpbase_pages_updated), "in our main list!")
+```
+
+Let's load the functions that will permit us to extract specific elements on the webpages. 
+```{python}
+# Load library for access to regular expressions
+import re
+
+
+# Finds rating information
+def find_info(x):
+    y = re.findall(r'(?<![0-9])[0-9]{4}(?!\.|\=|[0-9])',  x)    
+    return(y)
+
+# Merges strings together
+def combine_strings(x):
+  y = ", ".join((str(elements) for elements in x)) 
+  return(y)
+
+# Extracts player names
+def find_names(x):
+  y = re.findall(r'([A-Z][a-z]+)', x)
+  return(y)
+
+```
+
+Let's append all of the web-scraped information to a list.
+```{python}
+# Extract date, rating, id, and names from webpage
+def extract_data_clean_players(pages):
+  player_information_list = []
+  for page in pages: 
+    html = requests.get(page).content
+    sel = Selector( text = html )
+    dates = sel.xpath( '//pre[2]/a/text()').extract()
+    infos = sel.xpath( '//pre[2]/text()').extract()
+    dates_flat = [str(date) for date in dates]
+    infos_flat = [combine_strings(find_info(str(info))) for info in infos]
+    infos_clean = [x for x in infos_flat if x]
+    names = [combine_strings(find_names(str(name))) for name in infos]
+    names_clean = [x for x in names if x]
+    indices = list(range(0,len(dates_flat),1))
+    for number in indices:
+      player_information_list.append(  str(names_clean[number]) + ": " + str(dates_flat[number])  + ": " + str(infos_clean[number]))
+  return(player_information_list)
+
+player_information_list= extract_data_clean_players(all_olimpbase_pages_updated)
+print("Our clean player list has", len(player_information_list), "elements!")
+```
+
+
+We will now convert the list into a data frame with a single column.
+```{python}
+player_information_df = pd.DataFrame(player_information_list, columns= ["Bio"])
+pp.pprint(player_information_df.head(10))
+```
+
+Let's use a similar scraper to extract Kasaprov and Short's information and convert that into data frames.
+```{python}
+# Save Kasparov and Short's URLs
+kasparov = "https://www.olimpbase.org/Elo/player/Kasparov,%20Garry.html"
+short = "https://www.olimpbase.org/Elo/player/Short,%20Nigel%20D..html"
+
+# Function that extracts all information on the webpages and removes 1994 records.
+def create_df_problem_players(page):
+    html = requests.get(page).content
+    sel = Selector( text = html )
+    dates = sel.xpath( '//pre[2]/a/text()').extract()
+    infos = sel.xpath( '//pre[2]/text()').extract()
+    names = [combine_strings(find_names(str(name))) for name in infos]
+    names_clean = [x for x in names if x]
+    dates_flat = [str(date) for date in dates]
+    dates_flat.remove("Jan 1994")
+    dates_flat.remove("Jul 1994")
+    infos_flat = [combine_strings(find_info(str(info))) for info in infos]
+    infos_clean = [x for x in infos_flat if x]
+    player_dic = {"Name": names_clean, "Date": dates_flat, "RTNG": infos_clean}
+    player_df = pd.DataFrame(player_dic) 
+    return(player_df)
+
+# Run function and save Kasparov and Short data as data frames.
+kasparov_df_raw = create_df_problem_players(kasparov)
+short_df_raw = create_df_problem_players(short)
+
+```
+
+
+# Data Cleaning and Validation
+
+Now that we have all of the data we need, let's put it all together.
+```{r}
+# Modify main data frame 
+player_information_df_clean <- py$player_information_df %>%
+  separate(Bio, c("Name", "Date", "RTNG"), sep = ": ", remove = TRUE, convert = FALSE)
+
+# Append data frames
+combined_player_info <- rbind(player_information_df_clean, py$kasparov_df_raw, py$short_df_raw)
+str(combined_player_info)
+```
+
+
+On the OlimpBase website, I discovered that some chess players had multiple IDs because of federation switches and FIDE ID procedure changes. For this reason, we will use the September monthly rating supplement from the beginning of this project to ensure that each chess player has a consistent current FIDE ID.
+```{r}
+supplemental_player_info<- py$players_before_1990_cut %>%
+  filter(Name != "Li, Chao b" & Name != "Iturrizaga Bonelli, Eduardo" ) 
+
+# Merge main data with supplemental data using Name string distances.
+library(fuzzyjoin)
+combined_player_info_almost <- combined_player_info %>% 
+#Change the names that don't merge easily with supplemental data
+  mutate(Name = dplyr::recode(Name, 
+    "Bruzon, Lazaro" = "Bruzon Batista, Lazaro", 
+    "Dominguez, Lenier" = "Dominguez Perez, Leinier",
+    "Jones, Gawain" = "Jones, Gawain C B"
+    )) %>%
+  stringdist_left_join(supplemental_player_info, by = "Name", method= "qgram",  max_dist = 3) %>%
+  select(Name.y, `ID Number`, Date, RTNG)%>%
+  rename(Name = Name.y)
+  
+```
+
+
+The last step is to convert the columns to their proper data types and filter for data before January 2000 because we already have that information. Note that FIDE published only January and July monthly ratings until the 2000s.
+```{r}
+library(lubridate)
+top_grandmaster_ratings_before_2000 <- combined_player_info_almost %>% 
+  mutate(RTNG = as.numeric(RTNG)) %>%
+  mutate(Date = parse_date_time(Date, "%b %Y")) %>%
+  filter(Date <="1999-07-01")
+
+top_grandmaster_ratings_before_2000
+```
+
+Let's export our data.
+````{r}
+write.csv(top_grandmaster_ratings_before_2000,"C:/Users/laryl/Desktop/Data Sets//top_grandmaster_ratings_before_2000.csv")
+
+```
+
+
+# Conclusion
+
+Although this project was short, it was extremely challenging. The majority of my time was used to find a method that could produce URLs  and extract the deeply nested data within them. One of the biggest takeaways from this project was the amount of inconsistencies found in the FIDE data. Being able to see how FIDE's data management has improved over the years proved to be more interesting than I originally thought. With the data acquired through this project and the previous chess web-scraping projects, we can now have fun creating visualizations that give us a better understanding of chess players growth over the last 50 years. 
+
+
+# Sources
+
++ For the September chess player ratings, check out the [FIDE Website](https://ratings.fide.com/download_lists.phtml).
+
++ For access to chess player records before 2000, see the [OlimpBase's monthly ratings](https://www.olimpbase.org/Elo/Elo200110e.html).
+
++ For more information about the 1993 split, see this [Wikipedia page](https://en.wikipedia.org/wiki/World_Chess_Championship_1993).
+
