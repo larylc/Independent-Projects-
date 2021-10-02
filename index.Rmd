@@ -103,4 +103,9 @@ Explored how tv show ratings differ across age categories.
 Created original data set of chess grandmaster rating histories before the year 2000.
 </details>
 
+<details>
+<summary><b> Data Visualization App: </b> Pathway to Prodigy (2021) </summary>
+Used original chess prodigy data set to create app that compares the rating trajectories of chess players over age ranges.
+</details>
+
 </center>

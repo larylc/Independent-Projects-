@@ -237,6 +237,9 @@
       <li>
         <a href="missing_chess_records.html">Minor Proj.3 (R &amp; Python)</a>
       </li>
+      <li>
+        <a href="https://loganlary.shinyapps.io/prodigies_app/?_ga=2.15136438.103236738.1633010249-569369622.1613318148">Data Viz App (R)</a>
+      </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               
@@ -302,7 +305,7 @@
 <style>
 
 h1.title, #toc {
-  margin-top: 100px;
+  margin-top: 130px;
 }
 
 
@@ -2368,10 +2371,10 @@ h1.title, h1, h2, h3, h4, body {
 <div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visreg</span>(pokemon_design_vs_points_fit, <span class="st">&quot;design_mean&quot;</span>, <span class="at">gg=</span> <span class="cn">TRUE</span>, </span>
 <span id="cb150-2"><a href="#cb150-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">line=</span> <span class="fu">list</span>(<span class="at">col =</span><span class="st">&quot;orange2&quot;</span>),</span>
 <span id="cb150-3"><a href="#cb150-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&quot;Mean Design Score&quot;</span>, </span>
-<span id="cb150-4"><a href="#cb150-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">&quot;Total Stat Point&quot;</span>,</span>
+<span id="cb150-4"><a href="#cb150-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">&quot;Stat Total&quot;</span>,</span>
 <span id="cb150-5"><a href="#cb150-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="fu">list</span>(<span class="at">col =</span> <span class="st">&quot;grey85&quot;</span>))<span class="sc">+</span> </span>
 <span id="cb150-6"><a href="#cb150-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
-<span id="cb150-7"><a href="#cb150-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Design Rating vs Total Stats Regression&quot;</span>)<span class="sc">+</span></span>
+<span id="cb150-7"><a href="#cb150-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Design Rating vs Stat Total Regression&quot;</span>)<span class="sc">+</span></span>
 <span id="cb150-8"><a href="#cb150-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">&quot;Georgia&quot;</span>),</span>
 <span id="cb150-9"><a href="#cb150-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>, <span class="fu">margin</span>(<span class="at">b =</span> <span class="dv">10</span>), <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">family =</span> <span class="st">&quot;Georgia&quot;</span>))</span></code></pre></div>
 <p><img src="pokemon-project-2020_files/figure-html/unnamed-chunk-58-1.png" width="768" /></p>

@@ -12,7 +12,7 @@ output:
 <style>
 
 h1.title, #toc {
-  margin-top: 100px;
+  margin-top: 130px;
 }
 
 
@@ -385,7 +385,8 @@ plot_data <- college_scorecard_cat_demographics_complete %>%
   add_bars() %>%
   layout(barmode = "stack",
          font = list(family = "Georgia"), 
-         yaxis = list(tickformat = "%"))
+         yaxis = list(title = "Percentage of Colleges", tickformat = "%"),
+         xaxis = list(title= "College Type" ))
 ```
 From this chart, we can clearly see that around half of both men-only and women-only colleges are religious wheres 14% percent of coed colleges are religious. 
 
@@ -828,7 +829,7 @@ college_scorecard_majors %>%
   add_trace(y = ~mean_lb_arts, name= 'Liberal Arts Degrees', marker = list(color = "#f1cb35"))%>%
   add_trace(y = ~mean_prof_voc, name= 'Professional and Vocational Degrees', marker = list(color = "#bdb8b8"))%>%
   layout(barmode = "group", 
-         xaxis = list(title = ""),
+         xaxis = list(title = "College Type"),
          yaxis = list(title = "Proportion of Degrees Conferred"),
          font = list(family = "Georgia"))
 ```
@@ -866,7 +867,7 @@ college_scorecard_completely_prepped %>%
   plot_ly(x = ~SEX_SPECIFIC, y = ~avg_mean, type= 'bar', name= 'Mean Earning ', marker = list(color = "#44668b")) %>%
   add_trace(y = ~avg_md, name= 'Median Earnings', marker = list(color = "#f1cb35"))%>%
   layout(barmode = "group", 
-         xaxis = list(title = ""),
+         xaxis = list(title = "College Type"),
          yaxis = list(title = "Average Earnings After 10 Years"),
          font = list(family = "Georgia"))
 
@@ -946,7 +947,7 @@ college_scorecard_completely_prepped %>%
   add_trace(y = ~avg_completion_as, name= 'Asian', marker = list(color = "#cc8834"))%>%
   add_trace(y = ~avg_completion_ai, name= 'American Indian/ Alaska Native', marker = list(color = "#bdb8b8"))%>%
   layout(barmode = "group", 
-         xaxis = list(title = ""),
+         xaxis = list(title = "College Type"),
          yaxis = list(title = "Average Completion Rate"),
          font = list(family = "Georgia"))
 ```
@@ -992,7 +993,7 @@ college_scorecard_completely_prepped %>%
   add_trace(y = ~avg_completion_nra, name= 'Nonresident Aliens', marker = list(color = "#f1cb35"))%>%
   add_trace(y = ~avg_completion_u, name= 'Unknown', marker = list(color = "#cc8834"))%>%
   layout(barmode = "group", 
-         xaxis = list(title = ""),
+         xaxis = list(title = "College Type"),
          yaxis = list(title = "Average Completion Rate"),
          font = list(family = "Georgia"))
 ```
@@ -1041,14 +1042,14 @@ faculty_data <- college_scorecard_completely_prepped %>%
 faculty_data %>%
   plot_ly(x = ~SEX_SPECIFIC, y = ~avg_fascal, type= 'bar', marker = list(color = "#1298d0"))%>%
   layout(barmode = "group", 
-         xaxis = list(title = ""),
+         xaxis = list(title = "College Type"),
          yaxis = list(title = "Average Faculty Salary (Monthly)"), 
          font = list(family = "Georgia")) 
 
 faculty_data %>%
   plot_ly(x = ~SEX_SPECIFIC, y = ~avg_pftfac, type= 'bar', marker = list(color = "#cc8834"))%>%
   layout(barmode = "group", 
-         xaxis = list(title = ""),
+         xaxis = list(title = "College Type"),
          yaxis = list(title = "Average Proportion of Full Time Faculty"),
          font = list(family = "Georgia"))
 
@@ -1074,7 +1075,7 @@ college_scorecard_completely_prepped %>%
   summarize(avg_median_hh = mean(MEDIAN_HH_INC, na.rm= TRUE)) %>%
   plot_ly(x = ~SEX_SPECIFIC, y = ~avg_median_hh, type= 'bar', marker = list(color = "#1298d0"))%>%
   layout(barmode = "group", 
-         xaxis = list(title = ""),
+         xaxis = list(title = "College Type"),
          yaxis = list(title = "Average Median Household Income"),
          font = list(family = "Georgia"))
 

@@ -52,7 +52,7 @@ My goal for this project is to gather as many chess grandmaster birthdates and b
 
 In part 1, I will be using a combination of web-scraping tools to extract birthdates and birthplaces from the Wikipedia pages of chess players over a rating of 2600. This standard was set because once a player reaches the 2600 rating threshold, they usually become more visible in the chess world and are more likely to have a Wikipedia page. 
 
-In part 2, for grandmasters below this rating threshold, I will be extracting almost all of their birth information from a [list of grandmasters Wikipedia page](https://en.wikipedia.org/wiki/List_of_chess_grandmasters). The reason this method is not being used for all of the grandmasters is because I found this page after I had already devised my own web-scraping methods for part 1. By using a more complex framework for the first part of this project, I get the opportunity to practice new python and R web-scraping tools.
+In part 2, for grandmasters below this rating threshold, I will be extracting almost all of their birth information from a [list of grandmasters Wikipedia page](https://en.wikipedia.org/w/index.php?title=List_of_chess_grandmasters&diff=1043484298&oldid=1043482995) (See sources for why I am using an older version of this page). The reason this method is not being used for all of the grandmasters is because I found this page after I had already devised my own web-scraping methods for part 1. By using a more complex framework for the first part of this project, I get the opportunity to practice new python and R web-scraping tools.
 
 I do make use of the list of grandmasters page in the first part of the project when my web-scraper does not extract the correct information. There are some conflicts that arise between the list of grandmasters page and the players' Wikipedia pages, so as we progress through this project, I will detail my process for solving these inconsistencies. 
 
@@ -115,7 +115,8 @@ grandmaster_2600_cleanish <- grandmaster_2600_r %>%
                                    "NA Narayanan.S.L" = "S.L. Narayanan",
                                    "NA Nihal Sarin" = "Nihal Sarin",
                                    "NA Praggnanandhaa R"= "Rameshbabu Praggnanandhaa", 
-                              "Johan-Sebastian Christiansen" = "Johan-Sebastian Christiansen wikipedia" ))
+                              "Johan-Sebastian Christiansen" = "Johan-Sebastian Christiansen wikipedia",
+                              "Konstantin Landa" = "Konstantin Landa wikipedia"))
 
 head(grandmaster_2600_cleanish)
 ```
@@ -142,7 +143,7 @@ With all of these issues in mind, I decided to use Google searches so that I cou
 
 grandmaster_list = list(r.grandmaster_2600_cleanish["Name"])
 
-grandmaster_list_wiki_query = [player + ' wiki chess player' for player in grandmaster_list]
+grandmaster_list_wiki_query = [player + ' wiki chess player'  for player in grandmaster_list]
 pp.pprint(grandmaster_list_wiki_query)
 ```
 
@@ -307,13 +308,16 @@ With 15 duplicate web-scraped names and 25 missing original names, we have quite
 
 Let's load the data from grandmaster list inside R. 
 ```{python}
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 
-df = pd.read_html('https://en.wikipedia.org/wiki/List_of_chess_grandmasters', attrs = {'id' : 'grandmasters'})
+df = pd.read_html('https://en.wikipedia.org/w/index.php?title=List_of_chess_grandmasters&diff=prev&oldid=1043484298', attrs = {'id' : 'grandmasters'})
 all_grandmaster_wiki_table = df[0]
 all_grandmaster_wiki_table =  all_grandmaster_wiki_table.drop(labels=0, axis=0)
 pp.pprint(all_grandmaster_wiki_table.info())
 
 ```
+
 Using the missing names table we created, let's try to fill in as many of the missing values as possible, clean the data, and fuse those missing values back into our main table. 
 ```{r, warning=FALSE, message=FALSE}
 # Merge missing table with grandmaster list data and clean it
@@ -617,7 +621,11 @@ write.csv(grandmaster_biotable_rest_complete,"C:/Users/laryl/Desktop/Data Sets//
 
 # Conclusion 
 
-Although this project began with the simple goal of obtaining grandmaster birthdates, we ended up acquiring birthplaces too. This project proved to be very challenging especially during part 1.  But along with these challenges came the opportunity to combine new R and Python tools like the "fuzzyjoins" package and the "googlesearch" library. The data extracted from this project will be combined with other original data sets from previous chess web-scraping projects so that questions about chess player origins and rating trajectories can be answered. 
+Although this project began with the simple goal of obtaining grandmaster birthdates, we ended up acquiring birthplaces too. This project proved to be very challenging especially during part 1.  But along with these challenges came the opportunity to combine new R and Python tools like the "fuzzyjoins" package and the "googlesearch" library. 
+
+The data extracted from this project will be combined with other original data sets from previous chess web-scraping projects so that questions about chess player origins and rating trajectories can be answered. **Note that these data sets are not complete because there are many manual insertions and corrections that need to be done. However, there is going to be an updated version of this data set that will include country of birth information and longitude and latitude data.** If you want to get more information about the data sets (the ones here and the updated one)  and download them, please visit my [GitHub](https://github.com/larylc/More-Chess-Webscraped-Data). 
+
+
 
 
 # Sources 
@@ -626,6 +634,6 @@ Although this project began with the simple goal of obtaining grandmaster birthd
 
 + For some of the birthplace information, I used [chess.com's top chess players page](https://www.chess.com/players)
  
-+ For the birth information, check out the [List of chess grandmasters](https://en.wikipedia.org/wiki/List_of_chess_grandmasters).
++ For the birth information, check out the [ current list of chess grandmasters](https://en.wikipedia.org/wiki/List_of_chess_grandmasters) and the [ old list of chess grandmasters](https://en.wikipedia.org/w/index.php?title=List_of_chess_grandmasters&diff=prev&oldid=1043484298) which used to have birthplace column before editors changed it.
 
-+ For information about the highest rated FIDE Master, check out Vladmir_Afromeev's [chessgames page  ](https://www.chessgames.com/player/vladimir_afromeev.html) and [Wikipedia page](https://en.wikipedia.org/wiki/Vladimir_Afromeev).
++ For information about the highest rated FIDE Master, check out Vladmir Afromeev's [chessgames page  ](https://www.chessgames.com/player/vladimir_afromeev.html) and [Wikipedia page](https://en.wikipedia.org/wiki/Vladimir_Afromeev).

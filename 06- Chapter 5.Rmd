@@ -331,10 +331,10 @@ Let's get to the plotting:
 visreg(pokemon_design_vs_points_fit, "design_mean", gg= TRUE, 
        line= list(col ="orange2"),
        xlab = "Mean Design Score", 
-       ylab = "Total Stat Point",
+       ylab = "Stat Total",
        fill = list(col = "grey85"))+ 
   theme_bw()+
-  labs(title = "Design Rating vs Total Stats Regression")+
+  labs(title = "Design Rating vs Stat Total Regression")+
   theme(text = element_text(family = "Georgia"),
         plot.title = element_text(size = 13, margin(b = 10), hjust = 0.5, family = "Georgia"))
 
