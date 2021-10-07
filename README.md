@@ -199,7 +199,9 @@ Following the link above will lead you to my project website. There, I will be p
 * Sources 
  
 </details>
+
 ---
+
 ## Minor Projects 
 
 ### **Minor Project 1: Understanding Anime Genre Trends** 
