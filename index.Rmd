@@ -1,111 +1,137 @@
 ---
-title: About
+title: ""
+
 ---
-<style>
 
-h1.title, h1, h2, h3, h4 {
-  font-family: Georgia;
-  text-align: center;
-  font-weight: bold;
-  color: #5dcf3ef2;
-}
+```{r setup, include=FALSE}
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+```
 
-body {
-  font-family: Georgia;
-  background-color: #f7e7b0;
+<div class= "main">
+<div class= "article article1">
+![](C:\Users\laryl\Documents\Independent-Projects-\img\IMG-0380.JPG){#img height="350"}
 
-}
+<div id = "square"></div>
 
-.navbar-default {
-   background-color: #5dcf3ef2;
-   font-size: 14px;
-}
+</div>
 
 
-.navbar-default .navbar-nav>.open>a, 
-.navbar-default .navbar-nav>.active>a, 
-a.dropdown-toggle:hover {
-  background-color: #d3f590;
-}
+<div class = "article article2">
 
-.navbar-default .dropdown-menu>.active>a
-.navbar-default .navbar-nav:hover, 
-.navbar-default .navbar-nav>li>a:hover, 
-a.navbar-brand:hover {
-  color: #000000;
-  background-color: #d3f590;
-  font-size: 14px;
-}
+<div id = "line"></div>
+<div class = "section section1">
 
-a.navbar-brand {
-  color: #000000;
-  font-size: 14px;
-}
+### Welcome to my project website! 
+This is where I post my projects in their entirety. These projects are formatted so that readers are  <b>1)</b> taken through my data science thinking process and <b>2)</b> provided with all of the technical tools I use for these projects. 
 
-item.active, .list-group-item.active:hover {
-  background-color: #000000;
-}
+For a more detailed summary of the projects please visit my [GitHub page](https://github.com/larylc/Independent-Projects-).
 
-a {
-color: #5dcf3ef2;
-}
-</style>
+For more information about my skill set please visit my [personal website](https://cedriclary.netlify.app/).
+
+</div>
+
+<div id = "line"></div>
 
 
-<center>
-
-![ Mountain Lake Biological Station, 08/09/2018.](C:\Users\laryl\Documents\Independent-Projects-\img\IMG-0380.JPG){#id .class style="border-radius:50%" height="450"}
-</center>
-
-
-
-<center>
-
-
-<span style = "color:#5dcf3ef2"><b> Welcome to my project website! </b> </span>
-This is where I post my projects in their entirety. These projects are formatted so that readers are  <b>1)</b> taken through my data science thinking process and <b>2)</b> provided with all of the technical tools I use for these projects. For a more detailed summary of the projects please visit my [GitHub page](https://github.com/larylc/Independent-Projects-).
-
-
+<div class = "section section2">
 ### Project Descriptions 
 
+<div id= "menu1">
+<div class= "dropdown dropdown1">
+<button>Major Projects</button>
 <details>
 <summary><b> Project 1: </b> Summer Research Project 2018 </summary>
-Investigated how movement affects forked fungus beetle social network position. 
+<p>Investigated how movement affects forked fungus beetle social network position.</p> 
 </details>
-
 <details>
 <summary><b> Project 2:</b> Exploratory Pokemon Analysis 2020 </summary>
-Explored data visualization using Pokemon gaming data.
+<p>Explored data visualization using Pokemon gaming data.</p> 
 </details>
-
 <details>
 <summary><b> Project 3: </b> Features of One Gender Schools (2021) </summary>
-Analyzed the key differences between co-ed colleges and single sex colleges.
+<p>Analyzed the key differences between co-ed colleges and single sex colleges.</p> 
 </details>
-
 <details>
 <summary><b> Project 4: </b> Grandmaster B-days and B-dates (2021) </summary>
-Created original data set of chess grandmaster birth information using web-scraping tools and Wikipedia pages.
+<p>Created original data set of chess grandmaster birth information using web-scraping tools and Wikipedia pages.</p> 
 </details>
 
+</div>
+
+<div class= "dropdown dropdown2">
+<button>Minor Projects</button>
 <details>
 <summary><b> Minor Project 1:</b> Understanding Anime Genre Trends (2021) </summary>
-Examined popularity of anime genres. 
+<p>Examined popularity of anime genres. </p> 
 </details>
 
 <details>
 <summary><b> Minor Project 2: </b> Do Children Have Bad Taste (2021) </summary>
-Explored how tv show ratings differ across age categories.
+<p>Explored how tv show ratings differ across age categories.</p> 
 </details>
 
 <details>
 <summary><b> Minor Project 3: </b> Finding the Missing Records (2021) </summary>
-Created original data set of chess grandmaster rating histories before the year 2000.
+<p>Created original data set of chess grandmaster rating histories before the year 2000.</p> 
 </details>
+</div>
 
+
+<div class= "dropdown dropdown3">
+<button>Data Visualizations</button>
 <details>
 <summary><b> Data Visualization App: </b> Pathway to Prodigy (2021) </summary>
-Used original chess prodigy data set to create app that compares the rating trajectories of chess players over age ranges.
+<p>Used original chess prodigy data set to create app that compares the rating trajectories of chess players over age ranges.</p> 
 </details>
+</div>
+</div>
+</div>
 
-</center>
+
+
+
+
+
+<div id = "line"></div>
+
+<div class = "section section3">
+
+### What am I doing now?
+<div id= "menu2">
+
+<div class= "dropdown dropdown4">
+<button>R</button>
+<ul>
+  <li>Updating Personal Website</li>
+  <li>Updating Project Website</li>
+</ul>
+</div>
+
+<div class= "dropdown dropdown5">
+<button>Python</button>
+</div>
+
+<div class= "dropdown dropdown6">
+<button>HTML/CSS</button>
+<ul>
+  <li>Updating Personal Website</li>
+  <li>Updating Project Website</li>
+</ul>
+</div>
+
+<div class= "dropdown dropdown7">
+<button>JavaScript</button>
+</div>
+
+<div class= "dropdown dropdown8">
+<button>D3.js</button>
+</div>
+
+</div>
+</div>
+
+
+</div>
+</div>
+
+

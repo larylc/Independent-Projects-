@@ -12,7 +12,7 @@ navbar:
     - text: "Proj.3 (R)"
       href: gendered_education_project_complete.html
     - text: "Proj.4 (R & Python)"
-      href: chess_birthdays.html
+      href: https://larylc.github.io/chess_birthday_project/
     - text: "Minor Proj.1 (R)"
       href: https://loganlary.shinyapps.io/anime1_030521/?_ga=2.199251374.1633841057.1615147342-569369622.1613318148
     - text: "Minor Proj.2 (Python)"
@@ -25,6 +25,9 @@ navbar:
 
 output:
   html_document:
+    css: style.css
+    includes:
+      after_body: footer.html
     theme: cosmo
 
     
