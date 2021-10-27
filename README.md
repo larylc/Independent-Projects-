@@ -170,8 +170,38 @@ Following the link above will lead you to my project website. There, I will be p
  
 
 </details>
+---
+
+### Project 4: Grandmaster B-days and B-dates
+**Summary**: This is a webscraping project that combines R and Python to acquire grandmaster birthplace and birthdate information from Wikipedia.
+
+<details>
+<summary><b>See Libaries Used:</b></summary>
+ 
+* library(knitr)
+* library(data.table) 
+* library(tidyverse)
+* library(forcats) 
+
+
+
+
+</details>
+
+<details>
+<summary><b>Table of Contents</b></summary>
+ 
+* Introduction
+* Part 1: Getting 2600 Birth Information
+* Part 2: Getting the Rest of the Grandmasters
+* Part 3: The Final Merge
+* Conclusion 
+* Sources 
+ 
+</details>
 
 ---
+
 ## Minor Projects 
 
 ### **Minor Project 1: Understanding Anime Genre Trends** 
