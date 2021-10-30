@@ -9,11 +9,14 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 
 <div class= "main">
 <div class= "article article1">
-![](C:\Users\laryl\Documents\Independent-Projects-\img\IMG-0380.JPG){#img height="350"}
+![](C:\Users\laryl\Documents\Independent-Projects-\img\IMG-0380.JPG){#img}
 
 <div id = "square"></div>
 
+
 </div>
+
+
 
 
 <div class = "article article2">
@@ -22,7 +25,8 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 <div class = "section section1">
 
 ### Welcome to my project website! 
-This is where I post my projects in their entirety. These projects are formatted so that readers are  <b>1)</b> taken through my data science thinking process and <b>2)</b> provided with all of the technical tools I use for these projects. 
+This is where I post my projects in their entirety. These projects are formatted so that readers are  <b>1)</b> <p class = "reasons"> taken through my data science thinking process</p> and <b> 2)</b> <p class = "reasons">provided with all of the technical tools I use for these projects.</p>
+
 
 For a more detailed summary of the projects please visit my [GitHub page](https://github.com/larylc/Independent-Projects-).
 
@@ -41,19 +45,19 @@ For more information about my skill set please visit my [personal website](https
 <button>Major Projects</button>
 <details>
 <summary><b> Project 1: </b> Summer Research Project 2018 </summary>
-<p>Investigated how movement affects forked fungus beetle social network position.</p> 
+<a href= "https://larylc.github.io/Independent-Projects-/Summer-Research-2018-Markdown.html">Investigated how movement affects forked fungus beetle social network position.</a> 
 </details>
 <details>
 <summary><b> Project 2:</b> Exploratory Pokemon Analysis 2020 </summary>
-<p>Explored data visualization using Pokemon gaming data.</p> 
+<a href= "https://larylc.github.io/Independent-Projects-/pokemon-project-2020.html" >Explored data visualization using Pokemon gaming data.</a> 
 </details>
 <details>
 <summary><b> Project 3: </b> Features of One Gender Schools (2021) </summary>
-<p>Analyzed the key differences between co-ed colleges and single sex colleges.</p> 
+<a href= "href= "https://larylc.github.io/Independent-Projects-/gendered_education_project_complete.html">Analyzed the key differences between co-ed colleges and single sex colleges.</a> 
 </details>
 <details>
 <summary><b> Project 4: </b> Grandmaster B-days and B-dates (2021) </summary>
-<p>Created original data set of chess grandmaster birth information using web-scraping tools and Wikipedia pages.</p> 
+<a href= "https://larylc.github.io/chess_birthday_project/">Created original data set of chess grandmaster birth information using web-scraping tools and Wikipedia pages.</a> 
 </details>
 
 </div>
@@ -62,17 +66,17 @@ For more information about my skill set please visit my [personal website](https
 <button>Minor Projects</button>
 <details>
 <summary><b> Minor Project 1:</b> Understanding Anime Genre Trends (2021) </summary>
-<p>Examined popularity of anime genres. </p> 
+<a href= "https://loganlary.shinyapps.io/anime1_030521/?_ga=2.199251374.1633841057.1615147342-569369622.1613318148">Examined popularity of anime genres. </a> 
 </details>
 
 <details>
 <summary><b> Minor Project 2: </b> Do Children Have Bad Taste (2021) </summary>
-<p>Explored how tv show ratings differ across age categories.</p> 
+<a href= "https://larylc.github.io/Independent-Projects-/tvanalysis.html">Explored how tv show ratings differ across age categories.</a> 
 </details>
 
 <details>
 <summary><b> Minor Project 3: </b> Finding the Missing Records (2021) </summary>
-<p>Created original data set of chess grandmaster rating histories before the year 2000.</p> 
+<a href= "https://larylc.github.io/Independent-Projects-/missing_chess_records.html">Created original data set of chess grandmaster rating histories before the year 2000.</a> 
 </details>
 </div>
 
@@ -81,7 +85,7 @@ For more information about my skill set please visit my [personal website](https
 <button>Data Visualizations</button>
 <details>
 <summary><b> Data Visualization App: </b> Pathway to Prodigy (2021) </summary>
-<p>Used original chess prodigy data set to create app that compares the rating trajectories of chess players over age ranges.</p> 
+<a href= "https://loganlary.shinyapps.io/prodigies_app/?_ga=2.15136438.103236738.1633010249-569369622.1613318148">Used original chess prodigy data set to create app that compares the rating trajectories of chess players over age ranges.</a> 
 </details>
 </div>
 </div>
@@ -102,7 +106,7 @@ For more information about my skill set please visit my [personal website](https
 <div class= "dropdown dropdown4">
 <button>R</button>
 <ul>
-  <li>Updating Personal Website</li>
+  <li>Creating Personal Website</li>
   <li>Updating Project Website</li>
 </ul>
 </div>
@@ -114,17 +118,25 @@ For more information about my skill set please visit my [personal website](https
 <div class= "dropdown dropdown6">
 <button>HTML/CSS</button>
 <ul>
-  <li>Updating Personal Website</li>
+  <li>Creating Personal Website</li>
   <li>Updating Project Website</li>
 </ul>
 </div>
 
 <div class= "dropdown dropdown7">
 <button>JavaScript</button>
+<ul>
+  <li>Head First JavaScript Chapter 10</li>
+  <li>Test Project Website</li>
+</ul>
 </div>
 
 <div class= "dropdown dropdown8">
 <button>D3.js</button>
+<ul>
+  <li>Full Stack D3 Master Class module 6 and 7</li>
+  <li>Test Project Website</li>
+</ul>
 </div>
 
 </div>

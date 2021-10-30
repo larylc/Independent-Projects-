@@ -23,12 +23,14 @@ h3, h4 {
   color: #000000;
 } 
 
-details p {
-  color: var(--accent-color);
-}
 
 .section1 {
   font-size: 14px;
+}
+.section1 .reasons {
+  display: inline;
+    transition: all ease-in-out 0.5s;
+    
 }
 
 /*Layout*/ 
@@ -69,6 +71,12 @@ html{
   z-index: -1;
 }
 
+
+
+
+
+
+
 #line {
   width: 450px;
   height: 3px;
@@ -79,6 +87,11 @@ html{
 img {
   position: relative;
   z-index: 1;
+  height: 350px;
+  max-width: none !important;
+
+  
+
 }
 
 #menu1 {
@@ -88,13 +101,16 @@ img {
 
 #menu2 {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-gap: 3px;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    grid-gap: 2px;
 }
 
 
+
 /*Styles and Transitions*/
-a {
+
+
+a , a:hover{
 color: var(--accent-color);
 }
 
@@ -103,15 +119,23 @@ details, .dropdown  ul  li {
   opacity: 0;
   font-size: 12px;
   transition: all ease-in-out 1s;
-  transform: translate3d(0,-10%,0);
+  transform: translate3d(0,-2%,0);
 }
 
+details, .dropdown  ul   {
+  padding-left: 10pt;
+}
+
+
 button {
+  width: 90%;
   font-size:12px;
   background-color: var(--secondary-color);
   border:none;
-  padding: 5px 10px;
+  padding: 5px 0px;
+
 }
+
 
 .dropdown:hover details, .dropdown:hover ul li  {
   box-sizing: border-box;
@@ -125,6 +149,10 @@ button {
   background-color: var(--accent-color);
 }
 
+.section1 .reasons:hover{
+  color: #fff;
+  background: var(--accent-color) ;
+}
 
 /*Navigation*/
 
@@ -146,7 +174,7 @@ button {
 a.dropdown-toggle:hover {
   background-color: var(--primary-color);
   color:#000000;
-  text-decoration: underline solid black;
+  text-decoration: underline solid var(--accent-color);
 }
 
 .navbar-default .dropdown-menu>.active>a
@@ -156,7 +184,7 @@ a.navbar-brand:hover {
   color: #000000 !important;
   font-size: 14px;
   background-color: var(--primary-color);
-  text-decoration: underline solid black;
+  text-decoration: underline solid var(--accent-color);
 }
 
 a.navbar-brand{
