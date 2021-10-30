@@ -8,7 +8,7 @@ https://larylc.github.io/Independent-Projects-/index.html
 
 ## About 
 
-Following the link above will lead you to my project website. There, I will be posting both major and minor projects. The major projects so far are in R. But I plan to be positing some of my Python projects as soon as they are completed.
+Following the link above will lead you to my project website. There, I will be posting both major and minor projects. 
 
 ## Major Projects
 
