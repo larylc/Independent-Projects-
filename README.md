@@ -38,10 +38,12 @@ Following the link above will lead you to my project website. There, I will be p
 
 <details>
 <summary><b>Table of Contents</b></summary>
+ 
 * Abstract
 * Sources and Acknowledgements 
 * Data and Preparation
 * Conclusions
+ 
 </details>
 
 ----
