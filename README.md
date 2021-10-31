@@ -1,16 +1,12 @@
-# Independent Projects
-
-Under Construction...
-
-## Website 
-
-https://larylc.github.io/Independent-Projects-/index.html
+[Website](https://larylc.github.io/Independent-Projects-/index.html)
 
 ## About 
 
-Following the link above will lead you to my project website. There, I will be posting both major and minor projects. 
+Following the link above will lead you to my project website. There, I will be posting my projects and data visualizations. 
 
 ## Major Projects
+
+These are the most detailed and time consuming projects. They usually take anywhere from a couple of weeks to several months to complete. In these projects you can expect to see not only a large variety of technical tools but also very detailed statistical analyses. 
 
 ### Project 1: Summer Research 2018 (R)
 
@@ -218,6 +214,8 @@ Following the link above will lead you to my project website. There, I will be p
 
 ## Minor Projects 
 
+These projects can vary from a few days to a few weeks. These projects are usually short and are geared toward completing specific goals.
+
 ### Minor Project 1: Understanding Anime Genre Trends
 
 **Date**: March 2021
@@ -290,7 +288,23 @@ Following the link above will lead you to my project website. There, I will be p
 * googlesearch
 * re
 
+ ---
+ 
+ ## Data Visualizations
+ 
+ These visualizations are end products only. They do not go into great detail. These projects are created so that users can interact with the data and uncover patterns for themselves.
+ 
+ ### Pathway to Prodigy App 
+ 
+**Date**: October 2021
 
+**Summary**: Shiny app designed for comparing chess prodigy rating trajectories over the years.
+
+[Data](https://github.com/larylc/More-Chess-Webscraped-Data) 
+ 
+
+ 
+ 
 ## Contact Me
 
 |**Contact Method**  |                          |
