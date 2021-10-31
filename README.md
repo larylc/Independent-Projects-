@@ -12,8 +12,9 @@ Following the link above will lead you to my project website. There, I will be p
 
 ## Major Projects
 
-### **Project 1: Summer Research 2018**
+### Project 1: Summer Research 2018 (R)
 
+**Date**: September 2018
 **Summary**: To determine which individual properties, predict an individual's social network position, I analyzed the bracket to bracket movements of Forked Fungus Beetles within populations during the Summer of 2016. 
 
 **See Project**:
@@ -22,7 +23,6 @@ Following the link above will lead you to my project website. There, I will be p
 
 <details>
 <summary><b>See Packages Used:</b></summary>
- 
 * library(knitr)
 * library(plyr)
 * library(doBy)
@@ -33,27 +33,25 @@ Following the link above will lead you to my project website. There, I will be p
 * library(lme4)
 * library(car) 
 * library(lsmeans)
-
 </details>
 
 <details>
 <summary><b>Table of Contents</b></summary>
- 
 * Abstract
 * Sources and Acknowledgements 
 * Data and Preparation
 * Conclusions
-
 </details>
 
 ----
 
-### **Project 2: Exploratory Pokemon Analysis 2020** 
+### Project 2: Exploratory Pokemon Analysis 2020 (R)
+
+**Date**: September 2020
 **Summary**: This is an extensive exploratory analysis of Pokemon game characteristics.
 
 <details>
 <summary><b>See Packages Used:</b></summary>
- 
 * library(knitr)
 * library(stringr)
 * library(ggplot2)
@@ -73,18 +71,15 @@ Following the link above will lead you to my project website. There, I will be p
 * library(vcd)
 * library(readr)
 * library(factoextra)
-
 </details>
 
 <details>
 <summary>Table of Contents:</summary>
 
 <details>
- 
 <summary>Introduction</summary>
 * Goals
 * Potential Questions and Tasks
-
 </details>
 
 <details>
@@ -131,7 +126,9 @@ Following the link above will lead you to my project website. There, I will be p
 </details>
 
 ---
-### Project 3: Features of One Gender Schools
+
+### Project 3: Features of One Gender Schools (R)
+**Date**: August 2021
 **Summary**: This is an exploratory analysis of differences between single-sex colleges and co-ed colleges.
 
 
@@ -153,8 +150,6 @@ Following the link above will lead you to my project website. There, I will be p
 * library(broom)
 * library(visreg)
 * library(effects)
-
-
 </details>
 
 <details>
@@ -166,13 +161,14 @@ Following the link above will lead you to my project website. There, I will be p
 * Key Variables
 * Conclusion 
 * Source 
- 
- 
 
 </details>
+
 ---
 
-### Project 4: Grandmaster B-days and B-dates
+### Project 4: Grandmaster B-days and B-dates (R & Python)
+
+**Date**: September 2021
 **Summary**: This is a webscraping project that combines R and Python to acquire grandmaster birthplace and birthdate information from Wikipedia.
 
 <details>
@@ -216,7 +212,9 @@ Following the link above will lead you to my project website. There, I will be p
 
 ## Minor Projects 
 
-### **Minor Project 1: Understanding Anime Genre Trends** 
+### Minor Project 1: Understanding Anime Genre Trends
+
+**Date**: March 2021
 **Summary**: Examined popularity of anime genres over time and overall. 
 
 <details>
@@ -237,7 +235,9 @@ Following the link above will lead you to my project website. There, I will be p
 
 ---
 
-### **Minor Project 2: Do Children Have Bad Taste** 
+### Minor Project 2: Do Children Have Bad Taste 
+
+**Date**: March 2021
 **Summary**: Explored the differences in tv show ratings across target audience age groups. 
 
 <details>
@@ -253,7 +253,9 @@ Following the link above will lead you to my project website. There, I will be p
 
 ---
 
-### **Minor Project 3: Finding The Missing Records** 
+### Minor Project 3: Finding The Missing Records
+
+**Date**: September 2021
 **Summary**: Websrcaped Olimpbase website to get chess player rating records before January 2000. 
 
 <details>
@@ -263,6 +265,7 @@ Following the link above will lead you to my project website. There, I will be p
 * library(knitr)
 * library(data.table) 
 * library(tidyverse)
+* library(lubridate)
 * library(fuzzyjoin)
 * library(stringdist)
 
