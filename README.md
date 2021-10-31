@@ -287,7 +287,10 @@ These projects can vary from a few days to a few weeks. These projects are usual
 * scrapy
 * googlesearch
 * re
- 
+ </details>
+
+---
+
  ## Data Visualizations
  
  These visualizations are end products only. They do not go into great detail. These projects are created so that users can interact with the data and uncover patterns for themselves.
@@ -301,8 +304,7 @@ These projects can vary from a few days to a few weeks. These projects are usual
 [Data](https://github.com/larylc/More-Chess-Webscraped-Data) 
  
 
- 
- 
+
 ## Contact Me
 
 |**Contact Method**  |                          |
