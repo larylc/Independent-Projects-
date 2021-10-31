@@ -287,8 +287,6 @@ These projects can vary from a few days to a few weeks. These projects are usual
 * scrapy
 * googlesearch
 * re
-
- ---
  
  ## Data Visualizations
  
