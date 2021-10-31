@@ -251,6 +251,32 @@ Following the link above will lead you to my project website. There, I will be p
 </details>
 
 
+---
+
+### **Minor Project 3: Finding The Missing Records** 
+**Summary**: Websrcaped Olimpbase website to get chess player rating records before January 2000. 
+
+<details>
+<summary><b>See R Packages Used:</b></summary>
+ 
+* library(reticulate)
+* library(knitr)
+* library(data.table) 
+* library(tidyverse)
+* library(fuzzyjoin)
+* library(stringdist)
+
+</details>
+
+<details>
+<summary><b>See Python Libraries Used:</b></summary>
+ 
+* pandas
+* BeautifulSoup
+* requests
+* scrapy
+* googlesearch
+* re
 
 
 ## Contact Me
