@@ -21,7 +21,7 @@ Following the link above will lead you to my project website. There, I will be p
 * [Poster](https://github.com/larylc/Summer-Research-2018/blob/main/Sigma%20Xi%20Research%20Poster%20Summer%202018%20Cedric%20Lary-%20Ultra.pdf)
 
 <details>
-<summary><b>See Libaries Used:</b></summary>
+<summary><b>See Packages Used:</b></summary>
  
 * library(knitr)
 * library(plyr)
@@ -136,7 +136,7 @@ Following the link above will lead you to my project website. There, I will be p
 
 
 <details>
-<summary><b>See Libaries Used:</b></summary>
+<summary><b>See Packages Used:</b></summary>
  
 * library(knitr)
 * library(data.table) 
@@ -176,17 +176,29 @@ Following the link above will lead you to my project website. There, I will be p
 **Summary**: This is a webscraping project that combines R and Python to acquire grandmaster birthplace and birthdate information from Wikipedia.
 
 <details>
-<summary><b>See Libaries Used:</b></summary>
+<summary><b>See R Packages Used:</b></summary>
  
+* library(reticulate)
 * library(knitr)
 * library(data.table) 
 * library(tidyverse)
-* library(forcats) 
-
-
-
+* library(forcats)
+* library(fuzzyjoin)
+* library(stringdist)
 
 </details>
+
+<details>
+<summary><b>See Python Libraries Used:</b></summary>
+ 
+* pandas
+* BeautifulSoup
+* requests
+* scrapy
+* googlesearch
+ 
+</details>
+
 
 <details>
 <summary><b>Table of Contents</b></summary>
@@ -237,6 +249,8 @@ Following the link above will lead you to my project website. There, I will be p
 * seaborn
 
 </details>
+
+
 
 
 ## Contact Me
