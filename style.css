@@ -203,9 +203,17 @@ nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .nav
 
 .navbar-default .navbar-toggle {
     border-color: transparent;
-    background-color: black;
+    background-color:var(--primary-color);
 }
 
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #000000;
+}
+
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    background-color:  var(--primary-color);
+}
 
 
 /*Footer*/
