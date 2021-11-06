@@ -1,18 +1,16 @@
-# Independent Projects
-
-Under Construction...
-
-## Website 
-
-https://larylc.github.io/Independent-Projects-/index.html
+[Website](https://larylc.github.io/Independent-Projects-/index.html)
 
 ## About 
 
-Following the link above will lead you to my project website. There, I will be posting both major and minor projects. 
+Following the link above will lead you to my project website. There, I will be posting my projects and data visualizations. 
 
 ## Major Projects
 
-### **Project 1: Summer Research 2018**
+These are the most detailed and time consuming projects. They usually take anywhere from a couple of weeks to several months to complete. In these projects you can expect to see not only a large variety of technical tools but also very detailed statistical analyses. 
+
+### Project 1: Summer Research 2018 (R)
+
+**Date**: September 2018
 
 **Summary**: To determine which individual properties, predict an individual's social network position, I analyzed the bracket to bracket movements of Forked Fungus Beetles within populations during the Summer of 2016. 
 
@@ -21,8 +19,7 @@ Following the link above will lead you to my project website. There, I will be p
 * [Poster](https://github.com/larylc/Summer-Research-2018/blob/main/Sigma%20Xi%20Research%20Poster%20Summer%202018%20Cedric%20Lary-%20Ultra.pdf)
 
 <details>
-<summary><b>See Libaries Used:</b></summary>
- 
+<summary><b>See Packages Used:</b></summary>
 * library(knitr)
 * library(plyr)
 * library(doBy)
@@ -33,7 +30,6 @@ Following the link above will lead you to my project website. There, I will be p
 * library(lme4)
 * library(car) 
 * library(lsmeans)
-
 </details>
 
 <details>
@@ -43,17 +39,19 @@ Following the link above will lead you to my project website. There, I will be p
 * Sources and Acknowledgements 
 * Data and Preparation
 * Conclusions
-
+ 
 </details>
 
 ----
 
-### **Project 2: Exploratory Pokemon Analysis 2020** 
+### Project 2: Exploratory Pokemon Analysis 2020 (R)
+
+**Date**: September 2020
+
 **Summary**: This is an extensive exploratory analysis of Pokemon game characteristics.
 
 <details>
 <summary><b>See Packages Used:</b></summary>
- 
 * library(knitr)
 * library(stringr)
 * library(ggplot2)
@@ -73,18 +71,15 @@ Following the link above will lead you to my project website. There, I will be p
 * library(vcd)
 * library(readr)
 * library(factoextra)
-
 </details>
 
 <details>
 <summary>Table of Contents:</summary>
 
 <details>
- 
 <summary>Introduction</summary>
 * Goals
 * Potential Questions and Tasks
-
 </details>
 
 <details>
@@ -131,12 +126,15 @@ Following the link above will lead you to my project website. There, I will be p
 </details>
 
 ---
-### Project 3: Features of One Gender Schools
+
+### Project 3: Features of One Gender Schools (R)
+
+**Date**: August 2021
+
 **Summary**: This is an exploratory analysis of differences between single-sex colleges and co-ed colleges.
 
-
 <details>
-<summary><b>See Libaries Used:</b></summary>
+<summary><b>See Packages Used:</b></summary>
  
 * library(knitr)
 * library(data.table) 
@@ -153,8 +151,6 @@ Following the link above will lead you to my project website. There, I will be p
 * library(broom)
 * library(visreg)
 * library(effects)
-
-
 </details>
 
 <details>
@@ -166,27 +162,41 @@ Following the link above will lead you to my project website. There, I will be p
 * Key Variables
 * Conclusion 
 * Source 
- 
- 
 
 </details>
+
 ---
 
-### Project 4: Grandmaster B-days and B-dates
+### Project 4: Grandmaster B-days and B-dates (R & Python)
+
+**Date**: September 2021
+
 **Summary**: This is a webscraping project that combines R and Python to acquire grandmaster birthplace and birthdate information from Wikipedia.
 
 <details>
-<summary><b>See Libaries Used:</b></summary>
+<summary><b>See R Packages Used:</b></summary>
  
+* library(reticulate)
 * library(knitr)
 * library(data.table) 
 * library(tidyverse)
-* library(forcats) 
-
-
-
+* library(forcats)
+* library(fuzzyjoin)
+* library(stringdist)
 
 </details>
+
+<details>
+<summary><b>See Python Libraries Used:</b></summary>
+ 
+* pandas
+* BeautifulSoup
+* requests
+* scrapy
+* googlesearch
+ 
+</details>
+
 
 <details>
 <summary><b>Table of Contents</b></summary>
@@ -204,7 +214,12 @@ Following the link above will lead you to my project website. There, I will be p
 
 ## Minor Projects 
 
-### **Minor Project 1: Understanding Anime Genre Trends** 
+These projects can vary from a few days to a few weeks. These projects are usually short and are geared toward completing specific goals.
+
+### Minor Project 1: Understanding Anime Genre Trends
+
+**Date**: March 2021
+
 **Summary**: Examined popularity of anime genres over time and overall. 
 
 <details>
@@ -225,7 +240,10 @@ Following the link above will lead you to my project website. There, I will be p
 
 ---
 
-### **Minor Project 2: Do Children Have Bad Taste** 
+### Minor Project 2: Do Children Have Bad Taste 
+
+**Date**: March 2021
+
 **Summary**: Explored the differences in tv show ratings across target audience age groups. 
 
 <details>
@@ -237,6 +255,54 @@ Following the link above will lead you to my project website. There, I will be p
 * seaborn
 
 </details>
+
+
+---
+
+### Minor Project 3: Finding The Missing Records
+
+**Date**: September 2021
+
+**Summary**: Websrcaped Olimpbase website to get chess player rating records before January 2000. 
+
+<details>
+<summary><b>See R Packages Used:</b></summary>
+ 
+* library(reticulate)
+* library(knitr)
+* library(data.table) 
+* library(tidyverse)
+* library(lubridate)
+* library(fuzzyjoin)
+* library(stringdist)
+
+</details>
+
+<details>
+<summary><b>See Python Libraries Used:</b></summary>
+ 
+* pandas
+* BeautifulSoup
+* requests
+* scrapy
+* googlesearch
+* re
+ </details>
+
+---
+
+ ## Data Visualizations
+ 
+ These visualizations are end products only. They do not go into great detail. These projects are created so that users can interact with the data and uncover patterns for themselves.
+ 
+ ### Pathway to Prodigy App 
+ 
+**Date**: October 2021
+
+**Summary**: Shiny app designed for comparing chess prodigy rating trajectories over the years.
+
+[Data](https://github.com/larylc/More-Chess-Webscraped-Data) 
+ 
 
 
 ## Contact Me
