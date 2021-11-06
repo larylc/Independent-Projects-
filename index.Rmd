@@ -53,7 +53,7 @@ For more information about my skill set please visit my [personal website](https
 </details>
 <details>
 <summary><b> Project 3: </b> Features of One Gender Schools (2021) </summary>
-<a href= "href= "https://larylc.github.io/Independent-Projects-/gendered_education_project_complete.html">Analyzed the key differences between co-ed colleges and single sex colleges.</a> 
+<a href= "https://larylc.github.io/Independent-Projects-/gendered_education_project_complete.html">Analyzed the key differences between co-ed colleges and single sex colleges.</a> 
 </details>
 <details>
 <summary><b> Project 4: </b> Grandmaster B-days and B-dates (2021) </summary>
