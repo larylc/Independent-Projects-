@@ -167,7 +167,7 @@ These are the most detailed and time consuming projects. They usually take anywh
 
 ---
 
-### Project 4: Grandmaster B-days and B-dates (R & Python)
+### Project 4: Grandmaster B-days and B-places (R & Python)
 
 **Date**: September 2021
 
