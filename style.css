@@ -244,6 +244,18 @@ nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .nav
   padding-bottom: 10px;
 }
   
+/*Media Queries*/
 
+@media (max-width: 768px) {
+  
+img {
+  left: 50px;
+}
+
+#square {
+  left: 100px;
+}
+  
+}
 
 

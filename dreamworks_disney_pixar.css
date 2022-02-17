@@ -1,0 +1,450 @@
+/* Cloud */
+
+.cloud {
+    width: 500px;
+    height: 100px;
+    background: #000;
+    border-radius: 50%;
+    position: absolute; 
+    top: -350px;
+    left: -600px;
+}
+
+#cloud-back {
+    filter: url(#filter-back);
+    box-shadow: 1000px 1000px 30px 30px #fff; 
+    
+  }
+  
+#cloud-mid {
+    filter: url(#filter-mid);
+    box-shadow: 1000px 1000px 70px 10px rgba(158, 168, 179, 0.5);
+    left: -630px;
+    top: -320px;
+  }
+  
+#cloud-front {
+    filter: url(#filter-front);
+    box-shadow: 1000px 1000px 40px 0px  rgba(0, 0, 0, 0.3);
+    left: -620px;
+    top: -300px;
+  }
+
+
+
+
+/* General  Layout */
+html {
+    height: 100%;
+}
+
+body{
+    height: 100%;
+    margin: 0;
+    background: rgb(21,16,32);
+    background: linear-gradient(180deg, rgba(21,16,32,1) 0%, rgba(37,34,78,1) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.container {
+    width: 95%;
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+
+.intro-container {
+    width: 75%;
+    margin: 0 auto;
+}
+
+.body-container {
+    width: 95%;
+    margin: 0 auto;
+}
+
+/*Intro layout */
+.intro-box {
+    display: flex;
+    justify-content: space-around;
+    color: #fff;
+}
+
+.disney-pixar-box {
+    color: #fff;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.disney-pixar-box p {
+    padding: 0 0.5em;
+}
+
+.company-box {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+}
+
+.company-box2 {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+}
+
+
+
+
+
+/*Body layout */
+
+.col1, .col2, .col5, .col6 , .col7, .col8{
+    width: 50%;
+}
+
+.section5 p {
+    padding-bottom: 10px;
+}
+
+.section {
+    color: #fff;
+    
+}
+.section5 p:last-child(){
+    margin-bottom: 1rem;
+}
+
+.section-box {
+    display: flex; 
+    flex-direction: row;
+}
+
+.section-box2 {
+    flex-direction: column;
+}
+
+
+
+.step {
+    margin-bottom: 50px;
+    margin-left: 50px;
+}
+
+.col2 p {
+    padding-top: 20px;
+    padding-bottom: 75px;
+
+}
+
+.modeling {
+margin-top: 150px;
+}
+
+
+
+
+.col3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+
+}
+
+
+.col:nth-child(even) {
+    text-align: left;
+    margin: 50px 5px;
+    padding: 30px 70px;
+}
+
+
+.col:nth-child(odd) p {
+    text-align: center;
+    padding: 0 0;
+    text-decoration: underline;
+}
+
+
+
+/* Typography */
+
+h2 {
+    font-family: Century Gothic;
+    color: #fff;
+    text-align: center;
+
+}
+
+body {
+    color: #fff;
+    font-family: Century;
+}
+
+body p {
+    font-size: 17px;
+}
+
+.disney-color {
+    color:#5F5BF3
+}
+
+.pixar-color {
+    color:#9EAFE6
+}
+
+a {
+    color: goldenrod;
+}
+#title {
+    font-size: 8rem;
+    color: #fff;
+    font-family: Impact;
+    text-align: center;
+    margin-bottom: 10px;    
+}
+#subtitle {
+    font-size: 1rem;
+    color: #312da2;
+    font-family: Century;
+    text-align: center;
+    opacity: .75;
+    margin-bottom: 200px;
+    z-index: 30;
+}
+
+
+table {
+    font-size: .75rem;
+    text-align: center;
+    display: block !important;
+    overflow-x: auto !important;
+    width: 100% !important;
+    margin: 0 auto;
+}
+
+.responsive-table{
+    width: 80%;
+
+}
+
+
+/*Elements*/
+
+.vertical-line {
+    margin: 0 auto;
+    height: 15px;
+    width: 1px;
+    background-color: #fff;
+}
+
+.v-shape {
+    margin: 15px auto 0;
+    border-right: 1px solid; 
+    border-bottom: 1px solid;
+    height: 70px;
+    width: 70px;
+    transform: rotate(-135deg);
+}
+
+
+/*Styles and Transitions*/
+.button-holder {
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    justify-content: center;
+ }
+
+.button {
+    font-size: .75rem;
+    font-family: Century;
+    border-radius: 10%;
+    padding: 10px 10px;
+    border: none;
+}
+.button-dreamworks {
+    background-color: #fff;
+    box-shadow: 0 4px 0 0 rgb(162, 162, 162);
+}
+.button-disney {
+    background-color: #5F5BF3;
+    box-shadow: 0 3px 0 0 #312da2;
+
+}
+.button-pixar {
+    background-color: #9EAFE6;
+    box-shadow: 0 4px 0 0 #7588c7;
+}
+
+.button:focus, .button:active {
+    transition: all 0.25s ease-out;
+    filter: brightness(0.90);
+    top: 2px;
+    transform: scale(0.98);
+    box-shadow: none;
+}
+
+.tooltip {
+    opacity: 0; 
+    border-radius: 20%;
+    background-color: #ddd;
+    position: relative;
+    left: 0;
+    padding: 0.5em 0.25em;
+    width:30%;
+    height:20%;
+    text-align: center;
+    border: 1px solid #ddd;
+    z-index: 12;
+    transition: all 0.2s ease-out;
+    pointer-events: none;
+}
+
+.tooltip2 {
+    opacity: 0; 
+    border-radius: 15%;
+    top: 90px;
+    background-color: #ddd;
+    position: relative;
+    left: 0;
+    padding: 0.5em 0.25em;
+    width:15%;
+    height:20%;
+    text-align: center;
+    border: 1px solid #ddd;
+    z-index: 12;
+    transition: all 0.2s ease-out;
+    pointer-events: none;
+}
+
+.tooltip3 {
+    opacity: 0; 
+    border-radius: 15%;
+    left: 50px;
+    top: 50px;
+    background-color: #ddd;
+    position: relative;
+    left: 0;
+    padding: 0.5em 0.25em;
+    width:15%;
+    height:10%;
+    text-align: center;
+    border: 1px solid #ddd;
+    z-index: 12;
+    transition: all 0.2s ease-out;
+    pointer-events: none;
+}
+
+
+.tooltip:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background: #ddd;
+    border: 1px solid #ddd;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    transform: translate(-50%, 50%) rotate(45deg);
+    transform-origin: center center;
+    z-index: 10;
+}
+
+.tooltip-info{
+    font-size: 8px;
+    color: #000;
+    z-index: 20;
+}
+
+table, th, td {
+    border: 1px solid #fff;
+    color: #000;
+  }
+
+th {
+    background:#fff;
+
+}
+
+td {
+    background: linear-gradient( to right, #9EAFE6, #5F5BF3);
+}
+td:hover {
+    filter: brightness(1.5);
+    font-weight: 700
+}
+
+/*chart styles*/
+.chart11 svg .bounds .bar {
+    transition: x 1s ease-out, width 1s ease-out;
+}
+
+.bar:hover {
+    fill: goldenrod;
+}
+.node:hover  {
+    transition: all 1s ease-out;
+    stroke: goldenrod;
+    stroke-width: 3px;
+}
+
+.x-axis line, .y-axis line, .h-y-axis line,
+.section-box1 .col .chart svg .bounds g .tick text, 
+.section-box1 .col .chart svg .bounds g .domain,
+.section-box2 .col .chart svg .bounds g .domain,
+.chart11 svg .bounds g .domain,
+.section-box2 .col .chart svg .bounds g .tick text{
+visibility: hidden;
+} 
+
+
+/*Media Queries */
+
+
+@media (max-width: 672px) {
+    #title{
+     font-size: 5rem;
+    }
+    #subtitle {
+        margin-bottom: 50px;
+    }
+}
+
+
+@media (max-width: 672px) {
+    
+#cloud-back,  #cloud-mid,  #cloud-front {
+     opacity: 0;
+    }
+
+    .section-box1, .section-box3, .section-box4{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .chart1 {
+        margin: 0 auto;
+    }
+    .col3 {
+        flex-direction: column;
+    }
+    .step {
+        padding: 20px;
+        margin-left: 0px;
+
+    }
+    .col1, .col3, .col5, .col7 {
+        margin: 0 auto;
+    }
+    
+    
+}
+

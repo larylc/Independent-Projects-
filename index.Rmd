@@ -56,8 +56,8 @@ For more information about my skill set please visit my [personal website](https
 <a href= "https://larylc.github.io/Independent-Projects-/gendered_education_project_complete.html">Analyzed the key differences between co-ed colleges and single sex colleges.</a> 
 </details>
 <details>
-<summary><b> Project 4: </b> Grandmaster B-days and B-dates (2021) </summary>
-<a href= "https://larylc.github.io/chess_birthday_project/">Created original data set of chess grandmaster birth information using web-scraping tools and Wikipedia pages.</a> 
+<summary><b> Project 4: </b> Grandmaster B-days and B-places (2021) </summary>
+<a href= "https://larylc.github.io/chess_bdays_bplaces/">Created original data set of chess grandmaster birth information using web-scraping tools and Wikipedia pages.</a> 
 </details>
 
 </div>
@@ -87,6 +87,12 @@ For more information about my skill set please visit my [personal website](https
 <summary><b> Data Visualization App: </b> Pathway to Prodigy (2021) </summary>
 <a href= "https://loganlary.shinyapps.io/prodigies_app/?_ga=2.15136438.103236738.1633010249-569369622.1613318148">Used original chess prodigy data set to create app that compares the rating trajectories of chess players over age ranges.</a> 
 </details>
+
+<details>
+<summary><b> Data Visualization Website: </b>  (2022) </summary>
+<a href= "https://larylc.github.io/Independent-Projects-/dreamworks_disney_pixar.html">Used IMDB and Wikipedia data to analyze differences between animation studio movies.</a> 
+</details>
+
 </div>
 </div>
 </div>

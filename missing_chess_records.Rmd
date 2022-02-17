@@ -312,7 +312,7 @@ top_grandmaster_ratings_before_2000
 
 Let's export our data.
 ````{r}
-write.csv(top_grandmaster_ratings_before_2000,"C:/Users/laryl/Desktop/Data Sets//top_grandmaster_ratings_before_2000.csv")
+#write.csv(top_grandmaster_ratings_before_2000,"C:/Users/laryl/Desktop/Data Sets//top_grandmaster_ratings_before_2000.csv")
 
 ```
 

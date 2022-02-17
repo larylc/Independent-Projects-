@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> DreamWorks, Disney, or Pixar</title>
+    <link rel = "stylesheet" href = "./dreamworks_disney_pixar.css">
+</head>
+<body>
+    <div class = "container">
+        <div class = "intro-container">
+            <h1 id= "title">DreamWorks, Disney, or Pixar</h1>
+            <h1 id = "subtitle">What Wikipedia and IMDB Can Tell Us About Animation Studios</h1>
+            <div class="cloud" id="cloud-back"></div>
+            <div class="cloud" id="cloud-mid"></div>
+            <div class="cloud" id="cloud-front"></div>    
+            <svg width="10" height="10"> 
+                <filter id="filter">
+    
+                <!--Top Layer-->
+                <filter id="filter-back">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="4" 
+                seed="0" />     
+                    <feDisplacementMap  in="SourceGraphic" scale="170" />
+                </filter>
+                    <filter id="filter-mid">
+                    <feTurbulence type="fractalNoise"  baseFrequency="0.012" numOctaves="2" 
+                seed="0"/>
+                    <feDisplacementMap  in="SourceGraphic" scale="150" />
+                </filter>
+                <filter id="filter-front">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="2" 
+                seed="0"/>
+                    <feDisplacementMap  in="SourceGraphic" scale="100" />
+                </filter>
+
+
+                
+              </svg>
+            <p>
+                If your first question while reading this article is <u>“there’s a difference”</u> or <u>“doesn’t Disney own them all,”</u> don’t worry— you’re in the right place. At the beginning of every animated movie, I would either see Pixar’s lamp hopping across the screen or DreamWorks’ boy fishing from the moon, never giving the movies anymore thought. Until very recently, I had never taken the time to understand that 1) the 3 animation studios above work independently and 2) their movies have several defining distinctions. 
+            </p>
+            <p>
+                So in the hopes of trying to understand the differences between <b >DreamWorks</b>, <b class="disney-color">Disney Animation</b> (Disney for short), and <b class="pixar-color">Pixar</b>, this article will be looking at the data that makes their movies so unique. 
+            </p>
+
+            <h2>Who Owns Who</h2>
+            <div class = "intro-box">
+                <div class = "company-box">
+                    <p>Comcast</p>
+                    <div class = "vertical-line"></div>
+                    <p>NBC Universal</p>
+                    <div class = "vertical-line"></div>
+                    <p>Universal Pictures  </p>
+                    <div class = "vertical-line"></div>
+                    <p><b>DreamWorks</b></p>
+                </div>
+
+                <div>
+                    <div class= "company-box2">
+                        <p>Disney</p>
+                        <div class = "vertical-line"></div>
+                        <p>Walt Disney Studios</p>
+                        <div class = "v-shape"></div>
+                        <div class = "disney-pixar-box">
+                            <p class = "disney-color"><b>Disney Animation</b></p>
+                            <p class = "pixar-color" ><b>Pixar</b></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <p>We will do a side-by-side comparison of the companies a little later. For now, let’s try to see if there are differences between their animated movies based on <u>finances</u>, <u>reception</u>, impact, and textual themes.
+            <p>We will do a side-by-side comparison of the companies a little later. For now, let’s try to see if there are differences between their animated movies based on <u>finances</u>, <u>reception</u>, <u>impact</u>, and <u>textual themes</u>.
+            </p>
+    </div>
+
+    
+    <div class = "body-container">
+
+        <div class= "section section1">
+            <h2>Finances</h2>
+
+
+            <div class= "section-box section-box1">
+                <div class = "col col1">
+                    <div class = "chart chart1">
+                        <div id= "tooltip1" class="tooltip">
+                            <div class = "tooltip-info">
+                                <div><b>Company:</b>  <span id ="company1"></span></div>
+                                <div><b>Name: </b>  <span id="name1"></span></div>
+                                <div><b>Budget:</b><span id ="budget1"></span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class = "chart chart2">
+                        <div id= "tooltip2" class="tooltip">
+                            <div class = "tooltip-info">
+                                <div><b>Company:</b> <span id ="company2"></span></div>
+                                <div><b>Name: </b>  <span id="name2"></span></div>
+                                <div><b>World Box-Office Gross:</b> <span id ="budget2"></span></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class = "chart chart3">
+                        <div id= "tooltip3" class="tooltip">
+                            <div class = "tooltip-info">
+                                <div><b>Company:</b> <span id ="company3"></span></div>
+                                <div><b>Name: </b> <span id="name3"></span></div>
+                                <div><b>US Box-Office Gross:</b> <span id ="budget3"></span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class = "col col2">
+                    <p class="step" id= "step1">
+                        From these graphs, we can see that <b class="pixar-color">Pixar</b> tends to have larger budgets (on average) than the other studios do.  <b>DreamWorks</b>, on the other hand, has smaller budgets but more movies. “Tangled,”  <b class="disney-color">Disney's </b> re-adaptation of “Rapunzel,” was the most expensive movie.
+                    </p> 
+
+                    <p class="step" id= "step2">
+                        Unsurprisingly, budgets tend to translate to box-office performances, so  <b class="pixar-color"></b>Pixar has been able to dominate the box-office stage by capitalizing on its massive budgets. 
+                    </p>
+
+                    <p class="step" id= "step3"> 
+                        It also looks like America really loves  <b class="pixar-color">Pixar</b> movies. When we look at the difference between <u>average US box-office gross</u> and <u>average world box-office gross</u> (more on this later), Pixar outperforms Disney by a larger margin on the US side. For US box-office gross, Pixar beats Disney by 11.4%. For world box-office gross, the difference is only 3.9%. But to <b class="disney-color">Disney’s</b> credit, it has had some runaway successes like “Frozen” and “Frozen II” on the world stage. 
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class= "section section2">
+            <h2>Reception</h2>
+            <div class= "section-box section-box2">
+                <div class="col col3">
+                    <div class = "chart chart4">
+                        <div id= "tooltip4" class="tooltip">
+                            <div class = "tooltip-info">
+                                <div><b>Company: </b><span id ="company4"></span></div>
+                                <div><b>Name: </b><span id="name4"></span></div>
+                                <div><b>IMDB Score: </b><span id ="score4"></span></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class = "chart chart5">
+                        <div id= "tooltip5" class="tooltip">
+                            <div class = "tooltip-info">
+                                <div><b>Company: </b> <span id ="company5"></span></div>
+                                <div><b>Name: </b> <span id="name5"></span></div>
+                                <div><b>RT Score:</b> <span id ="score5"></span></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class = "chart chart6">
+                        <div id= "tooltip6" class="tooltip">
+                            <div class = "tooltip-info">
+                                <div><b>Company: </b> <span id ="company6"></span></div>
+                                <div><b>Name: </b> <span id="name6"></span></div>
+                                <div><b>MC Score: </b><span id ="score6"></span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class = "col col4">
+                    <p class="step" id= "step4">
+                        These graphs show a pretty strong correlation between the different review scores, so it should come as no surprise that Pixar movies on average seem to come out on top no matter what metric is used. 
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class= "section section3">
+            <h2>Impact</h2>
+            <div class= "section-box section-box3">
+                <div class= "col col5">
+                    <p> Wikipedia Page Views</p>
+                    <div class = "chart chart7">
+                        <div id= "tooltip7" class="tooltip">
+                            <div class = "tooltip-info">
+                                <div><b>Name: </b> <span id="name7"></span></div>
+                                <div><b>Views:</b> <span id ="wiki-metric7"></span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p> Wikipedia Link Count</p>
+                    <div class = "chart chart8">
+                        <div id= "tooltip8" class="tooltip">
+                            <div class = "tooltip-info">
+                                <div><b>Name: </b> <span id="name8"></span></div>
+                                <div><b>Link Counts: </b><span id ="wiki-metric8"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class = "col col6">
+                    <p class= "step" id = "step5">
+                        Here is where things get interesting. In this section, I wanted to gauge how much influence or impact the movies and the studios have had over the years. Of course, influence could be measured using metrics like the ones above. But what if there was a way to measure impact based on how much people have written about and viewed the movies? Luckily, there is!
+
+                    </p>
+
+                    <p class= "step" id = "step6">
+                        Inspired by Matt Daniel’s article, <a href="https://pudding.cool/2017/03/miles/">“The Universe of Miles Davis,”</a> I decided to use web-scraped Wikipedia data to measure the impact the movies and their studios have had on readers. The metrics I decided to scrape were link counts (the number of Wikipedia pages that link back to a Wikipedia article) and page views (the number of views a page gets in the past 30 days). 
+                    </p>
+
+                    <p class= "step" id = "step7">
+                        We will talk about the studios a little later. As for the movie Wikipedia pages, in terms of average link count, we see the same pattern again: Pixar, then Disney, then DreamWorks. However, when we look at average page views, Disney comes out on top. 
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class= "section section4">
+            <h2 class="section-heading features">Themes</h2>
+            <div class= "section-box section-box4">
+                <div class= "col col7">
+                    <div class="section-charts analysis" >
+                        <div class= "chart-holder">
+                            <p>Sentiment Analysis</p>
+                            <div class = "chart chart9">
+                                <div id= "tooltip9" class="tooltip2">
+                                    <div class = "tooltip-info">
+                                        <div><b>Overall Sentiment:</b> <span id ="features9"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class = "chart chart10">
+                                <div id= "tooltip10" class="tooltip2">
+                                    <div class = "tooltip-info">
+                                        <div><b>Overall Sentiment:</b> <span id ="features10"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-charts modeling" >
+                        <p>Topic Modeling</p>
+                        <div class= "button-holder">
+                            <button class= "button button-dreamworks">DreamWorks</button>
+                            <button class= "button button-disney">Disney</button>
+                            <button class= "button button-pixar">Pixar</button>
+                        </div>
+                        <div class = "chart chart11">
+                            <div id= "tooltip11" class="tooltip3">
+                                <div class = "tooltip-info">
+                                    <div><b>Beta:</b> <span id ="features11"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class = "col col8">
+                    <div class="section-paragraphs sentiment">
+                        <p class= "step" id = "step8">
+                            In this section, we will be looking at the textual themes of these movies using sentiment analysis and topic modeling. After some thinking,  I stumbled upon the idea of using plot summary data (from Wikipedia) to find differences between the studios. For more details about how the data for this section was acquired, see my <a href="https://github.com/larylc/DreamWorks-Disney-or-Pixar/blob/main/README.md">GitHub page. </a>
+                        </p>
+
+
+                        <p class= "step" id = "step9">
+                            The sentiment analysis performed for this project was aimed at determining how positive or negative the language used to describe the movie plots was. Using two different dictionaries (AFINN and bing), we get the same result overall, Disney movies, on average, have the most negative plot summary language followed by Pixar and then Dreamworks. Disney movies being the most negative (on average) could be attributed to Disney’s commitment to telling fairytale-like stories, which often feature more medieval themes. As for the other 2 studios, DreamWorks movies tend to be more light-hearted and fun whereas Pixar movies are known for their mastery in dealing with very mature and emotional content. But these are definitive inferences. Wikipedia writing bias could be playing a role in the results we are seeing. A better way to get more definitive results would be to use multiple plot summary sources and observe if there are any changes to the results. Unfortunately, IMDB plot summaries were not available for all movies, so Wikipedia had to be the exclusive source.
+                        </p>
+                    </div>
+                    <div class="section-paragraphs topics">
+                        <p class= "step" id = "step10">
+                            The topic modeling for this project was much more nebulous. The framework I used is called the Latent Dirichlet Allocation (LDA) and it generates probabilities based on each word’s association with a particular topic. Because there is a large amount of freedom in determining how many topics are generated, this exploratory analysis showcases what I thought was relevant. LDA forces us to have at least 2 topics, but from what I found, the words associated with the secondary topics were not similar enough to derive clear themes. That is why I will only be displaying one topic for each studio. 
+                        </p>
+                        <p class= "step" id = "step11">
+                            The topics I derived from the data were <b class="pixar-color">family for Pixar</b>, <b class="disney-color">fantasy for Disney</b>, and <b>context/circumstance for DreamWorks</b>. With words like “family”, “parents,” “home,” and  “memory,” it should come as no surprise that Pixar movie plots seem to revolve around family. Disney’s topic was less clear because it featured a few setting words (“ocean”, “time”, “people”, “night”) and a few mythical words (“powers”, “heart”, “magic”, “kingdom”, “reveals”). But if you consider how these words could fit in a single story, the fantasy (or fairy tale) topic starts to make sense. All of the words associated with DreamWorks describe some sort of context or setting even though they appear to be random. If we consider how important world-building is in movies like “Shrek”, “Madagascar”, “How to Train Your Dragon”, and “Kung Foo Panda,” then it makes sense that DreamWorks plots tend to be context focused. 
+                             
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class= "section section5">
+            <h2>Summary</h2>
+            <p>
+                Here is a summary table of the differences between the studios. Long story short, Pixar on average makes longer movies, uses more money for budgets, has greater box-office success, has better reviews, and gets referenced and viewed more on Wikipedia. 
+            </p>
+
+            <div id="responsive-table">
+              <table class="table">
+                <thead><tr>
+                <th title="Field #2">Studio</th>
+                <th title="Field #3">Mean Duration</th>
+                <th title="Field #4">Mean Budget</th>
+                <th title="Field #5">Mean Box Office Gross US</th>
+                <th title="Field #6">Mean Box Office Gross World</th>
+                <th title="Field #7">Mean IMDB Score</th>
+                <th title="Field #8">Mean Rotten Tomatoes</th>
+                <th title="Field #9">Mean Metacritic Score</th>
+                <th title="Field #10">Mean Wikipedia Page Views</th>
+                <th title="Field #11">Mean Wikipedia Link Count</th>
+                <th title="Field #12">Studio Wikipedia Page Views</th>
+                <th title="Field #13">Studio Wikipedia Link Count</th>
+                </tr></thead>
+                <tbody><tr>
+                <td align="left" >DreamWorks </td>
+                <td>93.09</td>
+                <td>119,176,471</td>
+                <td>158,150,641</td>
+                <td>433,000,000</td>
+                <td>6.76</td>
+                <td>72.03</td>
+                <td>61.68</td>
+                <td>41,109</td>
+                <td>6,131</td>
+                <td align="center">2,670</td>
+                <td align="center">106,413</td>
+                </tr>
+                <tr>
+                <td align="left" >Disney</td>
+                <td>99.69</td>
+                <td>157,115,385</td>
+                <td>217,053,846</td>
+                <td>609,507,692</td>
+                <td>7.18</td>
+                <td>81.92</td>
+                <td>68.62</td>
+                <td>84,367</td>
+                <td>1,111</td>
+                <td align="center">3,394</td>
+                <td align="center">92,979</td>
+                </tr>
+                <tr>
+                <td align="left">Pixar</td>
+                <td>100.68</td>
+                <td>156,863,636</td>
+                <td>272,897,270</td>
+                <td>658,552,898</td>
+                <td>7.64</td>
+                <td>88.86</td>
+                <td>79.82</td>
+                <td>66,793</td>
+                <td>1,254</td>
+                <td align="center">4,762</td>
+                <td align="center">134,272</td>
+                </tr>
+                </tbody></table>
+            </div>
+
+
+            <h2>Conclusion</h2>
+            <p>
+                Pixar coming out on top is not a surprise because it has been an industry leader for a long time. However, this project was not just about comparing the quality of the movies. I think I can walk away from this project knowing that I have a slightly better understanding of what makes these studios unique. 
+            </p>
+
+            <p>
+                Pixar movies tend to be about telling longer stories that deal with strong familial and mature themes. The goal, I think, is for characters to go on these long journeys where they can discover what really matters and return to where they started with closer relationships with their loved ones. Disney movies appear to be about telling fairy tales that are deeply intertwined with moral and family values. DreamWorks movies are largely interested in taking viewers into the worlds of their characters. With all that being said, the 3 studios borrow themes, ideas, and techniques from each other. As these studios experiment and refine their craft, there is no doubt that the lines between their movies will become even more blurred.
+            </p>
+            
+            <p>
+                This project is my very first one involving D3.js. I hope you enjoy exploring the data. If there are any questions about sources, once again, visit my <a href="https://github.com/larylc/DreamWorks-Disney-or-Pixar/blob/main/README.md">GitHub</a>.</p>
+
+        </div>
+
+
+
+
+
+
+
+    </div>
+</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/animation.gsap.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="./dreamworks_disney_pixar.js"></script>
+</body>
+</html>
