@@ -6,7 +6,7 @@ Following the link above will lead you to my project website. There, I will be p
 
 ## Major Projects
 
-These are the most detailed and time consuming projects. They usually take anywhere from a couple of weeks to several months to complete. In these projects you can expect to see not only a large variety of technical tools but also very detailed statistical analyses. 
+These are the most detailed and time consuming projects. They usually take anywhere from a couple of weeks to several months to complete. In these projects, you can expect to see not only a large variety of technical tools but also very detailed statistical analyses. 
 
 ### Project 1: Summer Research 2018 (R)
 
@@ -167,7 +167,7 @@ These are the most detailed and time consuming projects. They usually take anywh
 
 ---
 
-### Project 4: Grandmaster B-days and B-dates (R & Python)
+### Project 4: Grandmaster B-days and B-places (R & Python)
 
 **Date**: September 2021
 
