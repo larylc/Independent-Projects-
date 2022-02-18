@@ -250,10 +250,13 @@ nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .nav
   
 img {
   left: 50px;
+  top: 75px;
 }
 
 #square {
   left: 100px;
+  top: 75px;
+
 }
   
 }

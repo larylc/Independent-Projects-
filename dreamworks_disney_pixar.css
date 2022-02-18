@@ -378,7 +378,7 @@ th {
 td {
     background: linear-gradient( to right, #9EAFE6, #5F5BF3);
 }
-td:hover {
+td:hover, td:focus, td:active {
     filter: brightness(1.5);
     font-weight: 700
 }
@@ -388,10 +388,10 @@ td:hover {
     transition: x 1s ease-out, width 1s ease-out;
 }
 
-.bar:hover {
+.bar:hover, .bar:active, .bar:focus {
     fill: goldenrod;
 }
-.node:hover  {
+.node:hover, .node:active, .node:focus {
     transition: all 1s ease-out;
     stroke: goldenrod;
     stroke-width: 3px;
@@ -412,7 +412,7 @@ visibility: hidden;
 
 @media (max-width: 672px) {
     #title{
-     font-size: 5rem;
+     font-size: 4.5rem;
     }
     #subtitle {
         margin-bottom: 50px;
@@ -437,12 +437,15 @@ visibility: hidden;
         flex-direction: column;
     }
     .step {
-        padding: 20px;
+        padding: 10px;
         margin-left: 0px;
 
     }
     .col1, .col3, .col5, .col7 {
         margin: 0 auto;
+    }
+    .col:nth-child(even) {
+      margin: 20px auto;
     }
     
     

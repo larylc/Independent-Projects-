@@ -1,20 +1,32 @@
 /*==================================================
-// Scrolling 
+// Scrolling and Responsiveness
 ==================================================*/
+containerSize = parseInt(d3.select(".container").style("width"), 10) > 672 ? "desktop" : "mobile";
 
-
+console.log(containerSize);
 
 function splitScroll(){
+  if (containerSize == "desktop") {
     const controller = new ScrollMagic.Controller();
 
     new ScrollMagic.Scene({
-        duration: "110%",
+        duration: "95%",
         triggerElement: ".modeling",
         triggerHook: 0
     })
     .setPin(".modeling")
-    //.addIndicators()
     .addTo(controller);
+  } else {
+    const controller = new ScrollMagic.Controller();
+    new ScrollMagic.Scene({
+        duration: "10%",
+        triggerElement: ".modeling",
+        triggerHook: 0
+    })
+    .setPin(".modeling")
+    .addTo(controller);
+    
+  }
 }
 splitScroll();
 
@@ -53,14 +65,14 @@ async function drawBar(width_size, axis_variable, metric, target_chart, tooltip_
         -dimensions.margin.top -dimensions.margin.left
  
  
-// 4. Load Data  
+// Load Data  
 const data = await d3.csv("https://raw.githubusercontent.com/larylc/DreamWorks-Disney-or-Pixar/main/all_movie_data.csv")
    
 const xAccessor = d => d["name"]
 const yAccessor = d => parseFloat(d[metric])
 const colorAccessor = d => d.company
  
-// 4. Draw Canvas
+// Draw Canvas
 const wrapper = d3.select(target_chart)
     .append("svg")
     .attr("width", dimensions.width)
@@ -74,7 +86,7 @@ let bounds = wrapper
       `translate(${dimensions.margin.left}px,${dimensions.margin.top}px)`
     );
  
-// 5. Create scales
+// Create scales
 const xScale = d3.scaleBand()
     .domain(data.map(xAccessor))
     .range([0,dimensions.boundedWidth])
@@ -89,9 +101,8 @@ const colorScale = d3.scaleOrdinal()
     .domain(["Pixar", "Disney", "DreamWorks"])
     .range(["#9EAFE6",  "#5F5BF3", "#fff"])  
  
-// 6. Draw Data
+// Draw Data
 
- 
 const bars = bounds.selectAll("rect")
     .data(data)
     .join("rect")
@@ -102,6 +113,7 @@ const bars = bounds.selectAll("rect")
     .attr("height", (d) => yScale(yAccessor(0)))
     .attr("fill", d=> colorScale(colorAccessor(d)))
 
+// Scrolling Effect
 
 var controller = new ScrollMagic.Controller();
 var sectionTwoScene = new ScrollMagic.Scene({
@@ -117,8 +129,13 @@ var sectionTwoScene = new ScrollMagic.Scene({
     .triggerHook(1)
     .addTo(controller);
 
+// Interactions
+
 bars.on("mouseenter", onMouseEnter )
         .on("mouseleave", onMouseLeave)
+        .on("touchstart", onTouchStart)
+        .on("touchend", onTouchEnd)
+
  
     const tooltip = d3.select(tooltip_target)
  
@@ -136,8 +153,6 @@ bars.on("mouseenter", onMouseEnter )
         const x = xScale(xAccessor(d)) + dimensions.margin.left
         const y = yScale(yAccessor(d)) + dimensions.margin.top
            
-            //tooltip.style("left", x + "px").style("top", y + "px")
- 
             tooltip.style("transform", `translate(`
                 +`calc(-50% + ${x}px),`
                 +`calc(-100% + ${y}px)`
@@ -146,8 +161,33 @@ bars.on("mouseenter", onMouseEnter )
     function onMouseLeave(event, d){
         tooltip.style("opacity", 0)
     }
+    
+    function onTouchStart(event, d) {
+            tooltip.select(tooltip_metric1)
+                .text(d.company)
+            tooltip.select(tooltip_metric2)
+                .text(xAccessor(d))
+            tooltip.select(tooltip_metric3)
+                .text(addCommas(yAccessor(d)))
+            tooltip.style("opacity", 1)
+           
+ 
+ 
+        const x = xScale(xAccessor(d)) + dimensions.margin.left
+        const y = yScale(yAccessor(d)) + dimensions.margin.top
+           
+            tooltip.style("transform", `translate(`
+                +`calc(-50% + ${x}px),`
+                +`calc(-100% + ${y}px)`
+                +`)`)
+        }
+    function onTouchEnd(event, d){
+        tooltip.style("opacity", 0)
+    }
+    
+    
 
-//Peripheral
+// Peripherals
 const xAxisGenerator  = d3.axisBottom()
     .scale(xScale)
 
@@ -167,13 +207,33 @@ const xAxisLabel = xAxis.append("text")
  
 }
 
+function chartSizer(){
+  let chartWidth;
+  if (containerSize == "desktop")  {
+  chartWidth = parseInt(d3.select(".col1").style("width"), 10);
+  return chartWidth;} 
+  else {
+  chartWidth = 300;
+  return chartWidth;}
+}
 
-drawBar(parseInt(d3.select(".col1").style("width"), 10), "Budget","budget", ".chart1", "#tooltip1", "#company1", "#name1","#budget1", ".chart1" );
-drawBar(parseInt(d3.select(".col1").style("width"), 10), "World Box Office Gross","box_office_gross_world", ".chart2", "#tooltip2","#company2", "#name2","#budget2", ".chart2");
-drawBar(parseInt(d3.select(".col1").style("width"), 10),"US Box Office Gross","box_office_gross_us", ".chart3", "#tooltip3","#company3", "#name3","#budget3", ".chart3");
-drawBar(280,"IMDB Score","imdb_score", ".chart4", "#tooltip4", "#company4", "#name4","#score4", ".chart4");
-drawBar(280, "Rotten Tomatoes Score","rotten_tomatoes_score", ".chart5", "#tooltip5","#company5", "#name5","#score5", ".chart5" );
-drawBar(280, "Metacritic Score","metacritic_score", ".chart6", "#tooltip6","#company6", "#name6","#score6", ".chart6" ); 
+function chartSizer2(){
+  let chartWidth;
+  if (containerSize == "desktop")  {
+  chartWidth = parseInt(d3.select(".col3").style("width"), 10)/3;
+  return chartWidth;} 
+  else {
+  chartWidth = 300;
+  return chartWidth;}
+}
+
+
+drawBar( chartSizer(), "Budget","budget", ".chart1", "#tooltip1", "#company1", "#name1","#budget1", ".chart1" );
+drawBar( chartSizer(), "World Box Office Gross","box_office_gross_world", ".chart2", "#tooltip2","#company2", "#name2","#budget2", ".chart2");
+drawBar( chartSizer(),"US Box Office Gross","box_office_gross_us", ".chart3", "#tooltip3","#company3", "#name3","#budget3", ".chart3");
+drawBar(chartSizer2(),"IMDB Score","imdb_score", ".chart4", "#tooltip4", "#company4", "#name4","#score4", ".chart4");
+drawBar(chartSizer2(), "Rotten Tomatoes Score","rotten_tomatoes_score", ".chart5", "#tooltip5","#company5", "#name5","#score5", ".chart5" );
+drawBar(chartSizer2(), "Metacritic Score","metacritic_score", ".chart6", "#tooltip6","#company6", "#name6","#score6", ".chart6" ); 
  
 
 
@@ -213,7 +273,7 @@ async function drawCirc(width_size, metric, target_chart, tooltip_target, toolti
         .range(["#9EAFE6",  "#5F5BF3", "#fff"])   
     
 
-//Draw Data 
+// Draw Data 
     const node = svg.append("g")
       .selectAll("circle")
       .data(data)
@@ -226,7 +286,7 @@ async function drawCirc(width_size, metric, target_chart, tooltip_target, toolti
         .style("fill-opacity", 0.85)
         .attr("stroke", d=> colorScale(colorAccessor(d)))
     
-//Force Simulation
+// Force Simulation
     const simulation = d3.forceSimulation()
         .force("forceX", d3.forceX().strength(.2).x(width * .5))
         .force("forceY", d3.forceY().strength(.2).y(height * .5))
@@ -243,8 +303,7 @@ async function drawCirc(width_size, metric, target_chart, tooltip_target, toolti
         });
 
 
-//Interactions 
-
+// Interactions 
 var controller = new ScrollMagic.Controller();
 var sectionTwoScene = new ScrollMagic.Scene({
     triggerElement: trigger_point, 
@@ -262,6 +321,9 @@ var sectionTwoScene = new ScrollMagic.Scene({
 
 node.on("mouseenter", onMouseEnter )
         .on("mouseleave", onMouseLeave)
+        .on("touchstart", onTouchStart)
+        .on("touchend", onTouchEnd)
+
 
     const tooltip = d3.select(tooltip_target) 
 
@@ -272,9 +334,6 @@ node.on("mouseenter", onMouseEnter )
                 .text(addCommas(sizeAccessor(d)))
             tooltip.style("opacity", 1)
             
-
-            //tooltip.style("left", x + "px").style("top", y + "px")
-
             tooltip.style("transform", `translate(`
                 +`calc(-50% + ${d.x}px),`
                 +`calc(-100% + ${d.y}px)`
@@ -283,8 +342,24 @@ node.on("mouseenter", onMouseEnter )
     function onMouseLeave(event, d){
         tooltip.style("opacity", 0)
     }
+    
+    function onTouchStart(event, d) {
+            tooltip.select(tooltip_metric1)
+                .text(d.name)
+            tooltip.select(tooltip_metric2)
+                .text(addCommas(sizeAccessor(d)))
+            tooltip.style("opacity", 1)
+            
+            tooltip.style("transform", `translate(`
+                +`calc(-50% + ${d.x}px),`
+                +`calc(-100% + ${d.y}px)`
+                +`)`)
+        }
+    function onTouchEnd(event, d){
+        tooltip.style("opacity", 0)
+    }
 
-//Legend 
+// Legend 
 svg.append("circle").attr("cx",width/2 - 15).attr("cy",18).attr("r", 2).style("fill", "white")
 svg.append("circle").attr("cx",width/2).attr("cy",18).attr("r", 4).style("fill", "white")
 svg.append("circle").attr("cx",width/2 + 20).attr("cy",18).attr("r", 6).style("fill", "white")
@@ -296,8 +371,18 @@ svg.append("text").attr("x", width/2 + 40).attr("y", 18).text("More").style("fon
 
     }
 
-drawCirc(parseInt(d3.select(".col5").style("width"), 10), "wiki_page_views", ".chart7", "#tooltip7", "#name7","#wiki-metric7", "Page Views", ".chart7" );
-drawCirc(parseInt(d3.select(".col5").style("width"), 10), "wiki_link_count", ".chart8", "#tooltip8", "#name8","#wiki-metric8", "Link Counts", ".chart8" );
+
+function chartSizer3(){
+  let chartWidth;
+  if (containerSize == "desktop")  {
+  chartWidth = parseInt(d3.select(".col5").style("width"), 10);
+  return chartWidth;} 
+  else {
+  chartWidth = 300;
+  return chartWidth;}
+}
+drawCirc(chartSizer3(), "wiki_page_views", ".chart7", "#tooltip7", "#name7","#wiki-metric7", "Page Views", ".chart7" );
+drawCirc(chartSizer3(), "wiki_link_count", ".chart8", "#tooltip8", "#name8","#wiki-metric8", "Link Counts", ".chart8" );
 
 
 
@@ -325,14 +410,14 @@ async function drawHBar(width_size, target_data, metric, target_chart, tooltip_t
          -dimensions.margin.top -dimensions.margin.left
   
   
- // 4. Load Data  
+ // Load Data  
  const data = await d3.csv(target_data)
  const drawHBarChart = function() {
     
  const xAccessor = d => parseFloat(d[metric])
  const yAccessor = d => d["company"]
   
- // 4. Draw Canvas
+ // Draw Canvas
  const wrapper = d3.select(target_chart)
      .append("svg")
      .attr("width", dimensions.width)
@@ -346,7 +431,7 @@ async function drawHBar(width_size, target_data, metric, target_chart, tooltip_t
        `translate(${dimensions.margin.left}px,${dimensions.margin.top}px)`
      );
   
- // 5. Create scales
+ // Create scales
  const xScale = d3.scaleLinear()
      .domain([ d3.min(data, xAccessor), 0])
      .range([0, dimensions.boundedWidth ])
@@ -358,7 +443,7 @@ async function drawHBar(width_size, target_data, metric, target_chart, tooltip_t
      .padding(0.05);
   
 
- // 6. Draw Data
+ // Draw Data
  const bars = bounds.selectAll("rect")
      .data(data)
      .join("rect")
@@ -372,7 +457,7 @@ async function drawHBar(width_size, target_data, metric, target_chart, tooltip_t
 
 
 
-//7. Peripherals
+// Peripherals
 const yAxisGenerator = d3.axisLeft("text")
     .scale(yScale)
 
@@ -384,8 +469,7 @@ const yAxis = bounds
   .attr("class", "y-axis")
 
 
-  //interactions 
- 
+  //  Interactions 
   var controller = new ScrollMagic.Controller();
   var sectionTwoScene = new ScrollMagic.Scene({
       triggerElement: trigger_point, 
@@ -404,6 +488,8 @@ const yAxis = bounds
 
 bars.on("mouseenter", onMouseEnter )
     .on("mouseleave", onMouseLeave)
+    .on("touchstart", onTouchStart)
+    .on("touchend", onTouchEnd)
 
 const tooltip = d3.select(tooltip_target)
 
@@ -416,16 +502,36 @@ function onMouseEnter(event, d) {
 const x = xScale(xAccessor(d)) + dimensions.margin.left
 const y = yScale(yAccessor(d)) + dimensions.margin.top
    
-    //tooltip.style("left", x + "px").style("top", y + "px")
 
     tooltip.style("transform", `translate(`
         +`calc(-50% + ${x}px),`
         +`calc(-100% + ${y}px)`
         +`)`)
 }
-function onMouseLeave(event, d){
-tooltip.style("opacity", 0)
+  function onMouseLeave(event, d){
+  tooltip.style("opacity", 0)
 }
+
+function onTouchStart(event, d) {
+    tooltip.select(tooltip_metric)
+        .text(xAccessor(d))
+    tooltip.style("opacity", 1)
+   
+
+const x = xScale(xAccessor(d)) + dimensions.margin.left
+const y = yScale(yAccessor(d)) + dimensions.margin.top
+   
+
+    tooltip.style("transform", `translate(`
+        +`calc(-50% + ${x}px),`
+        +`calc(-100% + ${y}px)`
+        +`)`)
+}
+  function onTouchEnd(event, d){
+    tooltip.style("opacity", 0)
+}
+
+
 
 
 
@@ -436,11 +542,27 @@ drawHBarChart()
 
 }
 
-drawHBar(parseInt(d3.select(".col7").style("width"), 10),"https://raw.githubusercontent.com/larylc/DreamWorks-Disney-or-Pixar/main/all_movie_sentiment_afinn.csv","avg_overall_sentiment", ".chart9", "#tooltip9" , "#features9", ".chart9");
-drawHBar(parseInt(d3.select(".col7").style("width"), 10),"https://raw.githubusercontent.com/larylc/DreamWorks-Disney-or-Pixar/main/all_movie_sentiment_bing.csv","avg_overall_sentiment", ".chart10", "#tooltip10" , "#features10", ".chart10" );
+
+function chartSizer4(){
+  let chartWidth;
+  if (containerSize == "desktop")  {
+  chartWidth = parseInt(d3.select(".col7").style("width"), 10);
+  return chartWidth;} 
+  else {
+  chartWidth = 300;
+  return chartWidth;}
+  
+}
+
+drawHBar(chartSizer4(),"https://raw.githubusercontent.com/larylc/DreamWorks-Disney-or-Pixar/main/all_movie_sentiment_afinn.csv","avg_overall_sentiment", ".chart9", "#tooltip9" , "#features9", ".chart9");
+drawHBar(chartSizer4(),"https://raw.githubusercontent.com/larylc/DreamWorks-Disney-or-Pixar/main/all_movie_sentiment_bing.csv","avg_overall_sentiment", ".chart10", "#tooltip10" , "#features10", ".chart10" );
 
 
-///
+
+/*==================================================
+Themes
+=============*/
+
 
 async function drawHBarInt(width_size, tooltip_target, tooltip_metric) {
         //  Create Chart Dimensions 
@@ -521,7 +643,7 @@ async function drawHBarInt(width_size, tooltip_target, tooltip_metric) {
         
     bars.exit().remove();
 
-    //7. Peripherals
+  // Peripherals
     const yAxisGenerator = d3.axisLeft("text")
         .scale(yScale)
 
@@ -532,6 +654,8 @@ const yAxis = bounds.select(".h-y-axis").call(yAxisGenerator)
 
 bars.on("mouseenter", onMouseEnter )
     .on("mouseleave", onMouseLeave)
+    .on("touchstart", onTouchStart)
+    .on("touchend", onTouchEnd)
 
 const tooltip = d3.select(tooltip_target)
 
@@ -544,7 +668,6 @@ function onMouseEnter(event, d) {
 const x = xScale(xAccessor(d)) + dimensions.margin.left
 const y = yScale(yAccessor(d)) + dimensions.margin.top
    
-    //tooltip.style("left", x + "px").style("top", y + "px")
 
     tooltip.style("transform", `translate(`
         +`calc(-50% + ${x}px),`
@@ -552,6 +675,26 @@ const y = yScale(yAccessor(d)) + dimensions.margin.top
         +`)`)
 }
 function onMouseLeave(event, d){
+    tooltip.style("opacity", 0)
+}
+
+
+function onTouchStart(event, d) {
+    tooltip.select(tooltip_metric)
+        .text(xAccessor(d).toFixed(4))
+    tooltip.style("opacity", 1)
+   
+
+const x = xScale(xAccessor(d)) + dimensions.margin.left
+const y = yScale(yAccessor(d)) + dimensions.margin.top
+   
+
+    tooltip.style("transform", `translate(`
+        +`calc(-50% + ${x}px),`
+        +`calc(-100% + ${y}px)`
+        +`)`)
+}
+function onTouchEnd(event, d){
     tooltip.style("opacity", 0)
 }
 
@@ -592,5 +735,6 @@ function onMouseLeave(event, d){
     
     
     }    
-drawHBarInt(parseInt(d3.select(".col7").style("width"), 10), "#tooltip11", "#features11"); 
+    
+drawHBarInt(chartSizer4(), "#tooltip11", "#features11"); 
     
