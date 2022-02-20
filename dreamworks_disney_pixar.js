@@ -188,21 +188,44 @@ bars.on("mouseenter", onMouseEnter )
     
 
 // Peripherals
-const xAxisGenerator  = d3.axisBottom()
-    .scale(xScale)
+const mean = Math.round(d3.mean(data, yAccessor));
 
-const xAxis = bounds.append("g")
-    .call(xAxisGenerator)
-    .style("transform", `translateY(${dimensions.boundedHeight}px)`)
-    .attr("class", "x-axis")
+const meanline1 = bounds.append("line")
+        .attr("x1", +2)
+        .attr("y1", yScale(mean))
+        .attr("x2", dimensions.boundedWidth)
+        .attr("y2", yScale(mean))
+        .attr("stroke", "goldenrod")
+        .attr("stroke-dasharray", "5px 5px")
 
-const xAxisLabel = xAxis.append("text")
-    .attr("x", dimensions.boundedWidth/2 )
-    .attr("y", dimensions.margin.bottom -10)
+
+const meanlabel = bounds.append("text")
+        .attr("x", dimensions.boundedWidth* 0.82 )
+        .attr("y", yScale(mean) -30)
+        .style("text-anchor", "middle")
+        .text("--- " + "Avg: " + addCommas(mean))
+        .attr("fill", "goldenrod")
+        .style("font-family", "Century")
+        .style("font-size", 10)
+        .style("font-weight", 900)
+        .style("z-index", 10)
+
+const yAxisGenerator  = d3.axisLeft()
+    .scale(yScale)
+
+const yAxis = bounds.append("g")
+    .call(yAxisGenerator)
+    .attr("class", "y-axis-first")
+
+const yAxisLabel = yAxis.append("text")
+    .attr("x", -dimensions.boundedHeight/2 )
+    .attr("y", -dimensions.margin.left + 40)
     .attr("fill", "white")
-    .style("font-size", "1.4em")
+    .style("font-size", "1em")
     .text(axis_variable)
     .style("font-family", "Century")
+    .style("text-anchor", "middle")
+    .style("transform", "rotate(-90deg)")          
 
  
 }

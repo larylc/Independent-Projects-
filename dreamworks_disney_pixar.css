@@ -145,8 +145,6 @@ margin-top: 150px;
 }
 
 
-
-
 .col3 {
     display: flex;
     flex-direction: row;
@@ -397,7 +395,7 @@ td:hover, td:focus, td:active {
     stroke-width: 3px;
 }
 
-.x-axis line, .y-axis line, .h-y-axis line,
+.y-axis-first line, .y-axis line, .h-y-axis line,
 .section-box1 .col .chart svg .bounds g .tick text, 
 .section-box1 .col .chart svg .bounds g .domain,
 .section-box2 .col .chart svg .bounds g .domain,
@@ -412,7 +410,7 @@ visibility: hidden;
 
 @media (max-width: 672px) {
     #title{
-     font-size: 4.5rem;
+     font-size: 4rem;
     }
     #subtitle {
         margin-bottom: 50px;
@@ -433,6 +431,10 @@ visibility: hidden;
     .chart1 {
         margin: 0 auto;
     }
+    .col {
+      width: 300px !important;
+    }
+    
     .col3 {
         flex-direction: column;
     }
