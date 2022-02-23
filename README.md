@@ -1,4 +1,4 @@
-[Website](https://larylc.github.io/Independent-Projects-/index.html)
+## [Website](https://larylc.github.io/Independent-Projects-/index.html)
 
 ## About 
 
@@ -303,7 +303,18 @@ These projects can vary from a few days to a few weeks. These projects are usual
 
 [Data](https://github.com/larylc/More-Chess-Webscraped-Data) 
  
+ ---
+ 
+### DreamWorks, Disney, or Pixar
 
+ 
+**Date**: February 2021
+
+**Summary**: A responsive webpage that showcases the differences between animation studio movies. 
+
+[Responsitory](https://github.com/larylc/DreamWorks-Disney-or-Pixar/blob/main/README.md)
+
+[Webpage](https://larylc.github.io/Independent-Projects-/dreamworks_disney_pixar.html)
 
 ## Contact Me
 
