@@ -297,18 +297,63 @@ async function drawCirc(width_size, metric, target_chart, tooltip_target, toolti
     
 
 // Draw Data 
+
+/*
     const node = svg.append("g")
       .selectAll("circle")
       .data(data)
-      .join("circle")
+      .enter()
+      .append("circle")
       .attr("class", "node")
         .attr("r", d=> sizeScale(0))
         .attr("cx", width / 2)
         .attr("cy", height / 2)
         .style("fill", d=> colorScale(colorAccessor(d)))
         .style("fill-opacity", 0.85)
-        .attr("stroke", d=> colorScale(colorAccessor(d)))
-    
+        .attr("stroke", d=> colorScale(colorAccessor(d)));*/
+        
+        
+    const node = svg.selectAll("circle")
+      .data(data)
+      .enter()
+      .append("g").append("circle")
+      .attr("class", "node")
+      .attr("r", d=> sizeScale(0))
+      .attr("cx", width / 2)
+      .attr("cy", height / 2)
+      .style("fill", d=> colorScale(colorAccessor(d)))
+      .style("fill-opacity", 0.85)
+      .attr("stroke", d=> colorScale(colorAccessor(d)));
+  
+  
+  const texts = svg.selectAll(null)
+      .data(data.filter(function(d){ return  d["name"] == "Coco" ||  d["name"] == "Frozen" || d["name"] == "Shrek"  
+        || d["name"] == "Up" || d["name"] == "Cars"  || d["name"] == "Moana"
+      }))
+      .enter()
+      .append("text")
+      .text(d => d.name)
+      .style("fill", "white")
+      .attr("font-size", 10)
+      .style("text-anchor", "middle")
+      .style("font-weight",  700);
+      
+      
+    const texts2 = svg.selectAll(null)
+      .data(data.filter(function(d){ return  d["name"] == "Shrek"  
+      }))
+      .enter()
+      .append("text")
+      .text(d => d.name)
+      .style("fill", "black")
+      .attr("font-size", 10)
+      .style("text-anchor", "middle")
+      .style("font-weight",  700);
+
+
+
+  
+  
 // Force Simulation
     const simulation = d3.forceSimulation()
         .force("forceX", d3.forceX().strength(.2).x(width * .5))
@@ -322,7 +367,15 @@ async function drawCirc(width_size, metric, target_chart, tooltip_target, toolti
         .on("tick", function(d){
           node
               .attr("cx", d => d.x)
-              .attr("cy", d => d.y)
+              .attr("cy", d => d.y);
+              
+          texts.attr("x", (d) => { return d.x})
+          .attr("y", (d) => { return d.y});
+          
+          
+          texts2.attr("x", (d) => { return d.x})
+          .attr("y", (d) => { return d.y});
+            
         });
 
 

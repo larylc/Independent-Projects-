@@ -112,8 +112,8 @@ For more information about my skill set please visit my [personal website](https
 <div class= "dropdown dropdown4">
 <button>R</button>
 <ul>
-  <li>Creating Personal Website</li>
-  <li>Updating Project Website</li>
+  <li>Updating personal and project websites</li>
+  <li>Creating visualizations for personal website</li>
 </ul>
 </div>
 
@@ -124,26 +124,33 @@ For more information about my skill set please visit my [personal website](https
 <div class= "dropdown dropdown6">
 <button>HTML/CSS</button>
 <ul>
-  <li>Creating Personal Website</li>
-  <li>Updating Project Website</li>
+  <li>Updating personal and project websites</li>
 </ul>
 </div>
 
 <div class= "dropdown dropdown7">
 <button>JavaScript</button>
 <ul>
-  <li>Head First JavaScript Chapter 10</li>
-  <li>Test Project Website</li>
+  <li>Updating personal and project websites</li>
 </ul>
 </div>
 
 <div class= "dropdown dropdown8">
 <button>D3.js</button>
 <ul>
-  <li>Full Stack D3 Master Class module 6 and 7</li>
-  <li>Test Project Website</li>
+  <li>Improving latest data viz project</li>
 </ul>
 </div>
+
+<div class= "dropdown dropdown9">
+<button>Tableau</button>
+<ul>
+  <li>Creating visualizations for personal website</li>
+</ul>
+</div>
+
+
+
 
 </div>
 </div>
