@@ -93,9 +93,10 @@ const xScale = d3.scaleBand()
     .padding(0.4);
    
 const yScale = d3.scaleLinear()
-    .domain(d3.extent(data,yAccessor))
+    .domain([0,d3.max(data, yAccessor)])
     .range([dimensions.boundedHeight, 0])
- 
+
+console.log(yScale.domain()); 
  
 const colorScale = d3.scaleOrdinal()
     .domain(["Pixar", "Disney", "DreamWorks"])
