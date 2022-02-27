@@ -20,6 +20,7 @@ These are the most detailed and time consuming projects. They usually take anywh
 
 <details>
 <summary><b>See Packages Used:</b></summary>
+ 
 * library(knitr)
 * library(plyr)
 * library(doBy)
@@ -30,6 +31,7 @@ These are the most detailed and time consuming projects. They usually take anywh
 * library(lme4)
 * library(car) 
 * library(lsmeans)
+ 
 </details>
 
 <details>
