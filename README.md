@@ -312,7 +312,7 @@ These projects can vary from a few days to a few weeks. These projects are usual
 
 **Summary**: A responsive webpage that showcases the differences between animation studio movies. 
 
-[Responsitory](https://github.com/larylc/DreamWorks-Disney-or-Pixar/blob/main/README.md)
+[Respository](https://github.com/larylc/DreamWorks-Disney-or-Pixar/blob/main/README.md)
 
 [Webpage](https://larylc.github.io/Independent-Projects-/dreamworks_disney_pixar.html)
 
