@@ -1,5 +1,6 @@
 ---
 title: ""
+pagetitle: Cedric's Data Science Projects
 
 ---
 
