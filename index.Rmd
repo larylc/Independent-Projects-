@@ -45,11 +45,11 @@ For more information about my skill set please visit my [personal website](https
 <div class= "dropdown dropdown1">
 <button>Major Projects</button>
 <details>
-<summary><b> Project 1: </b> Summer Research Project 2018 </summary>
+<summary><b> Project 1: </b> Summer Research Project (2018) </summary>
 <a href= "https://larylc.github.io/Independent-Projects-/Summer-Research-2018-Markdown.html">Investigated how movement affects forked fungus beetle social network position.</a> 
 </details>
 <details>
-<summary><b> Project 2:</b> Exploratory Pokemon Analysis 2020 </summary>
+<summary><b> Project 2:</b> Exploratory Pokemon Analysis (2020) </summary>
 <a href= "https://larylc.github.io/Independent-Projects-/pokemon-project-2020.html" >Explored data visualization using Pokemon gaming data.</a> 
 </details>
 <details>
@@ -90,7 +90,7 @@ For more information about my skill set please visit my [personal website](https
 </details>
 
 <details>
-<summary><b> Data Visualization Website: </b>  (2022) </summary>
+<summary><b> Data Visualization Website: </b> DreamWorks, Disney, or Pixar (2022) </summary>
 <a href= "https://larylc.github.io/Independent-Projects-/dreamworks_disney_pixar.html">Used IMDB and Wikipedia data to analyze differences between animation studio movies.</a> 
 </details>
 
