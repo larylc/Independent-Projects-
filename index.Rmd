@@ -43,7 +43,7 @@ For more information about my skill set please visit my [personal website](https
 
 <div id= "menu1">
 <div class= "dropdown dropdown1">
-<button>Major Projects</button>
+<button class= "drop-button">Major Projects</button>
 <details>
 <summary><b> Project 1: </b> Summer Research Project (2018) </summary>
 <a href= "https://larylc.github.io/Independent-Projects-/Summer-Research-2018-Markdown.html">Investigated how movement affects forked fungus beetle social network position.</a> 
@@ -64,7 +64,7 @@ For more information about my skill set please visit my [personal website](https
 </div>
 
 <div class= "dropdown dropdown2">
-<button>Minor Projects</button>
+<button class= "drop-button">Minor Projects</button>
 <details>
 <summary><b> Minor Project 1:</b> Understanding Anime Genre Trends (2021) </summary>
 <a href= "https://loganlary.shinyapps.io/anime1_030521/?_ga=2.199251374.1633841057.1615147342-569369622.1613318148">Examined popularity of anime genres. </a> 
@@ -83,7 +83,7 @@ For more information about my skill set please visit my [personal website](https
 
 
 <div class= "dropdown dropdown3">
-<button>Data Visualizations</button>
+<button class= "drop-button">Data Visualizations</button>
 <details>
 <summary><b> Data Visualization App: </b> Pathway to Prodigy (2021) </summary>
 <a href= "https://loganlary.shinyapps.io/prodigies_app/?_ga=2.15136438.103236738.1633010249-569369622.1613318148">Used original chess prodigy data set to create app that compares the rating trajectories of chess players over age ranges.</a> 
@@ -111,7 +111,7 @@ For more information about my skill set please visit my [personal website](https
 <div id= "menu2">
 
 <div class= "dropdown dropdown4">
-<button>R</button>
+<button class= "drop-button">R</button>
 <ul>
   <li>Updating personal and project websites</li>
   <li>Creating visualizations for personal website</li>
@@ -119,32 +119,32 @@ For more information about my skill set please visit my [personal website](https
 </div>
 
 <div class= "dropdown dropdown5">
-<button>Python</button>
+<button  class= "drop-button">Python</button>
 </div>
 
 <div class= "dropdown dropdown6">
-<button>HTML/CSS</button>
+<button  class= "drop-button">HTML/CSS</button>
 <ul>
   <li>Updating personal and project websites</li>
 </ul>
 </div>
 
 <div class= "dropdown dropdown7">
-<button>JavaScript</button>
+<button  class= "drop-button">JavaScript</button>
 <ul>
   <li>Updating personal and project websites</li>
 </ul>
 </div>
 
 <div class= "dropdown dropdown8">
-<button>D3.js</button>
+<button  class= "drop-button">D3.js</button>
 <ul>
   <li>Improving latest data viz project</li>
 </ul>
 </div>
 
 <div class= "dropdown dropdown9">
-<button>Tableau</button>
+<button  class= "drop-button">Tableau</button>
 <ul>
   <li>Creating visualizations for personal website</li>
 </ul>

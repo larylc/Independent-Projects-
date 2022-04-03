@@ -127,7 +127,8 @@ details, .dropdown  ul   {
 }
 
 
-button {
+
+.drop-button {
   width: 90%;
   font-size:12px;
   background-color: var(--secondary-color);
