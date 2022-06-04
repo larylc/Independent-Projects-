@@ -228,6 +228,9 @@ One of my favorite things about this chart is that it allows the user to interac
 
 # Improving the Second Group of Graphs
 
+These next graphs were also taken from the [Exploring Pokemon](https://larylc.github.io/Independent-Projects-/pokemon-project-2020.html) project. 
+
+
 ![Second Chart](C:\Users\laryl\Documents\Independent-Projects-\img\old chart 2.png){#id .class width=50% height=50%}
 ![Third Chart](C:\Users\laryl\Documents\Independent-Projects-\img\old chart 3.png){#id .class width=50% height=50%}
 ![Fourth Chart](C:\Users\laryl\Documents\Independent-Projects-\img\old chart 4.png){#id .class width=50% height=50%}
