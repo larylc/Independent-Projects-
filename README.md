@@ -314,11 +314,23 @@ These projects can vary from a few days to a few weeks. These projects are usual
  
 **Date**: February 2021
 
-**Summary**: A responsive webpage that showcases the differences between animation studio movies. 
+**Summary**: Responsive webpage that showcases the differences between animation studio movies. 
 
 [Respository](https://github.com/larylc/DreamWorks-Disney-or-Pixar/blob/main/README.md)
 
 [Webpage](https://larylc.github.io/Independent-Projects-/dreamworks_disney_pixar.html)
+
+---
+ 
+### Re-Viz It
+
+ 
+**Date**: June 2021
+
+**Summary**: Data viz report that redesigns problematic visualizations.
+
+[Webpage](https://larylc.github.io/Independent-Projects-/reviz_it.html)
+
 
 ## Contact Me
 
