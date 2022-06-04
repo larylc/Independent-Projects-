@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="pandoc" />
+
+        <meta name="author" content="Cedric Lary" />
+    
+    
+    <title>Re-viz It</title>
+
+        <script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+        <script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="site_libs/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+        <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+        <script src="site_libs/navigation-1.1/tabsets.js"></script>
+        <script src="site_libs/navigation-1.1/codefolding.js"></script>
+        <link href="site_libs/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
+        <script src="site_libs/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
+        <link href="site_libs/clean-0.1/clean.css" rel="stylesheet" />
+        <script src="site_libs/clean-0.1/clean.js"></script>
+        <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+        <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+        <script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+        <script src="site_libs/proj4js-2.3.15/proj4.js"></script>
+        <link href="site_libs/highcharts-8.1.2/css/motion.css" rel="stylesheet" />
+        <script src="site_libs/highcharts-8.1.2/highcharts.js"></script>
+        <script src="site_libs/highcharts-8.1.2/highcharts-3d.js"></script>
+        <script src="site_libs/highcharts-8.1.2/highcharts-more.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/stock.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/map.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/annotations.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/data.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/drilldown.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/item-series.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/offline-exporting.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/overlapping-datalabels.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/exporting.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/export-data.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/funnel.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/heatmap.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/treemap.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/sankey.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/dependency-wheel.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/organization.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/solid-gauge.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/streamgraph.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/sunburst.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/vector.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/wordcloud.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/xrange.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/tilemap.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/venn.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/gantt.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/timeline.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/parallel-coordinates.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/bullet.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/coloraxis.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/dumbbell.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/lollipop.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/series-label.js"></script>
+        <script src="site_libs/highcharts-8.1.2/plugins/motion.js"></script>
+        <script src="site_libs/highcharts-8.1.2/custom/reset.js"></script>
+        <script src="site_libs/highcharts-8.1.2/modules/boost.js"></script>
+        <script src="site_libs/highchart-binding-0.8.2/highchart.js"></script>
+        <script src="site_libs/plotly-binding-4.9.4.1/plotly.js"></script>
+        <script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+        <link href="site_libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+        <script src="site_libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+        <link href="site_libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+        <script src="site_libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+    
+    
+        <style type="text/css">code{white-space: pre;}</style>
+    <style type="text/css">
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      .sourceCode { overflow: visible; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+          background-color: #ffffff;
+          color: #a0a0a0;
+        }
+      pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+      div.sourceCode
+        { color: #1f1c1b; background-color: #ffffff; }
+      @media screen {
+      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+      code span { color: #1f1c1b; } /* Normal */
+      code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+      code span.an { color: #ca60ca; } /* Annotation */
+      code span.at { color: #0057ae; } /* Attribute */
+      code span.bn { color: #b08000; } /* BaseN */
+      code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+      code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+      code span.ch { color: #924c9d; } /* Char */
+      code span.cn { color: #aa5500; } /* Constant */
+      code span.co { color: #898887; } /* Comment */
+      code span.cv { color: #0095ff; } /* CommentVar */
+      code span.do { color: #607880; } /* Documentation */
+      code span.dt { color: #0057ae; } /* DataType */
+      code span.dv { color: #b08000; } /* DecVal */
+      code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+      code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+      code span.fl { color: #b08000; } /* Float */
+      code span.fu { color: #644a9b; } /* Function */
+      code span.im { color: #ff5500; } /* Import */
+      code span.in { color: #b08000; } /* Information */
+      code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+      code span.op { color: #1f1c1b; } /* Operator */
+      code span.ot { color: #006e28; } /* Other */
+      code span.pp { color: #006e28; } /* Preprocessor */
+      code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+      code span.sc { color: #3daee9; } /* SpecialChar */
+      code span.ss { color: #ff5500; } /* SpecialString */
+      code span.st { color: #bf0303; } /* String */
+      code span.va { color: #0057ae; } /* Variable */
+      code span.vs { color: #bf0303; } /* VerbatimString */
+      code span.wa { color: #bf0303; } /* Warning */
+    </style>
+    
+    
+    <!-- tabsets -->
+    <script>
+      $(document).ready(function () {
+	  window.buildTabsets("toc");
+      });
+      $(document).ready(function () {
+	  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+	      $(this).parent().toggleClass('nav-tabs-open')
+	  });
+      });
+    </script>
+
+    <!-- code folding -->
+        <script>
+      $(document).ready(function () {
+	  	  	  window.initializeCodeFolding("hide" === "show");
+	        });
+    </script>
+    
+    <!-- code download -->
+    
+    <!-- tabsets dropdown -->
+
+    <style type="text/css">
+      .tabset-dropdown > .nav-tabs {
+	  display: inline-table;
+	  max-height: 500px;
+	  min-height: 44px;
+	  overflow-y: auto;
+	  background: white;
+	  border: 1px solid #ddd;
+	  border-radius: 4px;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+	  content: "&#xe258;";
+	  border: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active {
+	  display: block;
+      }
+
+      .tabset-dropdown > .nav-tabs > li.active a {
+  	  padding: 0 15px !important;
+      }
+
+      .tabset-dropdown > .nav-tabs > li > a,
+      .tabset-dropdown > .nav-tabs > li > a:focus,
+      .tabset-dropdown > .nav-tabs > li > a:hover {
+	  border: none;
+	  display: inline-block;
+	  border-radius: 4px;
+	  background-color: transparent;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+	  display: block;
+	  float: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li {
+	  display: none;
+	  margin-left: 0 !important;
+      }
+    </style>
+    
+</head>
+
+<body class="preload">
+
+      <!-- html_clean start -->
+   <div class="container-fluid main-container">
+     <div class="row">
+       <div class="col-md-10">
+   	
+            
+      <div class="btn-group pull-right">
+     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+     <ul class="dropdown-menu" style="min-width: 50px;">
+	    	    <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+	    <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+	    	    	         </ul>
+   </div>
+   
+      
+      <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Cedric's Projects</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li>
+        <a href="index.html">About</a>
+      </li>
+      <li>
+        <a href="Summer-Research-2018-Markdown.html">Proj.1 (R)</a>
+      </li>
+      <li>
+        <a href="pokemon-project-2020.html">Proj.2 (R)</a>
+      </li>
+      <li>
+        <a href="gendered_education_project_complete.html">Proj.3 (R)</a>
+      </li>
+      <li>
+        <a href="https://larylc.github.io/chess_bdays_bplaces/">Proj.4 (R &amp; Python)</a>
+      </li>
+      <li>
+        <a href="https://loganlary.shinyapps.io/anime1_030521/?_ga=2.199251374.1633841057.1615147342-569369622.1613318148">Minor Proj.1 (R)</a>
+      </li>
+      <li>
+        <a href="tvanalysis.html">Minor Proj.2 (Python)</a>
+      </li>
+      <li>
+        <a href="missing_chess_records.html">Minor Proj.3 (R &amp; Python)</a>
+      </li>
+      <li>
+        <a href="https://loganlary.shinyapps.io/prodigies_app/?_ga=2.15136438.103236738.1633010249-569369622.1613318148">Data Viz App (R)</a>
+      </li>
+      <li>
+        <a href="dreamworks_disney_pixar.html">Data Viz Webpage (R, Python, D3.js)</a>
+      </li>
+      <li>
+        <a href="reviz_it.html">Data Viz Report (R)</a>
+      </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container -->
+      </div><!--/.navbar -->
+        
+      <h1 class="title">Re-viz It</h1>
+      
+        
+
+      <!-- html_clean authors -->
+         <h4 class="author"><em>Cedric Lary</em></h4>
+            <h4 class="date"><em>5/27/2022</em></h4>
+      
+      
+   
+<!-- Don't indent these lines or it will mess pre blocks indentation --> 
+<div id="content">
+<style>
+
+h1, h2, h3 {
+  font-family: Georgia;
+  font-weight: bold;
+}
+
+h1.title, #toc {
+  margin-top: 150px;
+}
+
+body {
+  font-family: Georgia;
+}
+</style>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>After struggling to come up with a new data set to work with for this new project, I decided to redesign a couple of my worst graphs. This project has a few purposes:</p>
+<ul>
+<li><p>It showcases my growth in programming and data visualization designing.</p></li>
+<li><p>It takes readers through my information design process.</p></li>
+</ul>
+<p>To keep things simple, I will be <mark>displaying the old graphs, highlighting their issues, showing my design and coding processes, and presenting the final visualizations.</mark></p>
+</div>
+<div id="data-and-packages" class="section level1">
+<h1>Data and Packages</h1>
+<p>This project will be be featuring an old Pokemon data set that I obtained from <a href="https://www.kaggle.com/datasets/mariotormo/complete-pokemon-dataset-updated-090420">Mario Tormo Romero’s Kaggle</a>. Although it has been updated, I will keep using the 4-21-20 version of it.</p>
+<p>Additionally, I will be using some of the same packages I used last time. The main difference here is that I am using more interactive data visualization packages, which was something I could not do when I began programming.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(extrafont)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(highcharter)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringi)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pokemon_data <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">&quot;C:/Users/laryl/Desktop/Data Sets/pokedex.csv&quot;</span>)</span></code></pre></div>
+</div>
+<div id="improving-graph-1" class="section level1">
+<h1>Improving Graph 1</h1>
+<p>The first graph is from my very first completely self-directed project called <a href="https://larylc.github.io/Independent-Projects-/pokemon-project-2020.html">Exploring Pokemon</a>.</p>
+<div class="figure">
+<img src="img/old%20chart%201.png" id="id" class="class" alt="" />
+<p class="caption">First Chart</p>
+</div>
+<div id="critiques" class="section level2">
+<h2>Critiques</h2>
+<p><strong>What is wrong with this first chart?</strong></p>
+<p>Firstly, when visualizing a variable with 18 categories that overlap along the x-axis, the better practice is to visualize bar charts horizontally to avoid axis label rotations. Funny enough, other visualizations in the project do this. Some might argue that the numbers on top of the bars are unnecessary and create “chart junk.” But since there were a few types that shared the same number, my thought, at the time, was that it could be helpful to see the exact numbers.</p>
+<p>One of the most significant issues here involves using too many colors for a variable displayed across the x-axis. Although the typical bar chart is supposed to apply colors sparingly, using colors to distinguish between types is common practice in the Pokemon franchise.</p>
+<p>However, the colors for this graph were selected using the “color names” (like cornflower blue instead of #6495ed) I felt matched the game’s colors best. As a result, the chart is probably a crude representation of Game Freak’s color choices.</p>
+<p>The last thing to critique for this chart is couldn’t we tell a better story than this? Although this chart was an opportunity to practice making a bar chart with ggplot, we did miss an opportunity to tell a more nuanced story.</p>
+</div>
+<div id="ideation-and-sketching" class="section level2">
+<h2>Ideation and Sketching</h2>
+<p><strong>Original Question:</strong> <mark> <em>How can we visualize the number of Pokemon per type?</em></mark></p>
+<p><strong>New Questions:</strong> <mark><em>Can I do more? Is there a way to tell a better story and get more depth from the data?</em></mark></p>
+<p>For this chart, I decided to go to one of my favorite developers and see if there were some interesting charts I could get inspired by. <a href="https://jkunst.com/">Joshua Kunst</a> is a developer who is well known in the R community for his work on highcharter visualizations. The highcharter package is a library that I have used to create stunning interactive visualizations(see one of my projects <a href="https://loganlary.shinyapps.io/prodigies_app/?_ga=2.15136438.103236738.1633010249-569369622.1613318148">here</a>).</p>
+<p>After scrolling through his page, I found an example of <a href="https://jkunst.com/blog/posts/2019-02-04-using-tooltips-in-unexpected-ways/">donut chart</a> that maximizes space by presenting a second related graph in the tooltip on the inside of the donut chart. Embedding related graphs inside of tooltips is something that I have done before in Tableau but never in R.</p>
+<p>This was exactly what I was looking for. My idea was to display the counts of the Pokemon on segments of the donut’s ring and then show the number of Pokemon for a particular type across generations when a segment is clicked.</p>
+<p>Here is a rough sketch of my idea:</p>
+<div class="figure">
+<img src="img/sketch1.jpg" id="id" class="class" alt="" />
+<p class="caption">Sketch 1</p>
+</div>
+</div>
+<div id="coding" class="section level2">
+<h2>Coding</h2>
+<p>Here is the code to transform the data so it is ready for visualization.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create two separate data frames to separate Pokemon so that they are counted twice if they have 2 types</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>pokemon_types1<span class="ot">&lt;-</span> pokemon_data <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, generation, type_1) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">type_half =</span> type_1) <span class="sc">%&gt;%</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>type_1)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>pokemon_types2<span class="ot">&lt;-</span> pokemon_data <span class="sc">%&gt;%</span> </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, generation, type_2) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">type_half =</span> type_2)<span class="sc">%&gt;%</span> </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(type_half <span class="sc">!=</span> <span class="st">&quot;&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>type_2)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Combine the two dataframes</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>pokemon_types <span class="ot">&lt;-</span> <span class="fu">rbind</span>(pokemon_types1, pokemon_types2)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Count the number of Pokemon per type overall</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>pokemon_type_totals <span class="ot">&lt;-</span> pokemon_types <span class="sc">%&gt;%</span> <span class="fu">count</span>(type_half)  <span class="sc">%&gt;%</span>  </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total =</span> n)<span class="sc">%&gt;%</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>n)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co">#Count the number of pokemon per generation per type</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>pokemon_types_counted <span class="ot">&lt;-</span> pokemon_types<span class="sc">%&gt;%</span> <span class="fu">count</span>(generation, type_half)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pokemon_type_totals)</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["type_half"],"name":[1],"type":["chr"],"align":["left"]},{"label":["total"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"Bug","2":"90"},{"1":"Dark","2":"70"},{"1":"Dragon","2":"72"},{"1":"Electric","2":"72"},{"1":"Fairy","2":"63"},{"1":"Fighting","2":"70"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pokemon_types_counted)</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["generation"],"name":[1],"type":["int"],"align":["right"]},{"label":["type_half"],"name":[2],"type":["chr"],"align":["left"]},{"label":["n"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"1","2":"Bug","3":"14"},{"1":"1","2":"Dark","3":"7"},{"1":"1","2":"Dragon","3":"5"},{"1":"1","2":"Electric","3":"14"},{"1":"1","2":"Fairy","3":"8"},{"1":"1","2":"Fighting","3":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>The biggest challenge here was nesting one data frame inside of another. Using another one of my resources, <a href="https://www.tmbish.me/lab/highcharter-cookbook/">Tom Bishop’s Highcharter Cookbook</a> I was able to finally to organize the data.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Nest the generation counts inside of the total counts</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pokemon_types_final <span class="ot">&lt;-</span> pokemon_type_totals <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(pokemon_types_counted, <span class="at">by=</span> <span class="st">&quot;type_half&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(generation, type_half, n) <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>(<span class="sc">-</span>type_half) <span class="sc">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">nested_data =</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">map</span>(mutate_mapping, <span class="fu">hcaes</span>(<span class="at">x =</span> generation, <span class="at">y =</span> n), <span class="at">drop =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">map</span>(list_parse)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>data)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#Arrange the data frame so that the types are ordered by counts instead of alphabetical order</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>pokemon_types_final2 <span class="ot">&lt;-</span> pokemon_types_final <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(pokemon_type_totals)<span class="sc">%&gt;%</span> <span class="fu">arrange</span>(total)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pokemon_types_final2)</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["type_half"],"name":[1],"type":["chr"],"align":["left"]},{"label":["nested_data"],"name":[2],"type":["list"],"align":["right"]},{"label":["total"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"Ice","2":"<list [8]>","3":"55"},{"1":"Fairy","2":"<list [8]>","3":"63"},{"1":"Ghost","2":"<list [8]>","3":"66"},{"1":"Dark","2":"<list [8]>","3":"70"},{"1":"Fighting","2":"<list [8]>","3":"70"},{"1":"Steel","2":"<list [8]>","3":"71"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Now comes the fun part: choosing a pallet and font for the graph. Since a donut chart typically displays categories by color, this time it makes sense to use the colors that are associated with the types. However, for this graph, we will be using a modified pallet that Game Freak created for their most recent iteration of Pokemon Games. The pallet features more <a href="https://www.pokemonaaah.net/news/2019/12/sword-shield-type-symbols-and-color-guide/">mutated and less varied colors</a>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pallet </span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>pokemon_pallet <span class="ot">&lt;-</span> <span class="fu">c</span>(  <span class="st">&quot;#73d0bd&quot;</span>  , <span class="co"># Ice</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;#ed91e3&quot;</span>  , <span class="co"># Fairy</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;#526aad&quot;</span>  , <span class="co"># Ghost</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;#5a5467&quot;</span>  , <span class="co"># Dark</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;#ce4267&quot;</span>  , <span class="co">#Fighting</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;#5a8fa3&quot;</span>  , <span class="co"># Steel</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;#0c6cc4&quot;</span>  , <span class="co"># Dragon </span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;#f4d43b&quot;</span>  , <span class="co"># Electric</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;#c6b88a&quot;</span>  , <span class="co"># Rock</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;#a96ac9&quot;</span>  ,  <span class="co">#Poison</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;#d97846&quot;</span>  , <span class="co"># Ground</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;#ff9d54&quot;</span>  , <span class="co">#Fire</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;#91c12c&quot;</span> , <span class="co"># Bug</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;#fb717b&quot;</span>  , <span class="co"># Psychic</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;#90a9dc&quot;</span>  , <span class="co"># Flying</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;#63bc5a&quot;</span>   , <span class="co"># Grass</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;#909ca2&quot;</span> , <span class="co"># Normal</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;#4e92d2&quot;</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">#Font</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>my_theme <span class="ot">&lt;-</span> <span class="fu">hc_theme</span>(</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">chart =</span> <span class="fu">list</span>(</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>            <span class="at">fontFamily =</span> <span class="st">&quot;Georgia&quot;</span>)))</span></code></pre></div>
+<p>My idea was to use a bar chart in the tooltip. But I realized that an area chart, like Tom Bishop’s interactive donut chart, guides the eye across change over generations better than bar charts do.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hchart</span>(pokemon_types_final2, <span class="st">&quot;pie&quot;</span>, <span class="fu">hcaes</span>(<span class="at">name =</span> type_half, <span class="at">y =</span>  total), <span class="at">innerSize =</span> <span class="dv">300</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hc_tooltip</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">useHTML =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">headerFormat =</span> <span class="st">&quot;&lt;b&gt; {point.y} &lt;span style=&#39;color:{point.color};&#39;&gt;{point.key}&lt;/span&gt; Pokemon in Total &lt;/b&gt;&quot;</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">pointFormatter =</span> <span class="fu">tooltip_chart</span>(</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">accesor =</span> <span class="st">&quot;nested_data&quot;</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">hc_opts =</span> <span class="fu">list</span>(</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">chart =</span> <span class="fu">list</span>(<span class="at">type =</span> <span class="st">&quot;area&quot;</span>),</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">yAxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="fu">list</span>(<span class="at">text =</span> <span class="st">&quot;Count&quot;</span>)),</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">xAxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="fu">list</span>(<span class="at">text =</span> <span class="st">&quot;Generation&quot;</span>), </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                     <span class="at">tickInterval =</span> <span class="dv">2</span>),</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">plotOptions =</span> <span class="fu">list</span>(<span class="at">area =</span> <span class="fu">list</span>(<span class="at">fillOpacity =</span> <span class="fl">0.15</span>), </span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>                           <span class="at">series =</span> <span class="fu">list</span>(<span class="at">label =</span> <span class="fu">list</span>(<span class="at">enabled =</span> <span class="cn">FALSE</span>)))),</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">height =</span> <span class="dv">130</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">positioner =</span> <span class="fu">JS</span>(</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;function () {</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="st">    </span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="st">        xp =  this.chart.chartWidth/2 - this.label.width/2</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="st">        yp =  this.chart.chartHeight/2 - this.label.height/2 + 20</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="st">      </span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="st">        return { x: xp, y: yp };</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="st">      </span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="st">      }&quot;</span>),</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">shadow =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">borderWidth =</span> <span class="dv">0</span>,</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">backgroundColor =</span> <span class="st">&quot;transparent&quot;</span>,</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">hideDelay =</span> <span class="dv">2000</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_colors</span>(pokemon_pallet)<span class="sc">%&gt;%</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>            <span class="fu">hc_add_theme</span>(my_theme)<span class="sc">%&gt;%</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_title</span>(<span class="at">text =</span> <span class="st">&quot;Counting the Number of Pokemon Across Types and Generations&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-5608110516c2c18667b3" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5608110516c2c18667b3">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Counting the Number of Pokemon Across Types and Generations"},"yAxis":{"title":{"text":"total"}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"type_half":"Ice","nested_data":[{"x":1,"y":10},{"x":2,"y":5},{"x":3,"y":8},{"x":4,"y":8},{"x":5,"y":12},{"x":6,"y":4},{"x":7,"y":1},{"x":8,"y":7}],"total":55,"y":55,"name":"Ice"},{"type_half":"Fairy","nested_data":[{"x":1,"y":8},{"x":2,"y":8},{"x":3,"y":8},{"x":4,"y":2},{"x":5,"y":3},{"x":6,"y":14},{"x":7,"y":12},{"x":8,"y":8}],"total":63,"y":63,"name":"Fairy"},{"type_half":"Ghost","nested_data":[{"x":1,"y":5},{"x":2,"y":2},{"x":3,"y":8},{"x":4,"y":9},{"x":5,"y":10},{"x":6,"y":15},{"x":7,"y":10},{"x":8,"y":7}],"total":66,"y":66,"name":"Ghost"},{"type_half":"Dark","nested_data":[{"x":1,"y":7},{"x":2,"y":8},{"x":3,"y":15},{"x":4,"y":7},{"x":5,"y":16},{"x":6,"y":7},{"x":7,"y":2},{"x":8,"y":8}],"total":70,"y":70,"name":"Dark"},{"type_half":"Fighting","nested_data":[{"x":1,"y":10},{"x":2,"y":4},{"x":3,"y":9},{"x":4,"y":10},{"x":5,"y":17},{"x":6,"y":4},{"x":7,"y":10},{"x":8,"y":6}],"total":70,"y":70,"name":"Fighting"},{"type_half":"Steel","nested_data":[{"x":1,"y":7},{"x":2,"y":6},{"x":3,"y":12},{"x":4,"y":12},{"x":5,"y":13},{"x":6,"y":5},{"x":7,"y":9},{"x":8,"y":7}],"total":71,"y":71,"name":"Steel"},{"type_half":"Dragon","nested_data":[{"x":1,"y":5},{"x":2,"y":2},{"x":3,"y":15},{"x":4,"y":8},{"x":5,"y":12},{"x":6,"y":11},{"x":7,"y":8},{"x":8,"y":11}],"total":72,"y":72,"name":"Dragon"},{"type_half":"Electric","nested_data":[{"x":1,"y":14},{"x":2,"y":9},{"x":3,"y":5},{"x":4,"y":12},{"x":5,"y":12},{"x":6,"y":3},{"x":7,"y":7},{"x":8,"y":10}],"total":72,"y":72,"name":"Electric"},{"type_half":"Rock","nested_data":[{"x":1,"y":15},{"x":2,"y":8},{"x":3,"y":12},{"x":4,"y":7},{"x":5,"y":10},{"x":6,"y":9},{"x":7,"y":9},{"x":8,"y":5}],"total":75,"y":75,"name":"Rock"},{"type_half":"Poison","nested_data":[{"x":1,"y":39},{"x":2,"y":4},{"x":3,"y":5},{"x":4,"y":8},{"x":5,"y":7},{"x":6,"y":2},{"x":7,"y":7},{"x":8,"y":5}],"total":77,"y":77,"name":"Poison"},{"type_half":"Ground","nested_data":[{"x":1,"y":16},{"x":2,"y":11},{"x":3,"y":16},{"x":4,"y":12},{"x":5,"y":14},{"x":6,"y":4},{"x":7,"y":4},{"x":8,"y":3}],"total":80,"y":80,"name":"Ground"},{"type_half":"Fire","nested_data":[{"x":1,"y":15},{"x":2,"y":11},{"x":3,"y":10},{"x":4,"y":6},{"x":5,"y":17},{"x":6,"y":8},{"x":7,"y":8},{"x":8,"y":7}],"total":82,"y":82,"name":"Fire"},{"type_half":"Bug","nested_data":[{"x":1,"y":14},{"x":2,"y":12},{"x":3,"y":14},{"x":4,"y":11},{"x":5,"y":18},{"x":6,"y":3},{"x":7,"y":11},{"x":8,"y":7}],"total":90,"y":90,"name":"Bug"},{"type_half":"Psychic","nested_data":[{"x":1,"y":22},{"x":2,"y":10},{"x":3,"y":28},{"x":4,"y":10},{"x":5,"y":16},{"x":6,"y":8},{"x":7,"y":12},{"x":8,"y":8}],"total":114,"y":114,"name":"Psychic"},{"type_half":"Flying","nested_data":[{"x":1,"y":23},{"x":2,"y":19},{"x":3,"y":14},{"x":4,"y":16},{"x":5,"y":21},{"x":6,"y":8},{"x":7,"y":12},{"x":8,"y":4}],"total":117,"y":117,"name":"Flying"},{"type_half":"Grass","nested_data":[{"x":1,"y":16},{"x":2,"y":10},{"x":3,"y":18},{"x":4,"y":17},{"x":5,"y":20},{"x":6,"y":15},{"x":7,"y":13},{"x":8,"y":8}],"total":117,"y":117,"name":"Grass"},{"type_half":"Normal","nested_data":[{"x":1,"y":27},{"x":2,"y":15},{"x":3,"y":20},{"x":4,"y":18},{"x":5,"y":19},{"x":6,"y":8},{"x":7,"y":12},{"x":8,"y":7}],"total":126,"y":126,"name":"Normal"},{"type_half":"Water","nested_data":[{"x":1,"y":35},{"x":2,"y":18},{"x":3,"y":32},{"x":4,"y":15},{"x":5,"y":19},{"x":6,"y":10},{"x":7,"y":14},{"x":8,"y":10}],"total":153,"y":153,"name":"Water"}],"type":"pie","innerSize":300}],"xAxis":{"type":null,"title":{"text":[]},"categories":null},"tooltip":{"useHTML":true,"headerFormat":"<b> {point.y} <span style='color:{point.color};'>{point.key}<\/span> Pokemon in Total <\/b>","pointFormatter":"function() {\nvar point = this;\nconsole.log(point);\nconsole.log(point.nested_data);\nsetTimeout(function() {\n\n$(\"#tooltipchart-2mbqtad472\").highcharts({\n  title: {\n    text: null\n  },\n  yAxis: {\n    title: {\n      text: \"Count\"\n    }\n  },\n  credits: {\n    enabled: false\n  },\n  exporting: {\n    enabled: false\n  },\n  chart: {\n    backgroundColor: \"transparent\",\n    type: \"area\"\n  },\n  legend: {\n    enabled: false\n  },\n  plotOptions: {\n    series: {\n      animation: false,\n      label: {\n        enabled: false\n      }\n    },\n    area: {\n      fillOpacity: 0.15\n    }\n  },\n  xAxis: {\n    title: {\n      text: \"Generation\"\n    },\n    tickInterval: 2\n  },\n  series: [\n    {\n      data: point.nested_data,\n      color: point.color\n    }\n  ]\n});\n\n}, 0);\n\nreturn '<div id=\"tooltipchart-2mbqtad472\" style=\"width: 250px; height: 130px;\"><\/div>';\n\n}","positioner":"function () {\n    \n        xp =  this.chart.chartWidth/2 - this.label.width/2\n        yp =  this.chart.chartHeight/2 - this.label.height/2 + 20\n      \n        return { x: xp, y: yp };\n      \n      }","shadow":false,"borderWidth":0,"backgroundColor":"transparent","hideDelay":2000},"colors":["#73d0bd","#ed91e3","#526aad","#5a5467","#ce4267","#5a8fa3","#0c6cc4","#f4d43b","#c6b88a","#a96ac9","#d97846","#ff9d54","#91c12c","#fb717b","#90a9dc","#63bc5a","#909ca2","#4e92d2"]},"theme":{"chart":{"style":{"fontFamily":"Georgia"}}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Georgia","debug":false},"evals":["hc_opts.tooltip.pointFormatter","hc_opts.tooltip.positioner"],"jsHooks":[]}</script>
+<p>One of my favorite things about this chart is that it allows the user to interact with the data and come up with really interesting insights. Before this visualization, I had no idea that after Generation 1, Game Freak significantly reduced the amount of poison Pokemon they were creating.</p>
+</div>
+</div>
+<div id="improving-the-second-group-of-graphs" class="section level1">
+<h1>Improving the Second Group of Graphs</h1>
+<p><img src="img/old%20chart%202.png" id="id" class="class" style="width:50.0%;height:50.0%" alt="Second Chart" /> <img src="img/old%20chart%203.png" id="id" class="class" style="width:50.0%;height:50.0%" alt="Third Chart" /> <img src="img/old%20chart%204.png" id="id" class="class" style="width:50.0%;height:50.0%" alt="Fourth Chart" /> <img src="img/old%20chart%205.png" id="id" class="class" style="width:50.0%;height:50.0%" alt="Fifth Chart" /></p>
+<div id="critiques-1" class="section level2">
+<h2>Critiques</h2>
+<p><strong>What is wrong with these charts?</strong></p>
+<p>Again, color choice is a problem for these charts. Additionally, there is a better way to answer the questions without having to create 7 separate charts.</p>
+</div>
+<div id="ideation-sketching" class="section level2">
+<h2>Ideation &amp; Sketching</h2>
+<p><strong>Original Question:</strong> <mark><em>On average, what are the strongest types based on individual stats and total stats?</em></mark></p>
+<p>The easiest way to address this issue is to simply make a dashboard that allows the user to pivot between stats. But splitting the graphs up doesn’t show some of the nuances that could probably be observed if all of the information was presented in a single chart.</p>
+<p><strong>New Question:</strong> <mark><em>Is there a way to display all of the data in a single chart and highlight more nuanced differences between the types?</em> </mark></p>
+<p>The answer is, once again, yes. For this chart, I was inspired to not only showcase the different types but also present differences in stat distributions between the types. For example, electric Pokemon like Pikachu are typically Pokemon that are really fast, hit hard, but are very frail. Therefore, my expectation would be to see the average stats of electric Pokemon to be more offensive than defensive. This idea of <a href="https://pokemondb.net/pokebase/38940/what-are-the-different-kinds-pokemon-competitive-battling">competitive battle roles</a> is something I investigated later on in the <a href="https://larylc.github.io/Independent-Projects-/pokemon-project-2020.html">Exploring Pokemon project</a> using regression frameworks. By using an interactive diverging stacked bar chart, I could quickly highlight some of those battle role average differences between types. ’</p>
+<p>Here is another rough sketch of what I was thinking:</p>
+<div class="figure">
+<img src="img/sketch2.jpg" id="id" class="class" alt="" />
+<p class="caption">Sketch 2</p>
+</div>
+</div>
+<div id="coding-1" class="section level2">
+<h2>Coding</h2>
+<p>Let’s now go get the data.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure Pokemon are counted for each of their types</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>pokemon_stats<span class="ot">&lt;-</span> pokemon_data <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, type_1, attack, defense, sp_attack, sp_defense, speed, hp, total_points) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">type_half =</span> type_1) <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>type_1)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>pokemon_stats2<span class="ot">&lt;-</span> pokemon_data <span class="sc">%&gt;%</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, type_2, attack, defense, sp_attack, sp_defense, speed, hp, total_points)<span class="sc">%&gt;%</span> </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">type_half =</span> type_2)<span class="sc">%&gt;%</span> </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(type_half <span class="sc">!=</span> <span class="st">&quot;&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>type_2)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>pokemon_stats_combined<span class="ot">&lt;-</span> <span class="fu">rbind</span>(pokemon_stats, pokemon_stats2)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Get average stat per type (Defensive stats were made negative for the diverging chart)</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>pokemon_stats_summarized <span class="ot">&lt;-</span> pokemon_stats_combined <span class="sc">%&gt;%</span> </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(type_half)<span class="sc">%&gt;%</span> </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_attack =</span> <span class="fu">round</span>(<span class="fu">mean</span>(attack)), </span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_sp_attack =</span> <span class="fu">round</span>(<span class="fu">mean</span>(sp_attack)), </span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_speed =</span> <span class="fu">round</span>(<span class="fu">mean</span>(speed)), </span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_defense =</span> <span class="fu">round</span>(<span class="fu">mean</span>(defense))<span class="sc">*-</span><span class="dv">1</span>, </span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_sp_defense =</span> <span class="fu">round</span>(<span class="fu">mean</span>(sp_defense)<span class="sc">*-</span><span class="dv">1</span>), </span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_hp =</span> <span class="fu">round</span>(<span class="fu">mean</span>(hp)<span class="sc">*-</span><span class="dv">1</span>), </span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_total =</span> <span class="fu">round</span>(<span class="fu">mean</span>(total_points)) ) <span class="sc">%&gt;%</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> mean_attack<span class="sc">:</span>mean_hp, <span class="at">names_to =</span> <span class="st">&quot;stats&quot;</span>,  <span class="at">values_to =</span> <span class="st">&quot;points&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stats =</span> <span class="fu">as.factor</span>(stats))<span class="sc">%&gt;%</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stats =</span> <span class="fu">fct_relevel</span>(stats, </span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;mean_attack&quot;</span>, <span class="st">&quot;mean_sp_attack&quot;</span>, <span class="st">&quot;mean_speed&quot;</span>, </span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>                                                   <span class="st">&quot;mean_defense&quot;</span>, <span class="st">&quot;mean_sp_defense&quot;</span>, <span class="st">&quot;mean_hp&quot;</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">stats =</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(stats,</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">&quot;mean_attack&quot;</span> <span class="ot">=</span> <span class="st">&quot;Attack&quot;</span> ,</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;mean_sp_attack&quot;</span> <span class="ot">=</span> <span class="st">&quot;Special Attack&quot;</span>,</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">&quot;mean_speed&quot;</span> <span class="ot">=</span> <span class="st">&quot;Speed&quot;</span> ,</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;mean_defense&quot;</span> <span class="ot">=</span> <span class="st">&quot;Defense&quot;</span>,</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">&quot;mean_sp_defense&quot;</span> <span class="ot">=</span> <span class="st">&quot;Special Defense&quot;</span>, </span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">&quot;mean_hp&quot;</span> <span class="ot">=</span> <span class="st">&quot;HP&quot;</span>))</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pokemon_stats_summarized)</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["type_half"],"name":[1],"type":["chr"],"align":["left"]},{"label":["mean_total"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["stats"],"name":[3],"type":["fct"],"align":["left"]},{"label":["points"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"Bug","2":"384","3":"Attack","4":"71"},{"1":"Bug","2":"384","3":"Special Attack","4":"57"},{"1":"Bug","2":"384","3":"Speed","4":"62"},{"1":"Bug","2":"384","3":"Defense","4":"-71"},{"1":"Bug","2":"384","3":"Special Defense","4":"-66"},{"1":"Bug","2":"384","3":"HP","4":"-57"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Something that has improved it to right more succinct code. The last time I did this data manipulation, 7 data frames were created. This time there is only 1.</p>
+<p>Up next is the pallet. Since we need 6 colors for the 6 stats, I need to make sure that I am choosing a pallet that does not violate chart design principles and is accessible to color-blind individuals. One of my favorite resources is the <a href="https://projects.susielu.com/viz-palette?colors=%5B%22#d84008%22,%22#f79350%22,%22#fffdae%22,%22#d9eef6%22,%22#6bb5d5%22,%22#00389e%22%5D&amp;backgroundColor=%22white%22&amp;fontColor=%22black%22&amp;mode=%22normal%22">Viz Pallet</a> tool which allows users to see if there are clashing colors or accessibility issues.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>second_pallet <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;#d84008&quot;</span>, <span class="st">&quot;#f79350&quot;</span>, <span class="st">&quot;#fffdae&quot;</span>, <span class="st">&quot;#00389E&quot;</span>,<span class="st">&quot;#6bb5d5&quot;</span>,<span class="st">&quot;#d9eef6&quot;</span>)</span></code></pre></div>
+<p>Now it’s time to visualize.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>breaks_values <span class="ot">&lt;-</span> <span class="fu">pretty</span>(pokemon_stats_summarized<span class="sc">$</span>points <span class="sc">*</span> <span class="fl">1.5</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt<span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pokemon_stats_summarized, </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">reorder</span>(type_half, mean_total), </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">x=</span> points, </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> stats, </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>           </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">text =</span> <span class="fu">paste</span>(<span class="st">&quot;Type:&quot;</span>, type_half, <span class="st">&quot;&lt;br&gt;&quot;</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;Stat:&quot;</span>, stats, <span class="st">&quot;&lt;br&gt;&quot;</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;Points:&quot;</span>, <span class="fu">abs</span>(points)))) <span class="sc">+</span> </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">&quot;stack&quot;</span>)<span class="sc">+</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> second_pallet, <span class="at">name =</span> <span class="st">&quot;&quot;</span>)<span class="sc">+</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Mean Stat Distributions by Type&quot;</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span> knitr<span class="sc">::</span><span class="fu">asis_output</span>(<span class="st">&quot;\U2190 Defensive Stats  |  Offensive Stats \U2192&quot;</span>),</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span> <span class="st">&quot;&quot;</span>)<span class="sc">+</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> breaks_values, </span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">abs</span>(breaks_values))<span class="sc">+</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size=</span> <span class="dv">8</span>), </span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>                <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">&quot;Georgia&quot;</span>)) </span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(plt, <span class="at">tooltip =</span> <span class="st">&quot;text&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(<span class="at">title =</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fl">0.5</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">style</span>(<span class="at">hoverlabel =</span> <span class="fu">list</span>(<span class="at">font =</span> <span class="fu">list</span>(<span class="at">family =</span> <span class="st">&quot;Georgia&quot;</span>)))</span></code></pre></div>
+<div id="htmlwidget-74e7b80309e6570215c9" style="width:100%;height:576px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-74e7b80309e6570215c9">{"x":{"data":[{"orientation":"v","width":[71,91,101,75,69,106,85,80,80,75,92,84,74,72,74,91,98,74],"base":[0.55,8.55,17.55,9.55,6.55,14.55,13.55,11.55,10.55,2.55,5.55,12.55,1.55,3.55,15.55,7.55,16.55,4.55],"x":[154.5,195.5,228.5,204.5,179.5,197,207.5,201,184,168.5,166,187,166,176,209,158.5,181,176],"y":[0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.9,0.9,0.899999999999999,0.9,0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.9],"text":["Type: Bug <br> Stat: Attack <br> Points: 71","Type: Dark <br> Stat: Attack <br> Points: 91","Type: Dragon <br> Stat: Attack <br> Points: 101","Type: Electric <br> Stat: Attack <br> Points: 75","Type: Fairy <br> Stat: Attack <br> Points: 69","Type: Fighting <br> Stat: Attack <br> Points: 106","Type: Fire <br> Stat: Attack <br> Points: 85","Type: Flying <br> Stat: Attack <br> Points: 80","Type: Ghost <br> Stat: Attack <br> Points: 80","Type: Grass <br> Stat: Attack <br> Points: 75","Type: Ground <br> Stat: Attack <br> Points: 92","Type: Ice <br> Stat: Attack <br> Points: 84","Type: Normal <br> Stat: Attack <br> Points: 74","Type: Poison <br> Stat: Attack <br> Points: 72","Type: Psychic <br> Stat: Attack <br> Points: 74","Type: Rock <br> Stat: Attack <br> Points: 91","Type: Steel <br> Stat: Attack <br> Points: 98","Type: Water <br> Stat: Attack <br> Points: 74"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(216,64,8,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Attack","legendgroup":"Attack","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null,"hoverlabel":{"font":{"family":"Georgia"}}},{"orientation":"v","width":[57,74,97,87,81,67,89,76,81,72,61,76,58,72,95,59,71,74],"base":[0.55,8.55,17.55,9.55,6.55,14.55,13.55,11.55,10.55,2.55,5.55,12.55,1.55,3.55,15.55,7.55,16.55,4.55],"x":[90.5,113,129.5,123.5,104.5,110.5,120.5,123,103.5,95,89.5,107,100,104,124.5,83.5,96.5,102],"y":[0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.9,0.9,0.899999999999999,0.9,0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.9],"text":["Type: Bug <br> Stat: Special Attack <br> Points: 57","Type: Dark <br> Stat: Special Attack <br> Points: 74","Type: Dragon <br> Stat: Special Attack <br> Points: 97","Type: Electric <br> Stat: Special Attack <br> Points: 87","Type: Fairy <br> Stat: Special Attack <br> Points: 81","Type: Fighting <br> Stat: Special Attack <br> Points: 67","Type: Fire <br> Stat: Special Attack <br> Points: 89","Type: Flying <br> Stat: Special Attack <br> Points: 76","Type: Ghost <br> Stat: Special Attack <br> Points: 81","Type: Grass <br> Stat: Special Attack <br> Points: 72","Type: Ground <br> Stat: Special Attack <br> Points: 61","Type: Ice <br> Stat: Special Attack <br> Points: 76","Type: Normal <br> Stat: Special Attack <br> Points: 58","Type: Poison <br> Stat: Special Attack <br> Points: 72","Type: Psychic <br> Stat: Special Attack <br> Points: 95","Type: Rock <br> Stat: Special Attack <br> Points: 59","Type: Steel <br> Stat: Special Attack <br> Points: 71","Type: Water <br> Stat: Special Attack <br> Points: 74"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(247,147,80,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Special Attack","legendgroup":"Special Attack","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null,"hoverlabel":{"font":{"family":"Georgia"}}},{"orientation":"v","width":[62,76,81,80,64,77,76,85,63,59,59,69,71,68,77,54,61,65],"base":[0.55,8.55,17.55,9.55,6.55,14.55,13.55,11.55,10.55,2.55,5.55,12.55,1.55,3.55,15.55,7.55,16.55,4.55],"x":[31,38,40.5,40,32,38.5,38,42.5,31.5,29.5,29.5,34.5,35.5,34,38.5,27,30.5,32.5],"y":[0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.9,0.9,0.899999999999999,0.9,0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.9],"text":["Type: Bug <br> Stat: Speed <br> Points: 62","Type: Dark <br> Stat: Speed <br> Points: 76","Type: Dragon <br> Stat: Speed <br> Points: 81","Type: Electric <br> Stat: Speed <br> Points: 80","Type: Fairy <br> Stat: Speed <br> Points: 64","Type: Fighting <br> Stat: Speed <br> Points: 77","Type: Fire <br> Stat: Speed <br> Points: 76","Type: Flying <br> Stat: Speed <br> Points: 85","Type: Ghost <br> Stat: Speed <br> Points: 63","Type: Grass <br> Stat: Speed <br> Points: 59","Type: Ground <br> Stat: Speed <br> Points: 59","Type: Ice <br> Stat: Speed <br> Points: 69","Type: Normal <br> Stat: Speed <br> Points: 71","Type: Poison <br> Stat: Speed <br> Points: 68","Type: Psychic <br> Stat: Speed <br> Points: 77","Type: Rock <br> Stat: Speed <br> Points: 54","Type: Steel <br> Stat: Speed <br> Points: 61","Type: Water <br> Stat: Speed <br> Points: 65"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(255,253,174,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Speed","legendgroup":"Speed","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null,"hoverlabel":{"font":{"family":"Georgia"}}},{"orientation":"v","width":[71,67,89,69,74,77,70,68,81,74,88,76,61,68,76,103,112,75],"base":[0.55,8.55,17.55,9.55,6.55,14.55,13.55,11.55,10.55,2.55,5.55,12.55,1.55,3.55,15.55,7.55,16.55,4.55],"x":[-158.5,-173.5,-216.5,-169.5,-190,-186.5,-178,-176,-183.5,-174,-185,-191,-171.5,-172,-198,-191.5,-205,-178.5],"y":[0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.9,0.9,0.899999999999999,0.9,0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.9],"text":["Type: Bug <br> Stat: Defense <br> Points: 71","Type: Dark <br> Stat: Defense <br> Points: 67","Type: Dragon <br> Stat: Defense <br> Points: 89","Type: Electric <br> Stat: Defense <br> Points: 69","Type: Fairy <br> Stat: Defense <br> Points: 74","Type: Fighting <br> Stat: Defense <br> Points: 77","Type: Fire <br> Stat: Defense <br> Points: 70","Type: Flying <br> Stat: Defense <br> Points: 68","Type: Ghost <br> Stat: Defense <br> Points: 81","Type: Grass <br> Stat: Defense <br> Points: 74","Type: Ground <br> Stat: Defense <br> Points: 88","Type: Ice <br> Stat: Defense <br> Points: 76","Type: Normal <br> Stat: Defense <br> Points: 61","Type: Poison <br> Stat: Defense <br> Points: 68","Type: Psychic <br> Stat: Defense <br> Points: 76","Type: Rock <br> Stat: Defense <br> Points: 103","Type: Steel <br> Stat: Defense <br> Points: 112","Type: Water <br> Stat: Defense <br> Points: 75"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(0,56,158,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Defense","legendgroup":"Defense","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null,"hoverlabel":{"font":{"family":"Georgia"}}},{"orientation":"v","width":[66,68,85,71,86,73,73,71,79,71,66,76,65,71,88,72,80,71],"base":[0.55,8.55,17.55,9.55,6.55,14.55,13.55,11.55,10.55,2.55,5.55,12.55,1.55,3.55,15.55,7.55,16.55,4.55],"x":[-90,-106,-129.5,-99.5,-110,-111.5,-106.5,-106.5,-103.5,-101.5,-108,-115,-108.5,-102.5,-116,-104,-109,-105.5],"y":[0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.9,0.9,0.899999999999999,0.9,0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.9],"text":["Type: Bug <br> Stat: Special Defense <br> Points: 66","Type: Dark <br> Stat: Special Defense <br> Points: 68","Type: Dragon <br> Stat: Special Defense <br> Points: 85","Type: Electric <br> Stat: Special Defense <br> Points: 71","Type: Fairy <br> Stat: Special Defense <br> Points: 86","Type: Fighting <br> Stat: Special Defense <br> Points: 73","Type: Fire <br> Stat: Special Defense <br> Points: 73","Type: Flying <br> Stat: Special Defense <br> Points: 71","Type: Ghost <br> Stat: Special Defense <br> Points: 79","Type: Grass <br> Stat: Special Defense <br> Points: 71","Type: Ground <br> Stat: Special Defense <br> Points: 66","Type: Ice <br> Stat: Special Defense <br> Points: 76","Type: Normal <br> Stat: Special Defense <br> Points: 65","Type: Poison <br> Stat: Special Defense <br> Points: 71","Type: Psychic <br> Stat: Special Defense <br> Points: 88","Type: Rock <br> Stat: Special Defense <br> Points: 72","Type: Steel <br> Stat: Special Defense <br> Points: 80","Type: Water <br> Stat: Special Defense <br> Points: 71"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(107,181,213,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Special Defense","legendgroup":"Special Defense","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null,"hoverlabel":{"font":{"family":"Georgia"}}},{"orientation":"v","width":[57,72,87,64,67,75,70,71,64,66,75,77,76,67,72,68,69,70],"base":[0.55,8.55,17.55,9.55,6.55,14.55,13.55,11.55,10.55,2.55,5.55,12.55,1.55,3.55,15.55,7.55,16.55,4.55],"x":[-28.5,-36,-43.5,-32,-33.5,-37.5,-35,-35.5,-32,-33,-37.5,-38.5,-38,-33.5,-36,-34,-34.5,-35],"y":[0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.9,0.9,0.899999999999999,0.9,0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.9],"text":["Type: Bug <br> Stat: HP <br> Points: 57","Type: Dark <br> Stat: HP <br> Points: 72","Type: Dragon <br> Stat: HP <br> Points: 87","Type: Electric <br> Stat: HP <br> Points: 64","Type: Fairy <br> Stat: HP <br> Points: 67","Type: Fighting <br> Stat: HP <br> Points: 75","Type: Fire <br> Stat: HP <br> Points: 70","Type: Flying <br> Stat: HP <br> Points: 71","Type: Ghost <br> Stat: HP <br> Points: 64","Type: Grass <br> Stat: HP <br> Points: 66","Type: Ground <br> Stat: HP <br> Points: 75","Type: Ice <br> Stat: HP <br> Points: 77","Type: Normal <br> Stat: HP <br> Points: 76","Type: Poison <br> Stat: HP <br> Points: 67","Type: Psychic <br> Stat: HP <br> Points: 72","Type: Rock <br> Stat: HP <br> Points: 68","Type: Steel <br> Stat: HP <br> Points: 69","Type: Water <br> Stat: HP <br> Points: 70"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(217,238,246,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"HP","legendgroup":"HP","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null,"hoverlabel":{"font":{"family":"Georgia"}}}],"layout":{"margin":{"t":40.8401826484018,"r":7.30593607305936,"b":36.1975923619759,"l":57.716894977169},"font":{"color":"rgba(0,0,0,1)","family":"Georgia","size":14.6118721461187},"title":{"text":"Mean Stat Distributions by Type","font":{"color":"rgba(0,0,0,1)","family":"Georgia","size":17.5342465753425},"x":0.5,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-288,306],"tickmode":"array","ticktext":[200,150,100,50,0,50,100,150,200],"tickvals":[-200,-150,-100,-50,0,50,100,150,200],"categoryorder":"array","categoryarray":[200,150,100,50,0,50,100,150,200],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Georgia","size":10.6268161062682},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"← Defensive Stats  |  Offensive Stats →","font":{"color":"rgba(0,0,0,1)","family":"Georgia","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,18.6],"tickmode":"array","ticktext":["Bug","Normal","Grass","Poison","Water","Ground","Fairy","Rock","Dark","Electric","Ghost","Flying","Ice","Fire","Fighting","Psychic","Steel","Dragon"],"tickvals":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],"categoryorder":"array","categoryarray":["Bug","Normal","Grass","Poison","Water","Ground","Fairy","Rock","Dark","Electric","Ghost","Flying","Ice","Fire","Fighting","Psychic","Steel","Dragon"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Georgia","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"Georgia","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"Georgia","size":11.689497716895},"y":0.972933070866142},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"daa02f701b54":{"x":{},"y":{},"fill":{},"text":{},"type":"bar"}},"cur_data":"daa02f701b54","visdat":{"daa02f701b54":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>This interactive chart gives a variety of options for inspecting the data. Plotly allows users to hover over bars, zoom into particular sections, and even select particular categories.</p>
+</div>
+</div>
+<div id="sources" class="section level1">
+<h1>Sources</h1>
+<p>Kunst (2019, Feb. 4). Data, Code and Visualization: Using tooltips in unexpected ways. Retrieved from <a href="http://jkunst.com/blog/posts/2019-02-04-using-tooltips-in-unexpected-ways/" class="uri">http://jkunst.com/blog/posts/2019-02-04-using-tooltips-in-unexpected-ways/</a></p>
+<p><a href="https://www.tmbish.me/lab/highcharter-cookbook/">Tom Bishop’s Highcharter Cookbook</a></p>
+<p><a href="https://www.kaggle.com/datasets/mariotormo/complete-pokemon-dataset-updated-090420">Pokemon Data from Mario Tormo Romero’s Kaggle</a></p>
+<p><a href="https://larylc.github.io/Independent-Projects-/pokemon-project-2020.html">Exploring Pokemon</a></p>
+</div>
+</div>
+
+   
+   
+      </div>
+   <div class="col-md-2">
+          <div id="toc">
+       <button type="button" class="close">×</button>
+       <ul>
+       <li><a href="#introduction">Introduction</a></li>
+       <li><a href="#data-and-packages">Data and Packages</a></li>
+       <li><a href="#improving-graph-1">Improving Graph 1</a>
+       <ul>
+       <li><a href="#critiques">Critiques</a></li>
+       <li><a href="#ideation-and-sketching">Ideation and Sketching</a></li>
+       <li><a href="#coding">Coding</a></li>
+       </ul></li>
+       <li><a href="#improving-the-second-group-of-graphs">Improving the Second Group of Graphs</a>
+       <ul>
+       <li><a href="#critiques-1">Critiques</a></li>
+       <li><a href="#ideation-sketching">Ideation &amp; Sketching</a></li>
+       <li><a href="#coding-1">Coding</a></li>
+       </ul></li>
+       <li><a href="#sources">Sources</a></li>
+       </ul>
+     </div>
+        </div>
+   </div>
+   </div>
+            
+      
+
+  <script>
+    $(document).ready(function () {
+
+		// add bootstrap table styles to pandoc tables
+	$('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+		
+ 	 	$('#content img').addClass("image-thumb");
+		
+		$('#content img:not(.no-lightbox)').addClass("image-lb");
+	$('#content').magnificPopup({
+	    type:'image',
+	    closeOnContentClick: false,
+	    closeBtnInside: false,
+	    delegate: '.image-lb',
+	    gallery: {enabled: false },
+	    image: {
+	        verticalFit: true,
+		titleSrc: 'alt'
+	    }
+ 	});
+ 	    });
+  </script>
+
+
+
+    <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+	var script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+	document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+  
+</body>
+</html>
