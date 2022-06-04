@@ -1,7 +1,7 @@
 ---
 title: "Re-viz It"
 author: "Cedric Lary"
-date: "5/27/2022"
+date: "6/02/2022"
 output: 
   rmdformats::html_clean:
     code_folding: hide
