@@ -73,24 +73,24 @@ Firstly, when visualizing a variable with 18 categories that overlap along the x
 
 One of the most significant issues here involves using too many colors for a variable displayed across the x-axis. Although the typical bar chart is supposed to apply colors sparingly, using colors to distinguish between types is common practice in the Pokemon franchise.  
 
-However, the colors for this graph were selected using the "color names" (like cornflower blue instead of #6495ed) I felt matched the game's colors best. As a result, the chart is probably a crude representation of Game Freak’s color choices. 
+However, the colors for this graph were selected using the color names I felt matched the game's colors best (like cornflower blue instead of #6495ed). As a result, the chart is probably a crude representation of Game Freak’s color choices. 
 
-The last thing to critique for this chart is couldn't we tell a better story than this? Although this chart was an opportunity to practice making a bar chart with ggplot, we did miss an opportunity to tell a more nuanced story. 
+Couldn't this chart tell a better story than this? Although this graph was an opportunity to practice making a bar chart with ggplot, I did miss an opportunity to tell a more nuanced story. 
 
 
 ## Ideation and Sketching
 
 
-**Original Question:** <mark> *How can we visualize the number of Pokemon per type?*</mark>
+**Original Question:** <mark> *How can I visualize the number of Pokemon per type?*</mark>
 
 **New Questions:** <mark>*Can I do more? Is there a way to tell a better story and get more depth from the data?*</mark>
 
 
 For this chart, I decided to go to one of my favorite developers and see if there were some interesting charts I could get inspired by. [Joshua Kunst](https://jkunst.com/) is a developer who is well known in the R community for his work on highcharter visualizations. The highcharter package is a library that I have used to create stunning interactive visualizations(see one of my projects [here](https://loganlary.shinyapps.io/prodigies_app/?_ga=2.15136438.103236738.1633010249-569369622.1613318148)).
 
-After scrolling through his page, I found an example of [donut chart](https://jkunst.com/blog/posts/2019-02-04-using-tooltips-in-unexpected-ways/) that maximizes space by presenting a second related graph in the tooltip on the inside of the donut chart. Embedding related graphs inside of tooltips is something that I have done before in Tableau but never in R. 
+After scrolling through his page, I found an example of [donut chart](https://jkunst.com/blog/posts/2019-02-04-using-tooltips-in-unexpected-ways/) that maximizes space by presenting a second related graph in the tooltip on the inside of the donut chart. Embedding graphs inside of tooltips is something that I have done before in Tableau but never in R. 
 
-This was exactly what I was looking for. My idea was to display the counts of the Pokemon on segments of the donut's ring and then show the number of Pokemon for a particular type across generations when a segment is clicked.
+This was exactly what I was looking for. My idea was to display the counts of the Pokemon types on the segments of the donut's ring and then show the number of Pokemon for a particular type across generations when a segment is clicked.
 
 
 Here is a rough sketch of my idea:
@@ -153,7 +153,9 @@ pokemon_types_final2 <- pokemon_types_final %>% left_join(pokemon_type_totals)%>
 head(pokemon_types_final2)
 ```
 
-Now comes the fun part: choosing a pallet and font for the graph. Since a donut chart typically displays categories by color, this time it makes sense to use the colors that are associated with the types. However, for this graph, we will be using a modified pallet that Game Freak created for their most recent iteration of Pokemon Games. The pallet features more [mutated and less varied colors](https://www.pokemonaaah.net/news/2019/12/sword-shield-type-symbols-and-color-guide/). 
+Now comes the fun part: choosing a pallet and font for the graph. Since a donut chart typically displays categories by color, this time it makes sense to use the colors that are associated with the types. 
+
+However, for this graph, we will be using a modified pallet that Game Freak created for their most recent iteration of Pokemon Games. The pallet features more [mutated and less varied colors](https://www.pokemonaaah.net/news/2019/12/sword-shield-type-symbols-and-color-guide/). 
 
 ```{r}
 # Pallet 
@@ -184,7 +186,7 @@ my_theme <- hc_theme(
 
 ```
 
-My idea was to use a bar chart in the tooltip. But I realized that an area chart, like Tom Bishop's interactive donut chart, guides the eye across change over generations better than bar charts do.
+My idea was to use a bar chart in the tooltip. But I realized that an area chart, like the one found in Tom Bishop's interactive donut chart, guides the eye across change over generations better than bar charts do.
 
 ```{r}
 
@@ -224,7 +226,7 @@ hchart(pokemon_types_final2, "pie", hcaes(name = type_half, y =  total), innerSi
 
 ```
 
-One of my favorite things about this chart is that it allows the user to interact with the data and come up with really interesting insights. Before this visualization, I had no idea that after Generation 1, Game Freak  significantly reduced the amount of poison Pokemon they were creating. 
+One of my favorite things about this chart is that it allows the user to interact with the data and come up with really interesting insights. Before this visualization, I had no idea that after Generation 1, Game Freak drastically reduced the amount of poison Pokemon they were creating. 
 
 # Improving the Second Group of Graphs
 
@@ -251,7 +253,7 @@ The easiest way to address this issue is to simply make a dashboard that allows 
  
 **New Question:** <mark>*Is there a way to display all of the data in a single chart and highlight more nuanced differences between the types?* </mark>
 
-The answer is, once again, yes. For this chart, I was inspired to not only showcase the different types but also present differences in stat distributions between the types. For example, electric Pokemon like Pikachu are typically Pokemon that are really fast, hit hard, but are very frail. Therefore, my expectation would be to see the average stats of electric Pokemon to be more offensive than defensive. This idea of [competitive battle roles](https://pokemondb.net/pokebase/38940/what-are-the-different-kinds-pokemon-competitive-battling) is something I investigated later on in the [Exploring Pokemon project](https://larylc.github.io/Independent-Projects-/pokemon-project-2020.html) using regression frameworks. By using an interactive diverging stacked bar chart, I could quickly highlight some of those battle role average differences between types. '
+The answer is, once again, yes. For this chart, I was inspired to not only showcase the different types but also present differences in stat distributions between the types. For example, electric Pokemon like Pikachu are typically Pokemon that are really fast, hit hard, but are very frail. Therefore, my expectation would be to see the average stats of electric Pokemon to be more offensive than defensive. This idea of [competitive battle roles](https://pokemondb.net/pokebase/38940/what-are-the-different-kinds-pokemon-competitive-battling) is something I investigated later on in the [Exploring Pokemon project](https://larylc.github.io/Independent-Projects-/pokemon-project-2020.html) using regression frameworks. By using an interactive diverging stacked bar chart, I could quickly highlight some of those mean battle role differences between types. 
  
  
 Here is another rough sketch of what I was thinking: 
@@ -304,10 +306,10 @@ head(pokemon_stats_summarized)
 
 ```
 
-Something that has improved it to right more succinct code. The last time I did this data manipulation, 7 data frames were created. This time there is only 1. 
+The last time I did this data manipulation, 7 data frames were created. This time there is only 1. 
 
 Up next is the pallet. Since we need 6 colors for the 6 stats, I need to make sure that I am choosing a pallet that does not violate chart design principles and is accessible to color-blind individuals. 
-One of my favorite resources is the [Viz Pallet](https://projects.susielu.com/viz-palette?colors=[%22#d84008%22,%22#f79350%22,%22#fffdae%22,%22#d9eef6%22,%22#6bb5d5%22,%22#00389e%22]&backgroundColor=%22white%22&fontColor=%22black%22&mode=%22normal%22) tool which allows users to see if there are clashing colors or accessibility issues.
+One of my favorite resources is the [Viz Pallet](https://projects.susielu.com/viz-palette?colors=[%22#d84008%22,%22#f79350%22,%22#fffdae%22,%22#d9eef6%22,%22#6bb5d5%22,%22#00389e%22]&backgroundColor=%22white%22&fontColor=%22black%22&mode=%22normal%22) tool which allows users to see if there are clashing colors or accessibility issues in pallets.
 
 ```{r}
 second_pallet <- c("#d84008", "#f79350", "#fffdae", "#00389E","#6bb5d5","#d9eef6")
