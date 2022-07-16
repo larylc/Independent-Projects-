@@ -291,8 +291,11 @@ $(document).ready(function () {
 </div>
 
 
-<div id="task-14-which-stats-are-most-useful-for-predicting-legendary-sub-legendary-mythical-status" class="section level2">
-<h2>Task 14: Which stat(s) are most useful for predicting legendary/ sub-legendary/ mythical status?</h2>
+<div
+id="task-14-which-stats-are-most-useful-for-predicting-legendary-sub-legendary-mythical-status"
+class="section level2">
+<h2>Task 14: Which stat(s) are most useful for predicting legendary/
+sub-legendary/ mythical status?</h2>
 <p>Let’s first build the necessary data frame for analysis:</p>
 <pre class="r"><code>predict_special&lt;- data.frame(pokemon_data_full[,c(10,7,18:24)])
 
@@ -327,7 +330,8 @@ table(predict_mythical$status)</code></pre>
 <pre><code>## 
 ##   0   1 
 ## 999  29</code></pre>
-<p>Now, that we have the data frames, we can proceed to building the model:</p>
+<p>Now, that we have the data frames, we can proceed to building the
+model:</p>
 <pre class="r"><code>predict_legendary_fit &lt;- glm(status ~ attack + defense + sp_attack + sp_defense + hp + speed, family = binomial, data = predict_legendary)
 summary(predict_legendary_fit)</code></pre>
 <pre><code>## 
@@ -418,9 +422,22 @@ summary(predict_mythical_fit)</code></pre>
 ## AIC: 218.01
 ## 
 ## Number of Fisher Scoring iterations: 7</code></pre>
-<p>The legendary model shows that all of the stats help predict legendary status. This finding makes sense because legendary Pokemon are usually good at all of their stats even the stats that aren’t their best. Furthermore, there are a large number of stat combinations that legendaries fulfill. Interestingly, the attack stat and defensive stats are less significant than the others. Because legendaries tend to be more offensive than defensive, this is not too surprising. They even have more of a tendency of specializing in special attack over physical attack.</p>
-<p>According to the sub-legendary model, speed, special attack, and defense (in that order) are the defining stats of sub-legendaries. For mythical Pokemon, it is speed followed by special attack. It is worth noting that defense, in the mythical model, almost makes the statistically significant cut-off.</p>
-<p>The next step is to create more representative models for plotting using what we learned from the first models.</p>
+<p>The legendary model shows that all of the stats help predict
+legendary status. This finding makes sense because legendary Pokemon are
+usually good at all of their stats even the stats that aren’t their
+best. Furthermore, there are a large number of stat combinations that
+legendaries fulfill. Interestingly, the attack stat and defensive stats
+are less significant than the others. Because legendaries tend to be
+more offensive than defensive, this is not too surprising. They even
+have more of a tendency of specializing in special attack over physical
+attack.</p>
+<p>According to the sub-legendary model, speed, special attack, and
+defense (in that order) are the defining stats of sub-legendaries. For
+mythical Pokemon, it is speed followed by special attack. It is worth
+noting that defense, in the mythical model, almost makes the
+statistically significant cut-off.</p>
+<p>The next step is to create more representative models for plotting
+using what we learned from the first models.</p>
 <pre class="r"><code>#Better Legendary model 
 predict_legendary_fit1 &lt;- glm(status ~ total_points, family = binomial, data = predict_legendary)
 summary(predict_legendary_fit1)</code></pre>
@@ -529,8 +546,16 @@ summary(predict_mythical_fit2)</code></pre>
 ## AIC: 219.13
 ## 
 ## Number of Fisher Scoring iterations: 7</code></pre>
-<p>While attempting to improve the models for simplicity, something interesting happened to the sub-legendary and mythical models. In the sub-legendary model, defense became the most significant of the three variables followed by special attack and speed.</p>
-<p>An interaction term (special attack and speed) was included in the mythical model because there was a possibility that the two stats together could help better predict mythical status. As it turns out, the interaction is statistically insignificant. Additionally, special attack becomes the better predictor when handling the two variables alone. For this reason, a third model was made for predicting mythical Pokemon.</p>
+<p>While attempting to improve the models for simplicity, something
+interesting happened to the sub-legendary and mythical models. In the
+sub-legendary model, defense became the most significant of the three
+variables followed by special attack and speed.</p>
+<p>An interaction term (special attack and speed) was included in the
+mythical model because there was a possibility that the two stats
+together could help better predict mythical status. As it turns out, the
+interaction is statistically insignificant. Additionally, special attack
+becomes the better predictor when handling the two variables alone. For
+this reason, a third model was made for predicting mythical Pokemon.</p>
 <pre class="r"><code>#Validation Analysis of Models 
 prob_legendary&lt;- predict(predict_legendary_fit1, predict_legendary, type = &quot;response&quot;)
 table(Predicted_Value = prob_legendary &gt; 0.5 , Actual_Value = predict_legendary$status )</code></pre>
@@ -550,7 +575,17 @@ table(Predicted_Value = prob_mythical &gt; 0.5 , Actual_Value = predict_mythical
 ## Predicted_Value   0   1
 ##           FALSE 997  28
 ##           TRUE    2   1</code></pre>
-<p>The legendary model’s accuracy was 96.7 percent. The sub-legendary model’s accuracy is 95.5 percent, and the mythical model’s accuracy was equal to 97.2 percent. However, we, once again, are finding that the recall of the models are not great. The recall for the legendary, sub-legendary, and mythical models are 33%, 0%, and 3.5 percent, respectively. Like before, these models seem to be too conservative because they are better at classifying the non-specified categories of Pokemon rather than the one specified category we are looking for. This means that the 0.5 threshold values need to be decreased to allow for better classification to occur. But once again, this is beyond this task’s goal.</p>
+<p>The legendary model’s accuracy was 96.7 percent. The sub-legendary
+model’s accuracy is 95.5 percent, and the mythical model’s accuracy was
+equal to 97.2 percent. However, we, once again, are finding that the
+recall of the models are not great. The recall for the legendary,
+sub-legendary, and mythical models are 33%, 0%, and 3.5 percent,
+respectively. Like before, these models seem to be too conservative
+because they are better at classifying the non-specified categories of
+Pokemon rather than the one specified category we are looking for. This
+means that the 0.5 threshold values need to be decreased to allow for
+better classification to occur. But once again, this is beyond this
+task’s goal.</p>
 <p>Here are some plots so we can visualize all of this:</p>
 <pre class="r"><code>#Legendary Logistic Regression
 visreg(predict_legendary_fit1, &quot;total_points&quot;,
@@ -631,12 +666,30 @@ visreg(predict_mythical_fit2, &quot;sp_attack&quot;, by = &quot;speed&quot;,
               text = element_text(family = &quot;Georgia&quot;), 
              plot.title = element_text(size = 15, margin(b = 10), hjust = 0.5, family = &quot;Georgia&quot;))</code></pre>
 <p><img src="06--Chapter-5_files/figure-html/unnamed-chunk-5-5.png" width="672" /></p>
-<p>In the legendary regression, we see a pretty straight forward graph where the probability of being a legendary Pokemon before about 500 total points is basically 0. After 750 total points, the probability is more than 87.5 percent. The three sub-legendary logistic regressions show how having different amounts of particular stats affect the model’s ability to predict sub-legendary status. The essential things to note are that when a Pokemon has high defense, having high special attack or high speed helps better predict sub-legendary status. Although not as strong as the first two graphs, the last plot shows how the presence of both high special attack and high speed helps predict sub-legendary status to lesser degree. Finally, for mythical status, if a Pokemon had both high special attack and high speed, the probability of being a mythical Pokemon increases.</p>
+<p>In the legendary regression, we see a pretty straight forward graph
+where the probability of being a legendary Pokemon before about 500
+total points is basically 0. After 750 total points, the probability is
+more than 87.5 percent. The three sub-legendary logistic regressions
+show how having different amounts of particular stats affect the model’s
+ability to predict sub-legendary status. The essential things to note
+are that when a Pokemon has high defense, having high special attack or
+high speed helps better predict sub-legendary status. Although not as
+strong as the first two graphs, the last plot shows how the presence of
+both high special attack and high speed helps predict sub-legendary
+status to lesser degree. Finally, for mythical status, if a Pokemon had
+both high special attack and high speed, the probability of being a
+mythical Pokemon increases.</p>
 </div>
-<div id="task-15-do-pokemon-with-better-designs-have-higher-stats" class="section level2">
+<div id="task-15-do-pokemon-with-better-designs-have-higher-stats"
+class="section level2">
 <h2>Task 15: Do pokemon with better designs have higher stats?</h2>
-<p>This task is actually pretty simple because we are only trying to figure out the relationship between one explanatory variable (design) and one response variable (total points).</p>
-<p>The hardest part for this task is going to be creating the data frame we need. We need gather the 8 separate surveys that were used to get design scores, create a useful data frame with them, and combine them with the data we have been using.</p>
+<p>This task is actually pretty simple because we are only trying to
+figure out the relationship between one explanatory variable (design)
+and one response variable (total points).</p>
+<p>The hardest part for this task is going to be creating the data frame
+we need. We need gather the 8 separate surveys that were used to get
+design scores, create a useful data frame with them, and combine them
+with the data we have been using.</p>
 <pre class="r"><code>#Read in data frames
 library(readr)
 
@@ -663,8 +716,16 @@ pokemon_generation7 &lt;- read_csv(&quot;C:/Users/laryl/Desktop/Data Sets/Pokemo
 
 # Survey 8
 pokemon_generation8  &lt;- read_csv(&quot;C:/Users/laryl/Desktop/Data Sets/Pokemon_Survey_Generation_8.csv&quot;)</code></pre>
-<p>At the moment, each Pokemon in these data frames have a design score that was given to them by respondents to the surveys. Those scores are listed in variables called “obs”. For example, the generation 1 survey (pokemon_generation1) has 12 variables in total. The first variable (ï..num) represents the Pokemon’s pokedex number (a unique number assigned to each Pokemon). The last 11 variables (obs_1- obs 11) are the 11 respondents to the survey. So each of the 11 respondents rated each Pokemon in the survey from 1-10.</p>
-<p>Now we need to take the mean of each Pokemon’s score and tern it into its own variable for all 8 surveys.</p>
+<p>At the moment, each Pokemon in these data frames have a design score
+that was given to them by respondents to the surveys. Those scores are
+listed in variables called “obs”. For example, the generation 1 survey
+(pokemon_generation1) has 12 variables in total. The first variable
+(ï..num) represents the Pokemon’s pokedex number (a unique number
+assigned to each Pokemon). The last 11 variables (obs_1- obs 11) are the
+11 respondents to the survey. So each of the 11 respondents rated each
+Pokemon in the survey from 1-10.</p>
+<p>Now we need to take the mean of each Pokemon’s score and tern it into
+its own variable for all 8 surveys.</p>
 <pre class="r"><code>#Take the mean of all of the observations and call that new variable design_mean
 
 library(dplyr)
@@ -710,7 +771,8 @@ pokemon_generation7_des&lt;- pokemon_generation7_des %&gt;%
   select(num, design_mean)
 pokemon_generation8_des&lt;- pokemon_generation8_des %&gt;%
   select(num, design_mean)</code></pre>
-<p>We need to now bind all of these survey data frames into a single survey data frame.</p>
+<p>We need to now bind all of these survey data frames into a single
+survey data frame.</p>
 <pre class="r"><code>pokemon_design&lt;- rbind(pokemon_generation1_des, pokemon_generation2_des, pokemon_generation3_des, pokemon_generation4_des, pokemon_generation5_des, pokemon_generation6_des, pokemon_generation7_des, pokemon_generation8_des)
 
 pokemon_design</code></pre>
@@ -728,7 +790,12 @@ pokemon_design</code></pre>
 ##  9 6MY          8.91
 ## 10 7            7.91
 ## # ... with 1,005 more rows</code></pre>
-<p>Now, in order to combine the design data frame with the data we have been using throughout this project, we need to make sure it has the same amount of observations. The design data frame has 1015 Pokemon whereas the project data frame has 1028 Pokemon. Unfortunately, this means playing detective to find all of the observations that do not match each other from both data frames.</p>
+<p>Now, in order to combine the design data frame with the data we have
+been using throughout this project, we need to make sure it has the same
+amount of observations. The design data frame has 1015 Pokemon whereas
+the project data frame has 1028 Pokemon. Unfortunately, this means
+playing detective to find all of the observations that do not match each
+other from both data frames.</p>
 <pre class="r"><code>#See the number of Pokemon per generation
 table(pokemon_data_clean$generation)</code></pre>
 <pre><code>## 
@@ -2775,14 +2842,16 @@ pokemon_design_vs_points</code></pre>
 ## 1025                                                    889    9.250000
 ## 1026                                                   889C    8.500000
 ## 1027                                                    890    7.500000</code></pre>
-<p>Finally, we can now do some modeling. Let’s first checkout the relationship between our two variables.</p>
+<p>Finally, we can now do some modeling. Let’s first checkout the
+relationship between our two variables.</p>
 <pre class="r"><code>ggplot(pokemon_design_vs_points, aes(x= design_mean, y = total_points)) +
   geom_point(shape= 19, size= 2, color = &quot;orange1&quot;, alpha = .5)+
   theme_minimal()+
   theme(legend.position = &quot;none&quot;,
        text = element_text(family = &quot;Georgia&quot;))</code></pre>
 <p><img src="06--Chapter-5_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<p>Although it isn’t a perfect linear relationship, it seems mostly fine.</p>
+<p>Although it isn’t a perfect linear relationship, it seems mostly
+fine.</p>
 <p>Next, we will build our model.</p>
 <pre class="r"><code>pokemon_design_vs_points_fit &lt;- lm(total_points ~ design_mean, data = pokemon_design_vs_points)
 summary(pokemon_design_vs_points_fit)</code></pre>
@@ -2804,8 +2873,11 @@ summary(pokemon_design_vs_points_fit)</code></pre>
 ## Residual standard error: 115.6 on 1010 degrees of freedom
 ## Multiple R-squared:  0.07685,    Adjusted R-squared:  0.07594 
 ## F-statistic: 84.08 on 1 and 1010 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>Design seems to be very statistically correlated with stat total. But only about 7.7 percent of the variation in stat total is accounted for by the variation in design mean.</p>
-<p>Let’s make sure our model does not violate linear regression assumptions.</p>
+<p>Design seems to be very statistically correlated with stat total. But
+only about 7.7 percent of the variation in stat total is accounted for
+by the variation in design mean.</p>
+<p>Let’s make sure our model does not violate linear regression
+assumptions.</p>
 <pre class="r"><code>#Checking for Normality
 residuals(pokemon_design_vs_points_fit )</code></pre>
 <pre class="r"><code>qqnorm(residuals(pokemon_design_vs_points_fit ), col= &quot;orange1&quot; )
@@ -2815,7 +2887,13 @@ qqline(residuals(pokemon_design_vs_points_fit ))</code></pre>
 plot(fitted(pokemon_design_vs_points_fit),resid(pokemon_design_vs_points_fit), col= &quot;orange1&quot;, pch= 19)
 abline(h=0) </code></pre>
 <p><img src="06--Chapter-5_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
-<p>The constant conditional SDs and linearity assumption seem to be okay. However the normality assumption seems to have been violated according to the QQ plot. What we are probably seeing is a distribution that is more narrow than the expected normal distribution. What might be causing this is the fact that the Pokemon only received 8-11 ratings which probably affected the mean design scores and consequently the distribution.</p>
+<p>The constant conditional SDs and linearity assumption seem to be
+okay. However the normality assumption seems to have been violated
+according to the QQ plot. What we are probably seeing is a distribution
+that is more narrow than the expected normal distribution. What might be
+causing this is the fact that the Pokemon only received 8-11 ratings
+which probably affected the mean design scores and consequently the
+distribution.</p>
 <p>Let’s get to the plotting:</p>
 <pre class="r"><code>visreg(pokemon_design_vs_points_fit, &quot;design_mean&quot;, gg= TRUE, 
        line= list(col =&quot;orange2&quot;),
@@ -2827,7 +2905,15 @@ abline(h=0) </code></pre>
   theme(text = element_text(family = &quot;Georgia&quot;),
         plot.title = element_text(size = 13, margin(b = 10), hjust = 0.5, family = &quot;Georgia&quot;))</code></pre>
 <p><img src="06--Chapter-5_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
-<p>As we can see, there is a significant correlation between a Pokemon’s design and its stat total. As stated above, one significant caveat to these findings was the amount of survey participants. Only 8-11 participants submitted responses meaning the “design means” may not have been the best representations of the public’s opinion on Pokemon designs. To improve this study, at least 20-25 survey participants would be needed. Nevertheless, these results do show us an interesting feature of Pokemon: Gamefreak may be putting more effort into designing their stronger Pokemon.</p>
+<p>As we can see, there is a significant correlation between a Pokemon’s
+design and its stat total. As stated above, one significant caveat to
+these findings was the amount of survey participants. Only 8-11
+participants submitted responses meaning the “design means” may not have
+been the best representations of the public’s opinion on Pokemon
+designs. To improve this study, at least 20-25 survey participants would
+be needed. Nevertheless, these results do show us an interesting feature
+of Pokemon: Gamefreak may be putting more effort into designing their
+stronger Pokemon.</p>
 </div>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

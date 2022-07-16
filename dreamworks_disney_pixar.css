@@ -235,6 +235,11 @@ table {
   color: goldenrod;
 }
 
+.tick {
+  font-family: Century;
+}
+
+
 /*Elements*/
 
 .vertical-line {

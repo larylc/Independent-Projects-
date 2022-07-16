@@ -192,8 +192,10 @@
           <div class="SidebarItems" id="toc">
             <ul>
             <li><a href="#abstract">Abstract</a></li>
-            <li><a href="#sources-and-acknowledgements">Sources and Acknowledgements</a></li>
-            <li><a href="#data-and-preparation">Data and Preparation</a></li>
+            <li><a href="#sources-and-acknowledgements">Sources and
+            Acknowledgements</a></li>
+            <li><a href="#data-and-preparation">Data and
+            Preparation</a></li>
             <li><a href="#analysis">Analysis</a></li>
             <li><a href="#conclusions">Conclusions</a></li>
             </ul>
@@ -265,12 +267,15 @@
         </div><!--/.container -->
       </div><!--/.navbar -->
         
-      <h1 class="title">Movement Among Mating Arenas Predicts Individuals’ Centrality In Some Social Networks</h1>
+      <h1 class="title">Movement Among Mating Arenas Predicts
+Individuals’ Centrality In Some Social Networks</h1>
       
       <p class="authors">
-           <span class="glyphicon glyphicon-user"></span> Cedric Lary and Vincent Formica
+           <span class="glyphicon glyphicon-user"></span> Cedric Lary
+and Vincent Formica
       </p>
-         <p class="date"><span class="glyphicon glyphicon-calendar"></span> Summer 2018</p>
+         <p class="date"><span class="glyphicon glyphicon-calendar"></span> Summer
+2018</p>
            
 
    
@@ -287,30 +292,68 @@ h1.title, #toc {
 
 </style>
 <center>
-<img src="img/IMG-0048.jpg" title="fig:" id="id" class="class" style="width:50.0%;height:50.0%" alt="Mountain Lake Biological Station, 6/8/2018." />
+<div class="figure">
+<img
+src="img/IMG-0048.jpg"
+id="id" class="class" style="width:50.0%;height:50.0%" alt="" />
+<p class="caption">Mountain Lake Biological Station, 6/8/2018.</p>
+</div>
 </center>
 <div id="abstract" class="section level1">
 <h1>Abstract</h1>
-<p>Because social interactions depend strongly on the positions of the interacting individuals, studying how movement affects those social interactions could give us a better understanding of where individuals fit within their societies. While previous work has shown that centrality metrics like strength and betweenness are significantly influenced by morphological traits, little is known about how these centrality metrics are affected by movement. We performed a general linear mixed model analysis to determine whether movement among mating arenas predicted strength and betweenness within forked fungus beetle (Bolitotherus cornutus) populations. In the analysis, sex, elytra size, and number of observations were used as fixed effects while population was used as a random effect. Our results showed that despite being highly correlated, strength and betweenness are affected by movement differently. Sex-specific social networks proved to be the most significant source of variation among the results with male-only social networks yielding consistent results across both centrality metrics. Additionally, although the effects of movement on strength in all social networks fell within our expectations, the effects of movement on male-only betweenness highlights a unique feature of male-only social interactions.</p>
+<p>Because social interactions depend strongly on the positions of the
+interacting individuals, studying how movement affects those social
+interactions could give us a better understanding of where individuals
+fit within their societies. While previous work has shown that
+centrality metrics like strength and betweenness are significantly
+influenced by morphological traits, little is known about how these
+centrality metrics are affected by movement. We performed a general
+linear mixed model analysis to determine whether movement among mating
+arenas predicted strength and betweenness within forked fungus beetle
+(Bolitotherus cornutus) populations. In the analysis, sex, elytra size,
+and number of observations were used as fixed effects while population
+was used as a random effect. Our results showed that despite being
+highly correlated, strength and betweenness are affected by movement
+differently. Sex-specific social networks proved to be the most
+significant source of variation among the results with male-only social
+networks yielding consistent results across both centrality metrics.
+Additionally, although the effects of movement on strength in all social
+networks fell within our expectations, the effects of movement on
+male-only betweenness highlights a unique feature of male-only social
+interactions.</p>
 </div>
 <div id="sources-and-acknowledgements" class="section level1">
 <h1>Sources and Acknowledgements</h1>
-<p>This project was made possible because of the efforts of Butch Brodie, Hannah Donald Cannon, Phoebe Cook, Robin Costello, and the members of Beetle Crew at Mountain Lake Biological Station.</p>
-<p>The survey, attribute, and centrality metrics data were obtained from Beetle Crew’s collection of data. For more information about the data, please contact Dr. Vincent Formica (<a href="mailto:vformic1@swarthmore.edu" class="email">vformic1@swarthmore.edu</a>).</p>
-<p>See poster references for information about the research papers that motivated this project.</p>
+<p>This project was made possible because of the efforts of Butch
+Brodie, Hannah Donald Cannon, Phoebe Cook, Robin Costello, and the
+members of Beetle Crew at Mountain Lake Biological Station.</p>
+<p>The survey, attribute, and centrality metrics data were obtained from
+Beetle Crew’s collection of data. For more information about the data,
+please contact Dr. Vincent Formica (<a
+href="mailto:vformic1@swarthmore.edu"
+class="email">vformic1@swarthmore.edu</a>).</p>
+<p>See poster references for information about the research papers that
+motivated this project.</p>
 </div>
 <div id="data-and-preparation" class="section level1">
 <h1>Data and Preparation</h1>
-<p><strong>Data Set 1</strong>: The survey data measures observations of forked fungus beetles in the field.</p>
-<p><strong>Data Set 2</strong>: Beetle attribute data measures beetle characteristics like physical traits and capture information.</p>
-<p><strong>Data Set 3</strong>: Centrality metric data measures social network metrics like strength and betweenness.</p>
-<p>The objective at this stage is to measure beetle movement using the number of unique fungus brackets beetles were observed on.</p>
+<p><strong>Data Set 1</strong>: The survey data measures observations of
+forked fungus beetles in the field.</p>
+<p><strong>Data Set 2</strong>: Beetle attribute data measures beetle
+characteristics like physical traits and capture information.</p>
+<p><strong>Data Set 3</strong>: Centrality metric data measures social
+network metrics like strength and betweenness.</p>
+<p>The objective at this stage is to measure beetle movement using the
+number of unique fungus brackets beetles were observed on.</p>
 <p>This will be accomplished by:</p>
 <ol style="list-style-type: decimal">
-<li>Filtering out beetles that were not observed on fungal brackets.</li>
-<li>Counting the observations of unique beetles on unique fungal brackets.</li>
+<li>Filtering out beetles that were not observed on fungal
+brackets.</li>
+<li>Counting the observations of unique beetles on unique fungal
+brackets.</li>
 <li>Counting the number of unique brackets per beetle.</li>
-<li>Merging beetle attributes and centrality metrics with the movement data.</li>
+<li>Merging beetle attributes and centrality metrics with the movement
+data.</li>
 </ol>
 <p>Load data and libraries.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Users/laryl/Desktop/Data Sets&quot;</span>)</span>
@@ -359,7 +402,8 @@ h1.title, #toc {
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Rename field id variables</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(raw_data_2017_6)[<span class="fu">names</span>(raw_data_2017_6) <span class="sc">==</span> <span class="st">&quot;ï.._fkfieldID_surveys&quot;</span>]<span class="ot">&lt;-</span> <span class="st">&quot;X_fkfieldID_surveys&quot;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(raw_data.att)[<span class="fu">names</span>(raw_data.att) <span class="sc">==</span> <span class="st">&quot;ï..__pkfieldID&quot;</span>]<span class="ot">&lt;-</span> <span class="st">&quot;X__pkfieldID&quot;</span></span></code></pre></div>
-<p>Step 2: Count unique observations of beetles on unique fungal brackets</p>
+<p>Step 2: Count unique observations of beetles on unique fungal
+brackets</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Make a new data frame with unique rows for a combination of columns</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>raw_data_2017_9<span class="ot">&lt;-</span> <span class="fu">unique</span>(raw_data_2017_6[,<span class="fu">c</span>(<span class="st">&quot;X_fkfieldID_surveys&quot;</span>,<span class="st">&quot;ScanID&quot;</span>,<span class="st">&quot;Bracket_surveys&quot;</span>,<span class="st">&quot;X_fkPopulation_surveys&quot;</span>)])</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#obs.scan.ID&lt;-summaryBy(ScanID~FFB.ID+ScanID+Bracket_surveys,FUN=length,data=raw.data.2017.bigpops)</span></span>
@@ -395,7 +439,8 @@ h1.title, #toc {
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X_fkfieldID_surveys"],"name":[1],"type":["chr"],"align":["left"]},{"label":["X_fkPopulation_surveys"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Bracket_surveys.length"],"name":[3],"type":["int"],"align":["right"]},{"label":["ID_Pop"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"HAA","2":"PDR-614","3":"1","4":"HAA_PDR-614","_rn_":"1"},{"1":"HAK","2":"PDR-607","3":"1","4":"HAK_PDR-607","_rn_":"2"},{"1":"HAO","2":"PDR-331","3":"1","4":"HAO_PDR-331","_rn_":"3"},{"1":"HAT","2":"PDR-331","3":"1","4":"HAT_PDR-331","_rn_":"4"},{"1":"HBY","2":"PDR-331","3":"4","4":"HBY_PDR-331","_rn_":"5"},{"1":"HBZ","2":"PDR-331","3":"10","4":"HBZ_PDR-331","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>Step 4: Merge observations of beetles on unique brackets and unique bracket data frames along with beetle attributes.</p>
+<p>Step 4: Merge observations of beetles on unique brackets and unique
+bracket data frames along with beetle attributes.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#merging </span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>merge<span class="fl">.1</span><span class="ot">&lt;-</span><span class="fu">merge</span>(scans.per.beetle,unique.br.counts, <span class="at">by=</span> <span class="st">&quot;ID_Pop&quot;</span>,<span class="at">all =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Getting rid of unnecessary columns</span></span>
@@ -709,9 +754,17 @@ h1.title, #toc {
 <div id="conclusions" class="section level1">
 <h1>Conclusions</h1>
 <ul>
-<li><p>Movement by individual beetles across mating arenas affects their centrality in male-male networks. Specifically, there is a significant positive relationship between male-male centrality metrics and movement.</p></li>
-<li><p>The presence of females within a social network seems to strongly influence the relationship between movement and centrality metrics. While male-male social interactions are always affected by movement, in joint (two sex) and female-only networks the relationship between movement and centrality is not always significant.</p></li>
-<li><p>Joint networks and female-only network appear to mimic each other.</p></li>
+<li><p>Movement by individual beetles across mating arenas affects their
+centrality in male-male networks. Specifically, there is a significant
+positive relationship between male-male centrality metrics and
+movement.</p></li>
+<li><p>The presence of females within a social network seems to strongly
+influence the relationship between movement and centrality metrics.
+While male-male social interactions are always affected by movement, in
+joint (two sex) and female-only networks the relationship between
+movement and centrality is not always significant.</p></li>
+<li><p>Joint networks and female-only network appear to mimic each
+other.</p></li>
 <li><p>See poster for more complete conclusions.</p></li>
 </ul>
 </div>

@@ -120,8 +120,7 @@ For more information about my skill set please visit my [personal website](https
 <div class= "dropdown dropdown4">
 <button class= "drop-button">R</button>
 <ul>
-  <li>Updating personal and project websites</li>
-  <li>Creating visualizations for personal website</li>
+  <li>Creating visualizations for my personal website's gallery.</li>
 </ul>
 </div>
 
@@ -146,14 +145,13 @@ For more information about my skill set please visit my [personal website](https
 <div class= "dropdown dropdown8">
 <button  class= "drop-button">D3.js</button>
 <ul>
-  <li>Improving latest data viz project</li>
+
 </ul>
 </div>
 
 <div class= "dropdown dropdown9">
 <button  class= "drop-button">Tableau</button>
 <ul>
-  <li>Creating visualizations for personal website</li>
 </ul>
 </div>
 

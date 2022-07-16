@@ -134,7 +134,7 @@ details, .dropdown  ul   {
   background-color: var(--secondary-color);
   border:none;
   padding: 5px 0px;
-
+  box-shadow: 0 3px 3px;
 }
 
 

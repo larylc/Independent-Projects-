@@ -198,8 +198,8 @@ hchart(pokemon_types_final2, "pie", hcaes(name = type_half, y =  total), innerSi
       accesor = "nested_data",
       hc_opts = list(
         chart = list(type = "area"),
-        yAxis = list(title = list(text = "Count")),
-        xAxis = list(title = list(text = "Generation"), 
+        yAxis = list(title = list(text = "Count"), style = list(fontFamily = "Georgia")),
+        xAxis = list(title = list(text = "Generation"),style = list(fontFamily = "Georgia"), 
                      tickInterval = 2),
         
         plotOptions = list(area = list(fillOpacity = 0.15), 

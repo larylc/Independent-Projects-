@@ -293,9 +293,14 @@ $(document).ready(function () {
 
 <div id="multivariate-study" class="section level1">
 <h1><strong>Multivariate Study</strong></h1>
-<div id="task-16-what-would-a-pca-of-pokemon-look-like-based-on-their-stats" class="section level2">
-<h2>Task 16: What would a PCA of pokemon look like based on their stats?</h2>
-<p>Since this task is mostly an exercise in using visualization tools I will first create a simple principle component analysis to get a cursory glance at how the Pokemon are being placed.</p>
+<div
+id="task-16-what-would-a-pca-of-pokemon-look-like-based-on-their-stats"
+class="section level2">
+<h2>Task 16: What would a PCA of pokemon look like based on their
+stats?</h2>
+<p>Since this task is mostly an exercise in using visualization tools I
+will first create a simple principle component analysis to get a cursory
+glance at how the Pokemon are being placed.</p>
 <pre class="r"><code>pokemon_pca &lt;- prcomp(pokemon_data_full[,c(19:24)], center=T, scale=T)#Ex 1
 summary(pokemon_pca)</code></pre>
 <pre><code>## Importance of components:
@@ -308,7 +313,8 @@ scores &lt;- pokemon_pca$x
 plot(scores[,1], scores[,2], type=&quot;n&quot;)
 text(scores[,1], scores[,2], label= pokemon_data_full$name, repel = TRUE, cex=.5)</code></pre>
 <p><img src="07-Chapter-6_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<p>Eternatus Eternamax probably needs to be removed in order to get a better glance at the Pokemon.</p>
+<p>Eternatus Eternamax probably needs to be removed in order to get a
+better glance at the Pokemon.</p>
 <pre class="r"><code>pokemon_data_biplot &lt;- pokemon_data_full[,c(3,19:24)]
 pokemon_data_biplot&lt;- pokemon_data_biplot[-1028,]
 rownames(pokemon_data_biplot)&lt;- pokemon_data_biplot[,1]
@@ -330,19 +336,49 @@ fviz_pca_biplot(pokemon_biplot, labelsize = 2, geom = &quot;text&quot;) +
   theme(text = element_text(family = &quot;Georgia&quot;),
         plot.title = element_text(size = 13, margin(b = 10), hjust = 0.5, family = &quot;Georgia&quot;))</code></pre>
 <p><img src="07-Chapter-6_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<p>The <strong>first principal component (PC1)</strong> accounts for 45.2% of the variance. We can make the case that it probably measures total stats because we see the weakest unevolved Pokemon on left and the strongest mega evolved legendary Pokemon on the right. The <strong>second principal component (PC2)</strong>, which accounts for 18.5 percent of the variation, seperates Pokemon based on their offensive and defensive capabilities. Pokemon at the bottom of the plot have a larger proportion of their stats devoted to speed and offense. Pokemon at the top have a larger proportion of their stats devoted to defenses. Thus a principal component analysis that uses stats as the variables seperates pokemon by their functions in battle.</p>
+<p>The <strong>first principal component (PC1)</strong> accounts for
+45.2% of the variance. We can make the case that it probably measures
+total stats because we see the weakest unevolved Pokemon on left and the
+strongest mega evolved legendary Pokemon on the right. The
+<strong>second principal component (PC2)</strong>, which accounts for
+18.5 percent of the variation, seperates Pokemon based on their
+offensive and defensive capabilities. Pokemon at the bottom of the plot
+have a larger proportion of their stats devoted to speed and offense.
+Pokemon at the top have a larger proportion of their stats devoted to
+defenses. Thus a principal component analysis that uses stats as the
+variables seperates pokemon by their functions in battle.</p>
 </div>
 </div>
 <div id="conclusion" class="section level1">
 <h1><strong>Conclusion</strong></h1>
-<p>For me this project served a few purposes. It not only permitted me to practice a number of coding skills but also allowed me to revisit a gaming series that I probably spent way to much time on in my childhood and adolescence. Having that personal understanding of the data did, however, help me understand many of the findings we uncovered, even if they were unexpected. If nothing else, this study underscored for me the importance of an intimate understanding of the data set being worked with. Although most of the findings were expected, I think fans of the franchise and data enthusiasts have a lot to look forward to as Gamefreak continues expand it’s franchise.</p>
+<p>For me this project served a few purposes. It not only permitted me
+to practice a number of coding skills but also allowed me to revisit a
+gaming series that I probably spent way to much time on in my childhood
+and adolescence. Having that personal understanding of the data did,
+however, help me understand many of the findings we uncovered, even if
+they were unexpected. If nothing else, this study underscored for me the
+importance of an intimate understanding of the data set being worked
+with. Although most of the findings were expected, I think fans of the
+franchise and data enthusiasts have a lot to look forward to as
+Gamefreak continues expand it’s franchise.</p>
 </div>
 <div id="sources" class="section level1">
 <h1><strong>Sources</strong></h1>
-<p>The first data set was obtained from Kaggle user Mario Tormo Romero: <a href="https://www.kaggle.com/mariotormo/complete-pokemon-dataset-updated-090420" class="uri">https://www.kaggle.com/mariotormo/complete-pokemon-dataset-updated-090420</a></p>
-<p>The 8 secondary data sets were produced from 8 google form surveys that asked respondents to rate the designs of most of the pokemon on a scale from 1-10. All of the pictures used in the surveys were obtained from <a href="https://www.serebii.net/pokemon/" class="uri">https://www.serebii.net/pokemon/</a>.</p>
-<p>To verify the accuracy of some of the results I used <a href="https://pokemondb.net/type/" class="uri">https://pokemondb.net/type/</a>.</p>
-<p>Many of the graphs used in this project were inspired by <a href="https://rkabacoff.github.io/datavis/">Rob Kabacoff’s data visualization book</a>.</p>
+<p>The first data set was obtained from Kaggle user Mario Tormo Romero:
+<a
+href="https://www.kaggle.com/mariotormo/complete-pokemon-dataset-updated-090420"
+class="uri">https://www.kaggle.com/mariotormo/complete-pokemon-dataset-updated-090420</a></p>
+<p>The 8 secondary data sets were produced from 8 google form surveys
+that asked respondents to rate the designs of most of the pokemon on a
+scale from 1-10. All of the pictures used in the surveys were obtained
+from <a href="https://www.serebii.net/pokemon/"
+class="uri">https://www.serebii.net/pokemon/</a>.</p>
+<p>To verify the accuracy of some of the results I used <a
+href="https://pokemondb.net/type/"
+class="uri">https://pokemondb.net/type/</a>.</p>
+<p>Many of the graphs used in this project were inspired by <a
+href="https://rkabacoff.github.io/datavis/">Rob Kabacoff’s data
+visualization book</a>.</p>
 </div>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
