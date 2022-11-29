@@ -41,10 +41,11 @@ html {
 body{
     height: 100%;
     margin: 0;
-    background: rgb(21,16,32);
-    background: linear-gradient(180deg, rgba(21,16,32,1) 0%, rgba(37,34,78,1) 100%);
+    background: rgb(21,16,32) url(https://e7.pngegg.com/pngimages/262/252/png-clipart-bright-starry-sky-starry-sky-stars-thumbnail.png) repeat center;
+/*   background: linear-gradient(180deg, rgba(21,16,32,1) 0%, rgba(37,34,78,1) 100%);
     background-repeat: no-repeat;
     background-attachment: fixed;
+*/
 }
 
 .container {
