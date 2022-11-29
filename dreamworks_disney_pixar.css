@@ -1,13 +1,13 @@
 /* Cloud */
 
 .cloud {
-    width: 500px;
+    width: 100%;
     height: 100px;
     background: #000;
     border-radius: 50%;
     position: absolute; 
     top: -350px;
-    left: -600px;
+    left: -60%;
 }
 
 #cloud-back {
@@ -19,14 +19,14 @@
 #cloud-mid {
     filter: url(#filter-mid);
     box-shadow: 1000px 1000px 70px 10px rgba(158, 168, 179, 0.5);
-    left: -630px;
+    left: -60%;
     top: -320px;
   }
   
 #cloud-front {
     filter: url(#filter-front);
     box-shadow: 1000px 1000px 40px 0px  rgba(0, 0, 0, 0.3);
-    left: -620px;
+    left: -60%;
     top: -300px;
   }
 
