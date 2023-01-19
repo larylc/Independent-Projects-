@@ -9,29 +9,20 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 ```
 
 <div class= "main">
-<div class= "article article1">
-![](C:\Users\laryl\Documents\Independent-Projects-\img\IMG-0380.JPG){#img}
-
-<div id = "square"></div>
-
-
-</div>
-
-
-
 
 <div class = "article article2">
 
 <div id = "line"></div>
 <div class = "section section1">
 
-### Welcome to my project website! 
-This is where I post my projects in their entirety. These projects are formatted so that readers are  <b>1)</b> <p class = "reasons"> taken through my data science thinking process</p> and <b> 2)</b> <p class = "reasons">provided with all of the technical tools I use for these projects.</p>
+### Welcome to my Archived Project Website! 
+
+This is where I posted my first projects <b>(2018-2022)</b> in their entirety. These projects were formatted so that readers were  <b>1)</b> <p class = "reasons"> taken through my data science thinking process</p> and <b> 2)</b> <p class = "reasons">provided with all of the technical tools I used for these projects. <b>This site is no longer being maintained.</b></p> 
 
 
 For a more detailed summary of the projects please visit my [GitHub page](https://github.com/larylc/Independent-Projects-).
 
-For more information about my skill set please visit my [personal website](https://cedriclary.netlify.app/).
+For more information about my current skill set please visit my [personal website](https://cedriclary.netlify.app/).
 
 </div>
 
@@ -110,56 +101,7 @@ For more information about my skill set please visit my [personal website](https
 
 
 
-<div id = "line"></div>
 
-<div class = "section section3">
-
-### What am I doing now?
-<div id= "menu2">
-
-<div class= "dropdown dropdown4">
-<button class= "drop-button">R</button>
-<ul>
-  <li>Creating visualizations for my personal website's gallery.</li>
-</ul>
-</div>
-
-<div class= "dropdown dropdown5">
-<button  class= "drop-button">Python</button>
-</div>
-
-<div class= "dropdown dropdown6">
-<button  class= "drop-button">HTML/CSS</button>
-<ul>
-  <li>Updating personal and project websites</li>
-</ul>
-</div>
-
-<div class= "dropdown dropdown7">
-<button  class= "drop-button">JavaScript</button>
-<ul>
-  <li>Updating personal and project websites</li>
-</ul>
-</div>
-
-<div class= "dropdown dropdown8">
-<button  class= "drop-button">D3.js</button>
-<ul>
-
-</ul>
-</div>
-
-<div class= "dropdown dropdown9">
-<button  class= "drop-button">Tableau</button>
-<ul>
-</ul>
-</div>
-
-
-
-
-</div>
-</div>
 
 
 </div>

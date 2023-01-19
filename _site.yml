@@ -1,7 +1,7 @@
 name: "Cedric's Independent Projects"
 output_dir: "."
 navbar:
-  title: "Cedric's Projects"
+  title: "Archived Projects"
   left:
     - text: "About"
       href: index.html
