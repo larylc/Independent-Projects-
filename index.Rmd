@@ -1,7 +1,8 @@
 ---
 title: ""
 pagetitle: Cedric's Data Science Projects
-
+html_document:
+    css: "style.css"
 ---
 
 ```{r setup, include=FALSE}
