@@ -227,4 +227,9 @@ nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .nav
 /*Media Queries*/
 
 
-
+@media (max-width: 700px) {
+  .footer {
+    bottom: revert;
+  }
+  
+}
